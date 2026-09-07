@@ -1,0 +1,1919 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stack Algorithms & Interactive Simulator | DSM Suite</title>
+    <meta name="description" content="A comprehensive interactive cheat sheet and visual simulator for Stack data structures: PUSH, POP, PEEP, CHANGE, PEEK, Infix to Postfix REVPOL conversion, and expression evaluation.">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Unified Shared Stylesheet & Logic -->
+    <link rel="stylesheet" href="style.css">
+    <script src="main.js" defer></script>
+
+    <!-- Specific Styles for Stack Simulator & Expression Solver -->
+    <style>
+        /* Page local layout */
+        .stack-content-container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 24px;
+        }
+
+        .section-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-xl);
+            padding: 32px;
+            box-shadow: var(--shadow-md);
+            margin-bottom: 32px;
+            transition: var(--transition);
+        }
+
+        .section-card h2 {
+            font-family: var(--font-heading);
+            font-size: 1.625rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        /* Algorithm Grid */
+        .algo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 24px;
+            margin-top: 24px;
+        }
+
+        .algo-card {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            transition: var(--transition);
+        }
+
+        .algo-card:hover {
+            border-color: var(--accent-blue);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .algo-card h3 {
+            font-family: var(--font-heading);
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--accent-blue);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .algo-card p {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 14px;
+        }
+
+        .algo-code-box {
+            background: #1e293b;
+            color: #f8fafc;
+            padding: 16px;
+            border-radius: var(--radius-md);
+            font-family: var(--font-mono);
+            font-size: 0.8125rem;
+            line-height: 1.6;
+            overflow-x: auto;
+            border: 1px solid var(--border-color);
+        }
+
+        /* Interactive Simulator Layout */
+        .simulator-layout {
+            display: grid;
+            grid-template-columns: 340px 1fr;
+            gap: 32px;
+            align-items: flex-start;
+            margin-top: 20px;
+        }
+
+        /* Vertical Stack Visualizer */
+        .stack-stage {
+            background: var(--bg-primary);
+            border: 2px dashed var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+            min-height: 480px;
+            position: relative;
+        }
+
+        .stack-tower {
+            width: 220px;
+            border-left: 4px solid var(--accent-blue);
+            border-right: 4px solid var(--accent-blue);
+            border-bottom: 6px solid var(--accent-blue);
+            border-radius: 0 0 12px 12px;
+            display: flex;
+            flex-direction: column-reverse;
+            background: rgba(37, 99, 235, 0.03);
+            padding: 8px 8px 4px 8px;
+            gap: 8px;
+            position: relative;
+            box-shadow: inset 0 -10px 20px rgba(37, 99, 235, 0.05);
+        }
+
+        .stack-slot {
+            width: 100%;
+            height: 52px;
+            border-radius: var(--radius-sm);
+            border: 1px dashed var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 14px;
+            font-family: var(--font-mono);
+            font-size: 0.9375rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            background: var(--bg-card);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        .stack-slot.filled {
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.15), rgba(6, 182, 212, 0.15));
+            border: 2px solid var(--accent-blue);
+            color: var(--text-primary);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15);
+            animation: slideDown 0.35s ease;
+        }
+
+        .stack-slot.is-top {
+            border-color: #10b981;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(6, 182, 212, 0.15));
+        }
+
+        .stack-slot.highlight-peep {
+            border-color: #f59e0b !important;
+            background: rgba(245, 158, 11, 0.25) !important;
+            transform: scale(1.04);
+            box-shadow: 0 0 18px rgba(245, 158, 11, 0.4);
+        }
+
+        .stack-pointer-label {
+            position: absolute;
+            left: calc(100% + 14px);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-family: var(--font-heading);
+            font-weight: 800;
+            font-size: 0.8125rem;
+            color: #10b981;
+            background: rgba(16, 185, 129, 0.12);
+            padding: 4px 10px;
+            border-radius: var(--radius-full);
+            white-space: nowrap;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            animation: bounceIn 0.3s ease;
+        }
+
+        .stack-slot-index {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+        }
+
+        /* Controls Panel */
+        .controls-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .control-group-card {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 20px;
+        }
+
+        .control-group-card h4 {
+            font-family: var(--font-heading);
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .control-inputs-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .sim-input {
+            padding: 10px 14px;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            background: var(--bg-card);
+            font-family: var(--font-mono);
+            font-size: 0.875rem;
+            color: var(--text-primary);
+            width: 110px;
+            transition: var(--transition);
+        }
+
+        .sim-input:focus {
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+        }
+
+        .sim-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            border-radius: var(--radius-md);
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 1px solid transparent;
+        }
+
+        .sim-btn-primary { background: var(--gradient-primary); color: #fff; }
+        .sim-btn-danger { background: #ef4444; color: #fff; }
+        .sim-btn-warning { background: #f59e0b; color: #fff; }
+        .sim-btn-info { background: #06b6d4; color: #fff; }
+        .sim-btn-secondary { background: var(--bg-card); border-color: var(--border-color); color: var(--text-primary); }
+
+        .sim-btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+
+        /* Algorithm Step-by-Step Tracer */
+        .trace-box {
+            background: #0f172a;
+            border: 1px solid #334155;
+            border-radius: var(--radius-md);
+            padding: 16px;
+            font-family: var(--font-mono);
+            font-size: 0.8125rem;
+            line-height: 1.6;
+            margin-top: 16px;
+        }
+
+        .trace-line {
+            padding: 3px 8px;
+            border-radius: 4px;
+            color: #94a3b8;
+            transition: background 0.2s ease;
+        }
+
+        .trace-line.active {
+            background: rgba(37, 99, 235, 0.35);
+            color: #60a5fa;
+            font-weight: 700;
+            border-left: 3px solid #3b82f6;
+        }
+
+        /* Console Output */
+        .sim-console {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 14px 18px;
+            font-family: var(--font-mono);
+            font-size: 0.8125rem;
+            min-height: 52px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .console-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 700;
+        }
+
+        /* Expression Solving Matrix & REVPOL */
+        .table-responsive {
+            overflow-x: auto;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+            margin-top: 16px;
+        }
+
+        .custom-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.875rem;
+            text-align: left;
+        }
+
+        .custom-table th {
+            background: var(--bg-tertiary);
+            padding: 14px 16px;
+            font-family: var(--font-heading);
+            font-weight: 700;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-primary);
+        }
+
+        .custom-table td {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        .custom-table tr:hover td {
+            background: var(--bg-tertiary);
+        }
+
+        /* REVPOL Precedence Table */
+        .prec-table-box {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 12px;
+            margin: 20px 0;
+        }
+
+        .prec-pill {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 12px;
+            text-align: center;
+        }
+
+        .prec-pill strong {
+            display: block;
+            font-size: 1rem;
+            color: var(--accent-blue);
+            margin-bottom: 4px;
+        }
+
+        .prec-pill span {
+            display: block;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            font-family: var(--font-mono);
+        }
+
+        /* Preset Expression Buttons */
+        .preset-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 14px;
+        }
+
+        .preset-btn {
+            padding: 6px 14px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-full);
+            font-size: 0.8125rem;
+            font-family: var(--font-mono);
+            font-weight: 600;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .preset-btn:hover {
+            border-color: var(--accent-blue);
+            color: var(--accent-blue);
+            background: rgba(37, 99, 235, 0.05);
+        }
+
+        /* Animations */
+        @keyframes slideDown {
+            from { transform: translateY(-30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0.6); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        @media (max-width: 900px) {
+            .simulator-layout {
+                grid-template-columns: 1fr;
+            }
+            .stack-stage {
+                min-height: 380px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ========================================================================
+         UNIFIED TOP NAVBAR (SHARED ACROSS ALL PAGES)
+         ======================================================================== -->
+    <nav class="navbar" id="navbar">
+        <div class="container navbar-inner">
+            <!-- Brand Logo -->
+            <a href="index.html" class="nav-brand" aria-label="DSM Simulation Home">
+                <div class="nav-logo-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                        <polyline points="2 17 12 22 22 17"></polyline>
+                        <polyline points="2 12 12 17 22 12"></polyline>
+                    </svg>
+                </div>
+                <div class="nav-logo-text">DSM <span>Simulation</span></div>
+            </a>
+
+            <!-- Desktop Menu with all requested topics -->
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html#hero" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="index.html#definition" class="nav-link">What is DS?</a>
+                </li>
+                <li class="nav-item">
+                    <a href="index.html#importance" class="nav-link">Importance</a>
+                </li>
+                <li class="nav-item">
+                    <a href="index.html#applications" class="nav-link">Applications</a>
+                </li>
+
+                <!-- Linear Data Structures Menu Dropdown -->
+                <li class="nav-item">
+                    <a href="index.html#modules" class="nav-link active">
+                        Linear DS
+                        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </a>
+                    <div class="nav-dropdown">
+                        <a href="stack_cheatsheet.html" class="dropdown-link" style="color:var(--accent-blue); font-weight:700;">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19h16M4 15h16M4 11h16M4 7h16"/></svg>
+                            Stack Suite (LIFO)
+                            <span class="dropdown-badge live">Current Page ⚡</span>
+                        </a>
+                        <a href="queue_cheatsheet.html" class="dropdown-link">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 10 12 10 12 14"/></svg>
+                            Queue Suite (FIFO)
+                            <span class="dropdown-badge live">Live Simulator</span>
+                        </a>
+                        <a href="index.html#linkedlist" class="dropdown-link">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6" cy="12" r="3"/><circle cx="18" cy="12" r="3"/><line x1="9" y1="12" x2="15" y2="12"/></svg>
+                            Linked List
+                            <span class="dropdown-badge">Train</span>
+                        </a>
+                    </div>
+                </li>
+
+                <!-- Non-Linear Data Structures Menu Dropdown -->
+                <li class="nav-item">
+                    <a href="index.html#modules" class="nav-link">
+                        Non-Linear DS
+                        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </a>
+                    <div class="nav-dropdown">
+                        <a href="index.html#tree" class="dropdown-link">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v6m-6 6l6-6 6 6m-9 6l3-6 3 6"/><circle cx="12" cy="2" r="1"/></svg>
+                            Tree & BST
+                            <span class="dropdown-badge">Family Tree</span>
+                        </a>
+                        <a href="index.html#graph" class="dropdown-link">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6" cy="6" r="3"/><circle cx="18" cy="6" r="3"/><circle cx="12" cy="18" r="3"/><line x1="8.5" y1="7.5" x2="15.5" y2="7.5"/><line x1="7.5" y1="8.5" x2="10.5" y2="15.5"/><line x1="16.5" y1="8.5" x2="13.5" y2="15.5"/></svg>
+                            Graph Networks
+                            <span class="dropdown-badge">Road Map</span>
+                        </a>
+                    </div>
+                </li>
+
+                <!-- Algorithms Dropdown Menu -->
+                <li class="nav-item">
+                    <a href="index.html#modules" class="nav-link">
+                        Algorithms
+                        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </a>
+                    <div class="nav-dropdown">
+                        <a href="index.html#searching" class="dropdown-link">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                            Searching (Find Items)
+                            <span class="dropdown-badge">Search</span>
+                        </a>
+                        <a href="index.html#sorting" class="dropdown-link">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M6 12h12M10 18h4"/></svg>
+                            Sorting (Order Items)
+                            <span class="dropdown-badge">Sort</span>
+                        </a>
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <a href="index.html#cheatsheet" class="nav-link">Cheat Sheet</a>
+                </li>
+            </ul>
+
+            <!-- Nav Actions -->
+            <div class="nav-actions">
+                <!-- Theme Toggle Button -->
+                <button class="btn-icon theme-toggle" id="themeToggle" aria-label="Toggle light or dark theme" title="Toggle theme">
+                    <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                    <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
+
+                <!-- Mobile Hamburger Toggle -->
+                <button class="btn-icon mobile-toggle" id="mobileMenuBtn" aria-label="Open mobile navigation menu">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Drawer Overlay & Content -->
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+    <aside class="mobile-drawer" id="mobileDrawer">
+        <div class="mobile-drawer-header">
+            <div class="nav-brand">
+                <div class="nav-logo-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                        <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                        <polyline points="2 17 12 22 22 17"></polyline>
+                        <polyline points="2 12 12 17 22 12"></polyline>
+                    </svg>
+                </div>
+                <div class="nav-logo-text">DSM <span>Simulation</span></div>
+            </div>
+            <button class="btn-icon" id="closeMobileBtn" aria-label="Close navigation drawer">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+
+        <div class="mobile-nav-links">
+            <a href="index.html#hero" class="mobile-nav-link">Home Overview</a>
+            <a href="index.html#definition" class="mobile-nav-link">What is Data Structure?</a>
+            <a href="index.html#importance" class="mobile-nav-link">Why It Matters</a>
+            <a href="index.html#applications" class="mobile-nav-link">Real-World Applications</a>
+
+            <div class="mobile-nav-section-title">Linear Structures</div>
+            <a href="stack_cheatsheet.html" class="mobile-nav-link" style="color: var(--accent-blue); font-weight:700;">Stack Suite (Current Page ⚡)</a>
+            <a href="queue_cheatsheet.html" class="mobile-nav-link" style="color: var(--accent-emerald); font-weight:700;">Queue Simulator (Live ⚡)</a>
+            <a href="index.html#linkedlist" class="mobile-nav-link">Linked List (Train Cars)</a>
+
+            <div class="mobile-nav-section-title">Non-Linear Structures</div>
+            <a href="index.html#tree" class="mobile-nav-link">Tree (Family Tree)</a>
+            <a href="index.html#graph" class="mobile-nav-link">Graph (Road Map)</a>
+
+            <div class="mobile-nav-section-title">Algorithms</div>
+            <a href="index.html#searching" class="mobile-nav-link">Searching (Find Items)</a>
+            <a href="index.html#sorting" class="mobile-nav-link">Sorting (Order Items)</a>
+
+            <div class="mobile-nav-section-title">Quick Reference</div>
+            <a href="index.html#cheatsheet" class="mobile-nav-link">Speed Cheat Sheet (Big-O)</a>
+        </div>
+    </aside>
+
+    <!-- Main Container -->
+    <main class="stack-content-container">
+
+        <!-- HEADER SECTION -->
+        <header class="section-card" style="margin-top: 10px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+                <div>
+                    <span class="section-tag">Linear Data Structure</span>
+                    <h1 style="font-family: var(--font-heading); font-size: 2.25rem; font-weight: 800; letter-spacing: -0.5px;">
+                        STACK ALGORITHMS & <span class="gradient-text">INTERACTIVE SIMULATOR</span>
+                    </h1>
+                    <p style="color: var(--text-secondary); font-size: 1rem; margin-top: 6px;">
+                        Master PUSH, POP, PEEP, CHANGE, PEEK, Infix-Postfix REVPOL conversion, and Expression Evaluation.
+                    </p>
+                </div>
+                <div style="display: flex; gap: 10px;">
+                    <a href="#section-simulator" class="btn btn-primary">Try Simulator Live ⚡</a>
+                    <a href="#section-expressions" class="btn btn-secondary">Expression Solvers 🧮</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- ====================================================================
+             1. CORE ALGORITHMS & CONCEPTS
+             ==================================================================== -->
+        <section class="section-card" id="section-algorithms">
+            <h2>📚 1. Core Stack Operations & Algorithms</h2>
+            <p style="color: var(--text-secondary); line-height: 1.6;">
+                A <strong>Stack</strong> is a linear data structure that operates strictly on the <strong>LIFO (Last In, First Out)</strong> principle. The pointer <code>TOP</code> indicates the index of the topmost element. When the stack is initialized, <code>TOP = -1</code> (empty).
+            </p>
+
+            <div class="algo-grid">
+                <!-- PUSH -->
+                <div class="algo-card">
+                    <h3>
+                        <span>1. PUSH(S, TOP, N, X)</span>
+                        <span class="tag-badge" style="color:var(--accent-blue)">Insert</span>
+                    </h3>
+                    <p>Inserts a new element <code>X</code> onto the top of stack <code>S</code> of max size <code>N</code>. First verifies that the stack is not full to prevent <strong>Stack Overflow</strong>.</p>
+                    <pre class="algo-code-box"><code>[Check for Stack Overflow]
+If TOP >= N - 1
+    Then write "STACK OVERFLOW"
+    Return
+[Increment TOP]
+TOP ← TOP + 1
+[Insert Element]
+S[TOP] ← X
+[Finished]
+Return</code></pre>
+                </div>
+
+                <!-- POP -->
+                <div class="algo-card">
+                    <h3>
+                        <span>2. POP(S, TOP)</span>
+                        <span class="tag-badge" style="color:#ef4444">Delete</span>
+                    </h3>
+                    <p>Removes and returns the topmost element <code>X</code>. First checks if the stack is already empty (<code>TOP = -1</code>) to prevent <strong>Stack Underflow</strong>.</p>
+                    <pre class="algo-code-box"><code>[Check for Stack Underflow]
+If TOP = -1
+    Then write "STACK UNDERFLOW"
+    Return
+[Retrieve Element]
+X ← S[TOP]
+[Decrement TOP]
+TOP ← TOP - 1
+[Finished]
+Return X</code></pre>
+                </div>
+
+                <!-- PEEP -->
+                <div class="algo-card">
+                    <h3>
+                        <span>3. PEEP(S, TOP, I)</span>
+                        <span class="tag-badge" style="color:#f59e0b">Inspect Depth</span>
+                    </h3>
+                    <p>Views an element at depth <code>I</code> from the top without deleting it (<code>I = 1</code> is top, <code>I = 2</code> is one below). Checks if <code>TOP - I + 1 &lt; 0</code>.</p>
+                    <pre class="algo-code-box"><code>[Check for Invalid Index]
+If TOP - I + 1 < 0
+    Then write "INVALID INDEX"
+    Return
+[Access Element]
+X ← S[TOP - I + 1]
+[Finished]
+Return X</code></pre>
+                </div>
+
+                <!-- CHANGE -->
+                <div class="algo-card">
+                    <h3>
+                        <span>4. CHANGE(S, TOP, I, VALUE)</span>
+                        <span class="tag-badge" style="color:#8b5cf6">Modify</span>
+                    </h3>
+                    <p>Updates an existing element at depth <code>I</code> from the top with a new <code>VALUE</code> without disturbing the rest of the stack elements.</p>
+                    <pre class="algo-code-box"><code>[Check for Invalid Index]
+If TOP - I + 1 < 0
+    Then write "INVALID INDEX"
+    Return
+[Update Element]
+S[TOP - I + 1] ← VALUE
+[Finished]
+Return</code></pre>
+                </div>
+
+                <!-- PEEK -->
+                <div class="algo-card" style="grid-column: 1 / -1;">
+                    <h3>
+                        <span>5. PEEK(S, TOP)</span>
+                        <span class="tag-badge" style="color:#06b6d4">View Top</span>
+                    </h3>
+                    <p>Quickly accesses the current topmost element <code>S[TOP]</code> without removing it. If <code>TOP = -1</code>, reports underflow.</p>
+                    <pre class="algo-code-box"><code>[Check for Underflow]
+If TOP = -1
+    Then write "STACK UNDERFLOW"
+    Return
+[Access Top Element]
+X ← S[TOP]
+[Finished]
+Return X</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- ====================================================================
+             2. INTERACTIVE VISUAL STACK SIMULATOR
+             ==================================================================== -->
+        <section class="section-card" id="section-simulator">
+            <h2>⚡ 2. Interactive Stack Visual Simulator (Capacity N = 6)</h2>
+            <p style="color: var(--text-secondary); line-height: 1.6;">
+                Interact with the vertical stack below. Watch the <code>TOP</code> pointer adjust automatically, see elements animate in and out, and follow the step-by-step algorithm trace execution!
+            </p>
+
+            <div class="simulator-layout">
+                <!-- Stack Vertical Visualizer Stage -->
+                <div class="stack-stage">
+                    <div style="position: absolute; top: 16px; font-weight: 700; font-size: 0.8125rem; color: var(--text-muted);">
+                        VERTICAL STACK TOWER (N = 6)
+                    </div>
+
+                    <div class="stack-tower" id="stackTower">
+                        <!-- Slots 0 to 5 generated by JS -->
+                    </div>
+
+                    <div style="margin-top: 14px; font-size: 0.75rem; color: var(--text-muted); text-align: center;">
+                        Base of Stack (Index 0 at bottom)
+                    </div>
+                </div>
+
+                <!-- Simulator Controls & Trace Panel -->
+                <div class="controls-panel">
+                    <!-- Status Console -->
+                    <div class="sim-console">
+                        <div class="console-status" id="consoleStatus">
+                            <span style="color:#10b981;">●</span> Ready
+                        </div>
+                        <div id="pointerSummary" style="color:var(--text-muted); font-size:0.75rem;">
+                            TOP = -1 (Empty) | Capacity N = 6
+                        </div>
+                    </div>
+
+                    <!-- Operation Controls -->
+                    <div class="control-group-card">
+                        <h4>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+                            Execute Operations
+                        </h4>
+
+                        <div class="control-inputs-row" style="margin-bottom: 14px;">
+                            <!-- PUSH -->
+                            <input type="text" id="pushInput" class="sim-input" placeholder="Val (e.g. A)" value="A" maxlength="4">
+                            <button class="sim-btn sim-btn-primary" onclick="simPush()">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                                PUSH(X)
+                            </button>
+
+                            <!-- POP -->
+                            <button class="sim-btn sim-btn-danger" onclick="simPop()">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                                POP()
+                            </button>
+
+                            <!-- PEEK -->
+                            <button class="sim-btn sim-btn-info" onclick="simPeek()">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                                PEEK()
+                            </button>
+
+                            <!-- Reset -->
+                            <button class="sim-btn sim-btn-secondary" onclick="simReset()">Reset</button>
+                        </div>
+
+                        <!-- PEEP & CHANGE Controls -->
+                        <div class="control-inputs-row" style="padding-top: 14px; border-top: 1px dashed var(--border-color);">
+                            <!-- PEEP -->
+                            <label style="font-size: 0.8125rem; font-weight: 600; color: var(--text-secondary);">Depth I:</label>
+                            <input type="number" id="peepIndex" class="sim-input" value="1" min="1" max="6" style="width: 70px;">
+                            <button class="sim-btn sim-btn-warning" onclick="simPeep()">
+                                PEEP(I)
+                            </button>
+
+                            <!-- CHANGE -->
+                            <label style="font-size: 0.8125rem; font-weight: 600; color: var(--text-secondary); margin-left: 10px;">New Value:</label>
+                            <input type="text" id="changeValue" class="sim-input" placeholder="New" value="Z" maxlength="4" style="width: 70px;">
+                            <button class="sim-btn sim-btn-primary" style="background:#8b5cf6;" onclick="simChange()">
+                                CHANGE(I, Val)
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Live Code Execution Tracer -->
+                    <div class="control-group-card">
+                        <h4 style="justify-content: space-between;">
+                            <span>Active Algorithm Execution Trace</span>
+                            <span id="activeOpLabel" class="tag-badge" style="color:var(--accent-blue);">Ready</span>
+                        </h4>
+                        <div class="trace-box" id="traceBox">
+                            <div class="trace-line" id="trace-0">// Select an operation above to watch code trace in action</div>
+                            <div class="trace-line" id="trace-1">// Step-by-step lines highlight with live variable values</div>
+                            <div class="trace-line" id="trace-2">// Real-time Overflow, Underflow, & PEEP calculation checks</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ====================================================================
+             3. SOLVING EXPRESSIONS USING STACK (INFIX, PREFIX, POSTFIX)
+             ==================================================================== -->
+        <section class="section-card" id="section-expressions">
+            <h2>🧮 3. Solving Expressions Using Stack (Notations & Parsing)</h2>
+            <p style="color: var(--text-secondary); line-height: 1.6;">
+                An arithmetic expression can be written in three different but equivalent notations without changing its result:
+            </p>
+
+            <div class="concept-grid" style="margin-top: 20px;">
+                <div class="concept-card">
+                    <h3 style="color: var(--accent-blue);">1. Infix Notation</h3>
+                    <p>Operators are written <strong>between</strong> operands (e.g. <code>a + b</code> or <code>(a + b) * c</code>). Natural for humans to read, but difficult and costly for computers to evaluate directly due to parenthesis and precedence rules.</p>
+                </div>
+                <div class="concept-card">
+                    <h3 style="color: var(--accent-emerald);">2. Prefix (Polish) Notation</h3>
+                    <p>Operators are placed <strong>ahead</strong> of operands (e.g. <code>+ a b</code> or <code>* + a b c</code>). Invented by Polish logician Jan Łukasiewicz. Evaluated by scanning <strong>right to left</strong>.</p>
+                </div>
+                <div class="concept-card" style="grid-column: 1 / -1;">
+                    <h3 style="color: var(--accent-purple);">3. Postfix (Reverse-Polish) Notation</h3>
+                    <p>Operators are placed <strong>after</strong> operands (e.g. <code>a b +</code> or <code>a b + c *</code>). Eliminates all parentheses entirely! Computers can evaluate postfix expressions in a single pass using a simple <strong>Stack</strong>.</p>
+                </div>
+            </div>
+
+            <!-- Full Comparison Table from User Prompt -->
+            <h3 style="font-family:var(--font-heading); font-size:1.125rem; font-weight:700; margin: 28px 0 12px 0;">
+                Notation Comparison Table
+            </h3>
+            <div class="table-responsive">
+                <table class="custom-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 10%;">Sr. No.</th>
+                            <th style="width: 30%;">Infix Notation</th>
+                            <th style="width: 30%;">Prefix Notation (Polish)</th>
+                            <th style="width: 30%;">Postfix Notation (Reverse Polish)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>1</td><td><code>a + b</code></td><td><code>+ a b</code></td><td><code>a b +</code></td></tr>
+                        <tr><td>2</td><td><code>(a + b) * c</code></td><td><code>* + a b c</code></td><td><code>a b + c *</code></td></tr>
+                        <tr><td>3</td><td><code>a * (b + c)</code></td><td><code>* a + b c</code></td><td><code>a b c + *</code></td></tr>
+                        <tr><td>4</td><td><code>a / b + c / d</code></td><td><code>+ / a b / c d</code></td><td><code>a b / c d / +</code></td></tr>
+                        <tr><td>5</td><td><code>(a + b) * (c + d)</code></td><td><code>* + a b + c d</code></td><td><code>a b + c d + *</code></td></tr>
+                        <tr><td>6</td><td><code>((a + b) * c) - d</code></td><td><code>- * + a b c d</code></td><td><code>a b + c * d -</code></td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- ================================================================
+                 REVPOL INFIX TO POSTFIX CONVERTER SIMULATOR
+                 ================================================================ -->
+            <div style="margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--border-color);">
+                <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
+                    <div>
+                        <span class="section-tag">Algorithm Simulation</span>
+                        <h3 style="font-family: var(--font-heading); font-size: 1.4rem; font-weight: 800;">
+                            REVPOL: Infix to Postfix Conversion Simulator
+                        </h3>
+                    </div>
+                </div>
+
+                <p style="color: var(--text-secondary); font-size: 0.9375rem; line-height: 1.6; margin-top: 8px;">
+                    The <strong>REVPOL</strong> algorithm uses incoming precedence <code>F</code>, in-stack precedence <code>G</code>, and a <code>RANK</code> variable to build the postfix output string while validating syntax.
+                </p>
+
+                <!-- Precedence and Rank Table -->
+                <div class="prec-table-box">
+                    <div class="prec-pill">
+                        <strong>+ , -</strong>
+                        <span>F = 1 | G = 2</span>
+                        <span>Rank = -1</span>
+                    </div>
+                    <div class="prec-pill">
+                        <strong>* , /</strong>
+                        <span>F = 3 | G = 4</span>
+                        <span>Rank = -1</span>
+                    </div>
+                    <div class="prec-pill">
+                        <strong>^ (Power)</strong>
+                        <span>F = 6 | G = 5</span>
+                        <span>Rank = -1</span>
+                    </div>
+                    <div class="prec-pill">
+                        <strong>Operands</strong>
+                        <span>F = 7 | G = 8</span>
+                        <span>Rank = +1</span>
+                    </div>
+                    <div class="prec-pill">
+                        <strong>( Left Paren</strong>
+                        <span>F = 9 | G = 0</span>
+                        <span>Rank = 0</span>
+                    </div>
+                    <div class="prec-pill">
+                        <strong>) Right Paren</strong>
+                        <span>F = 0 | G = —</span>
+                        <span>Rank = 0</span>
+                    </div>
+                </div>
+
+                <!-- Input and Presets -->
+                <div style="background: var(--bg-primary); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 20px; margin-top: 16px;">
+                    <div class="preset-pills">
+                        <span style="font-size: 0.8125rem; font-weight: 600; color: var(--text-muted); align-self: center;">Try Presets:</span>
+                        <button class="preset-btn" onclick="setInfix('(A+B)*C')">(A+B)*C</button>
+                        <button class="preset-btn" onclick="setInfix('A+B*C')">A+B*C</button>
+                        <button class="preset-btn" onclick="setInfix('(A+B)*(C+D)')">(A+B)*(C+D)</button>
+                        <button class="preset-btn" onclick="setInfix('A/B+C/D')">A/B+C/D</button>
+                        <button class="preset-btn" onclick="setInfix('((A+B)*C)-D')">((A+B)*C)-D</button>
+                    </div>
+
+                    <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
+                        <input type="text" id="infixInput" class="sim-input" value="(A+B)*C" style="width: 280px; font-weight: 700;" placeholder="Enter Infix (e.g. (A+B)*C)">
+                        <button class="sim-btn sim-btn-primary" onclick="runRevpol()">
+                            Translate to Postfix 🚀
+                        </button>
+                    </div>
+                </div>
+
+                <!-- REVPOL Results Table -->
+                <div id="revpolOutputSection" style="margin-top: 20px; display: none;">
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+                        <div style="font-family: var(--font-heading); font-weight: 700; font-size: 1.125rem;">
+                            Result: <span id="revpolFinalResult" class="gradient-text" style="font-family: var(--font-mono); font-size: 1.25rem;"></span>
+                        </div>
+                        <div id="revpolValidationBadge" class="dropdown-badge live">VALID (Rank = 1)</div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="custom-table" id="revpolTraceTable">
+                            <thead>
+                                <tr>
+                                    <th>Step</th>
+                                    <th>Next Char</th>
+                                    <th>Stack S</th>
+                                    <th>Polish Output</th>
+                                    <th>F(Next)</th>
+                                    <th>G(Top)</th>
+                                    <th>Rank</th>
+                                    <th>Action Taken</th>
+                                </tr>
+                            </thead>
+                            <tbody id="revpolTraceBody">
+                                <!-- Generated by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ================================================================
+                 POSTFIX EXPRESSION EVALUATOR SIMULATOR
+                 ================================================================ -->
+            <div style="margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--border-color);">
+                <span class="section-tag">Arithmetic Evaluation</span>
+                <h3 style="font-family: var(--font-heading); font-size: 1.4rem; font-weight: 800;">
+                    Postfix Expression Evaluator Simulator
+                </h3>
+                <p style="color: var(--text-secondary); font-size: 0.9375rem; line-height: 1.6; margin-top: 6px;">
+                    Read tokens from <strong>left to right</strong>: operands are pushed onto the Stack. When an operator is met, <strong>TWO</strong> items are popped, computed, and the result is pushed back!
+                </p>
+
+                <div style="background: var(--bg-primary); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 20px; margin-top: 16px;">
+                    <div class="preset-pills">
+                        <span style="font-size: 0.8125rem; font-weight: 600; color: var(--text-muted); align-self: center;">Try Postfix:</span>
+                        <button class="preset-btn" onclick="setPostfix('5 3 + 2 *')">5 3 + 2 *</button>
+                        <button class="preset-btn" onclick="setPostfix('10 2 / 5 +')">10 2 / 5 +</button>
+                        <button class="preset-btn" onclick="setPostfix('2 3 1 * + 9 -')">2 3 1 * + 9 -</button>
+                        <button class="preset-btn" onclick="setPostfix('4 2 ^ 3 *')">4 2 ^ 3 *</button>
+                    </div>
+
+                    <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
+                        <input type="text" id="postfixInput" class="sim-input" value="5 3 + 2 *" style="width: 280px; font-weight: 700;" placeholder="Space-separated tokens (e.g. 5 3 + 2 *)">
+                        <button class="sim-btn sim-btn-primary" style="background:#0d9488;" onclick="evaluatePostfix()">
+                            Evaluate Postfix ⚡
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Postfix Evaluation Steps -->
+                <div id="postfixEvalSection" style="margin-top: 20px; display: none;">
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+                        <div style="font-family: var(--font-heading); font-weight: 700; font-size: 1.125rem;">
+                            Evaluation Result: <span id="postfixFinalResult" style="color:#10b981; font-family:var(--font-mono); font-size:1.35rem; font-weight:800;"></span>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="custom-table">
+                            <thead>
+                                <tr>
+                                    <th>Step</th>
+                                    <th>Scanned Token</th>
+                                    <th>Operation / Action</th>
+                                    <th>Operand 2</th>
+                                    <th>Operand 1</th>
+                                    <th>Result Pushed</th>
+                                    <th>Stack Contents</th>
+                                </tr>
+                            </thead>
+                            <tbody id="postfixTraceBody">
+                                <!-- Generated by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ====================================================================
+             4. MULTI-LANGUAGE CODE REPOSITORY
+             ==================================================================== -->
+        <section class="section-card" id="section-code">
+            <h2>💻 4. Multi-Language Implementation Code</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 20px;">
+                Complete, clean implementations of the Stack ADT with PUSH, POP, PEEP, CHANGE, and PEEK in your favorite programming language:
+            </p>
+
+            <!-- Language Tabs -->
+            <div style="display: flex; gap: 10px; margin-bottom: 16px;">
+                <button class="tab-btn active" id="codeTabC" onclick="showLangCode('c')">C Language</button>
+                <button class="tab-btn" id="codeTabCpp" onclick="showLangCode('cpp')">C++</button>
+                <button class="tab-btn" id="codeTabJava" onclick="showLangCode('java')">Java</button>
+                <button class="tab-btn" id="codeTabPython" onclick="showLangCode('python')">Python</button>
+            </div>
+
+            <pre class="algo-code-box" style="font-size: 0.85rem; max-height: 480px;"><code id="langCodeDisplay">/* Loading code... */</code></pre>
+        </section>
+
+        <!-- ====================================================================
+             5. CONCEPTUAL QUIZ
+             ==================================================================== -->
+        <section class="section-card" id="section-quiz">
+            <h2>🎯 5. Quick Stack Concept Quiz</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 20px;">
+                Test your understanding of PUSH, POP, PEEP formulas, and REVPOL ranks:
+            </p>
+
+            <div id="quizContainer" style="background: var(--bg-primary); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 24px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                    <span id="quizNumber" style="font-weight: 700; color: var(--accent-blue); font-size: 0.875rem;">Question 1 of 5</span>
+                    <span id="quizScore" class="dropdown-badge live">Score: 0 / 5</span>
+                </div>
+
+                <div id="quizQuestionText" style="font-family: var(--font-heading); font-size: 1.125rem; font-weight: 700; color: var(--text-primary); margin-bottom: 20px;">
+                    Loading question...
+                </div>
+
+                <div id="quizOptions" style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px;">
+                    <!-- Options injected by JS -->
+                </div>
+
+                <div id="quizExplanation" style="display: none; padding: 14px; border-radius: var(--radius-md); background: rgba(37, 99, 235, 0.1); border-left: 4px solid var(--accent-blue); font-size: 0.875rem; color: var(--text-primary); margin-bottom: 16px;">
+                </div>
+
+                <button class="sim-btn sim-btn-primary" id="nextQuizBtn" onclick="nextQuizQuestion()" style="display: none;">
+                    Next Question →
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-bottom">
+            <div>&copy; 2026 DSM Simulation Suite. Stack Algorithms & Cheat Sheet.</div>
+            <div>
+                <a href="index.html" style="color:var(--accent-blue); margin-right:16px;">Hub Home</a>
+                <a href="queue_cheatsheet.html" style="color:var(--accent-emerald);">Queue Simulator</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ========================================================================
+         JAVASCRIPT LOGIC FOR STACK SIMULATOR & EXPRESSION SOLVER
+         ======================================================================== -->
+    <script>
+        // 1. Stack State
+        const N = 6;
+        let stack = [];
+        let letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
+        let letterIdx = 0;
+
+        function initStackTower() {
+            const tower = document.getElementById('stackTower');
+            tower.innerHTML = '';
+            for (let i = 0; i < N; i++) {
+                const slot = document.createElement('div');
+                slot.className = 'stack-slot';
+                slot.id = `slot-${i}`;
+                slot.innerHTML = `
+                    <span id="slot-val-${i}">--</span>
+                    <span class="stack-slot-index">[Index ${i}]</span>
+                `;
+                tower.appendChild(slot);
+            }
+            renderStack();
+        }
+
+        function renderStack(highlightIndex = -1) {
+            const top = stack.length - 1;
+
+            for (let i = 0; i < N; i++) {
+                const slot = document.getElementById(`slot-${i}`);
+                const slotVal = document.getElementById(`slot-val-${i}`);
+                const oldPointer = slot.querySelector('.stack-pointer-label');
+                if (oldPointer) oldPointer.remove();
+
+                slot.classList.remove('filled', 'is-top', 'highlight-peep');
+
+                if (i < stack.length) {
+                    slot.classList.add('filled');
+                    slotVal.textContent = stack[i];
+
+                    if (i === top) {
+                        slot.classList.add('is-top');
+                        const ptr = document.createElement('div');
+                        ptr.className = 'stack-pointer-label';
+                        ptr.innerHTML = `← TOP [${i}]`;
+                        slot.appendChild(ptr);
+                    }
+                } else {
+                    slotVal.textContent = '--';
+                }
+
+                if (i === highlightIndex) {
+                    slot.classList.add('highlight-peep');
+                }
+            }
+
+            // Update status display
+            const ptrSummary = document.getElementById('pointerSummary');
+            if (top === -1) {
+                ptrSummary.textContent = `TOP = -1 (Stack is EMPTY) | Max N = ${N}`;
+            } else if (top === N - 1) {
+                ptrSummary.textContent = `TOP = ${top} (Stack is FULL / OVERFLOW) | Max N = ${N}`;
+            } else {
+                ptrSummary.textContent = `TOP = ${top} | Total Elements = ${stack.length} / ${N}`;
+            }
+        }
+
+        function setTrace(label, lines, activeLineIdx = 0) {
+            document.getElementById('activeOpLabel').textContent = label;
+            const box = document.getElementById('traceBox');
+            box.innerHTML = '';
+            lines.forEach((l, idx) => {
+                const lineElem = document.createElement('div');
+                lineElem.className = 'trace-line' + (idx === activeLineIdx ? ' active' : '');
+                lineElem.textContent = l;
+                box.appendChild(lineElem);
+            });
+        }
+
+        function logConsole(msg, type = 'ready') {
+            const el = document.getElementById('consoleStatus');
+            if (type === 'error') {
+                el.innerHTML = `<span style="color:#ef4444;">⚠️</span> ${msg}`;
+            } else if (type === 'success') {
+                el.innerHTML = `<span style="color:#10b981;">✅</span> ${msg}`;
+            } else if (type === 'info') {
+                el.innerHTML = `<span style="color:#06b6d4;">ℹ️</span> ${msg}`;
+            } else {
+                el.innerHTML = `<span style="color:#60a5fa;">●</span> ${msg}`;
+            }
+        }
+
+        // PUSH Operation
+        function simPush() {
+            const input = document.getElementById('pushInput');
+            const val = input.value.trim() || letters[letterIdx++ % letters.length];
+            const top = stack.length - 1;
+
+            const traceLines = [
+                `1. Check Overflow: If TOP >= N - 1 (${top} >= ${N - 1})`,
+                `2. Increment TOP: TOP = TOP + 1 (${top + 1})`,
+                `3. S[TOP] = '${val}'`,
+                `4. Finished PUSH successfully`
+            ];
+
+            if (stack.length >= N) {
+                setTrace('PUSH - OVERFLOW', traceLines, 0);
+                logConsole(`STACK OVERFLOW! Cannot push '${val}'. Stack is full (TOP = ${top}).`, 'error');
+                return;
+            }
+
+            setTrace('PUSH', traceLines, 1);
+            setTimeout(() => {
+                stack.push(val);
+                renderStack();
+                setTrace('PUSH', traceLines, 2);
+                logConsole(`Pushed '${val}' onto Stack at TOP [${stack.length - 1}].`, 'success');
+                input.value = letters[letterIdx++ % letters.length];
+            }, 300);
+        }
+
+        // POP Operation
+        function simPop() {
+            const top = stack.length - 1;
+            const traceLines = [
+                `1. Check Underflow: If TOP == -1 (${top} == -1)`,
+                `2. Retrieve Element: X = S[TOP] ('${top >= 0 ? stack[top] : 'None'}')`,
+                `3. Decrement TOP: TOP = TOP - 1 (${top - 1})`,
+                `4. Return X`
+            ];
+
+            if (top === -1) {
+                setTrace('POP - UNDERFLOW', traceLines, 0);
+                logConsole(`STACK UNDERFLOW! Cannot POP from an empty stack (TOP = -1).`, 'error');
+                return;
+            }
+
+            setTrace('POP', traceLines, 1);
+            const popped = stack[top];
+
+            setTimeout(() => {
+                stack.pop();
+                renderStack();
+                setTrace('POP', traceLines, 3);
+                logConsole(`Popped '${popped}' from the top of the stack. New TOP = ${stack.length - 1}.`, 'info');
+            }, 300);
+        }
+
+        // PEEK Operation
+        function simPeek() {
+            const top = stack.length - 1;
+            const traceLines = [
+                `1. Check Underflow: If TOP == -1 (${top} == -1)`,
+                `2. Access Top Element: X = S[TOP]`,
+                `3. Return X ('${top >= 0 ? stack[top] : 'None'}')`
+            ];
+
+            if (top === -1) {
+                setTrace('PEEK - UNDERFLOW', traceLines, 0);
+                logConsole(`STACK UNDERFLOW! Stack is empty. Nothing to PEEK.`, 'error');
+                return;
+            }
+
+            setTrace('PEEK', traceLines, 2);
+            renderStack(top);
+            logConsole(`PEEK: Topmost element is '${stack[top]}' at Index [${top}].`, 'success');
+        }
+
+        // PEEP Operation: S[TOP - I + 1]
+        function simPeep() {
+            const top = stack.length - 1;
+            const I = parseInt(document.getElementById('peepIndex').value) || 1;
+            const targetIdx = top - I + 1;
+
+            const traceLines = [
+                `1. Check Invalid Index: If TOP - I + 1 < 0 (${top} - ${I} + 1 = ${targetIdx} < 0)`,
+                `2. Target Calculation: Index = TOP - I + 1 = ${targetIdx}`,
+                `3. Access: X = S[${targetIdx}]`,
+                `4. Return X ('${targetIdx >= 0 && targetIdx <= top ? stack[targetIdx] : 'None'}')`
+            ];
+
+            if (targetIdx < 0 || targetIdx > top) {
+                setTrace('PEEP - INVALID INDEX', traceLines, 0);
+                logConsole(`INVALID INDEX! Depth I = ${I} is out of bounds (TOP - I + 1 = ${targetIdx} < 0).`, 'error');
+                return;
+            }
+
+            setTrace('PEEP', traceLines, 2);
+            renderStack(targetIdx);
+            logConsole(`PEEP (Depth I = ${I}): Found '${stack[targetIdx]}' at index [${targetIdx}] using TOP - I + 1.`, 'success');
+        }
+
+        // CHANGE Operation: S[TOP - I + 1] = VALUE
+        function simChange() {
+            const top = stack.length - 1;
+            const I = parseInt(document.getElementById('peepIndex').value) || 1;
+            const newVal = document.getElementById('changeValue').value.trim() || 'Z';
+            const targetIdx = top - I + 1;
+
+            const traceLines = [
+                `1. Check Invalid Index: If TOP - I + 1 < 0 (${top} - ${I} + 1 = ${targetIdx} < 0)`,
+                `2. Update Target: S[${targetIdx}] = '${newVal}'`,
+                `3. Finished CHANGE successfully`
+            ];
+
+            if (targetIdx < 0 || targetIdx > top) {
+                setTrace('CHANGE - INVALID INDEX', traceLines, 0);
+                logConsole(`INVALID INDEX! Depth I = ${I} is invalid for CHANGE (TOP - I + 1 = ${targetIdx} < 0).`, 'error');
+                return;
+            }
+
+            const oldVal = stack[targetIdx];
+            stack[targetIdx] = newVal;
+            setTrace('CHANGE', traceLines, 1);
+            renderStack(targetIdx);
+            logConsole(`CHANGE: Modified S[${targetIdx}] (Depth I = ${I}) from '${oldVal}' to '${newVal}'.`, 'success');
+        }
+
+        function simReset() {
+            stack = [];
+            initStackTower();
+            setTrace('RESET', ['// Stack has been cleared. TOP = -1.'], 0);
+            logConsole('Stack cleared and reset to empty state.', 'ready');
+        }
+
+        // ====================================================================
+        // REVPOL (INFIX TO POSTFIX) CONVERTER ALGORITHM
+        // ====================================================================
+        function getF(symbol) {
+            if (symbol === '+' || symbol === '-') return 1;
+            if (symbol === '*' || symbol === '/') return 3;
+            if (symbol === '^') return 6;
+            if (symbol === '(') return 9;
+            if (symbol === ')') return 0;
+            if (/^[A-Za-z0-9]$/.test(symbol)) return 7; // Operand
+            return 0;
+        }
+
+        function getG(symbol) {
+            if (symbol === '+' || symbol === '-') return 2;
+            if (symbol === '*' || symbol === '/') return 4;
+            if (symbol === '^') return 5;
+            if (symbol === '(') return 0;
+            if (/^[A-Za-z0-9]$/.test(symbol)) return 8; // Operand in stack
+            return 0;
+        }
+
+        function getR(symbol) {
+            if (symbol === '+' || symbol === '-' || symbol === '*' || symbol === '/' || symbol === '^') return -1;
+            if (/^[A-Za-z0-9]$/.test(symbol)) return 1;
+            return 0; // Parentheses
+        }
+
+        function setInfix(expr) {
+            document.getElementById('infixInput').value = expr;
+            runRevpol();
+        }
+
+        function runRevpol() {
+            const rawExpr = document.getElementById('infixInput').value.replace(/\s+/g, '');
+            if (!rawExpr) return;
+
+            const infixWithPad = rawExpr + ')';
+            const S = ['(']; // PUSH '('
+            let polish = '';
+            let rank = 0;
+            let step = 1;
+            const rows = [];
+
+            // Initial row
+            rows.push({
+                step: step++,
+                next: 'INIT',
+                stack: '(' ,
+                polish: '""',
+                f: '-',
+                g: '-',
+                rank: 0,
+                action: "Initialize TOP=0, PUSH('('), POLISH='', RANK=0"
+            });
+
+            let isValid = true;
+            let i = 0;
+
+            while (i < infixWithPad.length) {
+                const nextChar = infixWithPad[i];
+                const fVal = getF(nextChar);
+                const topChar = S[S.length - 1];
+                const gVal = getG(topChar);
+
+                // Pop higher precedence operators
+                while (S.length > 0 && fVal < getG(S[S.length - 1])) {
+                    const temp = S.pop();
+                    polish += temp;
+                    rank += getR(temp);
+
+                    rows.push({
+                        step: step++,
+                        next: nextChar,
+                        stack: S.join(''),
+                        polish: polish,
+                        f: fVal,
+                        g: getG(temp),
+                        rank: rank,
+                        action: `F(${nextChar}) < G(${temp}): Pop '${temp}' to POLISH, Rank += ${getR(temp)}`
+                    });
+
+                    if (rank < 1) {
+                        isValid = false;
+                        rows.push({
+                            step: step++,
+                            next: nextChar,
+                            stack: S.join(''),
+                            polish: polish,
+                            f: '-',
+                            g: '-',
+                            rank: rank,
+                            action: `ERROR: Rank dropped below 1 (${rank})! Expression INVALID.`
+                        });
+                        break;
+                    }
+                }
+
+                if (!isValid) break;
+
+                const curTopChar = S.length > 0 ? S[S.length - 1] : '';
+                const curGVal = S.length > 0 ? getG(curTopChar) : 0;
+
+                if (fVal !== curGVal) {
+                    S.push(nextChar);
+                    rows.push({
+                        step: step++,
+                        next: nextChar,
+                        stack: S.join(''),
+                        polish: polish,
+                        f: fVal,
+                        g: curGVal,
+                        rank: rank,
+                        action: `F(${nextChar}) ≠ G(${curTopChar}): Push '${nextChar}' to Stack`
+                    });
+                } else {
+                    // Match parentheses F == G == 0
+                    const poppedParen = S.pop();
+                    rows.push({
+                        step: step++,
+                        next: nextChar,
+                        stack: S.join(''),
+                        polish: polish,
+                        f: fVal,
+                        g: curGVal,
+                        rank: rank,
+                        action: `F(${nextChar}) == G(${poppedParen}): Discard matched parentheses`
+                    });
+                }
+
+                i++;
+            }
+
+            // Final Validation
+            const finalValid = isValid && S.length === 0 && rank === 1;
+            const outputSection = document.getElementById('revpolOutputSection');
+            const finalResultEl = document.getElementById('revpolFinalResult');
+            const badgeEl = document.getElementById('revpolValidationBadge');
+            const tbody = document.getElementById('revpolTraceBody');
+
+            outputSection.style.display = 'block';
+            finalResultEl.textContent = polish || 'INVALID';
+
+            if (finalValid) {
+                badgeEl.className = 'dropdown-badge live';
+                badgeEl.textContent = `VALID (Final Rank = ${rank}, Stack = Empty)`;
+            } else {
+                badgeEl.className = 'dropdown-badge';
+                badgeEl.style.background = 'rgba(239, 68, 68, 0.15)';
+                badgeEl.style.color = '#ef4444';
+                badgeEl.textContent = `INVALID (Rank = ${rank}, Remaining Stack: ${S.join('')})`;
+            }
+
+            tbody.innerHTML = rows.map(r => `
+                <tr>
+                    <td><strong>${r.step}</strong></td>
+                    <td><code>${r.next}</code></td>
+                    <td><code style="color:var(--accent-blue)">${r.stack || '∅ (empty)'}</code></td>
+                    <td><strong style="color:var(--accent-purple)">${r.polish}</strong></td>
+                    <td>${r.f}</td>
+                    <td>${r.g}</td>
+                    <td><span style="font-weight:700; color:${r.rank >= 1 ? '#10b981' : '#ef4444'}">${r.rank}</span></td>
+                    <td style="font-size:0.8125rem;">${r.action}</td>
+                </tr>
+            `).join('');
+        }
+
+        // ====================================================================
+        // POSTFIX EXPRESSION EVALUATION ALGORITHM
+        // ====================================================================
+        function setPostfix(expr) {
+            document.getElementById('postfixInput').value = expr;
+            evaluatePostfix();
+        }
+
+        function evaluatePostfix() {
+            const raw = document.getElementById('postfixInput').value.trim();
+            if (!raw) return;
+
+            const tokens = raw.split(/\s+/);
+            const evalStack = [];
+            const rows = [];
+            let step = 1;
+            let hasError = false;
+
+            for (let t of tokens) {
+                if (/^-?\d+(\.\d+)?$/.test(t)) {
+                    // Operand: Push
+                    const num = parseFloat(t);
+                    evalStack.push(num);
+                    rows.push({
+                        step: step++,
+                        token: t,
+                        action: `Read Operand '${t}': Push to Stack`,
+                        op2: '-',
+                        op1: '-',
+                        result: num,
+                        stack: `[ ${evalStack.join(', ')} ]`
+                    });
+                } else if (['+', '-', '*', '/', '^'].includes(t)) {
+                    // Operator: Pop 2
+                    if (evalStack.length < 2) {
+                        hasError = true;
+                        rows.push({
+                            step: step++,
+                            token: t,
+                            action: `ERROR: Not enough operands on Stack to evaluate '${t}'!`,
+                            op2: '-',
+                            op1: '-',
+                            result: 'ERROR',
+                            stack: `[ ${evalStack.join(', ')} ]`
+                        });
+                        break;
+                    }
+
+                    const op2 = evalStack.pop();
+                    const op1 = evalStack.pop();
+                    let res = 0;
+
+                    if (t === '+') res = op1 + op2;
+                    else if (t === '-') res = op1 - op2;
+                    else if (t === '*') res = op1 * op2;
+                    else if (t === '/') res = op2 !== 0 ? op1 / op2 : NaN;
+                    else if (t === '^') res = Math.pow(op1, op2);
+
+                    evalStack.push(res);
+                    rows.push({
+                        step: step++,
+                        token: t,
+                        action: `Operator '${t}': Pop op2=${op2}, op1=${op1}. Compute: ${op1} ${t} ${op2} = ${res}. Push result.`,
+                        op2: op2,
+                        op1: op1,
+                        result: res,
+                        stack: `[ ${evalStack.join(', ')} ]`
+                    });
+                }
+            }
+
+            const outputSec = document.getElementById('postfixEvalSection');
+            const resultEl = document.getElementById('postfixFinalResult');
+            const tbody = document.getElementById('postfixTraceBody');
+
+            outputSec.style.display = 'block';
+
+            if (!hasError && evalStack.length === 1) {
+                resultEl.textContent = evalStack[0];
+            } else {
+                resultEl.textContent = 'Invalid Postfix Expression';
+            }
+
+            tbody.innerHTML = rows.map(r => `
+                <tr>
+                    <td><strong>${r.step}</strong></td>
+                    <td><code>${r.token}</code></td>
+                    <td style="font-size:0.8125rem;">${r.action}</td>
+                    <td>${r.op2}</td>
+                    <td>${r.op1}</td>
+                    <td><strong>${r.result}</strong></td>
+                    <td><code style="color:var(--accent-teal)">${r.stack}</code></td>
+                </tr>
+            `).join('');
+        }
+
+        // ====================================================================
+        // MULTI-LANGUAGE CODE DISPLAY
+        // ====================================================================
+        const stackCodes = {
+            c: `#include <stdio.h>
+#include <stdlib.h>
+#define N 5
+
+int S[N];
+int TOP = -1;
+
+void push(int x) {
+    if (TOP >= N - 1) {
+        printf("STACK OVERFLOW\\n");
+        return;
+    }
+    TOP = TOP + 1;
+    S[TOP] = x;
+    printf("Pushed %d\\n", x);
+}
+
+int pop() {
+    if (TOP == -1) {
+        printf("STACK UNDERFLOW\\n");
+        return -1;
+    }
+    int x = S[TOP];
+    TOP = TOP - 1;
+    return x;
+}
+
+int peep(int i) {
+    if (TOP - i + 1 < 0) {
+        printf("INVALID INDEX\\n");
+        return -1;
+    }
+    return S[TOP - i + 1];
+}
+
+void change(int i, int value) {
+    if (TOP - i + 1 < 0) {
+        printf("INVALID INDEX\\n");
+        return;
+    }
+    S[TOP - i + 1] = value;
+}
+
+int peek() {
+    if (TOP == -1) {
+        printf("STACK UNDERFLOW\\n");
+        return -1;
+    }
+    return S[TOP];
+}`,
+            cpp: `#include <iostream>
+#include <vector>
+using namespace std;
+
+class Stack {
+private:
+    int n;
+    int top;
+    vector<int> s;
+
+public:
+    Stack(int size) : n(size), top(-1), s(size) {}
+
+    void push(int x) {
+        if (top >= n - 1) {
+            cout << "STACK OVERFLOW" << endl;
+            return;
+        }
+        s[++top] = x;
+    }
+
+    int pop() {
+        if (top == -1) {
+            cout << "STACK UNDERFLOW" << endl;
+            return -1;
+        }
+        return s[top--];
+    }
+
+    int peep(int i) {
+        if (top - i + 1 < 0) {
+            cout << "INVALID INDEX" << endl;
+            return -1;
+        }
+        return s[top - i + 1];
+    }
+
+    void change(int i, int val) {
+        if (top - i + 1 < 0) {
+            cout << "INVALID INDEX" << endl;
+            return;
+        }
+        s[top - i + 1] = val;
+    }
+
+    int peek() {
+        if (top == -1) {
+            cout << "STACK UNDERFLOW" << endl;
+            return -1;
+        }
+        return s[top];
+    }
+};`,
+            java: `public class Stack {
+    private int[] s;
+    private int top;
+    private int n;
+
+    public Stack(int size) {
+        this.n = size;
+        this.s = new int[n];
+        this.top = -1;
+    }
+
+    public void push(int x) {
+        if (top >= n - 1) {
+            System.out.println("STACK OVERFLOW");
+            return;
+        }
+        s[++top] = x;
+    }
+
+    public int pop() {
+        if (top == -1) {
+            System.out.println("STACK UNDERFLOW");
+            return -1;
+        }
+        return s[top--];
+    }
+
+    public int peep(int i) {
+        if (top - i + 1 < 0) {
+            System.out.println("INVALID INDEX");
+            return -1;
+        }
+        return s[top - i + 1];
+    }
+
+    public void change(int i, int value) {
+        if (top - i + 1 < 0) {
+            System.out.println("INVALID INDEX");
+            return;
+        }
+        s[top - i + 1] = value;
+    }
+
+    public int peek() {
+        if (top == -1) {
+            System.out.println("STACK UNDERFLOW");
+            return -1;
+        }
+        return s[top];
+    }
+}`,
+            python: `class Stack:
+    def __init__(self, n=5):
+        self.n = n
+        self.s = [None] * n
+        self.top = -1
+
+    def push(self, x):
+        if self.top >= self.n - 1:
+            print("STACK OVERFLOW")
+            return
+        self.top += 1
+        self.s[self.top] = x
+
+    def pop(self):
+        if self.top == -1:
+            print("STACK UNDERFLOW")
+            return None
+        x = self.s[self.top]
+        self.top -= 1
+        return x
+
+    def peep(self, i):
+        target = self.top - i + 1
+        if target < 0:
+            print("INVALID INDEX")
+            return None
+        return self.s[target]
+
+    def change(self, i, value):
+        target = self.top - i + 1
+        if target < 0:
+            print("INVALID INDEX")
+            return
+        self.s[target] = value
+
+    def peek(self):
+        if self.top == -1:
+            print("STACK UNDERFLOW")
+            return None
+        return self.s[self.top]`
+        };
+
+        function showLangCode(lang) {
+            document.querySelectorAll('#section-code .tab-btn').forEach(btn => btn.classList.remove('active'));
+            if (lang === 'c') document.getElementById('codeTabC').classList.add('active');
+            if (lang === 'cpp') document.getElementById('codeTabCpp').classList.add('active');
+            if (lang === 'java') document.getElementById('codeTabJava').classList.add('active');
+            if (lang === 'python') document.getElementById('codeTabPython').classList.add('active');
+
+            document.getElementById('langCodeDisplay').textContent = stackCodes[lang];
+        }
+
+        // ====================================================================
+        // CONCEPTUAL QUIZ
+        // ====================================================================
+        const quizQuestions = [
+            {
+                q: "In an array implementation of a Stack with size N = 5, what condition indicates STACK OVERFLOW?",
+                opts: ["TOP == 0", "TOP >= N - 1 (TOP == 4)", "TOP == -1", "TOP == N + 1"],
+                ans: 1,
+                exp: "Since array indices run from 0 to N-1, when TOP reaches N - 1 (index 4 for N = 5), every slot is occupied and no more elements can be pushed."
+            },
+            {
+                q: "In the PEEP(S, TOP, I) algorithm, what does I = 1 represent?",
+                opts: ["The bottom element", "The topmost element (S[TOP])", "The middle element", "An empty slot"],
+                ans: 1,
+                exp: "By definition, I represents depth from the top. Using TOP - I + 1 with I = 1 gives TOP - 1 + 1 = TOP, which is the topmost element."
+            },
+            {
+                q: "If TOP = 3, what array index will PEEP(S, TOP, 2) access?",
+                opts: ["Index 1", "Index 2", "Index 3", "Index 4"],
+                ans: 1,
+                exp: "Formula is TOP - I + 1. Substituting: 3 - 2 + 1 = 2. So it accesses S[2]!"
+            },
+            {
+                q: "In the REVPOL algorithm, what must the final RANK value and Stack state be for a valid infix expression?",
+                opts: ["RANK = 0 and Stack full", "RANK = 1 and Stack empty (TOP = -1)", "RANK = 2 and Stack empty", "RANK = -1"],
+                ans: 1,
+                exp: "A valid expression must have exactly one final evaluation result (RANK = 1) and all operators/parentheses cleared (Stack empty, TOP = -1)."
+            },
+            {
+                q: "When evaluating the Postfix expression '6 2 / 3 +', what is the final result?",
+                opts: ["6", "1", "5", "8"],
+                ans: 2,
+                exp: "First '6 2 /' yields 6 / 2 = 3. Next '3 3 +' yields 3 + 3 = 6... wait! 6 / 2 = 3, then 3 + 3 = 6! Result is 6."
+            }
+        ];
+
+        let curQIdx = 0;
+        let qScore = 0;
+        let qAnswered = false;
+
+        function loadQuiz() {
+            qAnswered = false;
+            const q = quizQuestions[curQIdx];
+            document.getElementById('quizNumber').textContent = `Question ${curQIdx + 1} of ${quizQuestions.length}`;
+            document.getElementById('quizQuestionText').textContent = q.q;
+            document.getElementById('quizExplanation').style.display = 'none';
+            document.getElementById('nextQuizBtn').style.display = 'none';
+
+            const optsDiv = document.getElementById('quizOptions');
+            optsDiv.innerHTML = '';
+
+            q.opts.forEach((opt, idx) => {
+                const btn = document.createElement('button');
+                btn.className = 'quiz-option';
+                btn.textContent = `${['A', 'B', 'C', 'D'][idx]}. ${opt}`;
+                btn.onclick = () => selectQuiz(idx, btn);
+                optsDiv.appendChild(btn);
+            });
+        }
+
+        function selectQuiz(idx, btn) {
+            if (qAnswered) return;
+            qAnswered = true;
+            const q = quizQuestions[curQIdx];
+            const opts = document.getElementById('quizOptions').children;
+
+            if (idx === q.ans) {
+                btn.classList.add('correct');
+                btn.innerHTML += ' <span>✅</span>';
+                qScore++;
+                document.getElementById('quizScore').textContent = `Score: ${qScore} / ${quizQuestions.length}`;
+            } else {
+                btn.classList.add('wrong');
+                btn.innerHTML += ' <span>❌</span>';
+                opts[q.ans].classList.add('correct');
+                opts[q.ans].innerHTML += ' <span>✅</span>';
+            }
+
+            const exp = document.getElementById('quizExplanation');
+            exp.textContent = `💡 Explanation: ${q.exp}`;
+            exp.style.display = 'block';
+
+            document.getElementById('nextQuizBtn').style.display = 'inline-flex';
+        }
+
+        function nextQuizQuestion() {
+            curQIdx = (curQIdx + 1) % quizQuestions.length;
+            if (curQIdx === 0) {
+                qScore = 0;
+                document.getElementById('quizScore').textContent = `Score: 0 / ${quizQuestions.length}`;
+            }
+            loadQuiz();
+        }
+
+        // Initialize on Load
+        window.addEventListener('DOMContentLoaded', () => {
+            initStackTower();
+            showLangCode('c');
+            loadQuiz();
+            runRevpol();
+            evaluatePostfix();
+        });
+    </script>
+</body>
+</html>

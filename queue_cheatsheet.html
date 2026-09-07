@@ -1,0 +1,3552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Queue Cheat Sheet & Simulator</title>
+    <meta name="description" content="A comprehensive interactive cheat sheet and visual simulator for students to master Simple Queues, Circular Queues, Deques, Circular Deques, and Priority Queues.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Unified Shared Stylesheet & Logic -->
+    <link rel="stylesheet" href="style.css">
+    <script src="main.js" defer></script>
+    
+    <!-- Inline Styling (Vanilla CSS) -->
+    <style>
+        :root {
+            /* Light Theme Variables */
+            --bg-primary: #f8fafc;
+            --bg-secondary: #ffffff;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --border-color: #cbd5e1;
+            --card-bg: #ffffff;
+            --shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.08), 0 8px 10px -6px rgba(15, 23, 42, 0.08);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            
+            /* Accent Colors per Queue Type */
+            --color-simple: #3b82f6; /* Blue */
+            --color-circular: #0d9488; /* Teal */
+            --color-deque: #8b5cf6; /* Purple */
+            --color-c-deque: #f59e0b; /* Amber */
+            --color-priority: #ef4444; /* Crimson */
+            
+            /* Math/Status Colors */
+            --color-overflow: #dc2626;
+            --color-underflow: #ea580c;
+            --color-success: #16a34a;
+            
+            --font-main: 'Inter', sans-serif;
+            --font-head: 'Outfit', sans-serif;
+            --font-code: 'Fira Code', monospace;
+        }
+
+        [data-theme="dark"] {
+            /* Dark Theme Variables */
+            --bg-primary: #090d16;
+            --bg-secondary: #111827;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --border-color: #374151;
+            --card-bg: #1f2937;
+            --shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.4);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: var(--font-main);
+            line-height: 1.5;
+            transition: var(--transition);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header Styling */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            margin-bottom: 24px;
+            transition: var(--transition);
+        }
+
+        .header-title h1 {
+            font-family: var(--font-head);
+            font-weight: 800;
+            font-size: 28px;
+            background: linear-gradient(135deg, #1d4ed8, #06b6d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.5px;
+        }
+
+        .header-title p {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-top: 4px;
+        }
+
+        .theme-toggle-btn {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: var(--font-head);
+            font-weight: 600;
+            font-size: 13px;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+        }
+
+        .theme-toggle-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        /* Navigation Links */
+        .nav-bar {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 24px;
+            overflow-x: auto;
+            padding-bottom: 8px;
+        }
+
+        .nav-link {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-family: var(--font-head);
+            font-weight: 600;
+            font-size: 14px;
+            text-decoration: none;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: var(--transition);
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--text-primary);
+            border-color: var(--text-primary);
+            background: var(--bg-primary);
+            transform: scale(1.02);
+        }
+
+        /* Dashboard Sections */
+        .section-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            padding: 24px;
+            margin-bottom: 28px;
+            transition: var(--transition);
+        }
+
+        .section-card h2 {
+            font-family: var(--font-head);
+            font-weight: 700;
+            font-size: 22px;
+            margin-bottom: 16px;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Notation Grid */
+        .notation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 16px;
+        }
+
+        .notation-item {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 14px;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .notation-item:hover {
+            transform: translateY(-3px);
+            border-color: #3b82f6;
+        }
+
+        .notation-symbol {
+            font-family: var(--font-code);
+            font-weight: 700;
+            font-size: 20px;
+            color: #3b82f6;
+            margin-bottom: 4px;
+        }
+
+        .notation-desc {
+            font-size: 13px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        /* Matrix Styling */
+        .matrix-container {
+            overflow-x: auto;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .matrix-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 13px;
+            min-width: 1000px;
+        }
+
+        .matrix-table th {
+            background: #1e293b;
+            color: #ffffff;
+            font-family: var(--font-head);
+            font-weight: 600;
+            padding: 14px 10px;
+            border: 1px solid var(--border-color);
+            text-align: center;
+        }
+
+        .matrix-table td {
+            padding: 12px 10px;
+            border: 1px solid var(--border-color);
+            vertical-align: middle;
+            transition: var(--transition);
+        }
+
+        .matrix-table tr:hover td {
+            background: rgba(59, 130, 246, 0.03);
+        }
+
+        .matrix-row-title {
+            background: var(--bg-primary);
+            font-weight: 700;
+            color: var(--text-primary);
+            font-family: var(--font-head);
+            width: 14%;
+        }
+
+        /* Cell Highlights */
+        .col-simple { border-left: 3px solid var(--color-simple) !important; background: rgba(59, 130, 246, 0.01); }
+        .col-circular { border-left: 3px solid var(--color-circular) !important; background: rgba(13, 148, 136, 0.01); }
+        .col-deque { border-left: 3px solid var(--color-deque) !important; background: rgba(139, 92, 246, 0.01); }
+        .col-c-deque { border-left: 3px solid var(--color-c-deque) !important; background: rgba(245, 158, 11, 0.01); }
+        .col-priority { border-left: 3px solid var(--color-priority) !important; background: rgba(239, 68, 68, 0.01); }
+
+        .formula-box {
+            font-family: var(--font-code);
+            font-weight: 600;
+            background: var(--bg-primary);
+            padding: 6px 10px;
+            border-radius: 5px;
+            border: 1px solid var(--border-color);
+            display: inline-block;
+            word-break: break-word;
+        }
+
+        .elegant-reset {
+            background: #fef2f2;
+            color: #991b1b;
+            border-color: #fca5a5;
+        }
+        [data-theme="dark"] .elegant-reset {
+            background: #451a1a;
+            color: #fca5a5;
+            border-color: #7f1d1d;
+        }
+
+        /* Simulator Grid Layout */
+        .simulator-grid {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 24px;
+        }
+
+        @media (max-width: 900px) {
+            .simulator-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .sidebar-tabs {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        @media (max-width: 900px) {
+            .sidebar-tabs {
+                flex-direction: row;
+                overflow-x: auto;
+                padding-bottom: 6px;
+            }
+        }
+
+        .sidebar-tab-btn {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-family: var(--font-head);
+            font-weight: 600;
+            font-size: 14px;
+            text-align: left;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .sidebar-tab-btn:hover {
+            transform: translateX(4px);
+            color: var(--text-primary);
+        }
+
+        @media (max-width: 900px) {
+            .sidebar-tab-btn:hover {
+                transform: translateY(-2px);
+            }
+        }
+
+        .sidebar-tab-btn.active {
+            color: #ffffff;
+        }
+
+        .sidebar-tab-btn[data-type="simple"].active { background-color: var(--color-simple); border-color: var(--color-simple); }
+        .sidebar-tab-btn[data-type="circular"].active { background-color: var(--color-circular); border-color: var(--color-circular); }
+        .sidebar-tab-btn[data-type="deque"].active { background-color: var(--color-deque); border-color: var(--color-deque); }
+        .sidebar-tab-btn[data-type="c-deque"].active { background-color: var(--color-c-deque); border-color: var(--color-c-deque); }
+        .sidebar-tab-btn[data-type="priority"].active { background-color: var(--color-priority); border-color: var(--color-priority); }
+        .sidebar-tab-btn[data-type="priority-min"].active { background-color: var(--color-priority); border-color: var(--color-priority); }
+
+        .simulator-content {
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            background: var(--bg-primary);
+        }
+
+        /* Controls Block */
+        .controls-block {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+            align-items: center;
+        }
+
+        .input-elem {
+            padding: 8px 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-family: var(--font-main);
+            font-size: 14px;
+            width: 80px;
+            background: var(--card-bg);
+            color: var(--text-primary);
+        }
+
+        .btn-action {
+            padding: 8px 16px;
+            border-radius: 6px;
+            border: none;
+            color: #ffffff;
+            font-family: var(--font-head);
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-action:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.1);
+        }
+
+        .btn-action:active {
+            transform: translateY(0);
+        }
+
+        .btn-simple { background-color: var(--color-simple); }
+        .btn-circular { background-color: var(--color-circular); }
+        .btn-deque { background-color: var(--color-deque); }
+        .btn-c-deque { background-color: var(--color-c-deque); }
+        .btn-priority { background-color: var(--color-priority); }
+        .btn-reset { background-color: var(--text-secondary); }
+
+        /* Queue Visualizer Containers */
+        .visualization-container {
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: var(--card-bg);
+            border: 1px dashed var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        /* Array block cells styling */
+        .array-layout {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 30px;
+            margin-top: 20px;
+            position: relative;
+        }
+
+        .array-cell-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+
+        .array-cell {
+            width: 60px;
+            height: 60px;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: var(--font-head);
+            font-weight: 700;
+            font-size: 20px;
+            background: var(--bg-primary);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .array-cell.filled {
+            border-color: #3b82f6;
+            background: rgba(59, 130, 246, 0.1);
+            animation: popIn 0.3s forwards;
+        }
+
+        .array-cell.active-front {
+            box-shadow: 0 0 12px rgba(59, 130, 246, 0.5);
+            border-color: #3b82f6;
+        }
+
+        .array-cell-index {
+            font-size: 11px;
+            color: var(--text-secondary);
+            margin-top: 4px;
+            font-weight: 600;
+        }
+
+        .pointer-arrow {
+            position: absolute;
+            font-weight: 800;
+            font-size: 12px;
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: #ffffff;
+            white-space: nowrap;
+            z-index: 10;
+            animation: slideArrow 0.3s forwards;
+        }
+
+        .pointer-f {
+            background-color: #f59e0b;
+            bottom: -32px;
+        }
+
+        .pointer-r {
+            background-color: #ef4444;
+            top: -32px;
+        }
+
+        .pointer-fr {
+            background: linear-gradient(135deg, #f59e0b, #ef4444);
+            bottom: -32px;
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0.7); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        @keyframes slideArrow {
+            0% { transform: translateY(5px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        /* SVG Circular Ring styling */
+        .circular-svg-container {
+            width: 240px;
+            height: 240px;
+            position: relative;
+        }
+
+        .circular-node {
+            transition: var(--transition);
+        }
+
+        .circular-node-circle {
+            fill: var(--card-bg);
+            stroke: var(--border-color);
+            stroke-width: 2;
+            transition: var(--transition);
+        }
+
+        .circular-node.active .circular-node-circle {
+            stroke: var(--color-circular);
+            fill: rgba(13, 148, 136, 0.1);
+        }
+
+        .circular-node-text {
+            font-family: var(--font-head);
+            font-weight: 700;
+            font-size: 18px;
+            fill: var(--text-primary);
+            text-anchor: middle;
+            dominant-baseline: middle;
+        }
+
+        .circular-index-text {
+            font-family: var(--font-main);
+            font-size: 11px;
+            fill: var(--text-secondary);
+            font-weight: 600;
+            text-anchor: middle;
+        }
+
+        /* Binary Tree styling (Priority Queue) */
+        .tree-svg-container {
+            width: 320px;
+            height: 200px;
+        }
+
+        .tree-node-circle {
+            fill: var(--card-bg);
+            stroke: var(--border-color);
+            stroke-width: 2;
+            transition: var(--transition);
+        }
+
+        .tree-node.active .tree-node-circle {
+            stroke: var(--color-priority);
+            fill: rgba(239, 68, 68, 0.1);
+        }
+
+        .tree-node-text {
+            font-family: var(--font-head);
+            font-weight: 700;
+            font-size: 14px;
+            fill: var(--text-primary);
+            text-anchor: middle;
+            dominant-baseline: middle;
+        }
+
+        .tree-node-index {
+            font-family: var(--font-main);
+            font-size: 9px;
+            fill: var(--text-secondary);
+            text-anchor: middle;
+        }
+
+        .tree-link-line {
+            stroke: var(--border-color);
+            stroke-width: 2;
+            transition: var(--transition);
+        }
+
+        .tree-link-line.active {
+            stroke: var(--color-priority);
+        }
+
+        /* Console Output */
+        .console-output {
+            background: #0f172a;
+            color: #38bdf8;
+            font-family: var(--font-code);
+            font-size: 13px;
+            border-radius: 8px;
+            padding: 12px;
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+            border: 1px solid var(--border-color);
+            margin-bottom: 20px;
+        }
+
+        .console-output.warn {
+            color: #f87171;
+            background: #450a0a;
+        }
+
+        .console-output.success {
+            color: #4ade80;
+            background: #064e3b;
+        }
+
+        /* Trace step highlight code */
+        .trace-steps {
+            background: #1e293b;
+            color: #e2e8f0;
+            border-radius: 8px;
+            padding: 16px;
+            font-family: var(--font-code);
+            font-size: 12px;
+            border: 1px solid var(--border-color);
+        }
+
+        .trace-steps h4 {
+            color: var(--text-secondary);
+            font-family: var(--font-head);
+            font-size: 13px;
+            margin-bottom: 8px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .trace-line {
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin: 2px 0;
+            opacity: 0.6;
+            transition: var(--transition);
+        }
+
+        .trace-line.active-line {
+            background: #0284c7;
+            color: #ffffff;
+            opacity: 1;
+            font-weight: 600;
+        }
+
+        /* Code tabs container */
+        .code-tabs {
+            margin-top: 10px;
+        }
+
+        .tab-headers {
+            display: flex;
+            border-bottom: 1px solid var(--border-color);
+            gap: 10px;
+            margin-bottom: 14px;
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            padding: 8px 16px;
+            font-family: var(--font-head);
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .tab-btn.active {
+            color: var(--text-primary);
+        }
+
+        .tab-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: #3b82f6;
+            border-radius: 2px;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .code-block {
+            background: #1e293b;
+            color: #f8fafc;
+            padding: 16px;
+            border-radius: 8px;
+            font-family: var(--font-code);
+            font-size: 13px;
+            overflow-x: auto;
+            border: 1px solid var(--border-color);
+        }
+
+        /* Quiz Box Styling */
+        .quiz-container {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .quiz-question {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .quiz-options {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+        }
+
+        .quiz-option {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            padding: 12px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .quiz-option:hover {
+            border-color: #3b82f6;
+            background: rgba(59, 130, 246, 0.05);
+        }
+
+        .quiz-option.correct {
+            border-color: #22c55e;
+            background: rgba(34, 197, 94, 0.1);
+            color: #15803d;
+            font-weight: 600;
+        }
+
+        .quiz-option.wrong {
+            border-color: #ef4444;
+            background: rgba(239, 68, 68, 0.1);
+            color: #b91c1c;
+        }
+
+        .quiz-explanation {
+            background: #eff6ff;
+            border-left: 4px solid #3b82f6;
+            padding: 12px;
+            border-radius: 0 8px 8px 0;
+            font-size: 13px;
+            color: #1e3a8a;
+            margin-top: 10px;
+            display: none;
+        }
+        [data-theme="dark"] .quiz-explanation {
+            background: #172554;
+            color: #bfdbfe;
+            border-color: #3b82f6;
+        }
+
+        .quiz-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .quiz-score-badge {
+            background: rgba(59, 130, 246, 0.1);
+            color: #3b82f6;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ========================================================================
+         UNIFIED TOP NAVBAR (SHARED ACROSS ALL PAGES)
+         ======================================================================== -->
+    <nav class="navbar" id="navbar">
+        <div class="container navbar-inner">
+            <!-- Brand Logo -->
+            <a href="index.html" class="nav-brand" aria-label="DSM Simulation Home">
+                <div class="nav-logo-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                        <polyline points="2 17 12 22 22 17"></polyline>
+                        <polyline points="2 12 12 17 22 12"></polyline>
+                    </svg>
+                </div>
+                <div class="nav-logo-text">DSM <span>Simulation</span></div>
+            </a>
+
+            <!-- Desktop Menu with all requested topics -->
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html#hero" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="index.html#definition" class="nav-link">What is DS?</a>
+                </li>
+                <li class="nav-item">
+                    <a href="index.html#importance" class="nav-link">Importance</a>
+                </li>
+                <li class="nav-item">
+                    <a href="index.html#applications" class="nav-link">Applications</a>
+                </li>
+
+                <!-- Linear Data Structures Menu Dropdown -->
+                <li class="nav-item">
+                    <a href="index.html#modules" class="nav-link active">
+                        Linear DS
+                        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </a>
+                    <div class="nav-dropdown">
+                        <a href="stack_cheatsheet.html" class="dropdown-link">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19h16M4 15h16M4 11h16M4 7h16"/></svg>
+                            Stack Suite (LIFO)
+                            <span class="dropdown-badge live">Live Simulator ⚡</span>
+                        </a>
+                        <a href="queue_cheatsheet.html" class="dropdown-link" style="color:var(--accent-blue); font-weight:700;">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 10 12 10 12 14"/></svg>
+                            Queue Suite (FIFO)
+                            <span class="dropdown-badge live">Current Page</span>
+                        </a>
+                        <a href="index.html#linkedlist" class="dropdown-link">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6" cy="12" r="3"/><circle cx="18" cy="12" r="3"/><line x1="9" y1="12" x2="15" y2="12"/></svg>
+                            Linked List
+                            <span class="dropdown-badge">Train</span>
+                        </a>
+                    </div>
+                </li>
+
+                <!-- Non-Linear Data Structures Menu Dropdown -->
+                <li class="nav-item">
+                    <a href="index.html#modules" class="nav-link">
+                        Non-Linear DS
+                        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </a>
+                    <div class="nav-dropdown">
+                        <a href="index.html#tree" class="dropdown-link">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v6m-6 6l6-6 6 6m-9 6l3-6 3 6"/><circle cx="12" cy="2" r="1"/></svg>
+                            Tree & BST
+                            <span class="dropdown-badge">Family Tree</span>
+                        </a>
+                        <a href="index.html#graph" class="dropdown-link">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6" cy="6" r="3"/><circle cx="18" cy="6" r="3"/><circle cx="12" cy="18" r="3"/><line x1="8.5" y1="7.5" x2="15.5" y2="7.5"/><line x1="7.5" y1="8.5" x2="10.5" y2="15.5"/><line x1="16.5" y1="8.5" x2="13.5" y2="15.5"/></svg>
+                            Graph Networks
+                            <span class="dropdown-badge">Road Map</span>
+                        </a>
+                    </div>
+                </li>
+
+                <!-- Algorithms Dropdown Menu -->
+                <li class="nav-item">
+                    <a href="index.html#modules" class="nav-link">
+                        Algorithms
+                        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </a>
+                    <div class="nav-dropdown">
+                        <a href="index.html#searching" class="dropdown-link">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                            Searching (Find Items)
+                            <span class="dropdown-badge">Search</span>
+                        </a>
+                        <a href="index.html#sorting" class="dropdown-link">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M6 12h12M10 18h4"/></svg>
+                            Sorting (Order Items)
+                            <span class="dropdown-badge">Sort</span>
+                        </a>
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <a href="index.html#cheatsheet" class="nav-link">Cheat Sheet</a>
+                </li>
+            </ul>
+
+            <!-- Nav Actions -->
+            <div class="nav-actions">
+                <!-- Theme Toggle Button -->
+                <button class="btn-icon theme-toggle" id="themeToggle" aria-label="Toggle light or dark theme" title="Toggle theme">
+                    <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                    <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
+
+                <!-- Mobile Hamburger Toggle -->
+                <button class="btn-icon mobile-toggle" id="mobileMenuBtn" aria-label="Open mobile navigation menu">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Drawer Overlay & Content -->
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+    <aside class="mobile-drawer" id="mobileDrawer">
+        <div class="mobile-drawer-header">
+            <div class="nav-brand">
+                <div class="nav-logo-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                        <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                        <polyline points="2 17 12 22 22 17"></polyline>
+                        <polyline points="2 12 12 17 22 12"></polyline>
+                    </svg>
+                </div>
+                <div class="nav-logo-text">DSM <span>Simulation</span></div>
+            </div>
+            <button class="btn-icon" id="closeMobileBtn" aria-label="Close navigation drawer">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+
+        <div class="mobile-nav-links">
+            <a href="index.html#hero" class="mobile-nav-link">Home Overview</a>
+            <a href="index.html#definition" class="mobile-nav-link">What is Data Structure?</a>
+            <a href="index.html#importance" class="mobile-nav-link">Why It Matters</a>
+            <a href="index.html#applications" class="mobile-nav-link">Real-World Applications</a>
+
+            <div class="mobile-nav-section-title">Linear Structures</div>
+            <a href="stack_cheatsheet.html" class="mobile-nav-link" style="color: var(--accent-blue); font-weight:700;">Stack Simulator (Live ⚡)</a>
+            <a href="queue_cheatsheet.html" class="mobile-nav-link" style="color: var(--accent-emerald); font-weight:700;">Queue Simulator (Current Page ⚡)</a>
+            <a href="index.html#linkedlist" class="mobile-nav-link">Linked List (Train Cars)</a>
+
+            <div class="mobile-nav-section-title">Non-Linear Structures</div>
+            <a href="index.html#tree" class="mobile-nav-link">Tree (Family Tree)</a>
+            <a href="index.html#graph" class="mobile-nav-link">Graph (Road Map)</a>
+
+            <div class="mobile-nav-section-title">Algorithms</div>
+            <a href="index.html#searching" class="mobile-nav-link">Searching (Find Items)</a>
+            <a href="index.html#sorting" class="mobile-nav-link">Sorting (Order Items)</a>
+
+            <div class="mobile-nav-section-title">Quick Reference</div>
+            <a href="index.html#cheatsheet" class="mobile-nav-link">Speed Cheat Sheet (Big-O)</a>
+        </div>
+    </aside>
+
+<div class="container" style="margin-top: 24px;">
+
+    <!-- HEADER -->
+    <header>
+        <div class="header-title">
+            <a href="index.html" style="text-decoration:none; display:inline-flex; align-items:center; gap:6px; font-size:12px; font-weight:700; color:var(--text-secondary); margin-bottom:6px; text-transform:uppercase; letter-spacing:0.5px;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                Back to DSM Simulation Hub
+            </a>
+            <h1>QUEUE ALGORITHMS & REPRESENTATIONS</h1>
+            <p>A unified interactive visual manual for computer science students</p>
+        </div>
+        <button class="theme-toggle-btn" onclick="toggleTheme()">
+            <span id="theme-icon">🌙</span>
+            <span id="theme-text">Dark Mode</span>
+        </button>
+    </header>
+
+    <!-- NAVIGATION BAR -->
+    <div class="nav-bar">
+        <a href="index.html" class="nav-link" style="border-color: #3b82f6; color: #3b82f6; font-weight: 700;">🏠 Hub Home</a>
+        <a href="#section-notation" class="nav-link">Notation</a>
+        <a href="#section-matrix" class="nav-link">Comparison Matrix</a>
+        <a href="#section-simulators" class="nav-link">Visual Simulators</a>
+        <a href="#section-code" class="nav-link">Pseudocode & Code</a>
+        <a href="#section-quiz" class="nav-link">Quick Quiz</a>
+    </div>
+
+    <!-- NOTATION SECTION -->
+    <div id="section-notation" class="section-card">
+        <h2>🏷️ Basic Notation</h2>
+        <div class="notation-grid">
+            <div class="notation-item">
+                <div class="notation-symbol">Q</div>
+                <div class="notation-desc">Queue Array / Heap Array</div>
+            </div>
+            <div class="notation-item">
+                <div class="notation-symbol">N</div>
+                <div class="notation-desc">Maximum Capacity</div>
+            </div>
+            <div class="notation-item">
+                <div class="notation-symbol">F</div>
+                <div class="notation-desc">Front Index (Deletion point)</div>
+            </div>
+            <div class="notation-item">
+                <div class="notation-symbol">R</div>
+                <div class="notation-desc">Rear Index (Insertion point)</div>
+            </div>
+            <div class="notation-item">
+                <div class="notation-symbol">COUNT</div>
+                <div class="notation-desc">Number of Elements</div>
+            </div>
+            <div class="notation-item">
+                <div class="notation-symbol">X</div>
+                <div class="notation-desc">Value to be inserted</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- COMPARISON MATRIX SECTION -->
+    <div id="section-matrix" class="section-card">
+        <h2>📊 Queue Operations Comparison Matrix</h2>
+        <div class="matrix-container">
+            <table class="matrix-table">
+                <thead>
+                    <tr>
+                        <th style="width: 15%;">OPERATION</th>
+                        <th style="background-color: var(--color-simple);">SIMPLE QUEUE</th>
+                        <th style="background-color: var(--color-circular);">CIRCULAR QUEUE</th>
+                        <th style="background-color: var(--color-deque);">SIMPLE DEQUE</th>
+                        <th style="background-color: var(--color-c-deque);">CIRCULAR DEQUE</th>
+                        <th style="background-color: var(--color-priority);">PRIORITY QUEUE (MAX-HEAP)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="matrix-row-title">Pointers</td>
+                        <td class="col-simple"><span class="formula-box">Front, Rear</span></td>
+                        <td class="col-circular"><span class="formula-box">Front, Rear</span></td>
+                        <td class="col-deque"><span class="formula-box">Front, Rear</span></td>
+                        <td class="col-c-deque"><span class="formula-box">Front, Rear</span></td>
+                        <td class="col-priority"><span class="formula-box">0-index based Heap</span></td>
+                    </tr>
+                    <tr>
+                        <td class="matrix-row-title">Initial State</td>
+                        <td class="col-simple"><span class="formula-box">F = R = -1</span></td>
+                        <td class="col-circular"><span class="formula-box">F = R = -1</span></td>
+                        <td class="col-deque"><span class="formula-box">F = R = -1</span></td>
+                        <td class="col-c-deque"><span class="formula-box">F = R = -1</span></td>
+                        <td class="col-priority"><span class="formula-box">COUNT = 0</span></td>
+                    </tr>
+                    <tr>
+                        <td class="matrix-row-title">Overflow Check</td>
+                        <td class="col-simple"><span class="formula-box">R &ge; N - 1</span></td>
+                        <td class="col-circular">
+                            <span class="formula-box">F = 0 &amp; R = N - 1</span><br>OR<br>
+                            <span class="formula-box">R = F - 1</span> (i.e. <span class="formula-box">F = R + 1</span>)
+                        </td>
+                        <td class="col-deque">
+                            Front end: <span class="formula-box">F = 0</span><br>
+                            Rear end: <span class="formula-box">R &ge; N - 1</span>
+                        </td>
+                        <td class="col-c-deque">
+                            <span class="formula-box">F = 0 &amp; R = N - 1</span><br>OR<br>
+                            <span class="formula-box">R = F - 1</span> (i.e. <span class="formula-box">F = R + 1</span>)
+                        </td>
+                        <td class="col-priority"><span class="formula-box">COUNT = N</span></td>
+                    </tr>
+                    <tr>
+                        <td class="matrix-row-title">Underflow Check</td>
+                        <td class="col-simple"><span class="formula-box">F = -1</span> (or <span class="formula-box">F = R = -1</span>)</td>
+                        <td class="col-circular"><span class="formula-box">F = -1</span></td>
+                        <td class="col-deque"><span class="formula-box">F = -1</span> (or <span class="formula-box">F = R = -1</span>)</td>
+                        <td class="col-c-deque"><span class="formula-box">F = -1</span></td>
+                        <td class="col-priority"><span class="formula-box">COUNT = 0</span></td>
+                    </tr>
+                    <tr>
+                        <td class="matrix-row-title">Insert (Rear)</td>
+                        <td class="col-simple">
+                            <span class="formula-box">R = R + 1</span><br>
+                            <span class="formula-box elegant-reset">if F == -1 &rarr; F = 0</span><br>
+                            <span class="formula-box"><strong>Q[R] = X</strong></span>
+                        </td>
+                        <td class="col-circular">
+                            <span class="formula-box elegant-reset">if R == N-1 &rarr; R = 0</span><br>
+                            <span class="formula-box elegant-reset">else &rarr; R = R + 1</span><br>
+                            <span class="formula-box elegant-reset">if F == -1 &rarr; F = 0</span><br>
+                            <span class="formula-box"><strong>Q[R] = X</strong></span>
+                        </td>
+                        <td class="col-deque">
+                            <span class="formula-box">R = R + 1</span><br>
+                            <span class="formula-box elegant-reset">if F == -1 &rarr; F = 0</span><br>
+                            <span class="formula-box"><strong>Q[R] = X</strong></span>
+                        </td>
+                        <td class="col-c-deque">
+                            <span class="formula-box elegant-reset">if R == N-1 &rarr; R = 0</span><br>
+                            <span class="formula-box elegant-reset">else &rarr; R = R + 1</span><br>
+                            <span class="formula-box elegant-reset">if F == -1 &rarr; F = 0, R = 0</span><br>
+                            <span class="formula-box"><strong>Q[R] = X</strong></span>
+                        </td>
+                        <td class="col-priority" rowspan="2">
+                            <span class="formula-box">COUNT = COUNT + 1</span><br>
+                            <span class="formula-box">I = COUNT - 1; Q[I] = X</span><br>
+                            <span class="formula-box"><strong>Call HEAPIFY_UP(Q, I)</strong></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="matrix-row-title">Insert (Front)</td>
+                        <td class="col-simple">Not Applicable</td>
+                        <td class="col-circular">Not Applicable</td>
+                        <td class="col-deque">
+                            <span class="formula-box">F = F - 1</span><br>
+                            <span class="formula-box elegant-reset">if F == -1 &rarr; F = 0, R = 0</span><br>
+                            <span class="formula-box"><strong>Q[F] = X</strong></span>
+                        </td>
+                        <td class="col-c-deque">
+                            <span class="formula-box elegant-reset">if F == -1 &rarr; F = 0, R = 0</span><br>
+                            <span class="formula-box elegant-reset">else if F == 0 &rarr; F = N - 1</span><br>
+                            <span class="formula-box elegant-reset">else &rarr; F = F - 1</span><br>
+                            <span class="formula-box"><strong>Q[F] = X</strong></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="matrix-row-title">Delete (Front)</td>
+                        <td class="col-simple">
+                            <span class="formula-box">ITEM = Q[F]</span><br>
+                            <span class="formula-box">F = F + 1</span><br>
+                            <span class="formula-box elegant-reset">if F == R + 1 &rarr; F = R = -1</span>
+                        </td>
+                        <td class="col-circular">
+                            <span class="formula-box">ITEM = Q[F]</span><br>
+                            <span class="formula-box elegant-reset">if F == R &rarr; F = R = -1</span><br>
+                            <span class="formula-box elegant-reset">else &rarr; F = (F + 1) % N</span>
+                        </td>
+                        <td class="col-deque">
+                            <span class="formula-box">ITEM = Q[F]</span><br>
+                            <span class="formula-box">F = F + 1</span><br>
+                            <span class="formula-box elegant-reset">if F == R  &rarr; F = R = -1</span>
+                        </td>
+                        <td class="col-c-deque">
+                            <span class="formula-box">ITEM = Q[F]</span><br>
+                            <span class="formula-box elegant-reset">if F == R &rarr; F = R = -1</span><br>
+                            <span class="formula-box elegant-reset">else &rarr; F = (F + 1) % N</span>
+                        </td>
+                        <td class="col-priority" rowspan="2">
+                            <span class="formula-box">ITEM = Q[0]; Q[0] = Q[COUNT-1]</span><br>
+                            <span class="formula-box">COUNT = COUNT - 1</span><br>
+                            <span class="formula-box"><strong>Call HEAPIFY_DOWN(Q, COUNT, 0)</strong></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="matrix-row-title">Delete (Rear)</td>
+                        <td class="col-simple">Not Applicable</td>
+                        <td class="col-circular">Not Applicable</td>
+                        <td class="col-deque">
+                            <span class="formula-box">ITEM = Q[R]</span><br>
+                            <span class="formula-box">R = R - 1</span><br>
+                            <span class="formula-box elegant-reset">if F == R  &rarr; F = R = -1</span>
+                        </td>
+                        <td class="col-c-deque">
+                            <span class="formula-box">ITEM = Q[R]</span><br>
+                            <span class="formula-box elegant-reset">if F == R &rarr; F = R = -1</span><br>
+                            <span class="formula-box elegant-reset">else if R == 0 &rarr; R = N - 1</span><br>
+                            <span class="formula-box elegant-reset">else &rarr; R = R - 1</span>
+                        </td>
+                    </tr>
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- SIMULATORS SECTION -->
+    <div id="section-simulators" class="section-card">
+        <h2>🎮 Interactive Visual Simulators</h2>
+        <div class="simulator-grid">
+            
+            <!-- Sidebar tabs -->
+            <div class="sidebar-tabs">
+                <button class="sidebar-tab-btn active" data-type="simple" onclick="selectSimulator('simple')">Simple Queue <span>➔</span></button>
+                <button class="sidebar-tab-btn" data-type="circular" onclick="selectSimulator('circular')">Circular Queue <span>➔</span></button>
+                <button class="sidebar-tab-btn" data-type="deque" onclick="selectSimulator('deque')">Simple Deque <span>➔</span></button>
+                <button class="sidebar-tab-btn" data-type="c-deque" onclick="selectSimulator('c-deque')">Circular Deque <span>➔</span></button>
+                <button class="sidebar-tab-btn" data-type="priority" onclick="selectSimulator('priority')">Priority Queue (Max-Heap) <span>➔</span></button>
+                <button class="sidebar-tab-btn" data-type="priority-min" onclick="selectSimulator('priority-min')">Priority Queue (Min-Heap) <span>➔</span></button>
+            </div>
+
+            <!-- Main simulator screen -->
+            <div class="simulator-content">
+                <h3 id="sim-title" style="margin-bottom: 10px; font-family: var(--font-head); font-size: 18px;">Simple Queue Simulator</h3>
+                <p id="sim-desc" style="font-size: 13px; color: var(--text-secondary); margin-bottom: 20px;">A basic FIFO (First-In, First-Out) structure where insertions happen at the Rear and deletions happen at the Front. Shows linear pointer drift.</p>
+                
+                <!-- Input and operations buttons -->
+                <div class="controls-block" id="sim-controls">
+                    <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 5px; width: 100%;">
+                        <label for="insert-val" style="font-size: 13px; font-weight: 600;">Value X:</label>
+                        <input type="text" id="insert-val" class="input-elem" value="A" maxlength="3" style="width: 50px;">
+                        
+                        <label for="queue-size" style="font-size: 13px; font-weight: 600; margin-left: 10px;">Size N (Max 20):</label>
+                        <input type="number" id="queue-size" class="input-elem" value="6" min="2" max="20" style="width: 60px;" onchange="resizeQueue()">
+                        
+                        <label for="speed-slider" style="font-size: 13px; font-weight: 600; margin-left: 10px;">Step Delay:</label>
+                        <input type="range" id="speed-slider" min="300" max="5000" value="1200" step="100" style="width: 100px; vertical-align: middle;" oninput="updateSpeed()">
+                        <span id="speed-val" style="font-size: 12px; font-weight: 600;">1.2s</span>
+                    </div>
+                    
+                    <button class="btn-action btn-simple" id="btn-insert-rear" onclick="triggerInsertRear()">Insert Rear (Enqueue)</button>
+                    <button class="btn-action btn-simple" id="btn-insert-front" onclick="triggerInsertFront()" style="display:none;">Insert Front</button>
+                    <button class="btn-action btn-simple" id="btn-delete-front" onclick="triggerDeleteFront()">Delete Front (Dequeue)</button>
+                    <button class="btn-action btn-simple" id="btn-delete-rear" onclick="triggerDeleteRear()" style="display:none;">Delete Rear</button>
+                    <button class="btn-action btn-reset" onclick="resetCurrentSimulator()">Clear All</button>
+                </div>
+
+                <!-- Simulation visual container -->
+                <div class="visualization-container" id="visualizer-view">
+                    <!-- Dynamic rendering happens here -->
+                </div>
+
+                <!-- Console Output for logs -->
+                <div class="console-output" id="console-log">
+                    Console initialized. Try Enqueuing some values!
+                </div>
+
+                <!-- Line-by-line Trace panel -->
+                <div class="trace-steps">
+                    <h4>Algorithm Line-by-Line Execution Trace</h4>
+                    <div id="trace-lines-container">
+                        <!-- Dynamic code trace lines -->
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- CODE & DETAILS SECTION -->
+    <div id="section-code" class="section-card">
+        <h2>💻 Core Code Implementations</h2>
+        
+        <!-- Queue Type Selector Dropdown -->
+        <div style="margin-bottom: 18px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+            <label for="code-queue-select" style="font-family: var(--font-head); font-weight: 700; font-size: 15px; color: var(--text-primary);">Select Queue Type:</label>
+            <select id="code-queue-select" class="input-elem" style="width: 250px; background: var(--bg-primary); font-weight: 600;" onchange="updateDisplayedCode()">
+                <option value="simple">Simple Queue</option>
+                <option value="circular" selected>Circular Queue</option>
+                <option value="deque">Simple Deque</option>
+                <option value="c-deque">Circular Deque</option>
+                <option value="priority-max">Priority Queue (Max-Heap)</option>
+                <option value="priority-min">Priority Queue (Min-Heap)</option>
+            </select>
+        </div>
+
+        <div class="code-tabs">
+            <div class="tab-headers">
+                <button class="tab-btn active" onclick="switchLanguageTab(event, 'blackboard')">Blackboard Syntax</button>
+                <button class="tab-btn" onclick="switchLanguageTab(event, 'java')">Java Implementation</button>
+                <button class="tab-btn" onclick="switchLanguageTab(event, 'python')">Python Implementation</button>
+            </div>
+            
+            <div class="code-display">
+                <pre class="code-block" id="display-code-block" style="white-space: pre-wrap; max-height: 500px; overflow-y: auto;">Loading code snippet...</pre>
+            </div>
+        </div>
+    </div>
+
+    <!-- QUIZ SECTION -->
+    <div id="section-quiz" class="section-card">
+        <h2>📝 Conceptual Quick Quiz</h2>
+        <div class="quiz-container">
+            <div id="quiz-question-box">
+                <div class="quiz-question" id="q-text">Loading question...</div>
+                <div class="quiz-options" id="q-options">
+                    <!-- Options dynamic load -->
+                </div>
+                <div class="quiz-explanation" id="q-explanation">
+                    Explanation block
+                </div>
+            </div>
+            
+            <div class="quiz-nav">
+                <div class="quiz-score-badge" id="quiz-score">Score: 0 / 5</div>
+                <button class="btn-action btn-circular" onclick="loadNextQuizQuestion()">Next Question ➔</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Core Javascript Logic (Vanilla JS) -->
+<script>
+    let stepDelay = 1200; // default delay in ms
+    
+    // Custom setTimeout wrapper that scales delays according to user settings
+    const nativeSetTimeout = window.setTimeout;
+    window.setTimeout = function(callback, delay, ...args) {
+        let scaledDelay = delay;
+        if (delay === 400) scaledDelay = stepDelay;
+        else if (delay === 500) scaledDelay = stepDelay;
+        else if (delay === 600) scaledDelay = stepDelay;
+        else if (delay === 800) scaledDelay = stepDelay * 1.5;
+        return nativeSetTimeout(callback, scaledDelay, ...args);
+    };
+
+    function updateSpeed() {
+        const val = parseInt(document.getElementById('speed-slider').value);
+        stepDelay = val;
+        document.getElementById('speed-val').innerText = (val / 1000).toFixed(1) + 's';
+    }
+
+    function resizeQueue() {
+        let sizeInput = parseInt(document.getElementById('queue-size').value);
+        if (isNaN(sizeInput) || sizeInput < 2) {
+            sizeInput = 2;
+        } else if (sizeInput > 20) {
+            sizeInput = 20;
+        }
+        document.getElementById('queue-size').value = sizeInput;
+        
+        N = sizeInput;
+        MAX_HEAP_CAPACITY = sizeInput;
+        
+        // Re-initialize queue states to matching N
+        states.simple = { q: Array(N).fill(null), f: -1, r: -1 };
+        states.circular = { q: Array(N).fill(null), f: -1, r: -1 };
+        states.deque = { q: Array(N).fill(null), f: -1, r: -1 };
+        states['c-deque'] = { q: Array(N).fill(null), f: -1, r: -1 };
+        states.priority = { q: [], count: 0 };
+        states['priority-min'] = { q: [], count: 0 };
+        
+        logConsole(`Queue resized to size N = ${N}. States reset.`, 'info');
+        renderSimulator();
+    }
+
+    const codeRepository = {
+        simple: {
+            blackboard: `// --- SIMPLE QUEUE INSERT (ENQUEUE) ---
+Algorithm: INSERT_SQ(Q, N, F, R, X)
+1. [Check Overflow]
+   If R >= N - 1
+       Write "QUEUE OVERFLOW" and Return
+2. [Increment Rear]
+   R <- R + 1
+3. [Insert Element]
+   Q[R] <- X
+4. [Adjust Front Pointer on first insert]
+   If F = -1
+       F <- 0
+5. Return
+
+// --- SIMPLE QUEUE DELETE (DEQUEUE) ---
+Algorithm: DELETE_SQ(Q, F, R)
+1. [Check Underflow]
+   If F = -1
+       Write "QUEUE UNDERFLOW" and Return
+2. [Retrieve Item]
+   ITEM <- Q[F]
+3. [Check if Queue has only one element]
+   If F = R
+       F <- -1
+       R <- -1
+   Else
+       F <- F + 1
+4. Return ITEM`,
+            java: `public class SimpleQueue {
+    private int[] q;
+    private int front, rear, size;
+
+    public SimpleQueue(int limit) {
+        size = limit;
+        q = new int[size];
+        front = -1;
+        rear = -1;
+    }
+
+    public boolean enqueue(int val) {
+        if (rear >= size - 1) {
+            System.out.println("QUEUE OVERFLOW");
+            return false;
+        }
+        rear = rear + 1;
+        q[rear] = val;
+        if (front == -1) {
+            front = 0;
+        }
+        return true;
+    }
+
+    public int dequeue() {
+        if (front == -1) {
+            System.out.println("QUEUE UNDERFLOW");
+            return -1;
+        }
+        int item = q[front];
+        if (front == rear) {
+            front = -1;
+            rear = -1;
+        } else {
+            front = front + 1;
+        }
+        return item;
+    }
+}`,
+            python: `class SimpleQueue:
+    def __init__(self,n):
+        self.n=n
+        self.front=-1
+        self.rear=-1
+        self.sq=[]
+
+    def is_empty(self):
+        if self.front==-1 or self.rear==-1 or self.front<0 or self.rear<0:
+            return True
+        else:
+            return False
+
+    def is_full(self):
+        if self.rear>=self.n-1:
+            return True
+        else:
+            return False
+
+    def insert_sq(self,x):
+        if self.is_full():
+            print("Queue is full")
+            return
+        else:
+            if self.front==-1:
+                self.front=0
+                self.rear=0
+            else:
+                self.rear = self.rear+1
+        self.sq.append(x)
+
+    def delete_sq(self):
+        if self.is_empty():
+            print("Queue is empty")
+            return None
+        else:
+            deleted_value=self.sq[self.front]
+            if self.front==self.rear:
+                self.front=-1
+                self.rear=-1
+            else:
+                self.front=self.front+1
+            return deleted_value
+
+    def display(self):
+        if self.is_empty():
+            print("Queue is empty")
+        else:
+            for i in range(self.front,self.rear+1):
+                print(f"value at {i} = {self.sq[i]}")
+
+# --- Driver Program ---
+max_size = int(input("Enter the size of Queue::"))
+
+sq_obj = SimpleQueue(max_size)
+while (True):
+    print("1. Insert")
+    print("2. Delete")
+    print("3. Display")
+    print("4. Exit")
+
+    user_choice = int(input("Enter your Choice::"))
+
+    if user_choice == 1:
+        x = input("Enter value to insert on to the queue::")
+        sq_obj.insert_sq(x)
+        sq_obj.display()
+    elif user_choice == 2:
+        deleted_val = sq_obj.delete_sq()
+        # sq_obj.display()
+    elif user_choice == 3:
+        sq_obj.display()
+    elif user_choice == 4:
+        print("Exiting the code")
+        break
+    else:
+        print("invalid Choice")`
+        },
+        circular: {
+            blackboard: `// --- CIRCULAR QUEUE INSERT (ENQUEUE) ---
+Algorithm: INSERT_CQ(Q, N, F, R, X)
+1. [Check Overflow]
+   If (F = 0 and R = N - 1) OR (R = F - 1)
+       Write "QUEUE OVERFLOW" and Return
+2. [Calculate Insert Location]
+   If R = N - 1
+       R <- 0
+   Else
+       R <- R + 1
+3. [Insert Element]
+   Q[R] <- X
+4. [Adjust Front Pointer on first insert]
+   If F = -1
+       F <- 0
+5. Return
+
+// --- CIRCULAR QUEUE DELETE (DEQUEUE) ---
+Algorithm: DELETE_CQ(Q, N, F, R)
+1. [Check Underflow]
+   If F = -1
+       Write "QUEUE UNDERFLOW" and Return
+2. [Retrieve Item]
+   ITEM <- Q[F]
+3. [Check if Queue has only one element]
+   If F = R
+       F <- -1
+       R <- -1
+   Else If F = N - 1
+       F <- 0
+   Else
+       F <- F + 1
+4. Return ITEM`,
+            java: `public class CircularQueue {
+    private int[] q;
+    private int front, rear, size;
+
+    public CircularQueue(int limit) {
+        size = limit;
+        q = new int[size];
+        front = -1;
+        rear = -1;
+    }
+
+    public boolean enqueue(int val) {
+        if ((front == 0 && rear == size - 1) || (rear == front - 1)) {
+            System.out.println("QUEUE OVERFLOW");
+            return false;
+        }
+        if (rear == size - 1) {
+            rear = 0;
+        } else {
+            rear = rear + 1;
+        }
+        q[rear] = val;
+        if (front == -1) {
+            front = 0;
+        }
+        return true;
+    }
+
+    public int dequeue() {
+        if (front == -1) {
+            System.out.println("QUEUE UNDERFLOW");
+            return -1;
+        }
+        int item = q[front];
+        if (front == rear) {
+            front = -1;
+            rear = -1;
+        } else if (front == size - 1) {
+            front = 0;
+        } else {
+            front = front + 1;
+        }
+        return item;
+    }
+}`,
+            python: `class CircularQueue:
+    def __init__(self, size: int):
+        self.size = size
+        self.q = [None] * size
+        self.front = -1
+        self.rear = -1
+
+    def enqueue(self, val) -> bool:
+        if (self.front == 0 and self.rear == self.size - 1) or (self.rear == self.front - 1):
+            print("QUEUE OVERFLOW")
+            return False
+        if self.rear == self.size - 1:
+            self.rear = 0
+        else:
+            self.rear += 1
+        self.q[self.rear] = val
+        if self.front == -1:
+            self.front = 0
+        return True
+
+    def dequeue(self):
+        if self.front == -1:
+            print("QUEUE UNDERFLOW")
+            return None
+        item = self.q[self.front]
+        self.q[self.front] = None
+        if self.front == self.rear:
+            self.front = -1
+            self.rear = -1
+        elif self.front == self.size - 1:
+            self.front = 0
+        else:
+            self.front += 1
+        return item
+
+# --- Driver Program ---
+max_size = int(input("Enter the size of Queue::"))
+cq_obj = CircularQueue(max_size)
+
+while True:
+    print("1. Enqueue (Insert)")
+    print("2. Dequeue (Delete)")
+    print("3. Display")
+    print("4. Exit")
+    user_choice = int(input("Enter your Choice::"))
+    if user_choice == 1:
+        x = input("Enter value to insert on to the circular queue::")
+        cq_obj.enqueue(x)
+        print("Queue array:", cq_obj.q)
+    elif user_choice == 2:
+        deleted_val = cq_obj.dequeue()
+        print("Deleted:", deleted_val)
+        print("Queue array:", cq_obj.q)
+    elif user_choice == 3:
+        print("Queue array:", cq_obj.q)
+    elif user_choice == 4:
+        print("Exiting the code")
+        break
+    else:
+        print("invalid Choice")`
+        },
+        deque: {
+            blackboard: `// --- INSERT FRONT (SIMPLE DEQUE) ---
+Algorithm: INSERT_FRONT_DQ(Q, N, F, R, X)
+1. If F = 0
+       Write "FRONT OVERFLOW (Blocked)" and Return
+2. If F = -1
+       F <- 0, R <- 0
+3. Else
+       F <- F - 1
+4. Q[F] <- X
+
+// --- DELETE REAR (SIMPLE DEQUE) ---
+Algorithm: DELETE_REAR_DQ(Q, F, R)
+1. If F = -1
+       Write "QUEUE UNDERFLOW" and Return
+2. ITEM <- Q[R]
+3. If F = R
+       F <- -1, R <- -1
+4. Else
+       R <- R - 1
+5. Return ITEM`,
+            java: `public class SimpleDeque {
+    private int[] q;
+    private int front, rear, size;
+
+    public SimpleDeque(int limit) {
+        size = limit;
+        q = new int[size];
+        front = -1; rear = -1;
+    }
+
+    public boolean insertFront(int val) {
+        if (front == 0) {
+            System.out.println("FRONT OVERFLOW");
+            return false;
+        }
+        if (front == -1) {
+            front = 0; rear = 0;
+        } else {
+            front = front - 1;
+        }
+        q[front] = val;
+        return true;
+    }
+
+    public boolean insertRear(int val) {
+        if (rear >= size - 1) {
+            System.out.println("REAR OVERFLOW");
+            return false;
+        }
+        if (front == -1) {
+            front = 0; rear = 0;
+        } else {
+            rear = rear + 1;
+        }
+        q[rear] = val;
+        return true;
+    }
+
+    public int deleteFront() {
+        if (front == -1) return -1;
+        int item = q[front];
+        if (front == rear) {
+            front = -1; rear = -1;
+        } else {
+            front = front + 1;
+        }
+        return item;
+    }
+
+    public int deleteRear() {
+        if (rear == -1) return -1;
+        int item = q[rear];
+        if (front == rear) {
+            front = -1; rear = -1;
+        } else {
+            rear = rear - 1;
+        }
+        return item;
+    }
+}`,
+            python: `class SimpleDeque:
+    def __init__(self, size: int):
+        self.size = size
+        self.q = [None] * size
+        self.front = -1
+        self.rear = -1
+
+    def insert_front(self, val) -> bool:
+        if self.front == 0:
+            print("FRONT OVERFLOW")
+            return False
+        if self.front == -1:
+            self.front = 0
+            self.rear = 0
+        else:
+            self.front -= 1
+        self.q[self.front] = val
+        return True
+
+    def insert_rear(self, val) -> bool:
+        if self.rear >= self.size - 1:
+            print("REAR OVERFLOW")
+            return False
+        if self.front == -1:
+            self.front = 0
+            self.rear = 0
+        else:
+            self.rear += 1
+        self.q[self.rear] = val
+        return True
+
+    def delete_front(self):
+        if self.front == -1: return None
+        item = self.q[self.front]
+        self.q[self.front] = None
+        if self.front == self.rear:
+            self.front = -1
+            self.rear = -1
+        else:
+            self.front += 1
+        return item
+
+    def delete_rear(self):
+        if self.rear == -1: return None
+        item = self.q[self.rear]
+        self.q[self.rear] = None
+        if self.front == self.rear:
+            self.front = -1
+            self.rear = -1
+        else:
+            self.rear -= 1
+        return item
+
+# --- Driver Program ---
+max_size = int(input("Enter the size of Deque::"))
+dq_obj = SimpleDeque(max_size)
+
+while True:
+    print("1. Insert Front")
+    print("2. Insert Rear")
+    print("3. Delete Front")
+    print("4. Delete Rear")
+    print("5. Display")
+    print("6. Exit")
+    user_choice = int(input("Enter your Choice::"))
+    if user_choice == 1:
+        x = input("Enter value to insert front::")
+        dq_obj.insert_front(x)
+        print("Deque array:", dq_obj.q)
+    elif user_choice == 2:
+        x = input("Enter value to insert rear::")
+        dq_obj.insert_rear(x)
+        print("Deque array:", dq_obj.q)
+    elif user_choice == 3:
+        deleted_val = dq_obj.delete_front()
+        print("Deleted Front:", deleted_val)
+        print("Deque array:", dq_obj.q)
+    elif user_choice == 4:
+        deleted_val = dq_obj.delete_rear()
+        print("Deleted Rear:", deleted_val)
+        print("Deque array:", dq_obj.q)
+    elif user_choice == 5:
+        print("Deque array:", dq_obj.q)
+    elif user_choice == 6:
+        print("Exiting the code")
+        break
+    else:
+        print("invalid Choice")`
+        },
+        'c-deque': {
+            blackboard: `// --- CIRCULAR DEQUE INSERT FRONT ---
+Algorithm: INSERT_FRONT_CD(Q, N, F, R, X)
+1. If (F - 1 + N) % N == R -> OVERFLOW
+2. If F == -1 -> F <- 0, R <- 0
+3. Else -> F <- (F - 1 + N) % N
+4. Q[F] <- X
+
+// --- CIRCULAR DEQUE DELETE REAR ---
+Algorithm: DELETE_REAR_CD(Q, N, F, R)
+1. If F == -1 -> UNDERFLOW
+2. ITEM <- Q[R]
+3. If F == R -> F <- -1, R <- -1
+4. Else -> R <- (R - 1 + N) % N
+5. Return ITEM`,
+            java: `public class CircularDeque {
+    private int[] q;
+    private int front, rear, size;
+
+    public CircularDeque(int limit) {
+        size = limit;
+        q = new int[size];
+        front = -1; rear = -1;
+    }
+
+    public boolean insertFront(int val) {
+        if ((front - 1 + size) % size == rear) return false;
+        if (front == -1) {
+            front = 0; rear = 0;
+        } else {
+            front = (front - 1 + size) % size;
+        }
+        q[front] = val;
+        return true;
+    }
+
+    public boolean insertRear(int val) {
+        if ((rear + 1) % size == front) return false;
+        if (front == -1) {
+            front = 0; rear = 0;
+        } else {
+            rear = (rear + 1) % size;
+        }
+        q[rear] = val;
+        return true;
+    }
+
+    public int deleteFront() {
+        if (front == -1) return -1;
+        int item = q[front];
+        if (front == rear) {
+            front = -1; rear = -1;
+        } else {
+            front = (front + 1) % size;
+        }
+        return item;
+    }
+
+    public int deleteRear() {
+        if (front == -1) return -1;
+        int item = q[rear];
+        if (front == rear) {
+            front = -1; rear = -1;
+        } else {
+            rear = (rear - 1 + size) % size;
+        }
+        return item;
+    }
+}`,
+            python: `class CircularDeque:
+    def __init__(self, size: int):
+        self.size = size
+        self.q = [None] * size
+        self.front = -1
+        self.rear = -1
+
+    def insert_front(self, val) -> bool:
+        if (self.front - 1 + self.size) % self.size == self.rear:
+            return False
+        if self.front == -1:
+            self.front = 0
+            self.rear = 0
+        else:
+            self.front = (self.front - 1 + self.size) % self.size
+        self.q[self.front] = val
+        return True
+
+    def insert_rear(self, val) -> bool:
+        if (self.rear + 1) % self.size == self.front:
+            return False
+        if self.front == -1:
+            self.front = 0
+            self.rear = 0
+        else:
+            self.rear = (self.rear + 1) % self.size
+        self.q[self.rear] = val
+        return True
+
+    def delete_front(self):
+        if self.front == -1: return None
+        item = self.q[self.front]
+        self.q[self.front] = None
+        if self.front == self.rear:
+            self.front = -1
+            self.rear = -1
+        else:
+            self.front = (self.front + 1) % self.size
+        return item
+
+    def delete_rear(self):
+        if self.front == -1: return None
+        item = self.q[self.rear]
+        self.q[self.rear] = None
+        if self.front == self.rear:
+            self.front = -1
+            self.rear = -1
+        else:
+            self.rear = (self.rear - 1 + self.size) % self.size
+        return item
+
+# --- Driver Program ---
+max_size = int(input("Enter the size of Circular Deque::"))
+cdq_obj = CircularDeque(max_size)
+
+while True:
+    print("1. Insert Front")
+    print("2. Insert Rear")
+    print("3. Delete Front")
+    print("4. Delete Rear")
+    print("5. Display")
+    print("6. Exit")
+    user_choice = int(input("Enter your Choice::"))
+    if user_choice == 1:
+        x = input("Enter value to insert front::")
+        cdq_obj.insert_front(x)
+        print("Deque array:", cdq_obj.q)
+    elif user_choice == 2:
+        x = input("Enter value to insert rear::")
+        cdq_obj.insert_rear(x)
+        print("Deque array:", cdq_obj.q)
+    elif user_choice == 3:
+        deleted_val = cdq_obj.delete_front()
+        print("Deleted Front:", deleted_val)
+        print("Deque array:", cdq_obj.q)
+    elif user_choice == 4:
+        deleted_val = cdq_obj.delete_rear()
+        print("Deleted Rear:", deleted_val)
+        print("Deque array:", cdq_obj.q)
+    elif user_choice == 5:
+        print("Deque array:", cdq_obj.q)
+    elif user_choice == 6:
+        print("Exiting the code")
+        break
+    else:
+        print("invalid Choice")`
+        },
+        'priority-max': {
+            blackboard: `// --- PRIORITY QUEUE INSERT (MAX-HEAP) ---
+Algorithm: INSERT_PQ_MAX(Q, N, X)
+1. If COUNT == N -> Write "OVERFLOW" and Return
+2. COUNT <- COUNT + 1
+3. I <- COUNT - 1; Q[I] <- X
+4. Call HEAPIFY_UP_MAX(Q, I)
+
+Algorithm: HEAPIFY_UP_MAX(Q, I)
+1. While I > 0 AND Q[(I-1)/2] < Q[I]
+       Swap Q[I] with Q[(I-1)/2]
+       I <- (I-1)/2
+
+// --- PRIORITY QUEUE DELETE (MAX-HEAP) ---
+Algorithm: DELETE_PQ_MAX(Q, COUNT)
+1. If COUNT == 0 -> Write "UNDERFLOW" and Return
+2. ITEM <- Q[0]
+3. Q[0] <- Q[COUNT - 1]
+4. COUNT <- COUNT - 1
+5. Call HEAPIFY_DOWN_MAX(Q, COUNT, 0)
+6. Return ITEM
+
+Algorithm: HEAPIFY_DOWN_MAX(Q, N, I)
+1. Left <- 2 * I + 1
+2. Right <- 2 * I + 2
+3. Largest <- I
+4. If Left < N AND Q[Left] > Q[Largest] -> Largest <- Left
+5. If Right < N AND Q[Right] > Q[Largest] -> Largest <- Right
+6. If Largest != I
+       Swap Q[I] with Q[Largest]
+       Call HEAPIFY_DOWN_MAX(Q, N, Largest)`,
+            java: `public class MaxHeapPriorityQueue {
+    private int[] q;
+    private int count, size;
+
+    public MaxHeapPriorityQueue(int limit) {
+        size = limit;
+        q = new int[size];
+        count = 0;
+    }
+
+    public boolean insert(int val) {
+        if (count == size) return false;
+        count++;
+        int i = count - 1;
+        q[i] = val;
+        heapifyUp(i);
+        return true;
+    }
+
+    public int delete() {
+        if (count == 0) return -1;
+        int item = q[0];
+        q[0] = q[count - 1];
+        count--;
+        heapifyDown(count, 0);
+        return item;
+    }
+
+    private void heapifyUp(int i) {
+        while (i > 0 && q[(i - 1) / 2] < q[i]) {
+            int temp = q[i];
+            q[i] = q[(i - 1) / 2];
+            q[(i - 1) / 2] = temp;
+            i = (i - 1) / 2;
+        }
+    }
+
+    private void heapifyDown(int n, int i) {
+        while (2 * i + 1 < n) {
+            int left = 2 * i + 1;
+            int right = 2 * i + 2;
+            int largest = i;
+            if (left < n && q[left] > q[largest]) largest = left;
+            if (right < n && q[right] > q[largest]) largest = right;
+            if (largest == i) break;
+            int temp = q[i];
+            q[i] = q[largest];
+            q[largest] = temp;
+            i = largest;
+        }
+    }
+}`,
+            python: `class MaxHeapPriorityQueue:
+    def __init__(self, size: int):
+        self.size = size
+        self.q = []
+
+    def insert(self, val) -> bool:
+        if len(self.q) >= self.size:
+            return False
+        self.q.append(val)
+        self.heapify_up(len(self.q) - 1)
+        return True
+
+    def delete(self):
+        if not self.q:
+            return None
+        item = self.q[0]
+        if len(self.q) == 1:
+            self.q.pop()
+        else:
+            self.q[0] = self.q.pop()
+            self.heapify_down(len(self.q), 0)
+        return item
+
+    def heapify_up(self, i):
+        while i > 0 and self.q[(i - 1) // 2] < self.q[i]:
+            parent = (i - 1) // 2
+            self.q[i], self.q[parent] = self.q[parent], self.q[i]
+            i = parent
+
+    def heapify_down(self, n, i):
+        while 2 * i + 1 < n:
+            left = 2 * i + 1; right = 2 * i + 2
+            largest = i
+            if left < n and self.q[left] > self.q[largest]: largest = left
+            if right < n and self.q[right] > self.q[largest]: largest = right
+            if largest == i: break
+            self.q[i], self.q[largest] = self.q[largest], self.q[i]
+            i = largest
+
+# --- Driver Program ---
+max_size = int(input("Enter the size of Priority Queue (Max-Heap)::"))
+pq_obj = MaxHeapPriorityQueue(max_size)
+
+while True:
+    print("1. Insert Element")
+    print("2. Extract Max Element")
+    print("3. Display Heap Array")
+    print("4. Exit")
+    user_choice = int(input("Enter your Choice::"))
+    if user_choice == 1:
+        x = int(input("Enter integer value to insert::"))
+        pq_obj.insert(x)
+        print("Heap array:", pq_obj.q)
+    elif user_choice == 2:
+        deleted_val = pq_obj.delete()
+        print("Extracted Max:", deleted_val)
+        print("Heap array:", pq_obj.q)
+    elif user_choice == 3:
+        print("Heap array:", pq_obj.q)
+    elif user_choice == 4:
+        print("Exiting the code")
+        break
+    else:
+        print("invalid Choice")`
+        },
+        'priority-min': {
+            blackboard: `// --- PRIORITY QUEUE INSERT (MIN-HEAP) ---
+Algorithm: INSERT_PQ_MIN(Q, N, X)
+1. If COUNT == N -> Write "OVERFLOW" and Return
+2. COUNT <- COUNT + 1
+3. I <- COUNT - 1; Q[I] <- X
+4. Call HEAPIFY_UP_MIN(Q, I)
+
+Algorithm: HEAPIFY_UP_MIN(Q, I)
+1. While I > 0 AND Q[(I-1)/2] > Q[I]
+       Swap Q[I] with Q[(I-1)/2]
+       I <- (I-1)/2
+
+// --- PRIORITY QUEUE DELETE (MIN-HEAP) ---
+Algorithm: DELETE_PQ_MIN(Q, COUNT)
+1. If COUNT == 0 -> Write "UNDERFLOW" and Return
+2. ITEM <- Q[0]
+3. Q[0] <- Q[COUNT - 1]
+4. COUNT <- COUNT - 1
+5. Call HEAPIFY_DOWN_MIN(Q, COUNT, 0)
+6. Return ITEM
+
+Algorithm: HEAPIFY_DOWN_MIN(Q, N, I)
+1. Left <- 2 * I + 1
+2. Right <- 2 * I + 2
+3. Smallest <- I
+4. If Left < N AND Q[Left] < Q[Smallest] -> Smallest <- Left
+5. If Right < N AND Q[Right] < Q[Smallest] -> Smallest <- Right
+6. If Smallest != I
+       Swap Q[I] with Q[Smallest]
+       Call HEAPIFY_DOWN_MIN(Q, N, Smallest)`,
+            java: `public class MinHeapPriorityQueue {
+    private int[] q;
+    private int count, size;
+
+    public MinHeapPriorityQueue(int limit) {
+        size = limit;
+        q = new int[size];
+        count = 0;
+    }
+
+    public boolean insert(int val) {
+        if (count == size) return false;
+        count++;
+        int i = count - 1;
+        q[i] = val;
+        heapifyUp(i);
+        return true;
+    }
+
+    public int delete() {
+        if (count == 0) return -1;
+        int item = q[0];
+        q[0] = q[count - 1];
+        count--;
+        heapifyDown(count, 0);
+        return item;
+    }
+
+    private void heapifyUp(int i) {
+        while (i > 0 && q[(i - 1) / 2] > q[i]) {
+            int temp = q[i];
+            q[i] = q[(i - 1) / 2];
+            q[(i - 1) / 2] = temp;
+            i = (i - 1) / 2;
+        }
+    }
+
+    private void heapifyDown(int n, int i) {
+        while (2 * i + 1 < n) {
+            int left = 2 * i + 1;
+            int right = 2 * i + 2;
+            int smallest = i;
+            if (left < n && q[left] < q[smallest]) smallest = left;
+            if (right < n && q[right] < q[smallest]) smallest = right;
+            if (smallest == i) break;
+            int temp = q[i];
+            q[i] = q[smallest];
+            q[smallest] = temp;
+            i = smallest;
+        }
+    }
+}`,
+            python: `class MinHeapPriorityQueue:
+    def __init__(self, size: int):
+        self.size = size
+        self.q = []
+
+    def insert(self, val) -> bool:
+        if len(self.q) >= self.size:
+            return False
+        self.q.append(val)
+        self.heapify_up(len(self.q) - 1)
+        return True
+
+    def delete(self):
+        if not self.q:
+            return None
+        item = self.q[0]
+        if len(self.q) == 1:
+            self.q.pop()
+        else:
+            self.q[0] = self.q.pop()
+            self.heapify_down(len(self.q), 0)
+        return item
+
+    def heapify_up(self, i):
+        while i > 0 and self.q[(i - 1) // 2] > self.q[i]:
+            parent = (i - 1) // 2
+            self.q[i], self.q[parent] = self.q[parent], self.q[i]
+            i = parent
+
+    def heapify_down(self, n, i):
+        while 2 * i + 1 < n:
+            left = 2 * i + 1; right = 2 * i + 2
+            smallest = i
+            if left < n and self.q[left] < self.q[smallest]: smallest = left
+            if right < n and self.q[right] < self.q[smallest]: smallest = right
+            if smallest == i: break
+            self.q[i], self.q[smallest] = self.q[smallest], self.q[i]
+            i = smallest
+
+# --- Driver Program ---
+max_size = int(input("Enter the size of Priority Queue (Min-Heap)::"))
+pq_obj = MinHeapPriorityQueue(max_size)
+
+while True:
+    print("1. Insert Element")
+    print("2. Extract Min Element")
+    print("3. Display Heap Array")
+    print("4. Exit")
+    user_choice = int(input("Enter your Choice::"))
+    if user_choice == 1:
+        x = int(input("Enter integer value to insert::"))
+        pq_obj.insert(x)
+        print("Heap array:", pq_obj.q)
+    elif user_choice == 2:
+        deleted_val = pq_obj.delete()
+        print("Extracted Min:", deleted_val)
+        print("Heap array:", pq_obj.q)
+    elif user_choice == 3:
+        print("Heap array:", pq_obj.q)
+    elif user_choice == 4:
+        print("Exiting the code")
+        break
+    else:
+        print("invalid Choice")`
+        }
+    };
+
+    // Theme Management
+    function toggleTheme() {
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        
+        // Update button text
+        document.getElementById('theme-icon').innerText = newTheme === 'dark' ? '☀️' : '🌙';
+        document.getElementById('theme-text').innerText = newTheme === 'dark' ? 'Light Mode' : 'Dark Mode';
+    }
+
+    // Set saved or default theme
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    document.getElementById('theme-icon').innerText = savedTheme === 'dark' ? '☀️' : '🌙';
+    document.getElementById('theme-text').innerText = savedTheme === 'dark' ? 'Light Mode' : 'Dark Mode';
+
+    // Global Simulator States
+    let N = 6; // Capacity for Simple/Circular queues & deques
+    let MAX_HEAP_CAPACITY = 6; // Capacity for heaps
+    
+    let activeSimType = 'simple';
+    
+    // Individual queue states
+    let states = {
+        simple: { q: Array(N).fill(null), f: -1, r: -1 },
+        circular: { q: Array(N).fill(null), f: -1, r: -1 },
+        deque: { q: Array(N).fill(null), f: -1, r: -1 },
+        'c-deque': { q: Array(N).fill(null), f: -1, r: -1 },
+        priority: { q: [], count: 0 },
+        'priority-min': { q: [], count: 0 }
+    };
+
+    // Trace algorithm templates
+    const algorithmTraces = {
+        simple: {
+            insert: [
+                "1. If R >= N - 1 -> QUEUE OVERFLOW",
+                "2. R = R + 1",
+                "3. Q[R] = X",
+                "4. If F == -1 -> F = 0"
+            ],
+            delete: [
+                "1. If F == -1 -> QUEUE UNDERFLOW",
+                "2. ITEM = Q[F]",
+                "3. F = F + 1",
+                "4. If F == R + 1 -> Reset: F = R = -1"
+            ]
+        },
+        circular: {
+            insert: [
+                "1. If (R + 1) % N == F -> QUEUE OVERFLOW",
+                "2. If R == N - 1 -> R = 0  Else R = R + 1",
+                "3. Q[R] = X",
+                "4. If F == -1 -> F = 0"
+            ],
+            delete: [
+                "1. If F == -1 -> QUEUE UNDERFLOW",
+                "2. ITEM = Q[F]",
+                "3. If F == R -> Reset: F = R = -1",
+                "4. Else -> F = (F + 1) % N"
+            ]
+        },
+        deque: {
+            insert_rear: [
+                "1. If R >= N - 1 -> OVERFLOW REAR",
+                "2. R = R + 1",
+                "3. Q[R] = X",
+                "4. If F == -1 -> F = 0"
+            ],
+            insert_front: [
+                "1. If F == 0 -> OVERFLOW FRONT (Blocked)",
+                "2. If F == -1 -> F = 0, R = 0",
+                "3. Else -> F = F - 1",
+                "4. Q[F] = X"
+            ],
+            delete_front: [
+                "1. If F == -1 -> QUEUE UNDERFLOW",
+                "2. ITEM = Q[F]",
+                "3. F = F + 1",
+                "4. If F == R + 1 -> Reset: F = R = -1"
+            ],
+            delete_rear: [
+                "1. If F == -1 -> QUEUE UNDERFLOW",
+                "2. ITEM = Q[R]",
+                "3. R = R - 1",
+                "4. If F == R + 1 -> Reset: F = R = -1"
+            ]
+        },
+        'c-deque': {
+            insert_rear: [
+                "1. If (R + 1) % N == F -> OVERFLOW",
+                "2. If F == -1 -> F = 0, R = 0",
+                "3. Else if R == N - 1 -> R = 0  Else R = R + 1",
+                "4. Q[R] = X"
+            ],
+            insert_front: [
+                "1. If (F - 1 + N) % N == R -> OVERFLOW",
+                "2. If F == -1 -> F = 0, R = 0",
+                "3. Else if F == 0 -> F = N - 1  Else F = F - 1",
+                "4. Q[F] = X"
+            ],
+            delete_front: [
+                "1. If F == -1 -> UNDERFLOW",
+                "2. ITEM = Q[F]",
+                "3. If F == R -> Reset: F = R = -1",
+                "4. Else -> F = (F + 1) % N"
+            ],
+            delete_rear: [
+                "1. If F == -1 -> UNDERFLOW",
+                "2. ITEM = Q[R]",
+                "3. If F == R -> Reset: F = R = -1",
+                "4. Else if R == 0 -> R = N - 1  Else R = R - 1"
+            ]
+        },
+        priority: {
+            insert: [
+                "INSERT_PQ_MAX(Q, N, X):",
+                "1. If COUNT == N -> OVERFLOW",
+                "2. Q[COUNT] = X; COUNT = COUNT + 1",
+                "3. HEAPIFY_UP_MAX(Q, I):",
+                "   While I > 0 AND Q[(I-1)/2] < Q[I]:",
+                "     Swap Q[I] with Q[(I-1)/2]",
+                "     I = (I-1)/2"
+            ],
+            delete: [
+                "DELETE_PQ_MAX(Q, COUNT):",
+                "1. If COUNT == 0 -> UNDERFLOW",
+                "2. ITEM = Q[0]; Q[0] = Q[COUNT-1]",
+                "3. COUNT = COUNT - 1",
+                "4. HEAPIFY_DOWN_MAX(Q, COUNT, 0):",
+                "   Left = 2*I+1, Right = 2*I+2, Largest = I",
+                "   If Left < N and Q[Left] > Q[Largest] -> Largest = Left",
+                "   If Right < N and Q[Right] > Q[Largest] -> Largest = Right",
+                "   If Largest != I -> Swap Q[I], Q[Largest]; Recurse"
+            ]
+        },
+        'priority-min': {
+            insert: [
+                "INSERT_PQ_MIN(Q, N, X):",
+                "1. If COUNT == N -> OVERFLOW",
+                "2. Q[COUNT] = X; COUNT = COUNT + 1",
+                "3. HEAPIFY_UP_MIN(Q, I):",
+                "   While I > 0 AND Q[(I-1)/2] > Q[I]:",
+                "     Swap Q[I] with Q[(I-1)/2]",
+                "     I = (I-1)/2"
+            ],
+            delete: [
+                "DELETE_PQ_MIN(Q, COUNT):",
+                "1. If COUNT == 0 -> UNDERFLOW",
+                "2. ITEM = Q[0]; Q[0] = Q[COUNT-1]",
+                "3. COUNT = COUNT - 1",
+                "4. HEAPIFY_DOWN_MIN(Q, COUNT, 0):",
+                "   Left = 2*I+1, Right = 2*I+2, Smallest = I",
+                "   If Left < N and Q[Left] < Q[Smallest] -> Smallest = Left",
+                "   If Right < N and Q[Right] < Q[Smallest] -> Smallest = Right",
+                "   If Smallest != I -> Swap Q[I], Q[Smallest]; Recurse"
+            ]
+        }
+    };
+
+    function changeHeapType() {
+        const heapType = document.getElementById('heap-type').value;
+        const title = document.getElementById('sim-title');
+        const desc = document.getElementById('sim-desc');
+        const deleteFrontBtn = document.getElementById('btn-delete-front');
+        
+        if (heapType === 'max') {
+            title.innerText = "Priority Queue (Max-Heap) Simulator";
+            desc.innerText = "Arranges items based on key priority. Implemented as an array-backed Binary Max-Heap where parent values are always greater than child values: Q[(I-1)/2] >= Q[I].";
+            deleteFrontBtn.innerText = "Extract Max Element";
+        } else {
+            title.innerText = "Priority Queue (Min-Heap) Simulator";
+            desc.innerText = "Arranges items based on key priority. Implemented as an array-backed Binary Min-Heap where parent values are always smaller than child values: Q[(I-1)/2] <= Q[I].";
+            deleteFrontBtn.innerText = "Extract Min Element";
+        }
+        resetCurrentSimulator();
+    }
+
+    // Load selected simulator
+    function selectSimulator(type) {
+        activeSimType = type;
+        
+        // Re-initialize state of selected simulator to match N
+        if (type === 'priority' || type === 'priority-min') {
+            states[type] = { q: [], count: 0 };
+        } else {
+            states[type] = { q: Array(N).fill(null), f: -1, r: -1 };
+        }
+
+        activeSimType = type;
+        
+        // Update tab styling
+        document.querySelectorAll('.sidebar-tab-btn').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        document.querySelector(`.sidebar-tab-btn[data-type="${type}"]`).classList.add('active');
+        
+        // Update title, desc, controls
+        const title = document.getElementById('sim-title');
+        const desc = document.getElementById('sim-desc');
+        const insertRearBtn = document.getElementById('btn-insert-rear');
+        const insertFrontBtn = document.getElementById('btn-insert-front');
+        const deleteFrontBtn = document.getElementById('btn-delete-front');
+        const deleteRearBtn = document.getElementById('btn-delete-rear');
+        
+        // Remove prior colors
+        insertRearBtn.className = "btn-action";
+        insertFrontBtn.className = "btn-action";
+        deleteFrontBtn.className = "btn-action";
+        deleteRearBtn.className = "btn-action";
+        
+        // Set dynamic titles and show/hide buttons
+        if (type === 'simple') {
+            title.innerText = "Simple Queue Simulator";
+            desc.innerText = `A basic FIFO (First-In, First-Out) structure of capacity N = ${N}. Pointers Front (F) and Rear (R) move linearly. Pointers do not reuse memory slots after deletion.`;
+            insertFrontBtn.style.display = "none";
+            deleteRearBtn.style.display = "none";
+            insertRearBtn.innerText = "Insert Rear (Enqueue)";
+            deleteFrontBtn.innerText = "Delete Front (Dequeue)";
+            insertRearBtn.classList.add('btn-simple');
+            deleteFrontBtn.classList.add('btn-simple');
+        } else if (type === 'circular') {
+            title.innerText = "Circular Queue Simulator";
+            desc.innerText = `Reuses memory by connecting the end of the array back to the beginning. Capacity N = ${N}. Pointer arithmetic is modulo N: (R + 1) % N. Eliminates dangling empty spaces.`;
+            insertFrontBtn.style.display = "none";
+            deleteRearBtn.style.display = "none";
+            insertRearBtn.innerText = "Insert Rear (Enqueue)";
+            deleteFrontBtn.innerText = "Delete Front (Dequeue)";
+            insertRearBtn.classList.add('btn-circular');
+            deleteFrontBtn.classList.add('btn-circular');
+        } else if (type === 'deque') {
+            title.innerText = "Double Ended Queue (Deque) Simulator";
+            desc.innerText = `A linear double-ended queue of capacity N = ${N}. Supports insert and delete operations at both ends (Front and Rear). Insert front is blocked if F == 0 due to lack of circular wrap.`;
+            insertFrontBtn.style.display = "inline-block";
+            deleteRearBtn.style.display = "inline-block";
+            insertRearBtn.innerText = "Insert Rear";
+            deleteFrontBtn.innerText = "Delete Front";
+            insertRearBtn.classList.add('btn-deque');
+            insertFrontBtn.classList.add('btn-deque');
+            deleteFrontBtn.classList.add('btn-deque');
+            deleteRearBtn.classList.add('btn-deque');
+        } else if (type === 'c-deque') {
+            title.innerText = "Circular Deque Simulator";
+            desc.innerText = `Combines Deque freedom with Circular wrap-around memory efficiency. Capacity N = ${N}. Wrap formulas: F = (F - 1 + N) % N for Front Insertion, R = (R + 1) % N for Rear Insertion.`;
+            insertFrontBtn.style.display = "inline-block";
+            deleteRearBtn.style.display = "inline-block";
+            insertRearBtn.innerText = "Insert Rear";
+            deleteFrontBtn.innerText = "Delete Front";
+            insertRearBtn.classList.add('btn-c-deque');
+            insertFrontBtn.classList.add('btn-c-deque');
+            deleteFrontBtn.classList.add('btn-c-deque');
+            deleteRearBtn.classList.add('btn-c-deque');
+        } else if (type === 'priority') {
+            title.innerText = "Priority Queue (Max-Heap) Simulator";
+            desc.innerText = `Arranges items based on key priority. Capacity N = ${N}. Implemented as an array-backed Binary Max-Heap where parent values are always greater than child values: Q[(I-1)/2] >= Q[I].`;
+            insertFrontBtn.style.display = "none";
+            deleteRearBtn.style.display = "none";
+            insertRearBtn.innerText = "Insert Element";
+            deleteFrontBtn.innerText = "Extract Max Element";
+            insertRearBtn.classList.add('btn-priority');
+            deleteFrontBtn.classList.add('btn-priority');
+        } else if (type === 'priority-min') {
+            title.innerText = "Priority Queue (Min-Heap) Simulator";
+            desc.innerText = `Arranges items based on key priority. Capacity N = ${N}. Implemented as an array-backed Binary Min-Heap where parent values are always smaller than child values: Q[(I-1)/2] <= Q[I].`;
+            insertFrontBtn.style.display = "none";
+            deleteRearBtn.style.display = "none";
+            insertRearBtn.innerText = "Insert Element";
+            deleteFrontBtn.innerText = "Extract Min Element";
+            insertRearBtn.classList.add('btn-priority');
+            deleteFrontBtn.classList.add('btn-priority');
+        }
+
+        // Set trace lines
+        updateTraceLines(type, 'insert');
+
+        // Draw simulator
+        renderSimulator();
+    }
+
+    // Helper to print trace lines
+    function updateTraceLines(type, operation, activeLineIndex = -1) {
+        const container = document.getElementById('trace-lines-container');
+        container.innerHTML = '';
+        
+        let traceList = [];
+        if (type === 'deque' || type === 'c-deque') {
+            if (operation === 'insert-rear') traceList = algorithmTraces[type].insert_rear;
+            else if (operation === 'insert-front') traceList = algorithmTraces[type].insert_front;
+            else if (operation === 'delete-front') traceList = algorithmTraces[type].delete_front;
+            else if (operation === 'delete-rear') traceList = algorithmTraces[type].delete_rear;
+        } else {
+            traceList = algorithmTraces[type][operation] || [];
+        }
+
+        traceList.forEach((line, index) => {
+            const div = document.createElement('div');
+            div.className = `trace-line ${index === activeLineIndex ? 'active-line' : ''}`;
+            div.innerText = line;
+            container.appendChild(div);
+        });
+    }
+
+    // Log message helper
+    function logConsole(message, status = 'info') {
+        const log = document.getElementById('console-log');
+        log.innerText = message;
+        log.className = "console-output";
+        if (status === 'error') log.classList.add('warn');
+        if (status === 'success') log.classList.add('success');
+    }
+
+    // Render visual element based on active state
+    function renderSimulator() {
+        const view = document.getElementById('visualizer-view');
+        view.innerHTML = '';
+        const state = states[activeSimType];
+
+        if (activeSimType === 'simple' || activeSimType === 'deque') {
+            // Linear rendering
+            const arrayLayout = document.createElement('div');
+            arrayLayout.className = 'array-layout';
+
+            for (let i = 0; i < N; i++) {
+                const cellContainer = document.createElement('div');
+                cellContainer.className = 'array-cell-container';
+
+                const cell = document.createElement('div');
+                cell.className = 'array-cell';
+                if (state.q[i] !== null) {
+                    cell.innerText = state.q[i];
+                    cell.classList.add('filled');
+                }
+
+                // Append pointer arrow labels
+                if (state.f === i && state.r === i) {
+                    const arrow = document.createElement('div');
+                    arrow.className = 'pointer-arrow pointer-fr';
+                    arrow.innerText = 'F, R';
+                    cellContainer.appendChild(arrow);
+                } else {
+                    if (state.f === i) {
+                        const arrow = document.createElement('div');
+                        arrow.className = 'pointer-arrow pointer-f';
+                        arrow.innerText = 'F';
+                        cellContainer.appendChild(arrow);
+                    }
+                    if (state.r === i) {
+                        const arrow = document.createElement('div');
+                        arrow.className = 'pointer-arrow pointer-r';
+                        arrow.innerText = 'R';
+                        cellContainer.appendChild(arrow);
+                    }
+                }
+
+                const indexLabel = document.createElement('div');
+                indexLabel.className = 'array-cell-index';
+                indexLabel.innerText = `[${i}]`;
+
+                cellContainer.appendChild(cell);
+                cellContainer.appendChild(indexLabel);
+                arrayLayout.appendChild(cellContainer);
+            }
+            view.appendChild(arrayLayout);
+
+            // Print pointer index summary below
+            const pInfo = document.createElement('div');
+            pInfo.style.fontSize = "13px";
+            pInfo.style.fontWeight = "600";
+            pInfo.innerHTML = `Pointers: Front (F) = <span style="color:#d97706">${state.f}</span> | Rear (R) = <span style="color:#dc2626">${state.r}</span>`;
+            view.appendChild(pInfo);
+
+        } else if (activeSimType === 'circular' || activeSimType === 'c-deque') {
+            // Circular Queue ring representation using SVG
+            const svgContainer = document.createElement('div');
+            svgContainer.className = 'circular-svg-container';
+            
+            let svg = `<svg viewBox="0 0 240 240" width="100%" height="100%">`;
+            
+            // Draw connecting loop
+            svg += `<circle cx="120" cy="120" r="70" fill="none" stroke="var(--border-color)" stroke-width="4" stroke-dasharray="6,6"/>`;
+
+            const radius = 70;
+            const cx = 120;
+            const cy = 120;
+
+            const nodeRadius = N > 12 ? 11 : (N > 8 ? 15 : 22);
+            const indexDist = N > 12 ? radius - 18 : (N > 8 ? radius - 24 : radius - 28);
+            const badgeDist = N > 12 ? radius + 18 : (N > 8 ? radius + 22 : radius + 28);
+            const fontSize = N > 12 ? 8 : (N > 8 ? 10 : 12);
+            const badgeTextSize = N > 12 ? 7 : (N > 8 ? 9 : 10);
+
+            for (let i = 0; i < N; i++) {
+                const angle = -Math.PI / 2 + (2 * Math.PI * i) / N;
+                const nodeX = cx + radius * Math.cos(angle);
+                const nodeY = cy + radius * Math.sin(angle);
+                const isNodeActive = state.q[i] !== null;
+
+                let badgeText = '';
+                if (state.f === i) badgeText += 'F';
+                if (state.r === i) badgeText += (badgeText ? ', R' : 'R');
+                
+                let badgeSvg = '';
+                if (badgeText) {
+                    const badgeX = cx + badgeDist * Math.cos(angle);
+                    const badgeY = cy + badgeDist * Math.sin(angle);
+                    const isFr = state.f === i && state.r === i;
+                    const badgeBg = isFr ? 'url(#grad-fr)' : (state.f === i ? '#f59e0b' : '#ef4444');
+                    const badgeW = N > 12 ? 20 : 28;
+                    const badgeH = N > 12 ? 12 : 16;
+                    
+                    badgeSvg = `
+                        <rect x="${badgeX - badgeW/2}" y="${badgeY - badgeH/2}" width="${badgeW}" height="${badgeH}" rx="4" fill="${badgeBg}"/>
+                        <text x="${badgeX}" y="${badgeY}" fill="#fff" font-size="${badgeTextSize}" font-weight="700" font-family="var(--font-head)" text-anchor="middle" dominant-baseline="middle">${badgeText}</text>
+                    `;
+                }
+
+                svg += `
+                    <g class="circular-node ${isNodeActive ? 'active' : ''}">
+                        <circle cx="${nodeX}" cy="${nodeY}" r="${nodeRadius}" class="circular-node-circle"/>
+                        <text x="${nodeX}" y="${nodeY}" class="circular-node-text" font-size="${fontSize}">${state.q[i] !== null ? state.q[i] : ''}</text>
+                        <text x="${cx + indexDist * Math.cos(angle)}" y="${cy + indexDist * Math.sin(angle)}" class="circular-index-text" font-size="${fontSize - 2}">[${i}]</text>
+                    </g>
+                    ${badgeSvg}
+                `;
+            }
+
+            svg += `
+                <defs>
+                    <linearGradient id="grad-fr" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#f59e0b" />
+                        <stop offset="100%" stop-color="#ef4444" />
+                    </linearGradient>
+                </defs>
+            `;
+            svg += `</svg>`;
+            svgContainer.innerHTML = svg;
+            view.appendChild(svgContainer);
+
+            const pInfo = document.createElement('div');
+            pInfo.style.fontSize = "13px";
+            pInfo.style.fontWeight = "600";
+            pInfo.innerHTML = `Pointers: Front (F) = <span style="color:#d97706">${state.f}</span> | Rear (R) = <span style="color:#dc2626">${state.r}</span>`;
+            view.appendChild(pInfo);
+
+        } else if (activeSimType === 'priority' || activeSimType === 'priority-min') {
+            const treeContainer = document.createElement('div');
+            treeContainer.className = 'tree-svg-container';
+
+            const coords = [];
+            const W = 320;
+            const H = 220;
+            for (let i = 0; i < N; i++) {
+                const L = Math.floor(Math.log2(i + 1));
+                const numNodesAtLevel = Math.pow(2, L);
+                const pos = i - (numNodesAtLevel - 1);
+                const x = (pos + 0.5) * (W / numNodesAtLevel);
+                const y = 30 + L * 40;
+                coords.push({ x, y });
+            }
+
+            let svg = `<svg viewBox="0 0 320 220" width="100%" height="100%">`;
+
+            // Draw links first
+            for (let i = 1; i < N; i++) {
+                const parentIdx = Math.floor((i - 1) / 2);
+                const active = i < state.q.length;
+                if (active) {
+                    svg += `<line x1="${coords[parentIdx].x}" y1="${coords[parentIdx].y}" x2="${coords[i].x}" y2="${coords[i].y}" class="tree-link-line active"/>`;
+                } else {
+                    svg += `<line x1="${coords[parentIdx].x}" y1="${coords[parentIdx].y}" x2="${coords[i].x}" y2="${coords[i].y}" class="tree-link-line"/>`;
+                }
+            }
+
+            // Draw nodes
+            const radius = N > 10 ? 11 : (N > 6 ? 13 : 16);
+            const fontSize = N > 10 ? 7 : (N > 6 ? 9 : 10);
+            const indexOffset = N > 10 ? 17 : (N > 6 ? 20 : 24);
+
+            for (let i = 0; i < N; i++) {
+                const active = i < state.q.length;
+                const val = active ? state.q[i] : '';
+                
+                svg += `
+                    <g class="tree-node ${active ? 'active' : ''}">
+                        <circle cx="${coords[i].x}" cy="${coords[i].y}" r="${radius}" class="tree-node-circle"/>
+                        <text x="${coords[i].x}" y="${coords[i].y}" class="tree-node-text" font-size="${fontSize}">${val}</text>
+                        <text x="${coords[i].x}" y="${coords[i].y + indexOffset}" class="tree-node-index" font-size="${fontSize - 1}">[${i}]</text>
+                    </g>
+                `;
+            }
+
+            svg += `</svg>`;
+            treeContainer.innerHTML = svg;
+            view.appendChild(treeContainer);
+
+            // Display linear array representation of the heap below tree
+            const arrayRepresent = document.createElement('div');
+            arrayRepresent.style.display = "flex";
+            arrayRepresent.style.flexWrap = "wrap";
+            arrayRepresent.style.gap = "6px";
+            arrayRepresent.style.marginTop = "15px";
+
+            for (let i = 0; i < N; i++) {
+                const cell = document.createElement('div');
+                cell.style.width = N > 10 ? "26px" : "34px";
+                cell.style.height = N > 10 ? "26px" : "34px";
+                cell.style.border = "1px solid var(--border-color)";
+                cell.style.borderRadius = "4px";
+                cell.style.display = "flex";
+                cell.style.justifyContent = "center";
+                cell.style.alignItems = "center";
+                cell.style.fontSize = N > 10 ? "11px" : "12px";
+                cell.style.fontWeight = "700";
+                
+                const active = i < state.q.length;
+                if (active) {
+                    cell.style.background = "rgba(239, 68, 68, 0.1)";
+                    cell.style.borderColor = "var(--color-priority)";
+                    cell.innerText = state.q[i];
+                } else {
+                    cell.style.background = "var(--card-bg)";
+                    cell.style.borderColor = "var(--border-color)";
+                    cell.innerText = "";
+                }
+
+                const wrapper = document.createElement('div');
+                wrapper.style.display = "flex";
+                wrapper.style.flexDirection = "column";
+                wrapper.style.alignItems = "center";
+                
+                const idx = document.createElement('span');
+                idx.style.fontSize = "10px";
+                idx.style.color = "var(--text-secondary)";
+                idx.innerText = i;
+
+                wrapper.appendChild(cell);
+                wrapper.appendChild(idx);
+                arrayRepresent.appendChild(wrapper);
+            }
+            view.appendChild(arrayRepresent);
+        }
+    }
+
+    // Next random values generator helper
+    function getNextInsertLetter() {
+        const input = document.getElementById('insert-val');
+        const current = input.value.trim().toUpperCase();
+        
+        // Auto increment character for fun interactions
+        if (current.length === 1) {
+            const code = current.charCodeAt(0);
+            if (code >= 65 && code < 90) {
+                input.value = String.fromCharCode(code + 1);
+            } else {
+                input.value = 'A';
+            }
+        }
+        return current || 'A';
+    }
+
+    // SIMULATOR ACTION TRIGGERS
+    function triggerInsertRear() {
+        const valInput = document.getElementById('insert-val');
+        const xVal = valInput.value.trim();
+        if (!xVal) {
+            logConsole("Error: Please enter a value to insert.", 'error');
+            return;
+        }
+
+        const state = states[activeSimType];
+        
+        if (activeSimType === 'simple') {
+            updateTraceLines('simple', 'insert', 0);
+            
+            // Check Overflow: R >= N - 1
+            if (state.r >= N - 1) {
+                logConsole(`OVERFLOW! Condition (R >= N - 1) holds. Queue is full. [Rear = ${state.r}]`, 'error');
+                return;
+            }
+            
+            setTimeout(() => {
+                updateTraceLines('simple', 'insert', 1);
+                state.r = state.r + 1;
+                renderSimulator();
+                
+                setTimeout(() => {
+                    updateTraceLines('simple', 'insert', 2);
+                    state.q[state.r] = xVal;
+                    renderSimulator();
+                    
+                    setTimeout(() => {
+                        updateTraceLines('simple', 'insert', 3);
+                        if (state.f === -1) {
+                            state.f = 0;
+                        }
+                        renderSimulator();
+                        logConsole(`Success: Inserted '${xVal}' at Rear [index ${state.r}].`, 'success');
+                        getNextInsertLetter();
+                    }, 400);
+                }, 400);
+            }, 400);
+
+        } else if (activeSimType === 'circular') {
+            updateTraceLines('circular', 'insert', 0);
+            
+            // Check Overflow: (R + 1) % N == F
+            if ((state.r + 1) % N === state.f) {
+                logConsole(`OVERFLOW! Condition ((R + 1) % N == F) holds. Circular Queue is Full.`, 'error');
+                return;
+            }
+
+            setTimeout(() => {
+                updateTraceLines('circular', 'insert', 1);
+                if (state.f === -1) {
+                    state.f = 0;
+                    state.r = 0;
+                } else {
+                    state.r = (state.r + 1) % N;
+                }
+                renderSimulator();
+                
+                setTimeout(() => {
+                    updateTraceLines('circular', 'insert', 2);
+                    state.q[state.r] = xVal;
+                    renderSimulator();
+                    
+                    setTimeout(() => {
+                        updateTraceLines('circular', 'insert', 3);
+                        renderSimulator();
+                        logConsole(`Success: Inserted '${xVal}' circularly at index ${state.r}.`, 'success');
+                        getNextInsertLetter();
+                    }, 400);
+                }, 400);
+            }, 400);
+
+        } else if (activeSimType === 'deque') {
+            updateTraceLines('deque', 'insert_rear', 0);
+            
+            // Overflow Rear: R >= N-1
+            if (state.r >= N - 1) {
+                logConsole(`OVERFLOW AT REAR! (R >= N - 1). Cannot insert at rear.`, 'error');
+                return;
+            }
+            
+            setTimeout(() => {
+                updateTraceLines('deque', 'insert_rear', 1);
+                state.r = state.r + 1;
+                renderSimulator();
+                
+                setTimeout(() => {
+                    updateTraceLines('deque', 'insert_rear', 2);
+                    state.q[state.r] = xVal;
+                    renderSimulator();
+                    
+                    setTimeout(() => {
+                        updateTraceLines('deque', 'insert_rear', 3);
+                        if (state.f === -1) {
+                            state.f = 0;
+                        }
+                        renderSimulator();
+                        logConsole(`Inserted '${xVal}' at Rear [index ${state.r}].`, 'success');
+                        getNextInsertLetter();
+                    }, 400);
+                }, 400);
+            }, 400);
+
+        } else if (activeSimType === 'c-deque') {
+            updateTraceLines('c-deque', 'insert_rear', 0);
+            
+            // Circular Overflow: (R + 1) % N == F
+            if ((state.r + 1) % N === state.f) {
+                logConsole(`OVERFLOW! Circular Deque is full.`, 'error');
+                return;
+            }
+            
+            setTimeout(() => {
+                updateTraceLines('c-deque', 'insert_rear', 1);
+                if (state.f === -1) {
+                    state.f = 0;
+                    state.r = 0;
+                } else {
+                    state.r = (state.r + 1) % N;
+                }
+                renderSimulator();
+                
+                setTimeout(() => {
+                    updateTraceLines('c-deque', 'insert_rear', 3);
+                    state.q[state.r] = xVal;
+                    renderSimulator();
+                    logConsole(`Circularly inserted '${xVal}' at Rear [index ${state.r}].`, 'success');
+                    getNextInsertLetter();
+                }, 400);
+            }, 400);
+
+        } else if (activeSimType === 'priority') {
+            // Max-Heap Priority insertion
+            updateTraceLines('priority', 'insert', 0);
+            
+            if (state.q.length >= MAX_HEAP_CAPACITY) {
+                logConsole(`OVERFLOW! Heap is full at capacity N = ${MAX_HEAP_CAPACITY}.`, 'error');
+                return;
+            }
+            
+            const numericVal = parseInt(xVal) || Math.floor(Math.random() * 90) + 10;
+            
+            setTimeout(() => {
+                updateTraceLines('priority', 'insert', 1);
+                state.q.push(numericVal);
+                renderSimulator();
+                logConsole(`Added ${numericVal} at last position [index ${state.q.length - 1}]. Executing HEAPIFY_UP...`, 'info');
+                
+                setTimeout(() => {
+                    heapifyUp(state.q.length - 1);
+                }, 600);
+            }, 400);
+        }
+    }
+
+    function triggerInsertFront() {
+        const valInput = document.getElementById('insert-val');
+        const xVal = valInput.value.trim();
+        if (!xVal) {
+            logConsole("Error: Enter value to insert.", 'error');
+            return;
+        }
+
+        const state = states[activeSimType];
+
+        if (activeSimType === 'deque') {
+            updateTraceLines('deque', 'insert_front', 0);
+            
+            // Simple Deque front insert constraint: F == 0 (cannot drift left without wrapping)
+            if (state.f === 0) {
+                logConsole(`OVERFLOW AT FRONT! F is already at index 0. Try deleting from front to clear spaces.`, 'error');
+                return;
+            }
+            
+            setTimeout(() => {
+                updateTraceLines('deque', 'insert_front', 1);
+                if (state.f === -1) {
+                    state.f = 0;
+                    state.r = 0;
+                } else {
+                    state.f = state.f - 1;
+                }
+                renderSimulator();
+                
+                setTimeout(() => {
+                    updateTraceLines('deque', 'insert_front', 3);
+                    state.q[state.f] = xVal;
+                    renderSimulator();
+                    logConsole(`Inserted '${xVal}' at Front [index ${state.f}].`, 'success');
+                    getNextInsertLetter();
+                }, 400);
+            }, 400);
+
+        } else if (activeSimType === 'c-deque') {
+            updateTraceLines('c-deque', 'insert_front', 0);
+            
+            // Check Overflow: (F - 1 + N) % N == R
+            const prevIdx = (state.f - 1 + N) % N;
+            if (prevIdx === state.r) {
+                logConsole(`OVERFLOW! Circular Deque is full.`, 'error');
+                return;
+            }
+            
+            setTimeout(() => {
+                updateTraceLines('c-deque', 'insert_front', 1);
+                if (state.f === -1) {
+                    state.f = 0;
+                    state.r = 0;
+                } else {
+                    state.f = prevIdx;
+                }
+                renderSimulator();
+                
+                setTimeout(() => {
+                    updateTraceLines('c-deque', 'insert_front', 3);
+                    state.q[state.f] = xVal;
+                    renderSimulator();
+                    logConsole(`Circularly inserted '${xVal}' at Front [index ${state.f}].`, 'success');
+                    getNextInsertLetter();
+                }, 400);
+            }, 400);
+        }
+    }
+
+    function triggerDeleteFront() {
+        const state = states[activeSimType];
+        
+        if (activeSimType === 'simple') {
+            updateTraceLines('simple', 'delete', 0);
+            
+            // Check Underflow: F == -1
+            if (state.f === -1) {
+                logConsole("UNDERFLOW! Front index is -1. Queue is empty.", 'error');
+                return;
+            }
+            
+            setTimeout(() => {
+                updateTraceLines('simple', 'delete', 1);
+                const item = state.q[state.f];
+                state.q[state.f] = null;
+                renderSimulator();
+                
+                setTimeout(() => {
+                    updateTraceLines('simple', 'delete', 2);
+                    state.f = state.f + 1;
+                    renderSimulator();
+                    
+                    setTimeout(() => {
+                        updateTraceLines('simple', 'delete', 3);
+                        // Check if pointers crossed (reset queue)
+                        if (state.f === state.r + 1) {
+                            state.f = -1;
+                            state.r = -1;
+                            logConsole(`Deleted '${item}'. Queue became empty! Reset F = R = -1.`, 'success');
+                        } else {
+                            logConsole(`Deleted '${item}' from Front. Front moved to index ${state.f}.`, 'success');
+                        }
+                        renderSimulator();
+                    }, 400);
+                }, 400);
+            }, 400);
+
+        } else if (activeSimType === 'circular') {
+            updateTraceLines('circular', 'delete', 0);
+            
+            if (state.f === -1) {
+                logConsole("UNDERFLOW! Circular Queue is empty.", 'error');
+                return;
+            }
+            
+            setTimeout(() => {
+                updateTraceLines('circular', 'delete', 1);
+                const item = state.q[state.f];
+                state.q[state.f] = null;
+                renderSimulator();
+                
+                setTimeout(() => {
+                    if (state.f === state.r) {
+                        updateTraceLines('circular', 'delete', 2);
+                        state.f = -1;
+                        state.r = -1;
+                        logConsole(`Deleted last item '${item}'. Reset pointers: F = R = -1.`, 'success');
+                    } else {
+                        updateTraceLines('circular', 'delete', 3);
+                        state.f = (state.f + 1) % N;
+                        logConsole(`Deleted '${item}'. Front wrapped/advanced to index ${state.f}.`, 'success');
+                    }
+                    renderSimulator();
+                }, 400);
+            }, 400);
+
+        } else if (activeSimType === 'deque') {
+            updateTraceLines('deque', 'delete_front', 0);
+            
+            if (state.f === -1) {
+                logConsole("UNDERFLOW! Deque is empty.", 'error');
+                return;
+            }
+            
+            setTimeout(() => {
+                updateTraceLines('deque', 'delete_front', 1);
+                const item = state.q[state.f];
+                state.q[state.f] = null;
+                renderSimulator();
+                
+                setTimeout(() => {
+                    updateTraceLines('deque', 'delete_front', 2);
+                    state.f = state.f + 1;
+                    renderSimulator();
+                    
+                    setTimeout(() => {
+                        updateTraceLines('deque', 'delete_front', 3);
+                        if (state.f === state.r + 1) {
+                            state.f = -1;
+                            state.r = -1;
+                            logConsole(`Deleted '${item}'. Deque is now empty! Reset F = R = -1.`, 'success');
+                        } else {
+                            logConsole(`Deleted '${item}' from Front. Front is now ${state.f}.`, 'success');
+                        }
+                        renderSimulator();
+                    }, 400);
+                }, 400);
+            }, 400);
+
+        } else if (activeSimType === 'c-deque') {
+            updateTraceLines('c-deque', 'delete_front', 0);
+            
+            if (state.f === -1) {
+                logConsole("UNDERFLOW! Circular Deque is empty.", 'error');
+                return;
+            }
+            
+            setTimeout(() => {
+                updateTraceLines('c-deque', 'delete_front', 1);
+                const item = state.q[state.f];
+                state.q[state.f] = null;
+                renderSimulator();
+                
+                setTimeout(() => {
+                    if (state.f === state.r) {
+                        updateTraceLines('c-deque', 'delete_front', 2);
+                        state.f = -1;
+                        state.r = -1;
+                        logConsole(`Deleted last item '${item}'. Reset F = R = -1.`, 'success');
+                    } else {
+                        updateTraceLines('c-deque', 'delete_front', 3);
+                        state.f = (state.f + 1) % N;
+                        logConsole(`Deleted '${item}'. Front moved to index ${state.f}.`, 'success');
+                    }
+                    renderSimulator();
+                }, 400);
+            }, 400);
+
+        } else if (activeSimType === 'priority') {
+            // Priority Queue extraction
+            updateTraceLines('priority', 'delete', 0);
+            
+            if (state.q.length === 0) {
+                logConsole("UNDERFLOW! Priority Queue (Heap) is empty.", 'error');
+                return;
+            }
+
+            const heapType = document.getElementById('heap-type').value;
+            const extremeWord = heapType === 'max' ? 'highest' : 'lowest';
+
+            setTimeout(() => {
+                updateTraceLines('priority', 'delete', 1);
+                const maxVal = state.q[0];
+                logConsole(`Extracted ${extremeWord} priority element (${maxVal}). Swapping root with last leaf...`, 'info');
+                
+                if (state.q.length === 1) {
+                    state.q.pop();
+                    renderSimulator();
+                    logConsole(`Extracted ${maxVal}. Queue is now empty.`, 'success');
+                } else {
+                    state.q[0] = state.q.pop();
+                    renderSimulator();
+                    
+                    setTimeout(() => {
+                        updateTraceLines('priority', 'delete', 3);
+                        logConsole("Executing HEAPIFY_DOWN to restore order...", 'info');
+                        setTimeout(() => {
+                            heapifyDown(0);
+                        }, 500);
+                    }, 500);
+                }
+            }, 400);
+        }
+    }
+
+    function triggerDeleteRear() {
+        const state = states[activeSimType];
+        
+        if (activeSimType === 'deque') {
+            updateTraceLines('deque', 'delete_rear', 0);
+            
+            if (state.r === -1) {
+                logConsole("UNDERFLOW! Cannot delete from rear.", 'error');
+                return;
+            }
+            
+            setTimeout(() => {
+                updateTraceLines('deque', 'delete_rear', 1);
+                const item = state.q[state.r];
+                state.q[state.r] = null;
+                renderSimulator();
+                
+                setTimeout(() => {
+                    updateTraceLines('deque', 'delete_rear', 2);
+                    state.r = state.r - 1;
+                    renderSimulator();
+                    
+                    setTimeout(() => {
+                        updateTraceLines('deque', 'delete_rear', 3);
+                        if (state.f === state.r + 1) {
+                            state.f = -1;
+                            state.r = -1;
+                            logConsole(`Deleted '${item}' from Rear. Deque became empty! Reset F = R = -1.`, 'success');
+                        } else {
+                            logConsole(`Deleted '${item}' from Rear. Rear is now ${state.r}.`, 'success');
+                        }
+                        renderSimulator();
+                    }, 400);
+                }, 400);
+            }, 400);
+
+        } else if (activeSimType === 'c-deque') {
+            updateTraceLines('c-deque', 'delete_rear', 0);
+            
+            if (state.f === -1) {
+                logConsole("UNDERFLOW! Circular Deque is empty.", 'error');
+                return;
+            }
+            
+            setTimeout(() => {
+                updateTraceLines('c-deque', 'delete_rear', 1);
+                const item = state.q[state.r];
+                state.q[state.r] = null;
+                renderSimulator();
+                
+                setTimeout(() => {
+                    if (state.f === state.r) {
+                        updateTraceLines('c-deque', 'delete_rear', 2);
+                        state.f = -1;
+                        state.r = -1;
+                        logConsole(`Deleted last item '${item}'. Reset F = R = -1.`, 'success');
+                    } else {
+                        updateTraceLines('c-deque', 'delete_rear', 3);
+                        if (state.r === 0) {
+                            state.r = N - 1;
+                        } else {
+                            state.r = state.r - 1;
+                        }
+                        logConsole(`Deleted '${item}'. Rear moved to index ${state.r}.`, 'success');
+                    }
+                    renderSimulator();
+                }, 400);
+            }, 400);
+        }
+    }
+
+    // HEAPIFY OPERATIONS FOR PRIORITY QUEUE
+    function heapifyUp(index) {
+        if (index <= 0) {
+            logConsole("HEAPIFY_UP Complete. Root node reached.", 'success');
+            return;
+        }
+
+        const parentIdx = Math.floor((index - 1) / 2);
+        const heap = states[activeSimType].q;
+        const heapType = activeSimType === 'priority-min' ? 'min' : 'max';
+        
+        let violation = false;
+        if (heapType === 'max') {
+            violation = heap[parentIdx] < heap[index];
+        } else {
+            violation = heap[parentIdx] > heap[index];
+        }
+        
+        if (violation) {
+            const rel = heapType === 'max' ? '>' : '<';
+            const swapMsg = heapType === 'max' ? 'child > parent' : 'child < parent';
+            logConsole(`Violation found: ${swapMsg} (${heap[index]} ${rel} ${heap[parentIdx]}). Swapping...`, 'info');
+            
+            // Swap values
+            const temp = heap[index];
+            heap[index] = heap[parentIdx];
+            heap[parentIdx] = temp;
+            
+            renderSimulator();
+            
+            // Highlight swap step
+            updateTraceLines(activeSimType, 'insert', 5);
+            
+            setTimeout(() => {
+                heapifyUp(parentIdx);
+            }, 800);
+        } else {
+            const rel = heapType === 'max' ? '<=' : '>=';
+            logConsole(`Heap property satisfied: child (${heap[index]}) ${rel} parent (${heap[parentIdx]}).`, 'success');
+            // Highlight satisfies loop check
+            updateTraceLines(activeSimType, 'insert', 4);
+        }
+    }
+
+    // heapify down for priority queue (min/max heap)
+    function heapifyDown(index) {
+        const heap = states[activeSimType].q;
+        const size = heap.length;
+        const left = 2 * index + 1;
+        const right = 2 * index + 2;
+        const heapType = activeSimType === 'priority-min' ? 'min' : 'max';
+        let swapTarget = index;
+
+        if (heapType === 'max') {
+            if (left < size && heap[left] > heap[swapTarget]) {
+                swapTarget = left;
+            }
+            if (right < size && heap[right] > heap[swapTarget]) {
+                swapTarget = right;
+            }
+        } else {
+            if (left < size && heap[left] < heap[swapTarget]) {
+                swapTarget = left;
+            }
+            if (right < size && heap[right] < heap[swapTarget]) {
+                swapTarget = right;
+            }
+        }
+
+        if (swapTarget !== index) {
+            const rel = heapType === 'max' ? '<' : '>';
+            const violationMsg = heapType === 'max' ? 'parent < child' : 'parent > child';
+            logConsole(`Violation found: ${violationMsg} (${heap[index]} ${rel} ${heap[swapTarget]}). Swapping...`, 'info');
+            
+            const temp = heap[index];
+            heap[index] = heap[swapTarget];
+            heap[swapTarget] = temp;
+            
+            renderSimulator();
+            
+            // Highlight swap step
+            updateTraceLines(activeSimType, 'delete', 8);
+            
+            setTimeout(() => {
+                heapifyDown(swapTarget);
+            }, 800);
+        } else {
+            logConsole("HEAPIFY_DOWN Complete. Heap structure restored.", 'success');
+            // Highlight satisfies order
+            updateTraceLines(activeSimType, 'delete', 4);
+        }
+    }
+
+    // Reset current selected simulator
+    function resetCurrentSimulator() {
+        if (activeSimType === 'priority' || activeSimType === 'priority-min') {
+            states[activeSimType] = { q: [], count: 0 };
+        } else {
+            states[activeSimType] = { q: Array(N).fill(null), f: -1, r: -1 };
+        }
+        
+        // Reset Value inputs to A
+        document.getElementById('insert-val').value = (activeSimType === 'priority' || activeSimType === 'priority-min') ? '42' : 'A';
+        logConsole("Simulator cleared.");
+        renderSimulator();
+    }
+
+    // Active Code State
+    let activeCodeLang = 'blackboard';
+
+    function switchLanguageTab(event, lang) {
+        const tabContainer = event.target.parentElement;
+        tabContainer.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        event.target.classList.add('active');
+
+        activeCodeLang = lang;
+        updateDisplayedCode();
+    }
+
+    function updateDisplayedCode() {
+        const queueType = document.getElementById('code-queue-select').value;
+        const codeDisplay = document.getElementById('display-code-block');
+        
+        if (codeRepository[queueType] && codeRepository[queueType][activeCodeLang]) {
+            codeDisplay.textContent = codeRepository[queueType][activeCodeLang];
+        } else {
+            codeDisplay.textContent = "Code snippet not found.";
+        }
+    }
+
+    // CONCEPTUAL QUIZ LOGIC
+    const quizData = [
+        {
+            q: "If Front (F) = 2 and Rear (R) = 1 in a Circular Queue of size N = 5, what is the state of the queue?",
+            options: ["Empty", "Contains 1 element", "Full (Overflow)", "Underflow"],
+            correct: 2,
+            explanation: "In a Circular Queue of size N, the full condition is (R + 1) % N == F. Substituting values: (1 + 1) % 5 = 2, which matches F = 2. The queue is completely full!"
+        },
+        {
+            q: "Why is the deletion reset condition 'if F == R + 1 then F = R = -1' useful in simple queues?",
+            options: [
+                "It shifts all elements to index 0",
+                "It wraps pointers back in circular fashion",
+                "It detects when the queue becomes empty and resets pointers to initial state",
+                "It triggers an overflow warning"
+            ],
+            correct: 2,
+            explanation: "When you delete the last element from the queue, F increments past R (making F = R + 1). Resetting them to -1 prevents dangling memory offsets and re-enables inserting from index 0."
+        },
+        {
+            q: "In a simple Deque (not circular), why is insertion at front blocked if F == 0?",
+            options: [
+                "Because index 0 is reserved for Rear",
+                "Because there are no indices smaller than 0 available in standard arrays",
+                "Because Deques do not support front insertion",
+                "Because it causes the heap property to fail"
+            ],
+            correct: 1,
+            explanation: "A simple Deque is backed by a linear array. Decrementing F when F = 0 would result in -1, which is outside the array boundaries. A Circular Deque solves this by wrapping F to index N-1."
+        },
+        {
+            q: "For a Max-Heap Priority Queue stored in an array, what is the parent index formula of any node at index I?",
+            options: ["2 * I + 1", "(I - 1) / 2", "2 * I + 2", "I % 2"],
+            correct: 1,
+            explanation: "In a 0-indexed binary tree represented as an array, the parent of index I is calculated by integer division: (I - 1) / 2. The left child is at 2*I + 1 and right child is at 2*I + 2."
+        },
+        {
+            q: "What index does F wrap to in a Circular Deque of size N = 5 when doing an insert at front if F was currently 0?",
+            options: ["Index -1", "Index 1", "Index 4 (N-1)", "Index 0"],
+            correct: 2,
+            explanation: "When F is at 0, inserting at the front moves F counter-clockwise. The circular formula is (F - 1 + N) % N. Thus, (0 - 1 + 5) % 5 = 4 % 5 = 4 (which is N - 1)."
+        }
+    ];
+
+    let currentQuizIndex = 0;
+    let quizScore = 0;
+    let answered = false;
+
+    function loadQuizQuestion() {
+        answered = false;
+        const q = quizData[currentQuizIndex];
+        document.getElementById('q-text').innerText = `${currentQuizIndex + 1}. ${q.q}`;
+        document.getElementById('q-explanation').style.display = 'none';
+
+        const optionsDiv = document.getElementById('q-options');
+        optionsDiv.innerHTML = '';
+
+        q.options.forEach((opt, idx) => {
+            const btn = document.createElement('div');
+            btn.className = 'quiz-option';
+            btn.innerHTML = `<span>${opt}</span>`;
+            btn.onclick = () => selectQuizOption(idx, btn);
+            optionsDiv.appendChild(btn);
+        });
+    }
+
+    function selectQuizOption(index, optionElem) {
+        if (answered) return;
+        answered = true;
+
+        const q = quizData[currentQuizIndex];
+        const optionsDiv = document.getElementById('q-options');
+
+        if (index === q.correct) {
+            optionElem.classList.add('correct');
+            optionElem.innerHTML += '<span>✅</span>';
+            quizScore++;
+            document.getElementById('quiz-score').innerText = `Score: ${quizScore} / 5`;
+        } else {
+            optionElem.classList.add('wrong');
+            optionElem.innerHTML += '<span>❌</span>';
+            
+            // Highlight correct answer
+            optionsDiv.children[q.correct].classList.add('correct');
+            optionsDiv.children[q.correct].innerHTML += '<span>✅</span>';
+        }
+
+        // Show explanation
+        const exp = document.getElementById('q-explanation');
+        exp.innerText = q.explanation;
+        exp.style.display = 'block';
+    }
+
+    function loadNextQuizQuestion() {
+        if (!answered) {
+            alert("Please answer the current question first!");
+            return;
+        }
+
+        currentQuizIndex = (currentQuizIndex + 1) % quizData.length;
+        if (currentQuizIndex === 0) {
+            quizScore = 0;
+            document.getElementById('quiz-score').innerText = `Score: 0 / 5`;
+        }
+        loadQuizQuestion();
+    }
+
+    // INITIALIZE PAGE RUNS
+    window.onload = function() {
+        // Start Simple Queue Simulator default
+        selectSimulator('simple');
+        // Start Quiz
+        loadQuizQuestion();
+        // Load default code tab
+        updateDisplayedCode();
+    };
+</script>
+</body>
+</html>

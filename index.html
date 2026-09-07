@@ -1,0 +1,1306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Structures Made Simple | DSM Interactive Hub</title>
+    <meta name="description" content="Learn Data Structures and Algorithms the simple and fun way with easy analogies, real-world examples, interactive simulations, and cheat sheets.">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Unified Shared Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Core Interactive Logic -->
+    <script src="main.js" defer></script>
+</head>
+<body>
+
+    <!-- ========================================================================
+         1. UNIFIED NAVIGATION BAR (SHARED ACROSS ALL PAGES)
+         ======================================================================== -->
+    <nav class="navbar" id="navbar">
+        <div class="container navbar-inner">
+            <!-- Brand Logo -->
+            <a href="index.html" class="nav-brand" aria-label="DSM Simulation Home">
+                <div class="nav-logo-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                        <polyline points="2 17 12 22 22 17"></polyline>
+                        <polyline points="2 12 12 17 22 12"></polyline>
+                    </svg>
+                </div>
+                <div class="nav-logo-text">DSM <span>Simulation</span></div>
+            </a>
+
+            <!-- Desktop Menu with all requested topics -->
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html#hero" class="nav-link active">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="index.html#definition" class="nav-link">What is DS?</a>
+                </li>
+                <li class="nav-item">
+                    <a href="index.html#importance" class="nav-link">Importance</a>
+                </li>
+                <li class="nav-item">
+                    <a href="index.html#applications" class="nav-link">Applications</a>
+                </li>
+
+                <!-- Linear Data Structures Menu Dropdown -->
+                <li class="nav-item">
+                    <a href="index.html#modules" class="nav-link">
+                        Linear DS
+                        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </a>
+                    <div class="nav-dropdown">
+                        <a href="stack_cheatsheet.html" class="dropdown-link">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19h16M4 15h16M4 11h16M4 7h16"/></svg>
+                            Stack Suite (LIFO)
+                            <span class="dropdown-badge live">Live Simulator ⚡</span>
+                        </a>
+                        <a href="queue_cheatsheet.html" class="dropdown-link">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 10 12 10 12 14"/></svg>
+                            Queue Suite (FIFO)
+                            <span class="dropdown-badge live">Live Simulator</span>
+                        </a>
+                        <a href="index.html#linkedlist" class="dropdown-link">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6" cy="12" r="3"/><circle cx="18" cy="12" r="3"/><line x1="9" y1="12" x2="15" y2="12"/></svg>
+                            Linked List
+                            <span class="dropdown-badge">Train</span>
+                        </a>
+                    </div>
+                </li>
+
+                <!-- Non-Linear Data Structures Menu Dropdown -->
+                <li class="nav-item">
+                    <a href="index.html#modules" class="nav-link">
+                        Non-Linear DS
+                        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </a>
+                    <div class="nav-dropdown">
+                        <a href="index.html#tree" class="dropdown-link">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v6m-6 6l6-6 6 6m-9 6l3-6 3 6"/><circle cx="12" cy="2" r="1"/></svg>
+                            Tree & BST
+                            <span class="dropdown-badge">Family Tree</span>
+                        </a>
+                        <a href="index.html#graph" class="dropdown-link">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6" cy="6" r="3"/><circle cx="18" cy="6" r="3"/><circle cx="12" cy="18" r="3"/><line x1="8.5" y1="7.5" x2="15.5" y2="7.5"/><line x1="7.5" y1="8.5" x2="10.5" y2="15.5"/><line x1="16.5" y1="8.5" x2="13.5" y2="15.5"/></svg>
+                            Graph Networks
+                            <span class="dropdown-badge">Road Map</span>
+                        </a>
+                    </div>
+                </li>
+
+                <!-- Algorithms Dropdown Menu -->
+                <li class="nav-item">
+                    <a href="index.html#modules" class="nav-link">
+                        Algorithms
+                        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </a>
+                    <div class="nav-dropdown">
+                        <a href="index.html#searching" class="dropdown-link">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                            Searching (Find Items)
+                            <span class="dropdown-badge">Search</span>
+                        </a>
+                        <a href="index.html#sorting" class="dropdown-link">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M6 12h12M10 18h4"/></svg>
+                            Sorting (Order Items)
+                            <span class="dropdown-badge">Sort</span>
+                        </a>
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <a href="index.html#cheatsheet" class="nav-link">Cheat Sheet</a>
+                </li>
+            </ul>
+
+            <!-- Nav Actions -->
+            <div class="nav-actions">
+                <!-- Theme Toggle Button -->
+                <button class="btn-icon theme-toggle" id="themeToggle" aria-label="Toggle light or dark theme" title="Toggle theme">
+                    <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                    <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
+
+                <!-- Mobile Hamburger Toggle -->
+                <button class="btn-icon mobile-toggle" id="mobileMenuBtn" aria-label="Open mobile navigation menu">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Navigation Drawer -->
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+    <aside class="mobile-drawer" id="mobileDrawer">
+        <div class="mobile-drawer-header">
+            <div class="nav-brand">
+                <div class="nav-logo-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                        <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                        <polyline points="2 17 12 22 22 17"></polyline>
+                        <polyline points="2 12 12 17 22 12"></polyline>
+                    </svg>
+                </div>
+                <div class="nav-logo-text">DSM <span>Simulation</span></div>
+            </div>
+            <button class="btn-icon" id="closeMobileBtn" aria-label="Close navigation drawer">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+
+        <div class="mobile-nav-links">
+            <a href="index.html#hero" class="mobile-nav-link">Home Overview</a>
+            <a href="index.html#definition" class="mobile-nav-link">What is a Data Structure?</a>
+            <a href="index.html#importance" class="mobile-nav-link">Why It Matters</a>
+            <a href="index.html#applications" class="mobile-nav-link">Real-World Applications</a>
+
+            <div class="mobile-nav-section-title">Linear Structures</div>
+            <a href="stack_cheatsheet.html" class="mobile-nav-link" style="color: var(--accent-blue); font-weight:700;">Stack Simulator (Live ⚡)</a>
+            <a href="queue_cheatsheet.html" class="mobile-nav-link" style="color: var(--accent-emerald); font-weight:700;">Queue Simulator (Live ⚡)</a>
+            <a href="index.html#linkedlist" class="mobile-nav-link">Linked List (Train Cars)</a>
+
+            <div class="mobile-nav-section-title">Non-Linear Structures</div>
+            <a href="index.html#tree" class="mobile-nav-link">Tree (Family Tree)</a>
+            <a href="index.html#graph" class="mobile-nav-link">Graph (Road Map)</a>
+
+            <div class="mobile-nav-section-title">Algorithms</div>
+            <a href="index.html#searching" class="mobile-nav-link">Searching (Find Items)</a>
+            <a href="index.html#sorting" class="mobile-nav-link">Sorting (Order Items)</a>
+
+            <div class="mobile-nav-section-title">Quick Reference</div>
+            <a href="index.html#cheatsheet" class="mobile-nav-link">Speed Cheat Sheet (Big-O)</a>
+        </div>
+    </aside>
+
+    <!-- ========================================================================
+         2. HERO SECTION (SIMPLE & FRIENDLY)
+         ======================================================================== -->
+    <header class="hero" id="hero">
+        <div class="container hero-grid">
+            <div class="hero-text-col">
+                <div class="hero-badge-pill">
+                    <span class="hero-pulse"></span>
+                    Beginner-Friendly Computer Science Guide
+                </div>
+                <h1 class="hero-title">
+                    Learn <span class="gradient-text">Data Structures</span> the Simple Way
+                </h1>
+                <p class="hero-lead">
+                    Imagine throwing all your clothes in one giant messy pile on the floor. Finding your favorite shirt would take forever! But if you fold shirts in one drawer and hang jackets in a closet, you grab what you need in seconds.
+                </p>
+                <p class="hero-lead" style="margin-top:-16px;">
+                    In a computer, a <strong>Data Structure</strong> is just like that closet organizer. It is a neat way to organize and store information so your apps run fast, smooth, and without freezing.
+                </p>
+                <div class="hero-cta-group">
+                    <a href="#modules" class="btn btn-primary">
+                        Explore 7 Easy Topics
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </a>
+                    <a href="queue_cheatsheet.html" class="btn btn-secondary">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polygon points="10 8 16 12 10 16 10 8"></polygon></svg>
+                        Try Queue Simulator Live
+                    </a>
+                </div>
+
+                <!-- Friendly Quick Facts -->
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <h4>7 Topics</h4>
+                        <p>Stack, Queue, Tree & more</p>
+                    </div>
+                    <div class="stat-item">
+                        <h4>Real-Life</h4>
+                        <p>Plates, Lines, & Maps</p>
+                    </div>
+                    <div class="stat-item">
+                        <h4>Interactive</h4>
+                        <p>Simulators & Cheat Sheets</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hero Simple Visual Card -->
+            <div class="hero-visual">
+                <div class="floating-chip top-right">
+                    <div class="chip-icon icon-emerald">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    </div>
+                    <div>
+                        <div style="font-size:0.7rem; color:var(--text-muted)">Super Fast</div>
+                        <div style="color:var(--accent-emerald); font-weight:700;">Find things in 1 second!</div>
+                    </div>
+                </div>
+
+                <div class="hero-glass-card">
+                    <div class="terminal-header">
+                        <div class="terminal-dots">
+                            <span class="dot-red"></span>
+                            <span class="dot-yellow"></span>
+                            <span class="dot-green"></span>
+                        </div>
+                        <div class="terminal-title">SimpleExample.txt</div>
+                        <div style="font-size:0.7rem; color:var(--text-muted)">Beginner View</div>
+                    </div>
+                    <pre class="terminal-content"><code><span class="code-comment">// 1. Stack: Like a stack of dinner plates</span>
+<span class="code-keyword">Stack</span> plates = <span class="code-func">new</span> Stack();
+plates.<span class="code-func">push</span>(<span class="code-string">"Bottom Plate"</span>);
+plates.<span class="code-func">push</span>(<span class="code-string">"Top Plate"</span>);
+plates.<span class="code-func">pop</span>(); <span class="code-comment">// Takes the "Top Plate" off first!</span>
+
+<span class="code-comment">// 2. Queue: Like a line for ice cream</span>
+<span class="code-keyword">Queue</span> iceCreamLine = <span class="code-func">new</span> Queue();
+iceCreamLine.<span class="code-func">join</span>(<span class="code-string">"Alice"</span>);   <span class="code-comment">// Arrived 1st</span>
+iceCreamLine.<span class="code-func">join</span>(<span class="code-string">"Bob"</span>);     <span class="code-comment">// Arrived 2nd</span>
+iceCreamLine.<span class="code-func">serve</span>();        <span class="code-comment">// Alice gets ice cream first!</span>
+
+<span class="code-comment">// Golden Rule of Programming:</span>
+<span class="code-string">"Good Data Structure + Simple Steps = Great Program"</span></code></pre>
+                </div>
+
+                <div class="floating-chip bottom-left">
+                    <div class="chip-icon icon-blue">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                    </div>
+                    <div>
+                        <div style="font-size:0.7rem; color:var(--text-muted)">Why It Matters</div>
+                        <div style="color:var(--accent-blue); font-weight:700;">Saves battery & phone memory</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ========================================================================
+         3. SECTION: WHAT IS A DATA STRUCTURE? (SIMPLE EXPLANATION)
+         ======================================================================== -->
+    <section class="section" id="definition">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Easy Explanation</span>
+                <h2 class="section-title">What is a <span class="gradient-text">Data Structure</span>?</h2>
+                <p class="section-description">
+                    Simply put: A data structure is a <strong>smart way of organizing information</strong> inside a computer so you can store, find, and update it easily.
+                </p>
+            </div>
+
+            <!-- Two Easy Concept Cards -->
+            <div class="concept-grid">
+                <div class="concept-card">
+                    <div class="card-icon-box icon-blue">
+                        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+                    </div>
+                    <h3>1. The Kitchen Spice Rack Analogy</h3>
+                    <p>
+                        Think about cooking dinner. If all your spices (salt, pepper, oregano, cumin) are thrown into a messy box in no particular order, you have to dig around and check each bottle until you find salt.
+                    </p>
+                    <p>
+                        If you put them on a <strong>labeled spice rack</strong> alphabetically, your hand reaches for the salt in one second! A data structure is that spice rack for computer programs.
+                    </p>
+                    <ul class="feature-list">
+                        <li>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                            <span><strong>Keeps things orderly:</strong> Prevents your data from getting lost in a mess.</span>
+                        </li>
+                        <li>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                            <span><strong>Saves effort:</strong> The computer doesn't waste time checking things it doesn't need to.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="concept-card">
+                    <div class="card-icon-box icon-purple">
+                        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+                    </div>
+                    <h3>2. How We See It vs. How the Computer Stores It</h3>
+                    <p>
+                        Every data structure has two sides to it:
+                    </p>
+                    <ul class="feature-list" style="margin-bottom:16px;">
+                        <li>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                            <span><strong>The Human Idea (Logical View):</strong> How we picture it in our mind. For example, a straight line of people, or a family tree with branches.</span>
+                        </li>
+                        <li>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                            <span><strong>The Computer Storage (Memory View):</strong> How the computer puts it in RAM chips. Either side-by-side in one row (like lockers in a hallway) or connected with little memory arrows (pointers).</span>
+                        </li>
+                    </ul>
+                    <p>
+                        This means we can use simple commands like <code>add()</code> or <code>remove()</code> without worrying about the complicated wires inside the computer!
+                    </p>
+                </div>
+            </div>
+
+            <!-- Interactive Classification Tabs (In Plain English) -->
+            <div class="taxonomy-box">
+                <div class="taxonomy-header">
+                    <h3>How Data Structures Are Grouped (Classification)</h3>
+                    <p style="color:var(--text-secondary); font-size:0.95rem;">Click the buttons below to see how computer scientists categorize them in simple terms:</p>
+                </div>
+
+                <div class="taxonomy-nav">
+                    <button class="tab-btn active" data-tab="tab-linear">1. Straight Line vs. Branching</button>
+                    <button class="tab-btn" data-tab="tab-primitive">2. Single Value vs. Big Group</button>
+                    <button class="tab-btn" data-tab="tab-static">3. Fixed Size vs. Flexible Size</button>
+                    <button class="tab-btn" data-tab="tab-homogeneous">4. Same Type vs. Mixed Types</button>
+                </div>
+
+                <!-- Tab 1: Linear vs Non-Linear -->
+                <div class="taxonomy-tab-pane active" id="tab-linear">
+                    <div class="taxonomy-grid">
+                        <div class="tax-item">
+                            <h4>Linear (In a Straight Line) <span class="tag-badge" style="color:var(--accent-blue)">One by One</span></h4>
+                            <p>Items are lined up one after another in a single file line, like cars on a one-way street or a line of people waiting for tickets. You go through them from start to finish.</p>
+                            <div class="tax-pill-list">
+                                <span class="tax-pill">Stack (Like a stack of plates)</span>
+                                <span class="tax-pill">Queue (Like a grocery checkout line)</span>
+                                <span class="tax-pill">Array (Like a row of lockers)</span>
+                                <span class="tax-pill">Linked List (Like train cars hooked together)</span>
+                            </div>
+                        </div>
+                        <div class="tax-item">
+                            <h4>Non-Linear (Branching Out) <span class="tag-badge" style="color:var(--accent-emerald)">Networks & Trees</span></h4>
+                            <p>Items do not sit in a single line. Instead, they branch out in different directions, just like branches on a tree or roads connecting cities on a map.</p>
+                            <div class="tax-pill-list">
+                                <span class="tax-pill">Tree (Like a family tree or computer folders)</span>
+                                <span class="tax-pill">Graph (Like flight routes or friends on social media)</span>
+                                <span class="tax-pill">Heap (Organized by priority / biggest first)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab 2: Primitive vs Non-Primitive -->
+                <div class="taxonomy-tab-pane" id="tab-primitive">
+                    <div class="taxonomy-grid">
+                        <div class="tax-item">
+                            <h4>Basic / Primitive <span class="tag-badge" style="color:var(--accent-cyan)">Single Value</span></h4>
+                            <p>The simplest building blocks that hold only one single piece of information at a time. The computer natively understands them right away.</p>
+                            <div class="tax-pill-list">
+                                <span class="tax-pill">Integer: A whole number (like 5 or 100)</span>
+                                <span class="tax-pill">Float: A decimal number (like 3.14)</span>
+                                <span class="tax-pill">Character: A single letter (like 'A' or 'z')</span>
+                                <span class="tax-pill">Boolean: True or False (Yes or No)</span>
+                            </div>
+                        </div>
+                        <div class="tax-item">
+                            <h4>Composite / Non-Primitive <span class="tag-badge" style="color:var(--accent-purple)">Group of Values</span></h4>
+                            <p>Created by programmers by combining many basic values together to store larger lists, tables, and collections.</p>
+                            <div class="tax-pill-list">
+                                <span class="tax-pill">A list of all student names in a school</span>
+                                <span class="tax-pill">A music playlist of 50 songs</span>
+                                <span class="tax-pill">A chessboard matrix of 64 squares</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab 3: Static vs Dynamic -->
+                <div class="taxonomy-tab-pane" id="tab-static">
+                    <div class="taxonomy-grid">
+                        <div class="tax-item">
+                            <h4>Fixed Size (Static) <span class="tag-badge" style="color:var(--accent-amber)">Cannot Grow</span></h4>
+                            <p>Its size is decided at the very beginning and cannot change while the program is running. Like an egg carton with exactly 12 holes — you can never put a 13th egg in it!</p>
+                            <div class="tax-pill-list">
+                                <span class="tax-pill">Standard fixed arrays</span>
+                                <span class="tax-pill">Fixed-size buffers</span>
+                            </div>
+                        </div>
+                        <div class="tax-item">
+                            <h4>Flexible Size (Dynamic) <span class="tag-badge" style="color:var(--accent-rose)">Grows & Shrinks</span></h4>
+                            <p>Can easily expand when you want to add more items, and shrink when you delete items. Like a shopping cart that holds as much as you decide to put inside.</p>
+                            <div class="tax-pill-list">
+                                <span class="tax-pill">Dynamic lists (Vectors)</span>
+                                <span class="tax-pill">Linked Lists</span>
+                                <span class="tax-pill">Trees & Graphs</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab 4: Homogeneous vs Heterogeneous -->
+                <div class="taxonomy-tab-pane" id="tab-homogeneous">
+                    <div class="taxonomy-grid">
+                        <div class="tax-item">
+                            <h4>Same Type (Homogeneous) <span class="tag-badge" style="color:var(--accent-blue)">Uniform</span></h4>
+                            <p>Every single item inside must be of the exact same kind. For example, a list that holds only numbers, or an egg carton that holds only eggs.</p>
+                            <div class="tax-pill-list">
+                                <span class="tax-pill">An array of test scores (all numbers)</span>
+                                <span class="tax-pill">A word (a string of letters only)</span>
+                            </div>
+                        </div>
+                        <div class="tax-item">
+                            <h4>Mixed Types (Heterogeneous) <span class="tag-badge" style="color:var(--accent-indigo)">Different Kinds</span></h4>
+                            <p>Can pack different kinds of information together in one single card. Like a student ID card that holds a Name (words), Age (number), and Photo (image).</p>
+                            <div class="tax-pill-list">
+                                <span class="tax-pill">A Student Profile (Name, Roll No, Marks)</span>
+                                <span class="tax-pill">An Online Order (Item, Price, Address)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================================================
+         4. SECTION: WHY ARE DATA STRUCTURES IMPORTANT? (EVERYDAY VALUE)
+         ======================================================================== -->
+    <section class="section" id="importance" style="background: var(--bg-secondary);">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Why We Need Them</span>
+                <h2 class="section-title">Why Do Data Structures <span class="gradient-text">Matter</span>?</h2>
+                <p class="section-description">
+                    Computers are fast, but without good organization, even the fastest supercomputer in the world would slow to a crawl. Here is why data structures are essential:
+                </p>
+            </div>
+
+            <div class="importance-grid">
+                <!-- 1. Lightning Fast Speed -->
+                <div class="importance-card">
+                    <div class="importance-num">Reason 01</div>
+                    <h3>⚡ Lightning-Fast Speed</h3>
+                    <p>
+                        Imagine searching for a contact in a phonebook of 1,000,000 people. If it were completely random, you might have to check 1,000,000 names! But because a phonebook is sorted alphabetically, you jump directly to the right letter in just a few seconds. That is what data structures do for computers.
+                    </p>
+                    <div class="importance-meta">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                        Finds answers in less than a blink of an eye
+                    </div>
+                </div>
+
+                <!-- 2. Saves Computer Memory -->
+                <div class="importance-card">
+                    <div class="importance-num">Reason 02</div>
+                    <h3>💾 Saves Storage & Memory</h3>
+                    <p>
+                        Computers and smartphones have limited RAM memory. Smart data structures pack information neatly so that no extra memory is wasted. This keeps your phone feeling snappy and stops your battery from draining too fast.
+                    </p>
+                    <div class="importance-meta">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg>
+                        Keeps devices running smoothly without lag
+                    </div>
+                </div>
+
+                <!-- 3. Handles Giant Apps -->
+                <div class="importance-card">
+                    <div class="importance-num">Reason 03</div>
+                    <h3>🌍 Powers Huge Apps (Instagram, YouTube)</h3>
+                    <p>
+                        Every single day, billions of photos, videos, and comments are uploaded to the internet. Without data structures to organize this mountain of information, apps like YouTube, Netflix, or Instagram would crash instantly under the pressure.
+                    </p>
+                    <div class="importance-meta">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"></path></svg>
+                        Lets millions of people use an app at the exact same time
+                    </div>
+                </div>
+
+                <!-- 4. Clean, Tested Building Blocks -->
+                <div class="importance-card">
+                    <div class="importance-num">Reason 04</div>
+                    <h3>🧩 Like Reusable Lego Bricks</h3>
+                    <p>
+                        Programmers don't have to invent a new way to store data from scratch every time they write code. Standard data structures are like ready-made Lego blocks that have been tested and perfected for over 50 years.
+                    </p>
+                    <div class="importance-meta">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon></svg>
+                        Makes coding faster and prevents software bugs
+                    </div>
+                </div>
+
+                <!-- 5. Multitasking Without Freezing -->
+                <div class="importance-card">
+                    <div class="importance-num">Reason 05</div>
+                    <h3>🔄 Smooth Multitasking on Your PC</h3>
+                    <p>
+                        Your computer is constantly doing many things at once: playing background music, downloading an update, and checking for emails. It uses <strong>Queues</strong> to take turns fairly so your screen never freezes.
+                    </p>
+                    <div class="importance-meta">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                        Fair turn-taking for every running program
+                    </div>
+                </div>
+
+                <!-- 6. Powers Cool Features (Maps, Games, AI) -->
+                <div class="importance-card">
+                    <div class="importance-num">Reason 06</div>
+                    <h3>🚀 Powers the Coolest Tech We Love</h3>
+                    <p>
+                        Whether it is Google Maps calculating the shortest traffic route, video games calculating where characters can walk, or Spotify guessing what song you want to hear next — all of them run directly on data structures!
+                    </p>
+                    <div class="importance-meta">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+                        The secret engine behind modern technology
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================================================
+         5. SECTION: REAL-WORLD APPLICATIONS (EVERYDAY EXAMPLES)
+         ======================================================================== -->
+    <section class="section" id="applications">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Everyday Life</span>
+                <h2 class="section-title">Where You Experience Them <span class="gradient-text">Every Day</span></h2>
+                <p class="section-description">
+                    You use data structures all day long without even realizing it! Here are 6 everyday examples:
+                </p>
+            </div>
+
+            <div class="applications-grid">
+                <!-- App 1: Undo / Redo -->
+                <div class="app-card">
+                    <div class="app-header">
+                        <div class="app-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"></polyline><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path></svg>
+                        </div>
+                        <div class="app-header-text">
+                            <h4>The "Undo" Button (Ctrl + Z)</h4>
+                            <span>MS Word, Google Docs, Canva, Photoshop</span>
+                        </div>
+                    </div>
+                    <p>
+                        Every time you type a sentence or delete a picture, the program stacks your action on top of a <strong>Stack</strong>. When you hit "Undo", it simply removes the topmost action you just did!
+                    </p>
+                    <div class="app-tags">
+                        <span class="app-tag">Stack (LIFO)</span>
+                        <span class="app-tag">Undo / Redo Buffer</span>
+                    </div>
+                </div>
+
+                <!-- App 2: Web Browser Back Button -->
+                <div class="app-card">
+                    <div class="app-header">
+                        <div class="app-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                        </div>
+                        <div class="app-header-text">
+                            <h4>Browser "Back" and "Forward"</h4>
+                            <span>Google Chrome, Safari, Edge, Firefox</span>
+                        </div>
+                    </div>
+                    <p>
+                        Your browser uses two <strong>Stacks</strong>. When you visit a new webpage, it gets placed on top of your history stack. Clicking "Back" pops you right back to the previous page you saw.
+                    </p>
+                    <div class="app-tags">
+                        <span class="app-tag">Two Stacks (Back & Forward)</span>
+                        <span class="app-tag">History Memory</span>
+                    </div>
+                </div>
+
+                <!-- App 3: Music Playlists -->
+                <div class="app-card">
+                    <div class="app-header">
+                        <div class="app-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                        </div>
+                        <div class="app-header-text">
+                            <h4>Song Playlists & Printing Queues</h4>
+                            <span>Spotify, YouTube Music, Office Printers</span>
+                        </div>
+                    </div>
+                    <p>
+                        When you tap "Play Next" on Spotify, your song joins a <strong>Queue</strong>. Just like a line at a ticket booth, songs play in the order they joined (First In, First Out). The same happens with printer jobs!
+                    </p>
+                    <div class="app-tags">
+                        <span class="app-tag">Queue (FIFO)</span>
+                        <span class="app-tag">Printer Spooler</span>
+                    </div>
+                </div>
+
+                <!-- App 4: GPS Navigation -->
+                <div class="app-card">
+                    <div class="app-header">
+                        <div class="app-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"></polygon><line x1="8" y1="2" x2="8" y2="18"></line><line x1="16" y1="6" x2="16" y2="22"></line></svg>
+                        </div>
+                        <div class="app-header-text">
+                            <h4>Google Maps & GPS Directions</h4>
+                            <span>Google Maps, Apple Maps, Uber</span>
+                        </div>
+                    </div>
+                    <p>
+                        Maps view the world as a giant <strong>Graph</strong>. Road intersections are points (vertices) and streets are connections (edges). The app tests different paths to find the quickest route home.
+                    </p>
+                    <div class="app-tags">
+                        <span class="app-tag">Graph (Networks)</span>
+                        <span class="app-tag">Shortest Path Routing</span>
+                    </div>
+                </div>
+
+                <!-- App 5: Computer Folders -->
+                <div class="app-card">
+                    <div class="app-header">
+                        <div class="app-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+                        </div>
+                        <div class="app-header-text">
+                            <h4>Folders Inside Folders on Your PC</h4>
+                            <span>Windows File Explorer, Mac Finder</span>
+                        </div>
+                    </div>
+                    <p>
+                        Your files are organized like a <strong>Tree</strong>. Your main drive (C:) is the root. Inside are folders (branches), and inside those are files and subfolders (leaves).
+                    </p>
+                    <div class="app-tags">
+                        <span class="app-tag">Tree Structure</span>
+                        <span class="app-tag">Folder Hierarchy</span>
+                    </div>
+                </div>
+
+                <!-- App 6: Phone Contact Search -->
+                <div class="app-card">
+                    <div class="app-header">
+                        <div class="app-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                        </div>
+                        <div class="app-header-text">
+                            <h4>Instant Contact & Song Search</h4>
+                            <span>Phone Contacts, Google Search, App Store</span>
+                        </div>
+                    </div>
+                    <p>
+                        When you open your phone contacts and type the letter "D", your phone doesn't start reading from "A". It uses <strong>Searching Algorithms</strong> to jump right to names starting with "D" instantly.
+                    </p>
+                    <div class="app-tags">
+                        <span class="app-tag">Binary Search</span>
+                        <span class="app-tag">Fast Lookup</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================================================
+         6. SECTION: THE 7 CORE TOPICS (SIMPLIFIED MENU CARDS)
+         ======================================================================== -->
+    <section class="section" id="modules" style="background: var(--bg-primary);">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Explore The 7 Topics</span>
+                <h2 class="section-title">The 7 Fundamental <span class="gradient-text">Data Structures & Algorithms</span></h2>
+                <p class="section-description">
+                    Here are the core topics every student should know, explained with simple everyday examples. Click on any topic to learn more!
+                </p>
+            </div>
+
+            <!-- Hub Toolbar (Filters + Live Search) -->
+            <div class="hub-toolbar">
+                <div class="hub-filters">
+                    <button class="filter-btn active" data-filter="all">Show All (7)</button>
+                    <button class="filter-btn" data-filter="linear">Linear: In a Line (3)</button>
+                    <button class="filter-btn" data-filter="nonlinear">Non-Linear: Branching (2)</button>
+                    <button class="filter-btn" data-filter="algorithm">Algorithms (2)</button>
+                </div>
+
+                <div class="hub-search-box">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                    <input type="text" id="hubSearch" placeholder="Search (e.g. stack, queue, plates, tree)..." aria-label="Search modules">
+                </div>
+            </div>
+
+            <!-- Fallback for empty search -->
+            <div id="noSearchResults" style="display: none; text-align: center; padding: 48px 0; color: var(--text-muted);">
+                <p style="font-size: 1.125rem; font-weight: 600;">No matching topics found.</p>
+                <p style="font-size: 0.875rem;">Try typing "queue", "stack", "plates", "tree", or "search".</p>
+            </div>
+
+            <!-- Modules Grid -->
+            <div class="modules-grid" id="modulesGrid">
+
+                <!-- 1. STACK -->
+                <article class="module-card" id="stack" data-type="linear" data-category="stack" data-keywords="stack lifo plates push pop undo redo back button linear">
+                    <div class="card-top">
+                        <div class="card-top-meta">
+                            <span class="category-badge badge-linear">Linear (In a Line)</span>
+                            <span class="status-badge live-sim">⚡ Interactive Simulator</span>
+                        </div>
+                        <h3 class="module-title">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="color:var(--accent-blue)"><path d="M4 19h16M4 15h16M4 11h16M4 7h16"/></svg>
+                            Stack
+                        </h3>
+                        <p class="module-desc">
+                            Think of a stack of clean dinner plates in your kitchen. You add new plates on top, and when someone needs a plate, they take the one on top!
+                        </p>
+
+                        <div class="complexity-snippet">
+                            <div class="c-item">
+                                <span>Add (Push)</span>
+                                <code>Instant O(1)</code>
+                            </div>
+                            <div class="c-item">
+                                <span>Remove (Pop)</span>
+                                <code>Instant O(1)</code>
+                            </div>
+                            <div class="c-item">
+                                <span>Rule</span>
+                                <code>LIFO</code>
+                            </div>
+                        </div>
+
+                        <ul class="module-specs">
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span><strong>LIFO:</strong> "Last-In, First-Out" (the last plate placed is the first taken).</span>
+                            </li>
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span><strong>Push:</strong> Putting a new item on the top.</span>
+                            </li>
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span><strong>Pop:</strong> Taking the top item off.</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card-bottom">
+                        <span style="font-size:0.8125rem; color:var(--accent-blue); font-weight:700;">Full Simulator Available</span>
+                        <a href="stack_cheatsheet.html" class="btn btn-primary" style="padding: 6px 14px; font-size: 0.8125rem;">
+                            Open Simulator
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- 2. QUEUE -->
+                <article class="module-card" id="queue" data-type="linear" data-category="queue" data-keywords="queue fifo line ticket store circular deque priority simulator">
+                    <div class="card-top">
+                        <div class="card-top-meta">
+                            <span class="category-badge badge-linear">Linear (In a Line)</span>
+                            <span class="status-badge live-sim">⚡ Interactive Simulator</span>
+                        </div>
+                        <h3 class="module-title">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="color:var(--accent-teal)"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 10 12 10 12 14"/></svg>
+                            Queue Suite
+                        </h3>
+                        <p class="module-desc">
+                            Think of a line of people waiting to buy ice cream. The first person in line gets served first, and new people join at the back of the line!
+                        </p>
+
+                        <div class="complexity-snippet">
+                            <div class="c-item">
+                                <span>Join (Enqueue)</span>
+                                <code>Instant O(1)</code>
+                            </div>
+                            <div class="c-item">
+                                <span>Leave (Dequeue)</span>
+                                <code>Instant O(1)</code>
+                            </div>
+                            <div class="c-item">
+                                <span>Rule</span>
+                                <code>FIFO</code>
+                            </div>
+                        </div>
+
+                        <ul class="module-specs">
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span><strong>FIFO:</strong> "First-In, First-Out" (first to arrive gets served first).</span>
+                            </li>
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span><strong>Includes 5 Types:</strong> Simple, Circular, Deque, Circular Deque, Priority Queue.</span>
+                            </li>
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span><strong>Live Simulator:</strong> Watch items move in and out visually!</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card-bottom">
+                        <span style="font-size:0.8125rem; color:var(--accent-emerald); font-weight:700;">5 Queues Modeled</span>
+                        <a href="queue_cheatsheet.html" class="btn btn-primary" style="padding: 6px 14px; font-size: 0.8125rem;">
+                            Open Simulator
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- 3. LINKED LIST -->
+                <article class="module-card" id="linkedlist" data-type="linear" data-category="linkedlist" data-keywords="linked list train cars pointers nodes head tail dynamic memory">
+                    <div class="card-top">
+                        <div class="card-top-meta">
+                            <span class="category-badge badge-linear">Linear (In a Line)</span>
+                            <span class="status-badge">🚂 Like a Train of Cars</span>
+                        </div>
+                        <h3 class="module-title">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="color:var(--accent-purple)"><circle cx="6" cy="12" r="3"/><circle cx="18" cy="12" r="3"/><line x1="9" y1="12" x2="15" y2="12"/></svg>
+                            Linked List
+                        </h3>
+                        <p class="module-desc">
+                            Think of a train where each railroad car holds some luggage and has a coupler (pointer) hooked to the car behind it. You can easily hook in a new car anywhere!
+                        </p>
+
+                        <div class="complexity-snippet">
+                            <div class="c-item">
+                                <span>Add to Front</span>
+                                <code>Instant O(1)</code>
+                            </div>
+                            <div class="c-item">
+                                <span>Find an Item</span>
+                                <code>Check Each O(n)</code>
+                            </div>
+                            <div class="c-item">
+                                <span>Size</span>
+                                <code>Flexible</code>
+                            </div>
+                        </div>
+
+                        <ul class="module-specs">
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span><strong>Nodes:</strong> Each little box holds your data and an arrow pointing to the next node.</span>
+                            </li>
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span><strong>Flexible Size:</strong> Can grow as long as your computer has memory.</span>
+                            </li>
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span><strong>Types:</strong> Singly (one-way), Doubly (two-way), and Circular (loops back).</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card-bottom">
+                        <span style="font-size:0.8125rem; color:var(--text-muted);">Easy to insert anywhere</span>
+                        <a href="#cheatsheet" class="card-action-btn">
+                            View Speed Cheat Sheet
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- 4. TREE -->
+                <article class="module-card" id="tree" data-type="nonlinear" data-category="tree" data-keywords="tree binary search bst family hierarchy root branch leaf">
+                    <div class="card-top">
+                        <div class="card-top-meta">
+                            <span class="category-badge badge-nonlinear">Non-Linear (Branching)</span>
+                            <span class="status-badge">🌳 Like a Family Tree</span>
+                        </div>
+                        <h3 class="module-title">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="color:var(--accent-emerald)"><path d="M12 2v6m-6 6l6-6 6 6m-9 6l3-6 3 6"/><circle cx="12" cy="2" r="1"/></svg>
+                            Tree & BST
+                        </h3>
+                        <p class="module-desc">
+                            Think of a family tree or company chart. It starts with one root node at the top, and branches downward into child nodes below.
+                        </p>
+
+                        <div class="complexity-snippet">
+                            <div class="c-item">
+                                <span>Find Item</span>
+                                <code>Fast O(log n)</code>
+                            </div>
+                            <div class="c-item">
+                                <span>Add Item</span>
+                                <code>Fast O(log n)</code>
+                            </div>
+                            <div class="c-item">
+                                <span>Organization</span>
+                                <code>Branches</code>
+                            </div>
+                        </div>
+
+                        <ul class="module-specs">
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span><strong>Root:</strong> The very top node where the tree begins.</span>
+                            </li>
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span><strong>Binary Search Tree (BST):</strong> Smaller items go left, bigger items go right!</span>
+                            </li>
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span><strong>Where it is used:</strong> Computer folders, HTML web pages (the DOM tree).</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card-bottom">
+                        <span style="font-size:0.8125rem; color:var(--text-muted);">Splits search in half</span>
+                        <a href="#cheatsheet" class="card-action-btn">
+                            View Speed Cheat Sheet
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- 5. GRAPH -->
+                <article class="module-card" id="graph" data-type="nonlinear" data-category="graph" data-keywords="graph map roads friends social network flights connections">
+                    <div class="card-top">
+                        <div class="card-top-meta">
+                            <span class="category-badge badge-nonlinear">Non-Linear (Branching)</span>
+                            <span class="status-badge">🗺️ Like a Road Map</span>
+                        </div>
+                        <h3 class="module-title">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="color:var(--accent-amber)"><circle cx="6" cy="6" r="3"/><circle cx="18" cy="6" r="3"/><circle cx="12" cy="18" r="3"/><line x1="8.5" y1="7.5" x2="15.5" y2="7.5"/><line x1="7.5" y1="8.5" x2="10.5" y2="15.5"/><line x1="16.5" y1="8.5" x2="13.5" y2="15.5"/></svg>
+                            Graph Networks
+                        </h3>
+                        <p class="module-desc">
+                            Think of a map of airline flights or a network of friends on social media. Points are connected to each other with lines, forming a web.
+                        </p>
+
+                        <div class="complexity-snippet">
+                            <div class="c-item">
+                                <span>Points (V)</span>
+                                <code>Cities/Users</code>
+                            </div>
+                            <div class="c-item">
+                                <span>Lines (E)</span>
+                                <code>Roads/Friends</code>
+                            </div>
+                            <div class="c-item">
+                                <span>Shortest Path</span>
+                                <code>Dijkstra</code>
+                            </div>
+                        </div>
+
+                        <ul class="module-specs">
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span><strong>Vertices (Nodes):</strong> The points (cities, airports, or people).</span>
+                            </li>
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span><strong>Edges (Links):</strong> The connections (highways, flight routes, or friendships).</span>
+                            </li>
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span><strong>Where it is used:</strong> Google Maps calculating routes, friend recommendations.</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card-bottom">
+                        <span style="font-size:0.8125rem; color:var(--text-muted);">Powers GPS & Networks</span>
+                        <a href="#cheatsheet" class="card-action-btn">
+                            View Speed Cheat Sheet
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- 6. SEARCHING -->
+                <article class="module-card" id="searching" data-type="algorithm" data-category="searching" data-keywords="searching find binary search linear search dictionary lookup">
+                    <div class="card-top">
+                        <div class="card-top-meta">
+                            <span class="category-badge badge-algo">Algorithm</span>
+                            <span class="status-badge">🔍 Finding An Item</span>
+                        </div>
+                        <h3 class="module-title">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="color:var(--accent-cyan)"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                            Searching Algorithms
+                        </h3>
+                        <p class="module-desc">
+                            How a computer finds a specific needle in a haystack. You can either check items one-by-one, or be smart and cut the search space in half!
+                        </p>
+
+                        <div class="complexity-snippet">
+                            <div class="c-item">
+                                <span>Check 1-by-1</span>
+                                <code>Linear O(n)</code>
+                            </div>
+                            <div class="c-item">
+                                <span>Dictionary Cut</span>
+                                <code>Binary O(log n)</code>
+                            </div>
+                            <div class="c-item">
+                                <span>Direct Key</span>
+                                <code>Instant O(1)</code>
+                            </div>
+                        </div>
+
+                        <ul class="module-specs">
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span><strong>Linear Search:</strong> Check the 1st item, then the 2nd, then the 3rd... good for small unsorted lists.</span>
+                            </li>
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span><strong>Binary Search:</strong> Open a sorted list right in the middle. Too high? Go left. Too low? Go right!</span>
+                            </li>
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span><strong>Super Power:</strong> Finds one item out of 1,000,000 in only 20 questions!</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card-bottom">
+                        <span style="font-size:0.8125rem; color:var(--text-muted);">Fast phonebook lookup</span>
+                        <a href="#cheatsheet" class="card-action-btn">
+                            View Speed Cheat Sheet
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- 7. SORTING -->
+                <article class="module-card" id="sorting" data-type="algorithm" data-category="sorting" data-keywords="sorting arrange order quicksort mergesort bubblesort cards numbers">
+                    <div class="card-top">
+                        <div class="card-top-meta">
+                            <span class="category-badge badge-algo">Algorithm</span>
+                            <span class="status-badge">🔢 Arranging In Order</span>
+                        </div>
+                        <h3 class="module-title">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="color:var(--accent-rose)"><path d="M3 6h18M6 12h12M10 18h4"/></svg>
+                            Sorting Algorithms
+                        </h3>
+                        <p class="module-desc">
+                            Methods for arranging items in order from smallest to biggest, just like arranging playing cards in your hand or sorting shoes by size.
+                        </p>
+
+                        <div class="complexity-snippet">
+                            <div class="c-item">
+                                <span>MergeSort</span>
+                                <code>Fast O(n log n)</code>
+                            </div>
+                            <div class="c-item">
+                                <span>QuickSort</span>
+                                <code>Fast O(n log n)</code>
+                            </div>
+                            <div class="c-item">
+                                <span>BubbleSort</span>
+                                <code>Simple O(n²)</code>
+                            </div>
+                        </div>
+
+                        <ul class="module-specs">
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span><strong>Bubble Sort:</strong> Compare neighbors and swap if they are in the wrong order. Easy to understand.</span>
+                            </li>
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span><strong>Merge Sort:</strong> Cut the big list in half, sort each half, and glue them back together.</span>
+                            </li>
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span><strong>Where it is used:</strong> Sorting items on Amazon by "Price: Low to High", gaming leaderboards.</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card-bottom">
+                        <span style="font-size:0.8125rem; color:var(--text-muted);">From lowest to highest</span>
+                        <a href="#cheatsheet" class="card-action-btn">
+                            View Speed Cheat Sheet
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </a>
+                    </div>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================================================
+         7. SECTION: SIMPLE SPEED CHEAT SHEET (BIG-O MADE EASY)
+         ======================================================================== -->
+    <section class="section" id="cheatsheet" style="background: var(--bg-secondary);">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Quick Comparison</span>
+                <h2 class="section-title">Speed Cheat Sheet <span class="gradient-text">(Big-O Made Easy)</span></h2>
+                <p class="section-description">
+                    "Big-O" is just how programmers measure how fast a data structure is. Here is what the colors mean:
+                    <br>
+                    <span style="color:#10b981; font-weight:700;">🟢 Instant (1 step)</span> &nbsp;|&nbsp; 
+                    <span style="color:#06b6d4; font-weight:700;">🔵 Very Fast (Splits in half)</span> &nbsp;|&nbsp; 
+                    <span style="color:#f59e0b; font-weight:700;">🟡 Normal (Checks each item)</span> &nbsp;|&nbsp; 
+                    <span style="color:#ef4444; font-weight:700;">🔴 Slower for large lists</span>
+                </p>
+            </div>
+
+            <div class="table-container">
+                <table class="complexity-table">
+                    <thead>
+                        <tr>
+                            <th>Data Structure / Algorithm</th>
+                            <th>Real-Life Analogy</th>
+                            <th>Find An Item</th>
+                            <th>Add An Item</th>
+                            <th>Delete An Item</th>
+                            <th>Summary Speed</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="ds-name-cell">
+                                <a href="#stack" style="color:inherit;"><strong>Stack</strong></a>
+                            </td>
+                            <td>🍽️ Dinner plates</td>
+                            <td><span class="big-o-fair">Normal O(n)</span></td>
+                            <td><span class="big-o-good">Instant O(1)</span></td>
+                            <td><span class="big-o-good">Instant O(1)</span></td>
+                            <td><strong style="color:var(--accent-blue)">Great for Undo/Redo</strong></td>
+                        </tr>
+                        <tr>
+                            <td class="ds-name-cell">
+                                <a href="queue_cheatsheet.html" style="color:var(--accent-teal); display:inline-flex; align-items:center; gap:6px;">
+                                    <strong>Queue Suite</strong>
+                                    <span style="font-size:0.7rem; background:rgba(13,148,136,0.15); padding:1px 6px; border-radius:4px;">Live Sim</span>
+                                </a>
+                            </td>
+                            <td>🍦 Ice cream line</td>
+                            <td><span class="big-o-fair">Normal O(n)</span></td>
+                            <td><span class="big-o-good">Instant O(1)</span></td>
+                            <td><span class="big-o-good">Instant O(1)</span></td>
+                            <td><strong style="color:var(--accent-teal)">Great for First-Come First-Served</strong></td>
+                        </tr>
+                        <tr>
+                            <td class="ds-name-cell">
+                                <a href="#linkedlist" style="color:inherit;"><strong>Linked List</strong></a>
+                            </td>
+                            <td>🚂 Train cars hooked</td>
+                            <td><span class="big-o-fair">Normal O(n)</span></td>
+                            <td><span class="big-o-good">Instant O(1)*</span></td>
+                            <td><span class="big-o-good">Instant O(1)*</span></td>
+                            <td><strong style="color:var(--accent-purple)">Flexible size anytime</strong></td>
+                        </tr>
+                        <tr>
+                            <td class="ds-name-cell">
+                                <a href="#tree" style="color:inherit;"><strong>Binary Search Tree</strong></a>
+                            </td>
+                            <td>🌳 Family tree branches</td>
+                            <td><span class="big-o-good">Very Fast O(log n)</span></td>
+                            <td><span class="big-o-good">Very Fast O(log n)</span></td>
+                            <td><span class="big-o-good">Very Fast O(log n)</span></td>
+                            <td><strong style="color:var(--accent-emerald)">Great for quick lookups</strong></td>
+                        </tr>
+                        <tr>
+                            <td class="ds-name-cell">
+                                <a href="#graph" style="color:inherit;"><strong>Graph Network</strong></a>
+                            </td>
+                            <td>🗺️ Road map between cities</td>
+                            <td colspan="3" style="text-align:center;"><span class="big-o-good">Explores connections in O(Vertices + Roads)</span></td>
+                            <td><strong style="color:var(--accent-amber)">Great for Maps & Social Networks</strong></td>
+                        </tr>
+                        <tr>
+                            <td class="ds-name-cell">
+                                <a href="#searching" style="color:inherit;"><strong>Binary Search</strong></a>
+                            </td>
+                            <td>📖 Opening dictionary in middle</td>
+                            <td><span class="big-o-good">Very Fast O(log n)</span></td>
+                            <td colspan="2" style="text-align:center; color:var(--text-muted);">Used on already sorted lists</td>
+                            <td><strong style="color:var(--accent-cyan)">20 questions to find 1 in a million</strong></td>
+                        </tr>
+                        <tr>
+                            <td class="ds-name-cell">
+                                <a href="#sorting" style="color:inherit;"><strong>MergeSort / QuickSort</strong></a>
+                            </td>
+                            <td>🃏 Arranging playing cards</td>
+                            <td colspan="3" style="text-align:center;"><span class="big-o-good">Splits and sorts in O(n log n)</span></td>
+                            <td><strong style="color:var(--accent-rose)">Fastest way to put items in order</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p style="font-size:0.8125rem; color:var(--text-muted); margin-top:16px; text-align:right;">
+                * Adding or removing from a Linked List is instant O(1) once you are at that node.
+            </p>
+        </div>
+    </section>
+
+    <!-- ========================================================================
+         8. FOOTER
+         ======================================================================== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <!-- Brand Info -->
+                <div class="footer-brand">
+                    <div class="nav-brand">
+                        <div class="nav-logo-icon">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                                <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                                <polyline points="2 17 12 22 22 17"></polyline>
+                                <polyline points="2 12 12 17 22 12"></polyline>
+                            </svg>
+                        </div>
+                        <div class="nav-logo-text">DSM <span>Simulation</span></div>
+                    </div>
+                    <p>
+                        A beginner-friendly learning hub designed to help students master Data Structures and Algorithms with real-life analogies and visual simulators.
+                    </p>
+                </div>
+
+                <!-- Linear Topics -->
+                <div class="footer-col">
+                    <h5>Linear (In a Line)</h5>
+                    <div class="footer-links">
+                        <a href="index.html#stack">Stack (Dinner Plates)</a>
+                        <a href="queue_cheatsheet.html" style="color:var(--accent-emerald); font-weight:700;">Queue Simulator (Live ⚡)</a>
+                        <a href="index.html#linkedlist">Linked List (Train Cars)</a>
+                    </div>
+                </div>
+
+                <!-- Non-Linear & Algos -->
+                <div class="footer-col">
+                    <h5>Branching & Algorithms</h5>
+                    <div class="footer-links">
+                        <a href="index.html#tree">Tree (Family Tree)</a>
+                        <a href="index.html#graph">Graph (Road Map)</a>
+                        <a href="index.html#searching">Searching Algorithms</a>
+                        <a href="index.html#sorting">Sorting Algorithms</a>
+                    </div>
+                </div>
+
+                <!-- Basics & Cheatsheet -->
+                <div class="footer-col">
+                    <h5>Easy Concepts</h5>
+                    <div class="footer-links">
+                        <a href="index.html#definition">What is a Data Structure?</a>
+                        <a href="index.html#importance">Why It Matters</a>
+                        <a href="index.html#applications">Real-World Examples</a>
+                        <a href="index.html#cheatsheet">Speed Cheat Sheet (Big-O)</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div>&copy; 2026 DSM Simulation Suite. Made Simple for Students.</div>
+                <div>Unified Navigation & Theme on All Pages</div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
