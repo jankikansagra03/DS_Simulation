@@ -42,6 +42,15 @@
             --color-overflow: #dc2626;
             --color-underflow: #ea580c;
             --color-success: #16a34a;
+
+            /* Pleasant Eye-Friendly Algorithm & Code Block Colors */
+            --code-bg: #f8fafc;
+            --code-text: #334155;
+            --code-border: #e2e8f0;
+            --code-step: #1d4ed8;
+            --code-kw: #7c3aed;
+            --code-str: #059669;
+            --code-arrow: #d97706;
             
             --font-main: 'Inter', sans-serif;
             --font-head: 'Outfit', sans-serif;
@@ -57,6 +66,15 @@
             --border-color: #374151;
             --card-bg: #1f2937;
             --shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.4);
+
+            /* Dark Mode Eye-Friendly Code Block Colors (Serene midnight slate, soft pastel accents) */
+            --code-bg: #0c1424;
+            --code-text: #cbd5e1;
+            --code-border: #1e293b;
+            --code-step: #60a5fa;
+            --code-kw: #c084fc;
+            --code-str: #34d399;
+            --code-arrow: #fbbf24;
         }
 
         * {
@@ -966,6 +984,150 @@
             0% { transform: translateY(4px); opacity: 0; }
             100% { transform: translateY(0); opacity: 1; }
         }
+
+        /* Algorithm Syntax Highlighting & Line Breaks */
+        .algo-step-head {
+            color: var(--code-step);
+            font-weight: 700;
+        }
+
+        .algo-kw {
+            color: var(--code-kw);
+            font-weight: 600;
+        }
+
+        .algo-str {
+            color: var(--code-str);
+            font-weight: 500;
+        }
+
+        .algo-arrow {
+            color: var(--code-arrow);
+            font-weight: 700;
+        }
+
+        /* Academic Blackboard Studio */
+        .studio-card {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.06);
+            margin-bottom: 20px;
+            transition: var(--transition);
+        }
+
+        .studio-header {
+            background: var(--card-bg);
+            border-bottom: 1px solid var(--border-color);
+            padding: 12px 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .studio-dots {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .studio-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+        .studio-dot.red { background: #ef4444; }
+        .studio-dot.yellow { background: #f59e0b; }
+        .studio-dot.green { background: #10b981; }
+
+        .studio-tabs {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .stack-tab-btn {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            padding: 6px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-family: var(--font-head);
+            font-weight: 600;
+            font-size: 12px;
+            color: var(--text-primary);
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .stack-tab-btn:hover {
+            border-color: var(--color-standard);
+            background: var(--card-bg);
+        }
+
+        .stack-tab-btn.active {
+            background: var(--color-standard);
+            color: #ffffff;
+            border-color: var(--color-standard);
+        }
+
+        .studio-body {
+            padding: 18px;
+        }
+
+        .studio-code-box {
+            background: var(--code-bg);
+            color: var(--code-text);
+            border: 1px solid var(--code-border);
+            border-radius: 8px;
+            padding: 18px 20px;
+            font-family: var(--font-code);
+            font-size: 12.5px;
+            line-height: 1.75;
+            min-height: 320px;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-break: break-word;
+            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.04);
+            transition: var(--transition);
+        }
+
+        .studio-footer {
+            background: var(--card-bg);
+            border-top: 1px solid var(--border-color);
+            padding: 12px 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+            font-size: 12.5px;
+        }
+
+        .studio-select {
+            padding: 7px 14px;
+            border: 1.5px solid var(--border-color);
+            border-radius: 6px;
+            font-family: var(--font-main);
+            font-size: 13px;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            outline: none;
+            cursor: pointer;
+            transition: var(--transition);
+            width: auto;
+            max-width: 100%;
+        }
+
+        .studio-select:focus {
+            box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
+        }
     </style>
 </head>
 <body>
@@ -1142,9 +1304,8 @@
         <a href="#section-notation" class="nav-link-pill">Notation</a>
         <a href="#section-matrix" class="nav-link-pill">Comparison Matrix</a>
         <a href="#section-simulators" class="nav-link-pill">Visual Simulators</a>
-        <a href="#section-algorithms" class="nav-link-pill">Core Algorithms</a>
+        <a href="#section-algorithms" class="nav-link-pill">Academic Algorithm Studio</a>
         <a href="#section-expressions" class="nav-link-pill">Solve Expression (REVPOL)</a>
-        <a href="#section-code" class="nav-link-pill">Pseudocode & Code</a>
         <a href="#section-quiz" class="nav-link-pill">Quick Quiz</a>
     </div>
 
@@ -1506,108 +1667,112 @@
          SECTION 4: CORE ALGORITHMS DETAILED BREAKDOWN
          ==================================================================== -->
     <div id="section-algorithms" class="section-card">
-        <h2>📚 Core Stack Operations & Algorithms</h2>
-        <p style="color: var(--text-secondary); line-height: 1.6;">
-            A <strong>Stack</strong> is a linear data structure operating strictly on the <strong>LIFO (Last In, First Out)</strong> principle. The index variable <code>TOP</code> points to the topmost valid element. When initialized, <code>TOP = -1</code> (empty).
+        <a id="section-code" style="display:block; position:relative; top:-80px; visibility:hidden;"></a>
+        <h2>📖 Academic Stack Algorithm Studio & Cheat Sheet (Tremblay & Sorenson)</h2>
+        <p style="color: var(--text-secondary); font-size: 13px; margin-bottom: 18px;">
+            Standard university syllabus algorithms with precise pointer manipulation, boundary checks, and LIFO operations across <strong>Standard Array Stack, Expressions & Polish Notation (REVPOL), Two Stacks in One Array, Linked List Stack, and Min-Stack</strong>. Select your desired stack implementation and algorithm to explore the academic Blackboard presentation, complete working programs (C, Java, Python), and simulate live in memory!
         </p>
 
-        <div class="algo-grid">
-            <!-- PUSH -->
-            <div class="algo-card">
-                <h3>
-                    <span>1. PUSH(S, TOP, N, X)</span>
-                    <span style="font-size:12px; font-weight:700; color:var(--color-standard); background:rgba(37,99,235,0.1); padding:2px 8px; border-radius:12px;">Insert</span>
-                </h3>
-                <p>Inserts a new element <code>X</code> onto the top of stack <code>S</code> of max size <code>N</code>. Verifies <code>TOP &ge; N - 1</code> to prevent <strong>Stack Overflow</strong>.</p>
-                <pre class="algo-code-box"><code>[Check for Stack Overflow]
-1. If TOP &ge; N - 1
-       Then write "STACK OVERFLOW" and Return
-[Increment TOP Pointer]
-2. TOP &larr; TOP + 1
-[Insert Element into Top Slot]
-3. S[TOP] &larr; X
-[Finished]
-4. Return</code></pre>
+        <!-- Stack Type & Algorithm Dropdowns & Action Toolbar -->
+        <div style="background: var(--bg-primary); border: 1px solid var(--border-color); border-radius: 10px; padding: 14px 18px; margin-bottom: 18px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
+            <div style="display: flex; align-items: center; gap: 14px; flex-wrap: wrap;">
+                <!-- Type Dropdown -->
+                <div style="display: flex; align-items: center; gap: 6px;">
+                    <label for="stack-studio-type-select" style="font-size: 13px; font-weight: 700; color: var(--text-primary); display: flex; align-items: center; gap: 4px;">
+                        <span>📦 Stack Variant:</span>
+                    </label>
+                    <select id="stack-studio-type-select" class="studio-select" style="min-width: 270px; font-weight: 800; border: 1.5px solid var(--color-standard); color: var(--color-standard);" onchange="onStackTypeChange()">
+                        <option value="standard">🟦 Standard Array Stack (LIFO)</option>
+                        <option value="expressions">🟪 Expressions & Polish Notation (REVPOL)</option>
+                        <option value="twostacks">🟨 Two Stacks in One Array (Dual)</option>
+                        <option value="linked">🟩 Linked List Stack (Dynamic)</option>
+                        <option value="minstack">🔴 Specialized Stacks (Min-Stack)</option>
+                    </select>
+                </div>
+
+                <!-- Algorithm Dropdown -->
+                <div style="display: flex; align-items: center; gap: 6px;">
+                    <label for="stack-algo-select" style="font-size: 13px; font-weight: 700; color: var(--text-primary); display: flex; align-items: center; gap: 4px;">
+                        <span>🎯 Algorithm:</span>
+                    </label>
+                    <select id="stack-algo-select" class="studio-select" style="min-width: 380px; font-weight: 700;" onchange="onStackAlgoChange()">
+                        <!-- Dynamically populated -->
+                    </select>
+                </div>
             </div>
 
-            <!-- POP -->
-            <div class="algo-card">
-                <h3>
-                    <span>2. POP(S, TOP)</span>
-                    <span style="font-size:12px; font-weight:700; color:#ef4444; background:rgba(239,68,68,0.1); padding:2px 8px; border-radius:12px;">Delete</span>
-                </h3>
-                <p>Removes and returns the topmost element <code>X</code>. Checks if the stack is empty (<code>TOP = -1</code>) to prevent <strong>Stack Underflow</strong>.</p>
-                <pre class="algo-code-box"><code>[Check for Stack Underflow]
-1. If TOP = -1
-       Then write "STACK UNDERFLOW" and Return
-[Retrieve Element]
-2. X &larr; S[TOP]
-[Decrement TOP Pointer]
-3. TOP &larr; TOP - 1
-[Finished]
-4. Return X</code></pre>
+            <!-- Action Buttons -->
+            <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                <button class="btn-action btn-standard" id="btn-run-sim-from-algo" onclick="runStackAlgoInSim()" style="padding: 7px 14px; font-size: 12px; display: inline-flex; align-items: center; gap: 6px;">
+                    <span>⚡ Run in Visual Simulator ➔</span>
+                </button>
+                <button class="btn-action" id="btn-copy-algo-code" onclick="copyStackStudioCode()" style="padding: 7px 14px; font-size: 12px; background: var(--bg-primary); border: 1px solid var(--border-color); color: var(--text-primary); display: inline-flex; align-items: center; gap: 6px;">
+                    <span id="copy-btn-icon">📋</span> <span id="copy-btn-text">Copy Code</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Academic Blackboard & Working Program Studio -->
+        <div id="stack-algo-studio" class="studio-card">
+            <!-- Studio Header: Traffic Lights, Title, Badges, Tabs -->
+            <div class="studio-header">
+                <div style="display: flex; align-items: center; gap: 14px; flex-wrap: wrap;">
+                    <div class="studio-dots">
+                        <span class="studio-dot red"></span>
+                        <span class="studio-dot yellow"></span>
+                        <span class="studio-dot green"></span>
+                    </div>
+                    <div>
+                        <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                            <h3 id="studio-algo-title" style="font-family: var(--font-head); font-weight: 800; font-size: 15px; color: var(--color-standard); margin: 0;">
+                                Algorithm: PUSH(S, TOP, N, X)
+                            </h3>
+                            <span id="studio-algo-badge" style="font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 4px; background: rgba(37, 99, 235, 0.12); color: var(--color-standard);">
+                                Push (Insert)
+                            </span>
+                            <span id="studio-algo-complexity" style="font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 4px; background: var(--border-color); color: var(--text-secondary); font-family: var(--font-code);">
+                                Time: O(1) | Space: O(1)
+                            </span>
+                        </div>
+                        <p id="studio-algo-desc" style="font-size: 12px; color: var(--text-secondary); margin: 4px 0 0 0;">
+                            Inserts element X onto the top of stack S of max capacity N. Checks if TOP >= N - 1 to prevent Stack Overflow.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Studio Language Tabs -->
+                <div class="studio-tabs">
+                    <button class="stack-tab-btn active" data-tab="blackboard" onclick="switchStackStudioTab('blackboard')">
+                        <span>📝 Blackboard (Academic)</span>
+                    </button>
+                    <button class="stack-tab-btn" data-tab="c" onclick="switchStackStudioTab('c')">
+                        <span>⚡ C Program (Working)</span>
+                    </button>
+                    <button class="stack-tab-btn" data-tab="java" onclick="switchStackStudioTab('java')">
+                        <span>☕ Java (Working)</span>
+                    </button>
+                    <button class="stack-tab-btn" data-tab="python" onclick="switchStackStudioTab('python')">
+                        <span>🐍 Python (Working)</span>
+                    </button>
+                </div>
             </div>
 
-            <!-- PEEP -->
-            <div class="algo-card">
-                <h3>
-                    <span>3. PEEP(S, TOP, I)</span>
-                    <span style="font-size:12px; font-weight:700; color:#f59e0b; background:rgba(245,158,11,0.1); padding:2px 8px; border-radius:12px;">Inspect</span>
-                </h3>
-                <p>Views an element at depth <code>I</code> from top without removing it (<code>I = 1</code> is top, <code>I = 2</code> is one below). Formula: <code>TOP - I + 1</code>.</p>
-                <pre class="algo-code-box"><code>[Check for Invalid Index]
-1. If TOP - I + 1 &lt; 0
-       Then write "STACK UNDERFLOW / INVALID INDEX"
-       Return
-[Access Element at Depth I]
-2. X &larr; S[TOP - I + 1]
-[Finished]
-3. Return X</code></pre>
+            <!-- Studio Body: Blackboard / Working Code Display Box -->
+            <div class="studio-body">
+                <div class="studio-code-box" id="stack-studio-code">
+                    <!-- Dynamic code/blackboard inserted by JS -->
+                </div>
             </div>
 
-            <!-- CHANGE -->
-            <div class="algo-card">
-                <h3>
-                    <span>4. CHANGE(S, TOP, I, VALUE)</span>
-                    <span style="font-size:12px; font-weight:700; color:#8b5cf6; background:rgba(139,92,246,0.1); padding:2px 8px; border-radius:12px;">Modify</span>
-                </h3>
-                <p>Updates an existing element at depth <code>I</code> from the top with a new <code>VALUE</code> without modifying the surrounding elements.</p>
-                <pre class="algo-code-box"><code>[Check for Invalid Index]
-1. If TOP - I + 1 &lt; 0
-       Then write "STACK UNDERFLOW / INVALID INDEX"
-       Return
-[Update Element at Depth I]
-2. S[TOP - I + 1] &larr; VALUE
-[Finished]
-3. Return</code></pre>
-            </div>
-
-            <!-- PEEK -->
-            <div class="algo-card">
-                <h3>
-                    <span>5. PEEK(S, TOP)</span>
-                    <span style="font-size:12px; font-weight:700; color:#06b6d4; background:rgba(6,182,212,0.1); padding:2px 8px; border-radius:12px;">View Top</span>
-                </h3>
-                <p>Quickly inspects the current topmost element <code>S[TOP]</code> in $O(1)$ time without popping it.</p>
-                <pre class="algo-code-box"><code>[Check for Underflow]
-1. If TOP = -1
-       Then write "STACK EMPTY" and Return
-[Access Top Element]
-2. Return S[TOP]</code></pre>
-            </div>
-
-            <!-- TWO STACKS COLLISION -->
-            <div class="algo-card">
-                <h3>
-                    <span>6. TWO_STACKS(S, N, TOP1, TOP2)</span>
-                    <span style="font-size:12px; font-weight:700; color:#10b981; background:rgba(16,185,129,0.1); padding:2px 8px; border-radius:12px;">Dual Array</span>
-                </h3>
-                <p>Stack 1 grows from index $0 \rightarrow N-1$. Stack 2 grows backwards from $N-1 \rightarrow 0$. Space is optimal; collision occurs only when <code>TOP1 + 1 == TOP2</code>.</p>
-                <pre class="algo-code-box"><code>[Collision / Overflow Condition]
-If TOP1 + 1 == TOP2
-    Then write "STACK OVERFLOW (COLLISION)"
-[Push Stack 1]: TOP1 &larr; TOP1 + 1; S[TOP1] &larr; X
-[Push Stack 2]: TOP2 &larr; TOP2 - 1; S[TOP2] &larr; X</code></pre>
+            <!-- Studio Footer: Interactive Simulator Launcher Prompt -->
+            <div class="studio-footer">
+                <div style="display: flex; align-items: center; gap: 8px; color: var(--text-secondary);">
+                    <span style="font-size: 16px;">💡</span>
+                    <span><strong>Visual Simulation Ready:</strong> Click <em>Run in Visual Simulator</em> to step through stack pointers and watch slots push and pop live in memory.</span>
+                </div>
+                <button class="btn-action btn-standard" onclick="runStackAlgoInSim()" style="padding: 6px 12px; font-size: 12px; white-space: nowrap;">
+                    Launch Visual Simulator ➔
+                </button>
             </div>
         </div>
     </div>
@@ -2019,41 +2184,6 @@ If TOP1 + 1 == TOP2
                         </tbody>
                     </table>
                 </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- ====================================================================
-         SECTION 6: PSEUDOCODE & CODE IMPLEMENTATIONS
-         ==================================================================== -->
-    <div id="section-code" class="section-card">
-        <h2>💻 Core Code Implementations</h2>
-        
-        <!-- Stack Variant Dropdown -->
-        <div style="margin-bottom: 18px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
-            <label for="code-stack-select" style="font-family: var(--font-head); font-weight: 700; font-size: 15px; color: var(--text-primary);">Select Stack Implementation:</label>
-            <select id="code-stack-select" class="input-elem" style="width: 280px; background: var(--bg-primary); font-weight: 600;" onchange="updateDisplayedCode()">
-                <option value="standard" selected>Standard Array Stack (PUSH, POP, PEEP, CHANGE)</option>
-                <option value="twostacks">Two Stacks in One Array</option>
-                <option value="revpol">REVPOL Infix to Postfix Algorithm</option>
-                <option value="prefix">Infix to Prefix (POLISH) Algorithm</option>
-                <option value="postfix">Postfix Expression Evaluation</option>
-                <option value="prefixeval">Prefix Expression Evaluation</option>
-                <option value="linked">Linked List Stack (Dynamic LIFO)</option>
-                <option value="minstack">Min Stack (O(1) GetMin)</option>
-            </select>
-        </div>
-
-        <div class="code-tabs">
-            <div class="tab-headers">
-                <button class="tab-btn active" onclick="switchLanguageTab(event, 'blackboard')">Blackboard Syntax</button>
-                <button class="tab-btn" onclick="switchLanguageTab(event, 'c')">C Language</button>
-                <button class="tab-btn" onclick="switchLanguageTab(event, 'java')">Java Implementation</button>
-                <button class="tab-btn" onclick="switchLanguageTab(event, 'python')">Python Implementation</button>
-            </div>
-            
-            <div class="code-display">
-                <pre class="code-block" id="display-code-block" style="white-space: pre-wrap; max-height: 520px; overflow-y: auto;">Loading code snippet...</pre>
             </div>
         </div>
     </div>
@@ -5096,433 +5226,421 @@ If TOP1 + 1 == TOP2
         loadPrefixevalVariablesAndEvaluate();
     }
 
-    // =========================================================================
-    // CODE REPOSITORY
-    // =========================================================================
-    const codeRepository = {
-        standard: {
-            blackboard: `// --- PUSH(S, TOP, N, X) ---
-Algorithm: PUSH(S, TOP, N, X)
-1. [Check Overflow]
-   If TOP >= N - 1
-       Write "STACK OVERFLOW" and Return
-2. [Increment TOP]
-   TOP <- TOP + 1
-3. [Insert Element]
-   S[TOP] <- X
-4. Return
-
-// --- POP(S, TOP) ---
-Algorithm: POP(S, TOP)
-1. [Check Underflow]
-   If TOP = -1
-       Write "STACK UNDERFLOW" and Return
-2. [Retrieve Element]
-   X <- S[TOP]
-3. [Decrement TOP]
-   TOP <- TOP - 1
-4. Return X
-
-// --- PEEP(S, TOP, I) ---
-Algorithm: PEEP(S, TOP, I)
-1. [Check Bounds]
-   If TOP - I + 1 < 0
-       Write "STACK UNDERFLOW / INVALID INDEX" and Return
-2. Return S[TOP - I + 1]
-
-// --- CHANGE(S, TOP, I, VALUE) ---
-Algorithm: CHANGE(S, TOP, I, VALUE)
-1. [Check Bounds]
-   If TOP - I + 1 < 0
-       Write "STACK UNDERFLOW / INVALID INDEX" and Return
-2. S[TOP - I + 1] <- VALUE
-3. Return`,
-            c: `#include <stdio.h>
-#define N 6
-
-int S[N];
-int TOP = -1;
-
-void push(int x) {
-    if (TOP >= N - 1) {
-        printf("STACK OVERFLOW\\n");
-        return;
-    }
-    S[++TOP] = x;
-}
-
-int pop() {
-    if (TOP == -1) {
-        printf("STACK UNDERFLOW\\n");
-        return -1;
-    }
-    return S[TOP--];
-}
-
-int peep(int i) {
-    if (TOP - i + 1 < 0) {
-        printf("INVALID INDEX\\n");
-        return -1;
-    }
-    return S[TOP - i + 1];
-}
-
-void change(int i, int val) {
-    if (TOP - i + 1 < 0) {
-        printf("INVALID INDEX\\n");
-        return;
-    }
-    S[TOP - i + 1] = val;
-}`,
-            java: `public class ArrayStack {
-    private int[] S;
-    private int TOP;
-    private int N;
-
-    public ArrayStack(int capacity) {
-        N = capacity;
-        S = new int[N];
-        TOP = -1;
-    }
-
-    public void push(int x) {
-        if (TOP >= N - 1) {
-            System.out.println("STACK OVERFLOW");
-            return;
+    // ========================================================================
+    // ACADEMIC STACK ALGORITHM STUDIO DATA & CONTROLLER (TREMBLAY & SORENSON)
+    // ========================================================================
+    const stackStudioAlgoData = {
+    "standard": {
+        "push": {
+            "title": "Algorithm: PUSH(S, TOP, N, X)",
+            "badge": "Push (Insert)",
+            "complexity": "Time: O(1) | Space: O(1)",
+            "desc": "Inserts element X onto the top of stack S of max capacity N. Checks if TOP >= N - 1 to prevent Stack Overflow.",
+            "simType": "standard",
+            "blackboardHtml": "<span class=\"algo-step-head\">1. [Check for Stack Overflow]</span>\n   <span class=\"algo-kw\">If</span> TOP &ge; N - 1\n       <span class=\"algo-kw\">Then write</span> \"STACK OVERFLOW\" <span class=\"algo-kw\">and</span> Return\n\n<span class=\"algo-step-head\">2. [Increment TOP Pointer]</span>\n   TOP <span class=\"algo-arrow\">&larr;</span> TOP + 1\n\n<span class=\"algo-step-head\">3. [Insert Element at Top Slot]</span>\n   S[TOP] <span class=\"algo-arrow\">&larr;</span> X\n\n<span class=\"algo-step-head\">4. [Finished]</span>\n   Return",
+            "blackboardText": "Algorithm: PUSH(S, TOP, N, X)\n\n1. [Check for Stack Overflow]\n   If TOP >= N - 1\n       Then write \"STACK OVERFLOW\" and Return\n\n2. [Increment TOP Pointer]\n   TOP <- TOP + 1\n\n3. [Insert Element at Top Slot]\n   S[TOP] <- X\n\n4. [Finished]\n   Return",
+            "c": "#include <stdio.h>\n#define N 6\n\nint S[N];\nint TOP = -1;\n\nvoid push(int x) {\n    if (TOP >= N - 1) {\n        printf(\"STACK OVERFLOW\\n\");\n        return;\n    }\n    TOP = TOP + 1;\n    S[TOP] = x;\n    printf(\"Pushed %d onto Stack (New TOP = %d)\\n\", x, TOP);\n}\n\nint main() {\n    push(10);\n    push(20);\n    push(30);\n    return 0;\n}",
+            "java": "public class StackPush {\n    private int[] S;\n    private int TOP;\n    private int N;\n\n    public StackPush(int capacity) {\n        N = capacity;\n        S = new int[N];\n        TOP = -1;\n    }\n\n    public boolean push(int x) {\n        if (TOP >= N - 1) {\n            System.out.println(\"STACK OVERFLOW\");\n            return false;\n        }\n        TOP = TOP + 1;\n        S[TOP] = x;\n        System.out.println(\"Pushed: \" + x + \" | TOP = \" + TOP);\n        return true;\n    }\n\n    public static void main(String[] args) {\n        StackPush st = new StackPush(6);\n        st.push(10);\n        st.push(20);\n    }\n}",
+            "python": "class ArrayStack:\n    def __init__(self, capacity=6):\n        self.n = capacity\n        self.s = [None] * capacity\n        self.top = -1\n\n    def push(self, x):\n        if self.top >= self.n - 1:\n            print(\"STACK OVERFLOW\")\n            return False\n        self.top += 1\n        self.s[self.top] = x\n        print(f\"Pushed {x} (TOP = {self.top})\")\n        return True\n\nif __name__ == \"__main__\":\n    st = ArrayStack(6)\n    st.push(10)\n    st.push(20)"
+        },
+        "pop": {
+            "title": "Algorithm: POP(S, TOP)",
+            "badge": "Pop (Delete)",
+            "complexity": "Time: O(1) | Space: O(1)",
+            "desc": "Removes and returns the topmost element from stack S. Checks if TOP = -1 to prevent Stack Underflow.",
+            "simType": "standard",
+            "blackboardHtml": "<span class=\"algo-step-head\">1. [Check for Stack Underflow]</span>\n   <span class=\"algo-kw\">If</span> TOP = -1\n       <span class=\"algo-kw\">Then write</span> \"STACK UNDERFLOW\" <span class=\"algo-kw\">and</span> Return(0)\n\n<span class=\"algo-step-head\">2. [Retrieve Element]</span>\n   X <span class=\"algo-arrow\">&larr;</span> S[TOP]\n\n<span class=\"algo-step-head\">3. [Decrement TOP Pointer]</span>\n   TOP <span class=\"algo-arrow\">&larr;</span> TOP - 1\n\n<span class=\"algo-step-head\">4. [Return Value]</span>\n   Return(X)",
+            "blackboardText": "Algorithm: POP(S, TOP)\n\n1. [Check for Stack Underflow]\n   If TOP = -1\n       Then write \"STACK UNDERFLOW\" and Return(0)\n\n2. [Retrieve Element]\n   X <- S[TOP]\n\n3. [Decrement TOP Pointer]\n   TOP <- TOP - 1\n\n4. [Return Value]\n   Return(X)",
+            "c": "#include <stdio.h>\n#define N 6\n\nint S[N];\nint TOP = -1;\n\nint pop() {\n    if (TOP == -1) {\n        printf(\"STACK UNDERFLOW\\n\");\n        return -1;\n    }\n    int x = S[TOP];\n    TOP = TOP - 1;\n    return x;\n}\n\nint main() {\n    S[++TOP] = 10;\n    S[++TOP] = 20;\n    printf(\"Popped: %d\\n\", pop());\n    printf(\"Popped: %d\\n\", pop());\n    return 0;\n}",
+            "java": "public class StackPop {\n    private int[] S;\n    private int TOP;\n\n    public StackPop(int capacity) {\n        S = new int[capacity];\n        TOP = -1;\n    }\n\n    public int pop() {\n        if (TOP == -1) {\n            System.out.println(\"STACK UNDERFLOW\");\n            return -1;\n        }\n        int x = S[TOP];\n        TOP = TOP - 1;\n        return x;\n    }\n\n    public static void main(String[] args) {\n        StackPop st = new StackPop(6);\n        st.S[++st.TOP] = 42;\n        System.out.println(\"Popped: \" + st.pop());\n    }\n}",
+            "python": "class ArrayStack:\n    def __init__(self, capacity=6):\n        self.n = capacity\n        self.s = [None] * capacity\n        self.top = -1\n\n    def pop(self):\n        if self.top == -1:\n            print(\"STACK UNDERFLOW\")\n            return None\n        val = self.s[self.top]\n        self.top -= 1\n        return val\n\nif __name__ == \"__main__\":\n    st = ArrayStack()\n    st.top += 1; st.s[st.top] = 42\n    print(\"Popped:\", st.pop())"
+        },
+        "peep": {
+            "title": "Algorithm: PEEP(S, TOP, I)",
+            "badge": "Peep (Inspect)",
+            "complexity": "Time: O(1) | Space: O(1)",
+            "desc": "Inspects element at depth I from top (I=1 is top, I=2 is 2nd from top) using index formula TOP - I + 1 without modifying stack.",
+            "simType": "standard",
+            "blackboardHtml": "<span class=\"algo-step-head\">1. [Check for Invalid Index / Underflow]</span>\n   <span class=\"algo-kw\">If</span> TOP - I + 1 &lt; 0\n       <span class=\"algo-kw\">Then write</span> \"STACK UNDERFLOW / INVALID INDEX\" <span class=\"algo-kw\">and</span> Return(0)\n\n<span class=\"algo-step-head\">2. [Access Element at Depth I]</span>\n   X <span class=\"algo-arrow\">&larr;</span> S[TOP - I + 1]\n\n<span class=\"algo-step-head\">3. [Finished]</span>\n   Return(X)",
+            "blackboardText": "Algorithm: PEEP(S, TOP, I)\n\n1. [Check for Invalid Index / Underflow]\n   If TOP - I + 1 < 0\n       Then write \"STACK UNDERFLOW / INVALID INDEX\" and Return(0)\n\n2. [Access Element at Depth I]\n   X <- S[TOP - I + 1]\n\n3. [Finished]\n   Return(X)",
+            "c": "#include <stdio.h>\n#define N 6\n\nint S[N];\nint TOP = -1;\n\nint peep(int i) {\n    if (TOP - i + 1 < 0) {\n        printf(\"STACK UNDERFLOW / INVALID INDEX\\n\");\n        return -1;\n    }\n    return S[TOP - i + 1];\n}\n\nint main() {\n    S[++TOP] = 10;\n    S[++TOP] = 20;\n    S[++TOP] = 30;\n    printf(\"Top element (i=1): %d\\n\", peep(1));\n    printf(\"Second element (i=2): %d\\n\", peep(2));\n    return 0;\n}",
+            "java": "public class StackPeep {\n    public static int peep(int[] S, int top, int i) {\n        if (top - i + 1 < 0) {\n            System.out.println(\"STACK UNDERFLOW / INVALID INDEX\");\n            return -1;\n        }\n        return S[top - i + 1];\n    }\n\n    public static void main(String[] args) {\n        int[] S = {10, 20, 30};\n        int top = 2;\n        System.out.println(\"Peep i=1 (Top): \" + peep(S, top, 1));\n        System.out.println(\"Peep i=2: \" + peep(S, top, 2));\n    }\n}",
+            "python": "def peep(s, top, i):\n    target_idx = top - i + 1\n    if target_idx < 0:\n        print(\"STACK UNDERFLOW / INVALID INDEX\")\n        return None\n    return s[target_idx]\n\nif __name__ == \"__main__\":\n    stack = [10, 20, 30]\n    top = 2\n    print(\"Peep i=1 (Top):\", peep(stack, top, 1))\n    print(\"Peep i=2:\", peep(stack, top, 2))"
+        },
+        "change": {
+            "title": "Algorithm: CHANGE(S, TOP, I, VALUE)",
+            "badge": "Change (Modify)",
+            "complexity": "Time: O(1) | Space: O(1)",
+            "desc": "Updates the element at depth I from the top with new VALUE using formula TOP - I + 1 without altering stack height.",
+            "simType": "standard",
+            "blackboardHtml": "<span class=\"algo-step-head\">1. [Check for Invalid Index / Underflow]</span>\n   <span class=\"algo-kw\">If</span> TOP - I + 1 &lt; 0\n       <span class=\"algo-kw\">Then write</span> \"STACK UNDERFLOW / INVALID INDEX\" <span class=\"algo-kw\">and</span> Return\n\n<span class=\"algo-step-head\">2. [Update Element at Depth I]</span>\n   S[TOP - I + 1] <span class=\"algo-arrow\">&larr;</span> VALUE\n\n<span class=\"algo-step-head\">3. [Finished]</span>\n   Return",
+            "blackboardText": "Algorithm: CHANGE(S, TOP, I, VALUE)\n\n1. [Check for Invalid Index / Underflow]\n   If TOP - I + 1 < 0\n       Then write \"STACK UNDERFLOW / INVALID INDEX\" and Return\n\n2. [Update Element at Depth I]\n   S[TOP - I + 1] <- VALUE\n\n3. [Finished]\n   Return",
+            "c": "#include <stdio.h>\n#define N 6\n\nint S[N];\nint TOP = -1;\n\nvoid change(int i, int value) {\n    if (TOP - i + 1 < 0) {\n        printf(\"STACK UNDERFLOW / INVALID INDEX\\n\");\n        return;\n    }\n    S[TOP - i + 1] = value;\n    printf(\"Changed element at depth %d to %d\\n\", i, value);\n}\n\nint main() {\n    S[++TOP] = 10;\n    S[++TOP] = 20;\n    S[++TOP] = 30;\n    change(2, 99); // Replace 20 with 99\n    printf(\"New S[1] = %d\\n\", S[1]);\n    return 0;\n}",
+            "java": "public class StackChange {\n    public static void change(int[] S, int top, int i, int value) {\n        if (top - i + 1 < 0) {\n            System.out.println(\"STACK UNDERFLOW / INVALID INDEX\");\n            return;\n        }\n        S[top - i + 1] = value;\n        System.out.println(\"Updated depth \" + i + \" to \" + value);\n    }\n\n    public static void main(String[] args) {\n        int[] S = {10, 20, 30};\n        int top = 2;\n        change(S, top, 2, 99);\n        System.out.println(\"S[1] is now: \" + S[1]);\n    }\n}",
+            "python": "def change(s, top, i, value):\n    target_idx = top - i + 1\n    if target_idx < 0:\n        print(\"STACK UNDERFLOW / INVALID INDEX\")\n        return False\n    s[target_idx] = value\n    print(f\"Updated depth {i} (index {target_idx}) to {value}\")\n    return True\n\nif __name__ == \"__main__\":\n    s = [10, 20, 30]\n    top = 2\n    change(s, top, 2, 99)\n    print(\"Stack now:\", s)"
+        },
+        "peek": {
+            "title": "Algorithm: PEEK(S, TOP)",
+            "badge": "Peek (Top Access)",
+            "complexity": "Time: O(1) | Space: O(1)",
+            "desc": "Directly accesses the topmost element S[TOP] in O(1) time without popping or decrementing TOP pointer.",
+            "simType": "standard",
+            "blackboardHtml": "<span class=\"algo-step-head\">1. [Check if Stack is Empty]</span>\n   <span class=\"algo-kw\">If</span> TOP = -1\n       <span class=\"algo-kw\">Then write</span> \"STACK EMPTY\" <span class=\"algo-kw\">and</span> Return(0)\n\n<span class=\"algo-step-head\">2. [Access Top Element]</span>\n   X <span class=\"algo-arrow\">&larr;</span> S[TOP]\n\n<span class=\"algo-step-head\">3. [Finished]</span>\n   Return(X)",
+            "blackboardText": "Algorithm: PEEK(S, TOP)\n\n1. [Check if Stack is Empty]\n   If TOP = -1\n       Then write \"STACK EMPTY\" and Return(0)\n\n2. [Access Top Element]\n   X <- S[TOP]\n\n3. [Finished]\n   Return(X)",
+            "c": "#include <stdio.h>\n#define N 6\n\nint S[N];\nint TOP = -1;\n\nint peek() {\n    if (TOP == -1) {\n        printf(\"STACK EMPTY\\n\");\n        return -1;\n    }\n    return S[TOP];\n}\n\nint main() {\n    S[++TOP] = 100;\n    S[++TOP] = 200;\n    printf(\"Current Top element: %d\\n\", peek());\n    return 0;\n}",
+            "java": "public class StackPeek {\n    public static int peek(int[] S, int top) {\n        if (top == -1) {\n            System.out.println(\"STACK EMPTY\");\n            return -1;\n        }\n        return S[top];\n    }\n\n    public static void main(String[] args) {\n        int[] S = {100, 200};\n        System.out.println(\"Top element: \" + peek(S, 1));\n    }\n}",
+            "python": "def peek(s, top):\n    if top == -1:\n        print(\"STACK EMPTY\")\n        return None\n    return s[top]\n\nif __name__ == \"__main__\":\n    stack = [100, 200]\n    print(\"Top element:\", peek(stack, 1))"
         }
-        S[++TOP] = x;
-    }
-
-    public int pop() {
-        if (TOP == -1) {
-            System.out.println("STACK UNDERFLOW");
-            return -1;
+    },
+    "expressions": {
+        "revpol": {
+            "title": "Algorithm: REVPOL(INFIX, POLISH)",
+            "badge": "Infix to Postfix",
+            "complexity": "Time: O(n) | Space: O(n)",
+            "desc": "Tremblay & Sorenson standard algorithm translating Infix expression to Reverse Polish (Postfix) notation using input precedence F, in-stack precedence G, and rank R.",
+            "simType": "revpol",
+            "blackboardHtml": "<span class=\"algo-step-head\">1. [Initialize Stack, Pointers, and Output]</span>\n   TOP <span class=\"algo-arrow\">&larr;</span> 0\n   S[TOP] <span class=\"algo-arrow\">&larr;</span> '('\n   POLISH <span class=\"algo-arrow\">&larr;</span> \"\"\n   RANK <span class=\"algo-arrow\">&larr;</span> 0\n   I <span class=\"algo-arrow\">&larr;</span> 0\n   Append ')' to end of INFIX\n\n<span class=\"algo-step-head\">2. [Process Input Symbols]</span>\n   <span class=\"algo-kw\"><span class=\"algo-kw\">Repeat through</span> step-6 until</span> TOP = -1\n\n<span class=\"algo-step-head\">3. [Read Next Symbol]</span>\n   NEXT <span class=\"algo-arrow\">&larr;</span> INFIX[I]\n   I <span class=\"algo-arrow\">&larr;</span> I + 1\n\n<span class=\"algo-step-head\">4. [Pop Operators of Greater/Equal In-Stack Precedence]</span>\n   <span class=\"algo-kw\">While</span> G(S[TOP]) &gt; F(NEXT)\n       TEMP <span class=\"algo-arrow\">&larr;</span> S[TOP]\n       TOP <span class=\"algo-arrow\">&larr;</span> TOP - 1\n       POLISH <span class=\"algo-arrow\">&larr;</span> POLISH + TEMP\n       RANK <span class=\"algo-arrow\">&larr;</span> RANK + R(TEMP)\n       <span class=\"algo-kw\">If</span> RANK &lt; 1\n           <span class=\"algo-kw\">Then write</span> \"INVALID EXPRESSION\" <span class=\"algo-kw\">and</span> Return\n\n<span class=\"algo-step-head\">5. [Push Next Symbol or Pop Matching Parenthesis]</span>\n   <span class=\"algo-kw\">If</span> G(S[TOP]) &ne; F(NEXT)\n       TOP <span class=\"algo-arrow\">&larr;</span> TOP + 1\n       S[TOP] <span class=\"algo-arrow\">&larr;</span> NEXT\n   Else\n       TOP <span class=\"algo-arrow\">&larr;</span> TOP - 1\n\n<span class=\"algo-step-head\">6. [Validate Expression Rank]</span>\n   <span class=\"algo-kw\">If</span> TOP = -1 <span class=\"algo-kw\">and</span> RANK = 1\n       <span class=\"algo-kw\">Then write</span> \"VALID POSTFIX: \", POLISH\n   <span class=\"algo-kw\">Else</span> <span class=\"algo-kw\">If</span> TOP = -1 <span class=\"algo-kw\">and</span> RANK &ne; 1\n       <span class=\"algo-kw\">Then write</span> \"INVALID EXPRESSION: RANK MISMATCH\"\n\n<span class=\"algo-step-head\">7. [Finished]</span>\n   Return(POLISH)",
+            "blackboardText": "Algorithm: REVPOL(INFIX, POLISH)\n\n1. [Initialize Stack, Pointers, and Output]\n   TOP <- 0\n   S[TOP] <- '('\n   POLISH <- \"\"\n   RANK <- 0\n   I <- 0\n   Append ')' to end of INFIX\n\n2. [Process Input Symbols]\n   Repeat through step-6 until TOP = -1\n\n3. [Read Next Symbol]\n   NEXT <- INFIX[I]\n   I <- I + 1\n\n4. [Pop Operators of Greater/Equal In-Stack Precedence]\n   While G(S[TOP]) > F(NEXT)\n       TEMP <- S[TOP]\n       TOP <- TOP - 1\n       POLISH <- POLISH + TEMP\n       RANK <- RANK + R(TEMP)\n       If RANK < 1\n           Then write \"INVALID EXPRESSION\" and Return\n\n5. [Push Next Symbol or Pop Matching Parenthesis]\n   If G(S[TOP]) != F(NEXT)\n       TOP <- TOP + 1\n       S[TOP] <- NEXT\n   Else\n       TOP <- TOP - 1\n\n6. [Validate Expression Rank]\n   If TOP = -1 and RANK = 1\n       Then write \"VALID POSTFIX: \", POLISH\n   Else If TOP = -1 and RANK != 1\n       Then write \"INVALID EXPRESSION: RANK MISMATCH\"\n\n7. [Finished]\n   Return(POLISH)",
+            "c": "#include <stdio.h>\n#include <string.h>\n\nint F(char c) { // Incoming Precedence\n    if (c == '+' || c == '-') return 1;\n    if (c == '*' || c == '/') return 3;\n    if (c == '^') return 6;\n    if (c == '(') return 9;\n    if (c == ')') return 0;\n    return 7; // Operands\n}\n\nint G(char c) { // In-Stack Precedence\n    if (c == '+' || c == '-') return 2;\n    if (c == '*' || c == '/') return 4;\n    if (c == '^') return 5;\n    if (c == '(') return 0;\n    return 8; // Operands\n}\n\nint R(char c) { // Rank\n    if (c == '+' || c == '-' || c == '*' || c == '/' || c == '^') return -1;\n    if (c == '(' || c == ')') return 0;\n    return 1; // Operands\n}\n\nvoid revpol(char *infix, char *polish) {\n    char S[100];\n    int top = 0;\n    S[top] = '(';\n    int rank = 0, pIdx = 0;\n    int len = strlen(infix);\n    char fullInfix[120];\n    strcpy(fullInfix, infix);\n    fullInfix[len] = ')';\n    fullInfix[len + 1] = '\\0';\n\n    for (int i = 0; fullInfix[i] != '\\0'; i++) {\n        char next = fullInfix[i];\n        while (top >= 0 && G(S[top]) > F(next)) {\n            char temp = S[top--];\n            polish[pIdx++] = temp;\n            rank += R(temp);\n            if (rank < 1) { printf(\"INVALID EXPRESSION\\n\"); return; }\n        }\n        if (G(S[top]) != F(next)) S[++top] = next;\n        else top--; // Pop '('\n    }\n    polish[pIdx] = '\\0';\n    if (top == -1 && rank == 1) printf(\"VALID POSTFIX: %s\\n\", polish);\n    else printf(\"INVALID EXPRESSION: RANK = %d\\n\", rank);\n}\n\nint main() {\n    char polish[100];\n    revpol(\"(A+B)*C\", polish);\n    return 0;\n}",
+            "java": "import java.util.Stack;\n\npublic class RevpolConverter {\n    public static int F(char c) {\n        if (c == '+' || c == '-') return 1;\n        if (c == '*' || c == '/') return 3;\n        if (c == '^') return 6;\n        if (c == '(') return 9;\n        if (c == ')') return 0;\n        return 7; // Operands\n    }\n\n    public static int G(char c) {\n        if (c == '+' || c == '-') return 2;\n        if (c == '*' || c == '/') return 4;\n        if (c == '^') return 5;\n        if (c == '(') return 0;\n        return 8; // Operands\n    }\n\n    public static int R(char c) {\n        if (c == '+' || c == '-' || c == '*' || c == '/' || c == '^') return -1;\n        if (c == '(' || c == ')') return 0;\n        return 1;\n    }\n\n    public static String revpol(String infix) {\n        Stack<Character> stack = new Stack<>();\n        stack.push('(');\n        String full = infix + \")\";\n        StringBuilder polish = new StringBuilder();\n        int rank = 0;\n\n        for (int i = 0; i < full.length(); i++) {\n            char next = full.charAt(i);\n            while (!stack.isEmpty() && G(stack.peek()) > F(next)) {\n                char temp = stack.pop();\n                polish.append(temp);\n                rank += R(temp);\n                if (rank < 1) return \"INVALID EXPRESSION\";\n            }\n            if (!stack.isEmpty() && G(stack.peek()) != F(next)) {\n                stack.push(next);\n            } else if (!stack.isEmpty()) {\n                stack.pop(); // Pop '('\n            }\n        }\n        return (stack.isEmpty() && rank == 1) ? polish.toString() : \"INVALID\";\n    }\n\n    public static void main(String[] args) {\n        System.out.println(\"REVPOL: \" + revpol(\"(A+B)*C\"));\n    }\n}",
+            "python": "def F(c):\n    if c in ('+', '-'): return 1\n    if c in ('*', '/'): return 3\n    if c == '^': return 6\n    if c == '(': return 9\n    if c == ')': return 0\n    return 7\n\ndef G(c):\n    if c in ('+', '-'): return 2\n    if c in ('*', '/'): return 4\n    if c == '^': return 5\n    if c == '(': return 0\n    return 8\n\ndef R(c):\n    if c in ('+', '-', '*', '/', '^'): return -1\n    if c in ('(', ')'): return 0\n    return 1\n\ndef revpol(infix):\n    stack = ['(']\n    polish = []\n    rank = 0\n    full_infix = infix + ')'\n\n    for next_sym in full_infix:\n        while stack and G(stack[-1]) > F(next_sym):\n            temp = stack.pop()\n            polish.append(temp)\n            rank += R(temp)\n            if rank < 1:\n                return \"INVALID EXPRESSION\"\n        if stack and G(stack[-1]) != F(next_sym):\n            stack.append(next_sym)\n        elif stack:\n            stack.pop() # Match '('\n            \n    if not stack and rank == 1:\n        return ''.join(polish)\n    return \"INVALID EXPRESSION: RANK MISMATCH\"\n\nif __name__ == '__main__':\n    print(\"REVPOL:\", revpol(\"(A+B)*C\"))"
+        },
+        "postfix_eval": {
+            "title": "Algorithm: POSTFIX_EVAL(E)",
+            "badge": "Postfix Evaluation",
+            "complexity": "Time: O(n) | Space: O(n)",
+            "desc": "Evaluates postfix (Reverse Polish) expression left-to-right using an operand stack. Pops 2 operands for each operator and pushes result.",
+            "simType": "postfix",
+            "blackboardHtml": "<span class=\"algo-step-head\">1. [Initialize Empty Stack]</span>\n   TOP <span class=\"algo-arrow\">&larr;</span> -1\n   I <span class=\"algo-arrow\">&larr;</span> 0\n\n<span class=\"algo-step-head\">2. [Scan Postfix String Left-to-Right]</span>\n   <span class=\"algo-kw\">Repeat through</span> step-5 while E[I] &ne; NULL\n\n<span class=\"algo-step-head\">3. [Fetch Symbol]</span>\n   SYM <span class=\"algo-arrow\">&larr;</span> E[I]\n   I <span class=\"algo-arrow\">&larr;</span> I + 1\n\n<span class=\"algo-step-head\">4. [Operand Action]</span>\n   <span class=\"algo-kw\">If</span> SYM is Operand\n       PUSH(S, SYM)\n\n<span class=\"algo-step-head\">5. [Operator Action]</span>\n   <span class=\"algo-kw\">Else</span> <span class=\"algo-kw\">If</span> SYM is Operator\n       OP2 <span class=\"algo-arrow\">&larr;</span> POP(S)\n       OP1 <span class=\"algo-arrow\">&larr;</span> POP(S)\n       RESULT <span class=\"algo-arrow\">&larr;</span> PERFORM_OP(SYM, OP1, OP2)\n       PUSH(S, RESULT)\n\n<span class=\"algo-step-head\">6. [Final Result]</span>\n   FINAL_VAL <span class=\"algo-arrow\">&larr;</span> POP(S)\n   Return(FINAL_VAL)",
+            "blackboardText": "Algorithm: POSTFIX_EVAL(E)\n\n1. [Initialize Empty Stack]\n   TOP <- -1\n   I <- 0\n\n2. [Scan Postfix String Left-to-Right]\n   Repeat through step-5 while E[I] != NULL\n\n3. [Fetch Symbol]\n   SYM <- E[I]\n   I <- I + 1\n\n4. [Operand Action]\n   If SYM is Operand\n       PUSH(S, SYM)\n\n5. [Operator Action]\n   Else If SYM is Operator\n       OP2 <- POP(S)\n       OP1 <- POP(S)\n       RESULT <- PERFORM_OP(SYM, OP1, OP2)\n       PUSH(S, RESULT)\n\n6. [Final Result]\n   FINAL_VAL <- POP(S)\n   Return(FINAL_VAL)",
+            "c": "#include <stdio.h>\n#include <ctype.h>\n#include <math.h>\n\nint evalPostfix(char *exp) {\n    int stack[50], top = -1;\n    for (int i = 0; exp[i] != '\\0'; i++) {\n        if (isdigit(exp[i])) {\n            stack[++top] = exp[i] - '0';\n        } else {\n            int op2 = stack[top--];\n            int op1 = stack[top--];\n            switch (exp[i]) {\n                case '+': stack[++top] = op1 + op2; break;\n                case '-': stack[++top] = op1 - op2; break;\n                case '*': stack[++top] = op1 * op2; break;\n                case '/': stack[++top] = op1 / op2; break;\n                case '^': stack[++top] = (int)pow(op1, op2); break;\n            }\n        }\n    }\n    return stack[top];\n}\n\nint main() {\n    printf(\"Evaluation of '23+4*': %d\\n\", evalPostfix(\"23+4*\"));\n    return 0;\n}",
+            "java": "import java.util.Stack;\n\npublic class PostfixEvaluation {\n    public static int evaluate(String exp) {\n        Stack<Integer> st = new Stack<>();\n        for (char c : exp.toCharArray()) {\n            if (Character.isDigit(c)) {\n                st.push(c - '0');\n            } else {\n                int op2 = st.pop();\n                int op1 = st.pop();\n                switch (c) {\n                    case '+': st.push(op1 + op2); break;\n                    case '-': st.push(op1 - op2); break;\n                    case '*': st.push(op1 * op2); break;\n                    case '/': st.push(op1 / op2); break;\n                }\n            }\n        }\n        return st.pop();\n    }\n\n    public static void main(String[] args) {\n        System.out.println(\"Result: \" + evaluate(\"23+4*\"));\n    }\n}",
+            "python": "def eval_postfix(exp):\n    stack = []\n    for token in exp:\n        if token.isdigit():\n            stack.append(int(token))\n        else:\n            op2 = stack.pop()\n            op1 = stack.pop()\n            if token == '+': stack.append(op1 + op2)\n            elif token == '-': stack.append(op1 - op2)\n            elif token == '*': stack.append(op1 * op2)\n            elif token == '/': stack.append(int(op1 / op2))\n    return stack.pop()\n\nif __name__ == '__main__':\n    print(\"Result of '23+4*':\", eval_postfix(\"23+4*\"))"
         }
-        return S[TOP--];
-    }
-
-    public int peep(int i) {
-        if (TOP - i + 1 < 0) {
-            System.out.println("INVALID INDEX");
-            return -1;
+    },
+    "twostacks": {
+        "push1": {
+            "title": "Algorithm: PUSH1(S, TOP1, TOP2, X)",
+            "badge": "Dual Stack (Push 1)",
+            "complexity": "Time: O(1) | Space: O(1)",
+            "desc": "Pushes onto Stack 1 from left boundary (0 to N-1). Collision/Overflow occurs when TOP1 + 1 == TOP2.",
+            "simType": "twostacks",
+            "blackboardHtml": "<span class=\"algo-step-head\">1. [Check Collision Overflow]</span>\n   <span class=\"algo-kw\">If</span> TOP1 + 1 == TOP2\n       <span class=\"algo-kw\">Then write</span> \"STACK OVERFLOW: COLLISION WITH STACK 2\" <span class=\"algo-kw\">and</span> Return\n\n<span class=\"algo-step-head\">2. [Increment TOP1 Pointer]</span>\n   TOP1 <span class=\"algo-arrow\">&larr;</span> TOP1 + 1\n\n<span class=\"algo-step-head\">3. [Insert Element in Stack 1]</span>\n   S[TOP1] <span class=\"algo-arrow\">&larr;</span> X\n\n<span class=\"algo-step-head\">4. [Finished]</span>\n   Return",
+            "blackboardText": "Algorithm: PUSH1(S, TOP1, TOP2, X)\n\n1. [Check Collision Overflow]\n   If TOP1 + 1 == TOP2\n       Then write \"STACK OVERFLOW: COLLISION WITH STACK 2\" and Return\n\n2. [Increment TOP1 Pointer]\n   TOP1 <- TOP1 + 1\n\n3. [Insert Element in Stack 1]\n   S[TOP1] <- X\n\n4. [Finished]\n   Return",
+            "c": "#include <stdio.h>\n#define N 6\nint S[N];\nint TOP1 = -1, TOP2 = N;\n\nvoid push1(int x) {\n    if (TOP1 + 1 == TOP2) {\n        printf(\"STACK OVERFLOW: COLLISION\\n\");\n        return;\n    }\n    S[++TOP1] = x;\n    printf(\"Pushed %d to Stack 1 (TOP1 = %d)\\n\", x, TOP1);\n}",
+            "java": "public class TwoStacks {\n    private int[] S;\n    private int top1, top2, n;\n\n    public TwoStacks(int cap) {\n        n = cap; S = new int[n]; top1 = -1; top2 = n;\n    }\n\n    public void push1(int x) {\n        if (top1 + 1 == top2) {\n            System.out.println(\"STACK OVERFLOW (COLLISION)\");\n            return;\n        }\n        S[++top1] = x;\n    }\n}",
+            "python": "class TwoStacks:\n    def __init__(self, n=6):\n        self.s = [None] * n\n        self.top1 = -1\n        self.top2 = n\n\n    def push1(self, x):\n        if self.top1 + 1 == self.top2:\n            print(\"STACK OVERFLOW: COLLISION\")\n            return False\n        self.top1 += 1\n        self.s[self.top1] = x\n        return True"
+        },
+        "push2": {
+            "title": "Algorithm: PUSH2(S, TOP1, TOP2, X)",
+            "badge": "Dual Stack (Push 2)",
+            "complexity": "Time: O(1) | Space: O(1)",
+            "desc": "Pushes onto Stack 2 growing backwards from right boundary (N-1 to 0). Collision occurs when TOP1 + 1 == TOP2.",
+            "simType": "twostacks",
+            "blackboardHtml": "<span class=\"algo-step-head\">1. [Check Collision Overflow]</span>\n   <span class=\"algo-kw\">If</span> TOP1 + 1 == TOP2\n       <span class=\"algo-kw\">Then write</span> \"STACK OVERFLOW: COLLISION WITH STACK 1\" <span class=\"algo-kw\">and</span> Return\n\n<span class=\"algo-step-head\">2. [Decrement TOP2 Pointer]</span>\n   TOP2 <span class=\"algo-arrow\">&larr;</span> TOP2 - 1\n\n<span class=\"algo-step-head\">3. [Insert Element in Stack 2]</span>\n   S[TOP2] <span class=\"algo-arrow\">&larr;</span> X\n\n<span class=\"algo-step-head\">4. [Finished]</span>\n   Return",
+            "blackboardText": "Algorithm: PUSH2(S, TOP1, TOP2, X)\n\n1. [Check Collision Overflow]\n   If TOP1 + 1 == TOP2\n       Then write \"STACK OVERFLOW: COLLISION WITH STACK 1\" and Return\n\n2. [Decrement TOP2 Pointer]\n   TOP2 <- TOP2 - 1\n\n3. [Insert Element in Stack 2]\n   S[TOP2] <- X\n\n4. [Finished]\n   Return",
+            "c": "void push2(int x) {\n    if (TOP1 + 1 == TOP2) {\n        printf(\"STACK OVERFLOW: COLLISION\\n\");\n        return;\n    }\n    S[--TOP2] = x;\n    printf(\"Pushed %d to Stack 2 (TOP2 = %d)\\n\", x, TOP2);\n}",
+            "java": "public void push2(int x) {\n    if (top1 + 1 == top2) {\n        System.out.println(\"STACK OVERFLOW (COLLISION)\");\n        return;\n    }\n    S[--top2] = x;\n}",
+            "python": "def push2(self, x):\n    if self.top1 + 1 == self.top2:\n        print(\"STACK OVERFLOW: COLLISION\")\n        return False\n    self.top2 -= 1\n    self.s[self.top2] = x\n    return True"
+        },
+        "pop1": {
+            "title": "Algorithm: POP1(S, TOP1)",
+            "badge": "Dual Stack (Pop 1)",
+            "complexity": "Time: O(1) | Space: O(1)",
+            "desc": "Pops from Stack 1. Underflow occurs when TOP1 = -1.",
+            "simType": "twostacks",
+            "blackboardHtml": "<span class=\"algo-step-head\">1. [Check Underflow]</span>\n   <span class=\"algo-kw\">If</span> TOP1 = -1\n       <span class=\"algo-kw\">Then write</span> \"STACK 1 UNDERFLOW\" <span class=\"algo-kw\">and</span> Return(0)\n\n<span class=\"algo-step-head\">2. [Retrieve and Decrement]</span>\n   X <span class=\"algo-arrow\">&larr;</span> S[TOP1]\n   TOP1 <span class=\"algo-arrow\">&larr;</span> TOP1 - 1\n\n<span class=\"algo-step-head\">3. [Return Value]</span>\n   Return(X)",
+            "blackboardText": "Algorithm: POP1(S, TOP1)\n\n1. [Check Underflow]\n   If TOP1 = -1\n       Then write \"STACK 1 UNDERFLOW\" and Return(0)\n\n2. [Retrieve and Decrement]\n   X <- S[TOP1]\n   TOP1 <- TOP1 - 1\n\n3. [Return Value]\n   Return(X)",
+            "c": "int pop1() {\n    if (TOP1 == -1) {\n        printf(\"STACK 1 UNDERFLOW\\n\");\n        return -1;\n    }\n    return S[TOP1--];\n}",
+            "java": "public int pop1() {\n    if (top1 == -1) {\n        System.out.println(\"STACK 1 UNDERFLOW\");\n        return -1;\n    }\n    return S[top1--];\n}",
+            "python": "def pop1(self):\n    if self.top1 == -1:\n        print(\"STACK 1 UNDERFLOW\")\n        return None\n    val = self.s[self.top1]\n    self.top1 -= 1\n    return val"
+        },
+        "pop2": {
+            "title": "Algorithm: POP2(S, TOP2, N)",
+            "badge": "Dual Stack (Pop 2)",
+            "complexity": "Time: O(1) | Space: O(1)",
+            "desc": "Pops from Stack 2. Underflow occurs when TOP2 = N.",
+            "simType": "twostacks",
+            "blackboardHtml": "<span class=\"algo-step-head\">1. [Check Underflow]</span>\n   <span class=\"algo-kw\">If</span> TOP2 = N\n       <span class=\"algo-kw\">Then write</span> \"STACK 2 UNDERFLOW\" <span class=\"algo-kw\">and</span> Return(0)\n\n<span class=\"algo-step-head\">2. [Retrieve and Increment]</span>\n   X <span class=\"algo-arrow\">&larr;</span> S[TOP2]\n   TOP2 <span class=\"algo-arrow\">&larr;</span> TOP2 + 1\n\n<span class=\"algo-step-head\">3. [Return Value]</span>\n   Return(X)",
+            "blackboardText": "Algorithm: POP2(S, TOP2, N)\n\n1. [Check Underflow]\n   If TOP2 = N\n       Then write \"STACK 2 UNDERFLOW\" and Return(0)\n\n2. [Retrieve and Increment]\n   X <- S[TOP2]\n   TOP2 <- TOP2 + 1\n\n3. [Return Value]\n   Return(X)",
+            "c": "int pop2() {\n    if (TOP2 == N) {\n        printf(\"STACK 2 UNDERFLOW\\n\");\n        return -1;\n    }\n    return S[TOP2++];\n}",
+            "java": "public int pop2() {\n    if (top2 == n) {\n        System.out.println(\"STACK 2 UNDERFLOW\");\n        return -1;\n    }\n    return S[top2++];\n}",
+            "python": "def pop2(self):\n    if self.top2 == self.n:\n        print(\"STACK 2 UNDERFLOW\")\n        return None\n    val = self.s[self.top2]\n    self.top2 += 1\n    return val"
         }
-        return S[TOP - i + 1];
-    }
-
-    public void change(int i, int val) {
-        if (TOP - i + 1 < 0) {
-            System.out.println("INVALID INDEX");
-            return;
+    },
+    "linked": {
+        "push_ll": {
+            "title": "Algorithm: PUSH_LL(TOP, X)",
+            "badge": "Linked Stack (Push)",
+            "complexity": "Time: O(1) | Space: O(1)",
+            "desc": "Allocates a new node and inserts it at the beginning of the singly linked stack, setting TOP pointer to the new node.",
+            "simType": "linked",
+            "blackboardHtml": "<span class=\"algo-step-head\">1. [Allocate Node from AVAIL]</span>\n   NEW <span class=\"algo-arrow\">&larr;</span> AVAIL\n   AVAIL <span class=\"algo-arrow\">&larr;</span> LINK(AVAIL)\n\n<span class=\"algo-step-head\">2. [Set Node Information]</span>\n   INFO(NEW) <span class=\"algo-arrow\">&larr;</span> X\n\n<span class=\"algo-step-head\">3. [Link Node to Current Top]</span>\n   LINK(NEW) <span class=\"algo-arrow\">&larr;</span> TOP\n\n<span class=\"algo-step-head\">4. [Update Top Pointer]</span>\n   TOP <span class=\"algo-arrow\">&larr;</span> NEW\n\n<span class=\"algo-step-head\">5. [Finished]</span>\n   Return(TOP)",
+            "blackboardText": "Algorithm: PUSH_LL(TOP, X)\n\n1. [Allocate Node from AVAIL]\n   NEW <- AVAIL\n   AVAIL <- LINK(AVAIL)\n\n2. [Set Node Information]\n   INFO(NEW) <- X\n\n3. [Link Node to Current Top]\n   LINK(NEW) <- TOP\n\n4. [Update Top Pointer]\n   TOP <- NEW\n\n5. [Finished]\n   Return(TOP)",
+            "c": "#include <stdio.h>\n#include <stdlib.h>\n\nstruct Node {\n    int info;\n    struct Node* next;\n};\n\nstruct Node* pushLL(struct Node* top, int x) {\n    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));\n    if (!newNode) {\n        printf(\"HEAP OVERFLOW\\n\");\n        return top;\n    }\n    newNode->info = x;\n    newNode->next = top;\n    top = newNode;\n    return top;\n}",
+            "java": "public class LinkedStack {\n    static class Node { int data; Node next; Node(int d) { data = d; } }\n    private Node top = null;\n\n    public void push(int x) {\n        Node newNode = new Node(x);\n        newNode.next = top;\n        top = newNode;\n    }\n}",
+            "python": "class Node:\n    def __init__(self, data):\n        self.data = data\n        self.next = None\n\nclass LinkedStack:\n    def __init__(self):\n        self.top = None\n\n    def push(self, x):\n        new_node = Node(x)\n        new_node.next = self.top\n        self.top = new_node"
+        },
+        "pop_ll": {
+            "title": "Algorithm: POP_LL(TOP)",
+            "badge": "Linked Stack (Pop)",
+            "complexity": "Time: O(1) | Space: O(1)",
+            "desc": "Removes the top node of the linked stack, advances TOP to LINK(TOP), and frees memory.",
+            "simType": "linked",
+            "blackboardHtml": "<span class=\"algo-step-head\">1. [Check Underflow]</span>\n   <span class=\"algo-kw\">If</span> TOP = NULL\n       <span class=\"algo-kw\">Then write</span> \"LINKED STACK UNDERFLOW\" <span class=\"algo-kw\">and</span> Return(TOP)\n\n<span class=\"algo-step-head\">2. [Retrieve Data and Advance TOP]</span>\n   TEMP <span class=\"algo-arrow\">&larr;</span> TOP\n   X <span class=\"algo-arrow\">&larr;</span> INFO(TEMP)\n   TOP <span class=\"algo-arrow\">&larr;</span> LINK(TOP)\n\n<span class=\"algo-step-head\">3. [Free Memory to AVAIL]</span>\n   LINK(TEMP) <span class=\"algo-arrow\">&larr;</span> AVAIL\n   AVAIL <span class=\"algo-arrow\">&larr;</span> TEMP\n\n<span class=\"algo-step-head\">4. [Return Value]</span>\n   Return(X)",
+            "blackboardText": "Algorithm: POP_LL(TOP)\n\n1. [Check Underflow]\n   If TOP = NULL\n       Then write \"LINKED STACK UNDERFLOW\" and Return(TOP)\n\n2. [Retrieve Data and Advance TOP]\n   TEMP <- TOP\n   X <- INFO(TEMP)\n   TOP <- LINK(TOP)\n\n3. [Free Memory to AVAIL]\n   LINK(TEMP) <- AVAIL\n   AVAIL <- TEMP\n\n4. [Return Value]\n   Return(X)",
+            "c": "int popLL(struct Node** topRef) {\n    if (*topRef == NULL) {\n        printf(\"LINKED STACK UNDERFLOW\\n\");\n        return -1;\n    }\n    struct Node* temp = *topRef;\n    int val = temp->info;\n    *topRef = temp->next;\n    free(temp);\n    return val;\n}",
+            "java": "public int pop() {\n    if (top == null) {\n        System.out.println(\"LINKED STACK UNDERFLOW\");\n        return -1;\n    }\n    int val = top.data;\n    top = top.next;\n    return val;\n}",
+            "python": "def pop(self):\n    if self.top is None:\n        print(\"LINKED STACK UNDERFLOW\")\n        return None\n    val = self.top.data\n    self.top = self.top.next\n    return val"
         }
-        S[TOP - i + 1] = val;
-    }
-}`,
-            python: `class ArrayStack:
-    def __init__(self, capacity: int):
-        self.N = capacity
-        self.S = [None] * capacity
-        self.TOP = -1
-
-    def push(self, x):
-        if self.TOP >= self.N - 1:
-            print("STACK OVERFLOW")
-            return
-        self.TOP += 1
-        self.S[self.TOP] = x
-
-    def pop(self):
-        if self.TOP == -1:
-            print("STACK UNDERFLOW")
-            return None
-        val = self.S[self.TOP]
-        self.TOP -= 1
-        return val
-
-    def peep(self, i: int):
-        if self.TOP - i + 1 < 0:
-            print("INVALID INDEX")
-            return None
-        return self.S[self.TOP - i + 1]
-
-    def change(self, i: int, val):
-        if self.TOP - i + 1 < 0:
-            print("INVALID INDEX")
-            return
-        self.S[self.TOP - i + 1] = val`
+    },
+    "minstack": {
+        "min_push": {
+            "title": "Algorithm: MINSTACK_PUSH(VAL)",
+            "badge": "Min Stack (Push)",
+            "complexity": "Time: O(1) | Space: O(1)",
+            "desc": "Pushes VAL onto main stack. Simultaneously pushes minimum of VAL and current min onto auxiliary min-stack.",
+            "simType": "minstack",
+            "blackboardHtml": "<span class=\"algo-step-head\">1. [Push to Main Stack]</span>\n   PUSH(MAIN_STACK, VAL)\n\n<span class=\"algo-step-head\">2. [Update Auxiliary Min Stack]</span>\n   <span class=\"algo-kw\">If</span> IS_EMPTY(MIN_STACK) <span class=\"algo-kw\">or</span> VAL &le; PEEK(MIN_STACK)\n       PUSH(MIN_STACK, VAL)\n   Else\n       PUSH(MIN_STACK, PEEK(MIN_STACK))\n\n<span class=\"algo-step-head\">3. [Finished]</span>\n   Return",
+            "blackboardText": "Algorithm: MINSTACK_PUSH(VAL)\n\n1. [Push to Main Stack]\n   PUSH(MAIN_STACK, VAL)\n\n2. [Update Auxiliary Min Stack]\n   If IS_EMPTY(MIN_STACK) or VAL <= PEEK(MIN_STACK)\n       PUSH(MIN_STACK, VAL)\n   Else\n       PUSH(MIN_STACK, PEEK(MIN_STACK))\n\n3. [Finished]\n   Return",
+            "c": "#include <stdio.h>\n#define N 50\n\nint mainStk[N], minStk[N];\nint topMain = -1, topMin = -1;\n\nvoid minPush(int val) {\n    mainStk[++topMain] = val;\n    if (topMin == -1 || val <= minStk[topMin]) {\n        minStk[++topMin] = val;\n    } else {\n        minStk[++topMin] = minStk[topMin - 1];\n    }\n}",
+            "java": "import java.util.Stack;\n\npublic class MinStack {\n    private Stack<Integer> mainStack = new Stack<>();\n    private Stack<Integer> minStack = new Stack<>();\n\n    public void push(int val) {\n        mainStack.push(val);\n        if (minStack.isEmpty() || val <= minStack.peek()) {\n            minStack.push(val);\n        } else {\n            minStack.push(minStack.peek());\n        }\n    }\n\n    public int getMin() {\n        return minStack.peek();\n    }\n}",
+            "python": "class MinStack:\n    def __init__(self):\n        self.main = []\n        self.min_st = []\n\n    def push(self, val):\n        self.main.append(val)\n        if not self.min_st or val <= self.min_st[-1]:\n            self.min_st.append(val)\n        else:\n            self.min_st.append(self.min_st[-1])\n\n    def get_min(self):\n        return self.min_st[-1] if self.min_st else None"
         },
-        twostacks: {
-            blackboard: `// --- TWO STACKS IN ONE ARRAY ---
-Algorithm: PUSH1(S, TOP1, TOP2, X)
-1. If TOP1 + 1 == TOP2 -> Write "STACK OVERFLOW" and Return
-2. TOP1 <- TOP1 + 1; S[TOP1] <- X
-
-Algorithm: PUSH2(S, TOP1, TOP2, X)
-1. If TOP1 + 1 == TOP2 -> Write "STACK OVERFLOW" and Return
-2. TOP2 <- TOP2 - 1; S[TOP2] <- X
-
-Algorithm: POP1(S, TOP1)
-1. If TOP1 == -1 -> Write "STACK 1 UNDERFLOW" and Return
-2. X <- S[TOP1]; TOP1 <- TOP1 - 1; Return X
-
-Algorithm: POP2(S, TOP2, N)
-1. If TOP2 == N -> Write "STACK 2 UNDERFLOW" and Return
-2. X <- S[TOP2]; TOP2 <- TOP2 + 1; Return X`,
-            c: `int S[N]; int TOP1 = -1; int TOP2 = N;
-void push1(int x) { if (TOP1 + 1 == TOP2) return; S[++TOP1] = x; }
-void push2(int x) { if (TOP1 + 1 == TOP2) return; S[--TOP2] = x; }
-int pop1() { return (TOP1 == -1) ? -1 : S[TOP1--]; }
-int pop2() { return (TOP2 == N) ? -1 : S[TOP2++]; }`,
-            java: `public class TwoStacks {
-    private int[] s; private int top1, top2, n;
-    public TwoStacks(int cap) { n = cap; s = new int[n]; top1 = -1; top2 = n; }
-    public void push1(int x) { if (top1 + 1 == top2) return; s[++top1] = x; }
-    public void push2(int x) { if (top1 + 1 == top2) return; s[--top2] = x; }
-    public int pop1() { return (top1 == -1) ? -1 : s[top1--]; }
-    public int pop2() { return (top2 == n) ? -1 : s[top2++]; }
-}`,
-            python: `class TwoStacks:
-    def __init__(self, n: int):
-        self.n = n; self.s = [None] * n; self.top1 = -1; self.top2 = n
-    def push1(self, x):
-        if self.top1 + 1 == self.top2: return
-        self.top1 += 1; self.s[self.top1] = x
-    def push2(self, x):
-        if self.top1 + 1 == self.top2: return
-        self.top2 -= 1; self.s[self.top2] = x
-    def pop1(self):
-        if self.top1 == -1: return None
-        v = self.s[self.top1]; self.top1 -= 1; return v
-    def pop2(self):
-        if self.top2 == self.n: return None
-        v = self.s[self.top2]; self.top2 += 1; return v`
-        },
-        revpol: {
-            blackboard: `// --- REVPOL ALGORITHM ---
-Algorithm: REVPOL(INFIX)
-1. [Initialize Stack with '(' and append ')' to INFIX]
-   TOP <- 0; S[TOP] <- '('; POLISH <- ""; RANK <- 0
-2. [Process next symbol]
-   NEXT <- NEXTCHAR(INFIX)
-3. Repeat while NEXT != ' '
-   While F(NEXT) < G(S[TOP]) do
-       TEMP <- POP(S, TOP)
-       POLISH <- POLISH + TEMP
-       RANK <- RANK + R(TEMP)
-       If RANK < 1 -> Write "INVALID" and Return
-   If F(NEXT) != G(S[TOP])
-       PUSH(S, TOP, NEXT)
-   Else
-       POP(S, TOP) // Discard parens
-   NEXT <- NEXTCHAR(INFIX)
-4. If TOP = -1 AND RANK = 1
-       Write "VALID" and Return POLISH
-   Else
-       Write "INVALID"`,
-            c: `// Standard academic REVPOL implementation in C
-// Uses F(incoming), G(in-stack), and R(rank) lookup tables`,
-            java: `// Standard academic REVPOL implementation in Java`,
-            python: `def revpol(infix: str) -> str:
-    # Uses F, G, and Rank tables for conversion
-    pass`
-        },
-        prefix: {
-            blackboard: `// --- INFIX TO PREFIX CONVERSION (REVERSAL ALGORITHM) ---
-Algorithm: INFIX_TO_PREFIX(INFIX)
-1. [Reverse and swap parentheses]
-   E_REV <- REVERSE(INFIX)
-   Replace '(' with ')' and ')' with '(' in E_REV
-2. [Translate to Postfix with modified precedence]
-   S <- Empty Stack; BUFFER <- ""
-   For each token T in E_REV:
-       If T is operand -> BUFFER <- BUFFER + T
-       Else if T is '(' -> PUSH(S, T)
-       Else if T is ')' -> POP until '(' into BUFFER, discard '('
-       Else (Operator):
-           While S not empty AND S[TOP] != '(' AND 
-                 ((T == '^' AND Prec(S[TOP]) >= Prec(T)) OR 
-                  (T != '^' AND Prec(S[TOP]) > Prec(T))):
-               BUFFER <- BUFFER + POP(S)
-           PUSH(S, T)
-   While S not empty -> BUFFER <- BUFFER + POP(S)
-3. [Final Reversal]
-   PREFIX <- REVERSE(BUFFER)
-4. Return PREFIX`,
-            c: `// Infix to Prefix conversion using Stack in C
-#include <stdio.h>
-#include <string.h>
-#include <ctype.h>
-
-int prec(char c) {
-    if (c == '^') return 3;
-    if (c == '*' || c == '/') return 2;
-    if (c == '+' || c == '-') return 1;
-    return 0;
-}
-
-void infixToPrefix(char infix[], char prefix[]) {
-    // 1. Reverse & swap brackets
-    // 2. Modified postfix translation
-    // 3. Reverse output buffer
-}`,
-            java: `public class InfixToPrefix {
-    // Academic Infix to Prefix using textbook reversal method
-}`,
-            python: `def infix_to_prefix(infix: str) -> str:
-    # 1. Reverse and swap parens
-    rev = []
-    for ch in reversed(infix.replace(" ", "")):
-        if ch == '(': rev.append(')')
-        elif ch == ')': rev.append('(')
-        else: rev.append(ch)
-    
-    prec = {'^': 3, '*': 2, '/': 2, '+': 1, '-': 1}
-    stack, buffer = [], []
-    for ch in rev:
-        if ch.isalnum(): buffer.append(ch)
-        elif ch == '(': stack.append(ch)
-        elif ch == ')':
-            while stack and stack[-1] != '(': buffer.append(stack.pop())
-            if stack: stack.pop()
-        elif ch in prec:
-            while stack and stack[-1] != '(' and (
-                (ch == '^' and prec.get(stack[-1], 0) >= prec[ch]) or
-                (ch != '^' and prec.get(stack[-1], 0) > prec[ch])
-            ):
-                buffer.append(stack.pop())
-            stack.append(ch)
-    while stack: buffer.append(stack.pop())
-    return "".join(reversed(buffer))`
-        },
-        postfix: {
-            blackboard: `// --- POSTFIX EVALUATION ALGORITHM ---
-Algorithm: EVAL_POSTFIX(E)
-1. Read token T from left to right:
-2. If T is an operand:
-       PUSH(S, T)
-3. Else if T is an operator:
-       OP2 <- POP(S)
-       OP1 <- POP(S)
-       RES <- OP1 (operator) OP2
-       PUSH(S, RES)
-4. When input expression is exhausted:
-       Return POP(S)`,
-            c: `// Postfix Evaluation using Stack in C`,
-            java: `// Postfix Evaluation using Stack in Java`,
-            python: `def eval_postfix(tokens):
-    stack = []
-    for t in tokens:
-        if t.isdigit(): stack.append(int(t))
-        else:
-            b, a = stack.pop(), stack.pop()
-            if t == '+': stack.append(a + b)
-            elif t == '-': stack.append(a - b)
-            elif t == '*': stack.append(a * b)
-            elif t == '/': stack.append(a // b)
-            elif t == '^': stack.append(a ** b)
-    return stack.pop()`
-        },
-        prefixeval: {
-            blackboard: `// --- PREFIX EVALUATION ALGORITHM (RIGHT-TO-LEFT SCAN) ---
-Algorithm: EVAL_PREFIX(E)
-1. Read tokens from RIGHT to LEFT:
-2. If token T is an operand:
-       PUSH(S, T)
-3. Else if token T is an operator:
-       OP1 <- POP(S)  // Left operand!
-       OP2 <- POP(S)  // Right operand!
-       RES <- OP1 (operator) OP2
-       PUSH(S, RES)
-4. When input expression is exhausted:
-       Return POP(S)`,
-            c: `// Prefix Evaluation using Stack in C (Right to Left Scan)`,
-            java: `// Prefix Evaluation using Stack in Java (Right to Left Scan)`,
-            python: `def eval_prefix(tokens):
-    # Scan Right to Left
-    stack = []
-    for t in reversed(tokens):
-        if t.isdigit(): stack.append(int(t))
-        else:
-            op1, op2 = stack.pop(), stack.pop() # op1 is left, op2 is right
-            if t == '+': stack.append(op1 + op2)
-            elif t == '-': stack.append(op1 - op2)
-            elif t == '*': stack.append(op1 * op2)
-            elif t == '/': stack.append(op1 // op2)
-            elif t == '^': stack.append(op1 ** op2)
-    return stack.pop()`
-        },
-        linked: {
-            blackboard: `// --- LINKED STACK ---
-Algorithm: PUSH_LINKED(TOP, X)
-1. NewNode <- Allocate(Node)
-2. NewNode.data <- X
-3. NewNode.next <- TOP
-4. TOP <- NewNode
-
-Algorithm: POP_LINKED(TOP)
-1. If TOP == NULL -> Write "UNDERFLOW" and Return
-2. X <- TOP.data
-3. TOP <- TOP.next
-4. Return X`,
-            c: `// Linked List Stack in C`,
-            java: `// Linked List Stack in Java`,
-            python: `class LinkedStack:
-    class Node:
-        def __init__(self, d, n=None): self.d = d; self.n = n
-    def __init__(self): self.top = None
-    def push(self, x): self.top = self.Node(x, self.top)
-    def pop(self):
-        if not self.top: return None
-        v = self.top.d; self.top = self.top.n; return v`
-        },
-        minstack: {
-            blackboard: `// --- MIN STACK IN O(1) ---
-Algorithm: PUSH(X)
-1. S_MAIN.push(X)
-2. If S_MIN is empty OR X <= S_MIN.peek()
-       S_MIN.push(X)
-
-Algorithm: POP()
-1. X <- S_MAIN.pop()
-2. If X == S_MIN.peek()
-       S_MIN.pop()
-3. Return X
-
-Algorithm: GET_MIN()
-1. Return S_MIN.peek() // O(1) time`,
-            c: `// Min Stack in C`,
-            java: `// Min Stack in Java`,
-            python: `class MinStack:
-    def __init__(self): self.main = []; self.min = []
-    def push(self, x):
-        self.main.append(x)
-        if not self.min or x <= self.min[-1]: self.min.append(x)
-    def pop(self):
-        v = self.main.pop()
-        if v == self.min[-1]: self.min.pop()
-        return v
-    def get_min(self): return self.min[-1]`
+        "min_getmin": {
+            "title": "Algorithm: MINSTACK_GETMIN()",
+            "badge": "Min Stack (O(1) Access)",
+            "complexity": "Time: O(1) | Space: O(1)",
+            "desc": "Retrieves the minimum element currently in the stack in strictly O(1) constant time from the auxiliary min-stack top.",
+            "simType": "minstack",
+            "blackboardHtml": "<span class=\"algo-step-head\">1. [Check if Stack is Empty]</span>\n   <span class=\"algo-kw\">If</span> IS_EMPTY(MIN_STACK)\n       <span class=\"algo-kw\">Then write</span> \"STACK EMPTY\" <span class=\"algo-kw\">and</span> Return(0)\n\n<span class=\"algo-step-head\">2. [Retrieve Minimum from Top of Min Stack]</span>\n   MIN_VAL <span class=\"algo-arrow\">&larr;</span> PEEK(MIN_STACK)\n\n<span class=\"algo-step-head\">3. [Return Minimum]</span>\n   Return(MIN_VAL)",
+            "blackboardText": "Algorithm: MINSTACK_GETMIN()\n\n1. [Check if Stack is Empty]\n   If IS_EMPTY(MIN_STACK)\n       Then write \"STACK EMPTY\" and Return(0)\n\n2. [Retrieve Minimum from Top of Min Stack]\n   MIN_VAL <- PEEK(MIN_STACK)\n\n3. [Return Minimum]\n   Return(MIN_VAL)",
+            "c": "int getMin() {\n    if (topMin == -1) {\n        printf(\"STACK EMPTY\\n\");\n        return -1;\n    }\n    return minStk[topMin];\n}",
+            "java": "public int getMin() {\n    if (minStack.isEmpty()) throw new IllegalStateException(\"Stack empty\");\n    return minStack.peek();\n}",
+            "python": "def get_min(self):\n    return self.min_st[-1] if self.min_st else None"
         }
+    }
+};
+
+    let currentStackStudioType = 'standard';
+    let currentStackStudioTab = 'blackboard';
+
+    const stackTypeColorMap = {
+        standard: 'var(--color-standard)',
+        expressions: 'var(--color-revpol)',
+        twostacks: 'var(--color-twostacks)',
+        linked: 'var(--color-linked)',
+        minstack: 'var(--color-minstack)'
     };
 
-    let activeCodeLang = 'blackboard';
+    const stackTypeBadgeBgMap = {
+        standard: 'rgba(37, 99, 235, 0.12)',
+        expressions: 'rgba(13, 148, 136, 0.12)',
+        twostacks: 'rgba(139, 92, 246, 0.12)',
+        linked: 'rgba(16, 185, 129, 0.12)',
+        minstack: 'rgba(239, 68, 68, 0.12)'
+    };
 
-    function switchLanguageTab(event, lang) {
-        const tabContainer = event.target.parentElement;
-        tabContainer.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-        event.target.classList.add('active');
-
-        activeCodeLang = lang;
-        updateDisplayedCode();
+    function initStackAlgoStudio() {
+        populateStackStudioAlgoSelect(currentStackStudioType);
+        renderStackStudio('push');
     }
 
-    function updateDisplayedCode() {
-        const stackType = document.getElementById('code-stack-select').value;
-        const codeDisplay = document.getElementById('display-code-block');
-        
-        if (codeRepository[stackType] && codeRepository[stackType][activeCodeLang]) {
-            codeDisplay.textContent = codeRepository[stackType][activeCodeLang];
+    function onStackTypeChange() {
+        const typeSel = document.getElementById('stack-studio-type-select');
+        if (!typeSel) return;
+        currentStackStudioType = typeSel.value;
+
+        const activeColor = stackTypeColorMap[currentStackStudioType] || 'var(--color-standard)';
+        typeSel.style.borderColor = activeColor;
+        typeSel.style.color = activeColor;
+
+        populateStackStudioAlgoSelect(currentStackStudioType);
+        const algoSel = document.getElementById('stack-algo-select');
+        const defaultAlgo = algoSel ? algoSel.value : Object.keys(stackStudioAlgoData[currentStackStudioType])[0];
+        renderStackStudio(defaultAlgo);
+    }
+
+    function populateStackStudioAlgoSelect(type) {
+        const sel = document.getElementById('stack-algo-select');
+        if (!sel) return;
+
+        let algos = [];
+        if (type === 'standard') {
+            algos = [
+                { val: "push", text: "1. PUSH(S, TOP, N, X) — Insert onto Stack" },
+                { val: "pop", text: "2. POP(S, TOP) — Delete from Stack" },
+                { val: "peep", text: "3. PEEP(S, TOP, I) — Inspect Element at Depth I" },
+                { val: "change", text: "4. CHANGE(S, TOP, I, VALUE) — Modify Element at Depth I" },
+                { val: "peek", text: "5. PEEK(S, TOP) — Read Top Element O(1)" }
+            ];
+        } else if (type === 'expressions') {
+            algos = [
+                { val: "revpol", text: "1. REVPOL(INFIX, POLISH) — Infix to Postfix Conversion" },
+                { val: "postfix_eval", text: "2. POSTFIX_EVAL(E) — Postfix Expression Evaluation" }
+            ];
+        } else if (type === 'twostacks') {
+            algos = [
+                { val: "push1", text: "1. PUSH1(S, TOP1, TOP2, X) — Push to Stack 1" },
+                { val: "push2", text: "2. PUSH2(S, TOP1, TOP2, X) — Push to Stack 2" },
+                { val: "pop1", text: "3. POP1(S, TOP1) — Pop from Stack 1" },
+                { val: "pop2", text: "4. POP2(S, TOP2, N) — Pop from Stack 2" }
+            ];
+        } else if (type === 'linked') {
+            algos = [
+                { val: "push_ll", text: "1. PUSH_LL(TOP, X) — Dynamic Node Push" },
+                { val: "pop_ll", text: "2. POP_LL(TOP) — Dynamic Node Pop" }
+            ];
+        } else if (type === 'minstack') {
+            algos = [
+                { val: "min_push", text: "1. MINSTACK_PUSH(VAL) — Push with Min Tracking" },
+                { val: "min_getmin", text: "2. MINSTACK_GETMIN() — Retrieve Minimum O(1)" }
+            ];
+        }
+
+        let optHtml = '';
+        for (const a of algos) {
+            optHtml += `<option value="${a.val}">${a.text}</option>`;
+        }
+        sel.innerHTML = optHtml;
+        if (algos.length > 0) {
+            sel.value = algos[0].val;
+        }
+    }
+
+    function onStackAlgoChange() {
+        const sel = document.getElementById('stack-algo-select');
+        if (!sel) return;
+        renderStackStudio(sel.value);
+    }
+
+    function switchStackStudioTab(tab) {
+        currentStackStudioTab = tab;
+        const sel = document.getElementById('stack-algo-select');
+        const key = sel ? sel.value : Object.keys(stackStudioAlgoData[currentStackStudioType])[0];
+        renderStackStudio(key);
+    }
+
+    function renderStackStudio(key) {
+        const typeData = stackStudioAlgoData[currentStackStudioType] || stackStudioAlgoData.standard;
+        const algoKeys = Object.keys(typeData);
+        const algo = typeData[key] || typeData[algoKeys[0]];
+        if (!algo) return;
+
+        const activeColor = stackTypeColorMap[currentStackStudioType] || 'var(--color-standard)';
+        const badgeBg = stackTypeBadgeBgMap[currentStackStudioType] || 'rgba(37, 99, 235, 0.12)';
+
+        const studio = document.getElementById('stack-algo-studio');
+        if (studio) studio.style.display = 'block';
+
+        const titleElem = document.getElementById('studio-algo-title');
+        const badgeElem = document.getElementById('studio-algo-badge');
+        const compElem = document.getElementById('studio-algo-complexity');
+        const descElem = document.getElementById('studio-algo-desc');
+        const codeBox = document.getElementById('stack-studio-code');
+        const runBtn = document.getElementById('btn-run-sim-from-algo');
+
+        if (titleElem) {
+            titleElem.innerText = algo.title;
+            titleElem.style.color = activeColor;
+        }
+        if (badgeElem) {
+            badgeElem.innerText = algo.badge;
+            badgeElem.style.color = activeColor;
+            badgeElem.style.background = badgeBg;
+        }
+        if (compElem) compElem.innerText = algo.complexity;
+        if (descElem) descElem.innerText = algo.desc;
+        if (runBtn) {
+            runBtn.className = `btn-action btn-${algo.simType || currentStackStudioType}`;
+        }
+
+        // Update active tab buttons
+        document.querySelectorAll('.stack-tab-btn').forEach(btn => {
+            if (btn.getAttribute('data-tab') === currentStackStudioTab) {
+                btn.classList.add('active');
+                btn.style.background = activeColor;
+                btn.style.borderColor = activeColor;
+                btn.style.color = '#ffffff';
+            } else {
+                btn.classList.remove('active');
+                btn.style.background = '';
+                btn.style.borderColor = '';
+                btn.style.color = '';
+            }
+        });
+
+        if (codeBox) {
+            if (currentStackStudioTab === 'blackboard') {
+                codeBox.innerHTML = algo.blackboardHtml;
+            } else {
+                codeBox.textContent = algo[currentStackStudioTab] || "// Code implementation...";
+            }
+        }
+    }
+
+    function runStackAlgoInSim() {
+        const sel = document.getElementById('stack-algo-select');
+        const typeData = stackStudioAlgoData[currentStackStudioType] || stackStudioAlgoData.standard;
+        const key = sel ? sel.value : Object.keys(typeData)[0];
+        const algo = typeData[key];
+        const targetSim = (algo && algo.simType) ? algo.simType : currentStackStudioType;
+
+        selectSimulator(targetSim);
+        const simSection = document.getElementById('section-simulators');
+        if (simSection) {
+            simSection.scrollIntoView({ behavior: 'smooth' });
+        }
+        logConsole(`Switched to ${targetSim.toUpperCase()} Stack Simulator. Ready to simulate!`, 'info');
+    }
+
+    function copyStackStudioCode() {
+        const sel = document.getElementById('stack-algo-select');
+        const typeData = stackStudioAlgoData[currentStackStudioType] || stackStudioAlgoData.standard;
+        const key = sel ? sel.value : Object.keys(typeData)[0];
+        const algo = typeData[key];
+        if (!algo) return;
+
+        let textToCopy = '';
+        if (currentStackStudioTab === 'blackboard') {
+            textToCopy = algo.blackboardText;
         } else {
-            codeDisplay.textContent = "// Code snippet for this language variant is being loaded...";
+            textToCopy = algo[currentStackStudioTab] || '';
+        }
+
+        if (navigator && navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                showStackCopyFeedback();
+            }).catch(() => {
+                fallbackStackCopy(textToCopy);
+            });
+        } else {
+            fallbackStackCopy(textToCopy);
+        }
+    }
+
+    function fallbackStackCopy(text) {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        showStackCopyFeedback();
+    }
+
+    function showStackCopyFeedback() {
+        const icon = document.getElementById('copy-btn-icon');
+        const text = document.getElementById('copy-btn-text');
+        if (icon && text) {
+            const oldIcon = icon.innerText;
+            const oldText = text.innerText;
+            icon.innerText = '✅';
+            text.innerText = 'Copied!';
+            setTimeout(() => {
+                icon.innerText = oldIcon;
+                text.innerText = oldText;
+            }, 2000);
         }
     }
 
@@ -5651,7 +5769,7 @@ Algorithm: GET_MIN()
     window.onload = function() {
         selectSimulator('standard');
         loadQuizQuestion();
-        updateDisplayedCode();
+        initStackAlgoStudio();
         // Run default examples in Section 5 solvers
         runRevpolSolver();
         runPrefixSolver();

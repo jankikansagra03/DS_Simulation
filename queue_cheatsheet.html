@@ -28,24 +28,34 @@
             --shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.08), 0 8px 10px -6px rgba(15, 23, 42, 0.08);
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             
-            /* Accent Colors per Queue Type */
+                        /* Accent Colors per Queue Type */
             --color-simple: #3b82f6; /* Blue */
             --color-circular: #0d9488; /* Teal */
             --color-deque: #8b5cf6; /* Purple */
             --color-c-deque: #f59e0b; /* Amber */
             --color-priority: #ef4444; /* Crimson */
+            --color-priority-min: #10b981; /* Emerald Green */
             
             /* Math/Status Colors */
             --color-overflow: #dc2626;
             --color-underflow: #ea580c;
             --color-success: #16a34a;
+
+            /* Pleasant Eye-Friendly Algorithm & Code Block Colors */
+            --code-bg: #f8fafc;
+            --code-text: #334155;
+            --code-border: #e2e8f0;
+            --code-step: #1d4ed8;
+            --code-kw: #7c3aed;
+            --code-str: #059669;
+            --code-arrow: #d97706;
             
             --font-main: 'Inter', sans-serif;
             --font-head: 'Outfit', sans-serif;
             --font-code: 'Fira Code', monospace;
         }
 
-        [data-theme="dark"] {
+                [data-theme="dark"] {
             /* Dark Theme Variables */
             --bg-primary: #090d16;
             --bg-secondary: #111827;
@@ -54,6 +64,15 @@
             --border-color: #374151;
             --card-bg: #1f2937;
             --shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.4);
+
+            /* Dark Mode Eye-Friendly Code Block Colors (Serene midnight slate, soft pastel accents) */
+            --code-bg: #0c1424;
+            --code-text: #cbd5e1;
+            --code-border: #1e293b;
+            --code-step: #60a5fa;
+            --code-kw: #c084fc;
+            --code-str: #34d399;
+            --code-arrow: #fbbf24;
         }
 
         * {
@@ -798,6 +817,153 @@
             font-weight: 700;
             font-size: 14px;
         }
+
+        .btn-priority-min { background-color: var(--color-priority-min); }
+
+        /* Algorithm Syntax Highlighting & Line Breaks */
+        .algo-step-head {
+            color: var(--code-step);
+            font-weight: 700;
+        }
+
+        .algo-kw {
+            color: var(--code-kw);
+            font-weight: 600;
+        }
+
+        .algo-str {
+            color: var(--code-str);
+            font-weight: 500;
+        }
+
+        .algo-arrow {
+            color: var(--code-arrow);
+            font-weight: 700;
+        }
+
+        /* Academic Blackboard Studio */
+        .studio-card {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.06);
+            margin-bottom: 20px;
+            transition: var(--transition);
+        }
+
+        .studio-header {
+            background: var(--card-bg);
+            border-bottom: 1px solid var(--border-color);
+            padding: 12px 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .studio-dots {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .studio-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+        .studio-dot.red { background: #ef4444; }
+        .studio-dot.yellow { background: #f59e0b; }
+        .studio-dot.green { background: #10b981; }
+
+        .studio-tabs {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .queue-tab-btn {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            padding: 6px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-family: var(--font-head);
+            font-weight: 600;
+            font-size: 12px;
+            color: var(--text-primary);
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .queue-tab-btn:hover {
+            border-color: var(--color-simple);
+            background: var(--card-bg);
+        }
+
+        .queue-tab-btn.active {
+            background: var(--color-simple);
+            color: #ffffff;
+            border-color: var(--color-simple);
+        }
+
+        .studio-body {
+            padding: 18px;
+        }
+
+        .studio-code-box {
+            background: var(--code-bg);
+            color: var(--code-text);
+            border: 1px solid var(--code-border);
+            border-radius: 8px;
+            padding: 18px 20px;
+            font-family: var(--font-code);
+            font-size: 12.5px;
+            line-height: 1.75;
+            min-height: 320px;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-break: break-word;
+            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.04);
+            transition: var(--transition);
+        }
+
+        .studio-footer {
+            background: var(--card-bg);
+            border-top: 1px solid var(--border-color);
+            padding: 12px 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+            font-size: 12.5px;
+        }
+
+        /* Studio Custom Select Dropdown Styling */
+        .studio-select {
+            padding: 7px 14px;
+            border: 1.5px solid var(--border-color);
+            border-radius: 6px;
+            font-family: var(--font-main);
+            font-size: 13px;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            outline: none;
+            cursor: pointer;
+            transition: var(--transition);
+            width: auto;
+            max-width: 100%;
+        }
+
+        .studio-select:focus {
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+        }
     </style>
 </head>
 <body>
@@ -851,10 +1017,9 @@
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 10 12 10 12 14"/></svg>
                             Queue (FIFO)
                         </a>
-                        <a href="index.html#linkedlist" class="dropdown-link">
+                        <a href="linkedlist_cheatsheet.html" class="dropdown-link">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6" cy="12" r="3"/><circle cx="18" cy="12" r="3"/><line x1="9" y1="12" x2="15" y2="12"/></svg>
                             Linked List
-                         
                         </a>
                     </div>
                 </li>
@@ -971,7 +1136,7 @@
             <div class="mobile-nav-section-title">Linear Structures</div>
             <a href="stack_cheatsheet.html" class="mobile-nav-link" style="color: var(--accent-blue); font-weight:700;">Stack Simulator (Live ⚡)</a>
             <a href="queue_cheatsheet.html" class="mobile-nav-link" style="color: var(--accent-emerald); font-weight:700;">Queue Simulator (Current Page ⚡)</a>
-            <a href="index.html#linkedlist" class="mobile-nav-link">Linked List (Train Cars)</a>
+            <a href="linkedlist_cheatsheet.html" class="mobile-nav-link" style="color: var(--accent-purple, #a855f7); font-weight:700;">Linked List Simulator (Live ⚡)</a>
 
             <div class="mobile-nav-section-title">Non-Linear Structures</div>
             <a href="index.html#tree" class="mobile-nav-link">Tree (Family Tree)</a>
@@ -1262,32 +1427,116 @@
         </div>
     </div>
 
-    <!-- CODE & DETAILS SECTION -->
+    <!-- ====================================================================
+         SECTION 4: ACADEMIC ALGORITHM CHEATSHEET & STUDIO (Tremblay & Sorenson)
+         ==================================================================== -->
     <div id="section-code" class="section-card">
-        <h2>💻 Core Code Implementations</h2>
-        
-        <!-- Queue Type Selector Dropdown -->
-        <div style="margin-bottom: 18px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
-            <label for="code-queue-select" style="font-family: var(--font-head); font-weight: 700; font-size: 15px; color: var(--text-primary);">Select Queue Type:</label>
-            <select id="code-queue-select" class="input-elem" style="width: 250px; background: var(--bg-primary); font-weight: 600;" onchange="updateDisplayedCode()">
-                <option value="simple">Simple Queue</option>
-                <option value="circular" selected>Circular Queue</option>
-                <option value="deque">Simple Deque</option>
-                <option value="c-deque">Circular Deque</option>
-                <option value="priority-max">Priority Queue (Max-Heap)</option>
-                <option value="priority-min">Priority Queue (Min-Heap)</option>
-            </select>
+        <h2>📖 Academic Queue Algorithm Studio & Cheat Sheet (Tremblay & Sorenson)</h2>
+        <p style="color: var(--text-secondary); font-size: 13px; margin-bottom: 18px;">
+            Standard university syllabus algorithms with precise pointer manipulation, boundary checks, and circular wrapping arithmetic across <strong>Simple Queue, Circular Queue, Simple Deque, Circular Deque, Max-Heap, and Min-Heap Priority Queues</strong>. Select your desired queue type and algorithm to explore the academic Blackboard presentation, complete working programs (C, Java, Python), and simulate live in memory!
+        </p>
+
+        <!-- Queue Type & Algorithm Dropdowns & Action Toolbar -->
+        <div style="background: var(--bg-primary); border: 1px solid var(--border-color); border-radius: 10px; padding: 14px 18px; margin-bottom: 18px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
+            <div style="display: flex; align-items: center; gap: 14px; flex-wrap: wrap;">
+                <!-- Type Dropdown -->
+                <div style="display: flex; align-items: center; gap: 6px;">
+                    <label for="queue-studio-type-select" style="font-size: 13px; font-weight: 700; color: var(--text-primary); display: flex; align-items: center; gap: 4px;">
+                        <span>📦 Queue Type:</span>
+                    </label>
+                    <select id="queue-studio-type-select" class="studio-select" style="min-width: 260px; font-weight: 800; border: 1.5px solid var(--color-simple); color: var(--color-simple);" onchange="onQueueTypeChange()">
+                        <option value="simple">🟦 Simple Linear Queue</option>
+                        <option value="circular">🟩 Circular Queue</option>
+                        <option value="deque">🟪 Simple Deque (Double Ended)</option>
+                        <option value="c-deque">🟧 Circular Deque</option>
+                        <option value="priority">🔴 Priority Queue (Max-Heap)</option>
+                        <option value="priority-min">🟢 Priority Queue (Min-Heap)</option>
+                    </select>
+                </div>
+
+                <!-- Algorithm Dropdown -->
+                <div style="display: flex; align-items: center; gap: 6px;">
+                    <label for="queue-algo-select" style="font-size: 13px; font-weight: 700; color: var(--text-primary); display: flex; align-items: center; gap: 4px;">
+                        <span>🎯 Algorithm:</span>
+                    </label>
+                    <select id="queue-algo-select" class="studio-select" style="min-width: 380px; font-weight: 700;" onchange="onQueueAlgoChange()">
+                        <!-- Dynamically populated -->
+                    </select>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                <button class="btn-action btn-simple" id="btn-run-sim-from-algo" onclick="runQueueAlgoInSim()" style="padding: 7px 14px; font-size: 12px; display: inline-flex; align-items: center; gap: 6px;">
+                    <span>⚡ Run in Visual Simulator ➔</span>
+                </button>
+                <button class="btn-action" id="btn-copy-algo-code" onclick="copyQueueStudioCode()" style="padding: 7px 14px; font-size: 12px; background: var(--bg-primary); border: 1px solid var(--border-color); color: var(--text-primary); display: inline-flex; align-items: center; gap: 6px;">
+                    <span id="copy-btn-icon">📋</span> <span id="copy-btn-text">Copy Code</span>
+                </button>
+            </div>
         </div>
 
-        <div class="code-tabs">
-            <div class="tab-headers">
-                <button class="tab-btn active" onclick="switchLanguageTab(event, 'blackboard')">Blackboard Syntax</button>
-                <button class="tab-btn" onclick="switchLanguageTab(event, 'java')">Java Implementation</button>
-                <button class="tab-btn" onclick="switchLanguageTab(event, 'python')">Python Implementation</button>
+        <!-- Academic Blackboard & Working Program Studio -->
+        <div id="queue-algo-studio" class="studio-card">
+            <!-- Studio Header: Traffic Lights, Title, Badges, Tabs -->
+            <div class="studio-header">
+                <div style="display: flex; align-items: center; gap: 14px; flex-wrap: wrap;">
+                    <div class="studio-dots">
+                        <span class="studio-dot red"></span>
+                        <span class="studio-dot yellow"></span>
+                        <span class="studio-dot green"></span>
+                    </div>
+                    <div>
+                        <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                            <h3 id="studio-algo-title" style="font-family: var(--font-head); font-weight: 800; font-size: 15px; color: var(--color-simple); margin: 0;">
+                                Algorithm: INSERT_SQ(Q, N, F, R, Y)
+                            </h3>
+                            <span id="studio-algo-badge" style="font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 4px; background: rgba(59, 130, 246, 0.12); color: var(--color-simple);">
+                                Enqueue
+                            </span>
+                            <span id="studio-algo-complexity" style="font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 4px; background: var(--border-color); color: var(--text-secondary); font-family: var(--font-code);">
+                                Time: O(1) | Space: O(1)
+                            </span>
+                        </div>
+                        <p id="studio-algo-desc" style="font-size: 12px; color: var(--text-secondary); margin: 4px 0 0 0;">
+                            Inserts an element Y at the rear of a simple linear queue.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Studio Language Tabs -->
+                <div class="studio-tabs">
+                    <button class="queue-tab-btn active" data-tab="blackboard" onclick="switchQueueStudioTab('blackboard')">
+                        <span>📝 Blackboard (Academic)</span>
+                    </button>
+                    <button class="queue-tab-btn" data-tab="c" onclick="switchQueueStudioTab('c')">
+                        <span>⚡ C Program (Working)</span>
+                    </button>
+                    <button class="queue-tab-btn" data-tab="java" onclick="switchQueueStudioTab('java')">
+                        <span>☕ Java (Working)</span>
+                    </button>
+                    <button class="queue-tab-btn" data-tab="python" onclick="switchQueueStudioTab('python')">
+                        <span>🐍 Python (Working)</span>
+                    </button>
+                </div>
             </div>
-            
-            <div class="code-display">
-                <pre class="code-block" id="display-code-block" style="white-space: pre-wrap; max-height: 500px; overflow-y: auto;">Loading code snippet...</pre>
+
+            <!-- Studio Body: Blackboard / Working Code Display Box -->
+            <div class="studio-body">
+                <div class="studio-code-box" id="queue-studio-code">
+                    <!-- Dynamic code/blackboard inserted by JS -->
+                </div>
+            </div>
+
+            <!-- Studio Footer: Interactive Simulator Launcher Prompt -->
+            <div class="studio-footer">
+                <div style="display: flex; align-items: center; gap: 8px; color: var(--text-secondary);">
+                    <span style="font-size: 16px;">💡</span>
+                    <span><strong>Visual Simulation Ready:</strong> Click <em>Run in Visual Simulator</em> to step through queue pointers and watch array slots update live in memory.</span>
+                </div>
+                <button class="btn-action btn-simple" onclick="runQueueAlgoInSim()" style="padding: 6px 12px; font-size: 12px; white-space: nowrap;">
+                    Launch Visual Simulator ➔
+                </button>
             </div>
         </div>
     </div>
@@ -1360,918 +1609,286 @@
         renderSimulator();
     }
 
-    const codeRepository = {
-        simple: {
-            blackboard: `// --- SIMPLE QUEUE INSERT (ENQUEUE) ---
-Algorithm: INSERT_SQ(Q, N, F, R, X)
-1. [Check Overflow]
-   If R >= N - 1
-       Write "QUEUE OVERFLOW" and Return
-2. [Increment Rear]
-   R <- R + 1
-3. [Insert Element]
-   Q[R] <- X
-4. [Adjust Front Pointer on first insert]
-   If F = -1
-       F <- 0
-5. Return
-
-// --- SIMPLE QUEUE DELETE (DEQUEUE) ---
-Algorithm: DELETE_SQ(Q, F, R)
-1. [Check Underflow]
-   If F = -1
-       Write "QUEUE UNDERFLOW" and Return
-2. [Retrieve Item]
-   ITEM <- Q[F]
-3. [Check if Queue has only one element]
-   If F = R
-       F <- -1
-       R <- -1
-   Else
-       F <- F + 1
-4. Return ITEM`,
-            java: `public class SimpleQueue {
-    private int[] q;
-    private int front, rear, size;
-
-    public SimpleQueue(int limit) {
-        size = limit;
-        q = new int[size];
-        front = -1;
-        rear = -1;
-    }
-
-    public boolean enqueue(int val) {
-        if (rear >= size - 1) {
-            System.out.println("QUEUE OVERFLOW");
-            return false;
-        }
-        rear = rear + 1;
-        q[rear] = val;
-        if (front == -1) {
-            front = 0;
-        }
-        return true;
-    }
-
-    public int dequeue() {
-        if (front == -1) {
-            System.out.println("QUEUE UNDERFLOW");
-            return -1;
-        }
-        int item = q[front];
-        if (front == rear) {
-            front = -1;
-            rear = -1;
-        } else {
-            front = front + 1;
-        }
-        return item;
-    }
-}`,
-            python: `class SimpleQueue:
-    def __init__(self,n):
-        self.n=n
-        self.front=-1
-        self.rear=-1
-        self.sq=[]
-
-    def is_empty(self):
-        if self.front==-1 or self.rear==-1 or self.front<0 or self.rear<0:
-            return True
-        else:
-            return False
-
-    def is_full(self):
-        if self.rear>=self.n-1:
-            return True
-        else:
-            return False
-
-    def insert_sq(self,x):
-        if self.is_full():
-            print("Queue is full")
-            return
-        else:
-            if self.front==-1:
-                self.front=0
-                self.rear=0
-            else:
-                self.rear = self.rear+1
-        self.sq.append(x)
-
-    def delete_sq(self):
-        if self.is_empty():
-            print("Queue is empty")
-            return None
-        else:
-            deleted_value=self.sq[self.front]
-            if self.front==self.rear:
-                self.front=-1
-                self.rear=-1
-            else:
-                self.front=self.front+1
-            return deleted_value
-
-    def display(self):
-        if self.is_empty():
-            print("Queue is empty")
-        else:
-            for i in range(self.front,self.rear+1):
-                print(f"value at {i} = {self.sq[i]}")
-
-# --- Driver Program ---
-max_size = int(input("Enter the size of Queue::"))
-
-sq_obj = SimpleQueue(max_size)
-while (True):
-    print("1. Insert")
-    print("2. Delete")
-    print("3. Display")
-    print("4. Exit")
-
-    user_choice = int(input("Enter your Choice::"))
-
-    if user_choice == 1:
-        x = input("Enter value to insert on to the queue::")
-        sq_obj.insert_sq(x)
-        sq_obj.display()
-    elif user_choice == 2:
-        deleted_val = sq_obj.delete_sq()
-        # sq_obj.display()
-    elif user_choice == 3:
-        sq_obj.display()
-    elif user_choice == 4:
-        print("Exiting the code")
-        break
-    else:
-        print("invalid Choice")`
+    const queueStudioAlgoData = {
+    "simple": {
+        "insert_sq": {
+            "title": "Algorithm: INSERT_SQ(Q, N, F, R, X)",
+            "badge": "Enqueue (Rear)",
+            "complexity": "Time: O(1) | Space: O(1)",
+            "desc": "Inserts element X at the rear of the linear queue. Checks for queue overflow and adjusts front pointer upon first insertion.",
+            "simOp": "insert_rear",
+            "blackboardHtml": "<span class=\"algo-step-head\">1. [Check for Queue Overflow]</span>\n   <span class=\"algo-kw\">If</span> R &ge; N - 1\n       <span class=\"algo-kw\">Then write</span> <span class=\"algo-str\">\"QUEUE OVERFLOW\"</span> <span class=\"algo-kw\">and Return</span>\n\n<span class=\"algo-step-head\">2. [Increment Rear Pointer]</span>\n   R <span class=\"algo-arrow\">&larr;</span> R + 1\n\n<span class=\"algo-step-head\">3. [Insert Element at Rear]</span>\n   Q[R] <span class=\"algo-arrow\">&larr;</span> X\n\n<span class=\"algo-step-head\">4. [Adjust Front Pointer on First Insert]</span>\n   <span class=\"algo-kw\">If</span> F = -1\n       F <span class=\"algo-arrow\">&larr;</span> 0\n\n<span class=\"algo-step-head\">5. [Finished]</span>\n   <span class=\"algo-kw\">Return</span>",
+            "blackboardText": "Algorithm: INSERT_SQ(Q, N, F, R, X)\n\n1. [Check for Queue Overflow]\n   If R >= N - 1\n       Then write \"QUEUE OVERFLOW\" and Return\n\n2. [Increment Rear Pointer]\n   R <- R + 1\n\n3. [Insert Element at Rear]\n   Q[R] <- X\n\n4. [Adjust Front Pointer on First Insert]\n   If F = -1\n       F <- 0\n\n5. [Finished]\n   Return",
+            "c": "#include <stdio.h>\n#define N 6\n\nint Q[N];\nint F = -1, R = -1;\n\n// Algorithm: INSERT_SQ(Q, N, F, R, X)\nint insertSQ(int x) {\n    // 1. [Check Overflow]\n    if (R >= N - 1) {\n        printf(\"QUEUE OVERFLOW! Cannot insert %d\\n\", x);\n        return 0;\n    }\n    // 2. [Increment Rear]\n    R = R + 1;\n    // 3. [Insert Element]\n    Q[R] = x;\n    // 4. [Adjust Front on First Insert]\n    if (F == -1) {\n        F = 0;\n    }\n    printf(\"Inserted %d at index %d (F=%d, R=%d)\\n\", x, R, F, R);\n    return 1;\n}\n\nvoid printQueue() {\n    if (F == -1 || F > R) {\n        printf(\"Queue is EMPTY\\n\");\n        return;\n    }\n    printf(\"Queue [Front to Rear]: \");\n    for (int i = F; i <= R; i++) {\n        printf(\"[%d] \", Q[i]);\n    }\n    printf(\"\\n\");\n}\n\nint main() {\n    printf(\"--- Simple Queue: INSERT_SQ ---\\n\");\n    insertSQ(10);\n    insertSQ(20);\n    insertSQ(30);\n    printQueue(); // [10] [20] [30]\n    return 0;\n}",
+            "java": "public class SimpleQueueInsert {\n    private static final int N = 6;\n    private static int[] Q = new int[N];\n    private static int F = -1, R = -1;\n\n    // Algorithm: INSERT_SQ(Q, N, F, R, X)\n    public static boolean insertSQ(int x) {\n        if (R >= N - 1) {\n            System.out.println(\"QUEUE OVERFLOW! Cannot insert \" + x);\n            return false;\n        }\n        R = R + 1;\n        Q[R] = x;\n        if (F == -1) {\n            F = 0;\n        }\n        System.out.println(\"Inserted \" + x + \" at index \" + R + \" (F=\" + F + \", R=\" + R + \")\");\n        return true;\n    }\n\n    public static void printQueue() {\n        if (F == -1 || F > R) {\n            System.out.println(\"Queue is EMPTY\");\n            return;\n        }\n        System.out.print(\"Queue [Front to Rear]: \");\n        for (int i = F; i <= R; i++) {\n            System.out.print(\"[\" + Q[i] + \"] \");\n        }\n        System.out.println();\n    }\n\n    public static void main(String[] args) {\n        System.out.println(\"--- Simple Queue: INSERT_SQ ---\");\n        insertSQ(10);\n        insertSQ(20);\n        insertSQ(30);\n        printQueue(); // [10] [20] [30]\n    }\n}",
+            "python": "class SimpleQueue:\n    def __init__(self, n=6):\n        self.n = n\n        self.q = [None] * n\n        self.f = -1\n        self.r = -1\n\n    # Algorithm: INSERT_SQ(Q, N, F, R, X)\n    def insert_sq(self, x):\n        if self.r >= self.n - 1:\n            print(f\"QUEUE OVERFLOW! Cannot insert {x}\")\n            return False\n        self.r += 1\n        self.q[self.r] = x\n        if self.f == -1:\n            self.f = 0\n        print(f\"Inserted {x} at index {self.r} (F={self.f}, R={self.r})\")\n        return True\n\n    def display(self):\n        if self.f == -1 or self.f > self.r:\n            print(\"Queue is EMPTY\")\n            return\n        items = [f\"[{self.q[i]}]\" for i in range(self.f, self.r + 1)]\n        print(\"Queue [Front to Rear]:\", \" \".join(items))\n\nsq = SimpleQueue(6)\nsq.insert_sq(10)\nsq.insert_sq(20)\nsq.insert_sq(30)\nsq.display() # [10] [20] [30]"
         },
-        circular: {
-            blackboard: `// --- CIRCULAR QUEUE INSERT (ENQUEUE) ---
-Algorithm: INSERT_CQ(Q, N, F, R, X)
-1. [Check Overflow]
-   If (F = 0 and R = N - 1) OR (R = F - 1)
-       Write "QUEUE OVERFLOW" and Return
-2. [Calculate Insert Location]
-   If R = N - 1
-       R <- 0
-   Else
-       R <- R + 1
-3. [Insert Element]
-   Q[R] <- X
-4. [Adjust Front Pointer on first insert]
-   If F = -1
-       F <- 0
-5. Return
-
-// --- CIRCULAR QUEUE DELETE (DEQUEUE) ---
-Algorithm: DELETE_CQ(Q, N, F, R)
-1. [Check Underflow]
-   If F = -1
-       Write "QUEUE UNDERFLOW" and Return
-2. [Retrieve Item]
-   ITEM <- Q[F]
-3. [Check if Queue has only one element]
-   If F = R
-       F <- -1
-       R <- -1
-   Else If F = N - 1
-       F <- 0
-   Else
-       F <- F + 1
-4. Return ITEM`,
-            java: `public class CircularQueue {
-    private int[] q;
-    private int front, rear, size;
-
-    public CircularQueue(int limit) {
-        size = limit;
-        q = new int[size];
-        front = -1;
-        rear = -1;
-    }
-
-    public boolean enqueue(int val) {
-        if ((front == 0 && rear == size - 1) || (rear == front - 1)) {
-            System.out.println("QUEUE OVERFLOW");
-            return false;
-        }
-        if (rear == size - 1) {
-            rear = 0;
-        } else {
-            rear = rear + 1;
-        }
-        q[rear] = val;
-        if (front == -1) {
-            front = 0;
-        }
-        return true;
-    }
-
-    public int dequeue() {
-        if (front == -1) {
-            System.out.println("QUEUE UNDERFLOW");
-            return -1;
-        }
-        int item = q[front];
-        if (front == rear) {
-            front = -1;
-            rear = -1;
-        } else if (front == size - 1) {
-            front = 0;
-        } else {
-            front = front + 1;
-        }
-        return item;
-    }
-}`,
-            python: `class CircularQueue:
-    def __init__(self, size: int):
-        self.size = size
-        self.q = [None] * size
-        self.front = -1
-        self.rear = -1
-
-    def enqueue(self, val) -> bool:
-        if (self.front == 0 and self.rear == self.size - 1) or (self.rear == self.front - 1):
-            print("QUEUE OVERFLOW")
-            return False
-        if self.rear == self.size - 1:
-            self.rear = 0
-        else:
-            self.rear += 1
-        self.q[self.rear] = val
-        if self.front == -1:
-            self.front = 0
-        return True
-
-    def dequeue(self):
-        if self.front == -1:
-            print("QUEUE UNDERFLOW")
-            return None
-        item = self.q[self.front]
-        self.q[self.front] = None
-        if self.front == self.rear:
-            self.front = -1
-            self.rear = -1
-        elif self.front == self.size - 1:
-            self.front = 0
-        else:
-            self.front += 1
-        return item
-
-# --- Driver Program ---
-max_size = int(input("Enter the size of Queue::"))
-cq_obj = CircularQueue(max_size)
-
-while True:
-    print("1. Enqueue (Insert)")
-    print("2. Dequeue (Delete)")
-    print("3. Display")
-    print("4. Exit")
-    user_choice = int(input("Enter your Choice::"))
-    if user_choice == 1:
-        x = input("Enter value to insert on to the circular queue::")
-        cq_obj.enqueue(x)
-        print("Queue array:", cq_obj.q)
-    elif user_choice == 2:
-        deleted_val = cq_obj.dequeue()
-        print("Deleted:", deleted_val)
-        print("Queue array:", cq_obj.q)
-    elif user_choice == 3:
-        print("Queue array:", cq_obj.q)
-    elif user_choice == 4:
-        print("Exiting the code")
-        break
-    else:
-        print("invalid Choice")`
+        "delete_sq": {
+            "title": "Algorithm: DELETE_SQ(Q, F, R)",
+            "badge": "Dequeue (Front)",
+            "complexity": "Time: O(1) | Space: O(1)",
+            "desc": "Deletes and returns the element at the front of the queue. Detects underflow and resets pointers to -1 when the last item is removed.",
+            "simOp": "delete_front",
+            "blackboardHtml": "<span class=\"algo-step-head\">1. [Check for Queue Underflow]</span>\n   <span class=\"algo-kw\">If</span> F = -1\n       <span class=\"algo-kw\">Then write</span> <span class=\"algo-str\">\"QUEUE UNDERFLOW\"</span> <span class=\"algo-kw\">and Return</span>(0)\n\n<span class=\"algo-step-head\">2. [Retrieve Item from Front]</span>\n   ITEM <span class=\"algo-arrow\">&larr;</span> Q[F]\n\n<span class=\"algo-step-head\">3. [Check if Queue has only one element]</span>\n   <span class=\"algo-kw\">If</span> F = R\n       F <span class=\"algo-arrow\">&larr;</span> -1\n       R <span class=\"algo-arrow\">&larr;</span> -1\n   <span class=\"algo-kw\">Else</span>\n       F <span class=\"algo-arrow\">&larr;</span> F + 1\n\n<span class=\"algo-step-head\">4. [Return Deleted Item]</span>\n   <span class=\"algo-kw\">Return</span>(ITEM)",
+            "blackboardText": "Algorithm: DELETE_SQ(Q, F, R)\n\n1. [Check for Queue Underflow]\n   If F = -1\n       Then write \"QUEUE UNDERFLOW\" and Return(0)\n\n2. [Retrieve Item from Front]\n   ITEM <- Q[F]\n\n3. [Check if Queue has only one element]\n   If F = R\n       F <- -1\n       R <- -1\n   Else\n       F <- F + 1\n\n4. [Return Deleted Item]\n   Return(ITEM)",
+            "c": "#include <stdio.h>\n#define N 6\n\nint Q[N] = {10, 20, 30};\nint F = 0, R = 2;\n\n// Algorithm: DELETE_SQ(Q, F, R)\nint deleteSQ() {\n    // 1. [Check Underflow]\n    if (F == -1) {\n        printf(\"QUEUE UNDERFLOW! No elements to delete.\\n\");\n        return -1;\n    }\n    // 2. [Retrieve Item]\n    int item = Q[F];\n\n    // 3. [Reset or Increment]\n    if (F == R) {\n        F = -1;\n        R = -1;\n    } else {\n        F = F + 1;\n    }\n    printf(\"Deleted item: %d (F=%d, R=%d)\\n\", item, F, R);\n    return item;\n}\n\nint main() {\n    printf(\"--- Simple Queue: DELETE_SQ ---\\n\");\n    deleteSQ(); // 10\n    deleteSQ(); // 20\n    deleteSQ(); // 30\n    deleteSQ(); // Underflow\n    return 0;\n}",
+            "java": "public class SimpleQueueDelete {\n    private static int[] Q = {10, 20, 30};\n    private static int F = 0, R = 2;\n\n    // Algorithm: DELETE_SQ(Q, F, R)\n    public static int deleteSQ() {\n        if (F == -1) {\n            System.out.println(\"QUEUE UNDERFLOW! No elements to delete.\");\n            return -1;\n        }\n        int item = Q[F];\n        if (F == R) {\n            F = -1;\n            R = -1;\n        } else {\n            F = F + 1;\n        }\n        System.out.println(\"Deleted item: \" + item + \" (F=\" + F + \", R=\" + R + \")\");\n        return item;\n    }\n\n    public static void main(String[] args) {\n        System.out.println(\"--- Simple Queue: DELETE_SQ ---\");\n        deleteSQ(); // 10\n        deleteSQ(); // 20\n        deleteSQ(); // 30\n        deleteSQ(); // Underflow\n    }\n}",
+            "python": "class SimpleQueue:\n    def __init__(self, items=[10, 20, 30]):\n        self.q = items\n        self.f = 0\n        self.r = len(items) - 1\n\n    # Algorithm: DELETE_SQ(Q, F, R)\n    def delete_sq(self):\n        if self.f == -1:\n            print(\"QUEUE UNDERFLOW! No elements to delete.\")\n            return None\n        item = self.q[self.f]\n        if self.f == self.r:\n            self.f = -1\n            self.r = -1\n        else:\n            self.f += 1\n        print(f\"Deleted item: {item} (F={self.f}, R={self.r})\")\n        return item\n\nsq = SimpleQueue()\nsq.delete_sq() # 10\nsq.delete_sq() # 20\nsq.delete_sq() # 30\nsq.delete_sq() # Underflow"
         },
-        deque: {
-            blackboard: `// --- INSERT FRONT (SIMPLE DEQUE) ---
-Algorithm: INSERT_FRONT_DQ(Q, N, F, R, X)
-1. If F = 0
-       Write "FRONT OVERFLOW (Blocked)" and Return
-2. If F = -1
-       F <- 0, R <- 0
-3. Else
-       F <- F - 1
-4. Q[F] <- X
-
-// --- DELETE REAR (SIMPLE DEQUE) ---
-Algorithm: DELETE_REAR_DQ(Q, F, R)
-1. If F = -1
-       Write "QUEUE UNDERFLOW" and Return
-2. ITEM <- Q[R]
-3. If F = R
-       F <- -1, R <- -1
-4. Else
-       R <- R - 1
-5. Return ITEM`,
-            java: `public class SimpleDeque {
-    private int[] q;
-    private int front, rear, size;
-
-    public SimpleDeque(int limit) {
-        size = limit;
-        q = new int[size];
-        front = -1; rear = -1;
-    }
-
-    public boolean insertFront(int val) {
-        if (front == 0) {
-            System.out.println("FRONT OVERFLOW");
-            return false;
+        "display_sq": {
+            "title": "Algorithm: DISPLAY_SQ(Q, F, R)",
+            "badge": "Traversal",
+            "complexity": "Time: O(n) | Space: O(1)",
+            "desc": "Traverses and displays all valid elements from Front to Rear index in linear order.",
+            "simOp": "insert_rear",
+            "blackboardHtml": "<span class=\"algo-step-head\">1. [Check if Queue is Empty]</span>\n   <span class=\"algo-kw\">If</span> F = -1\n       <span class=\"algo-kw\">Then write</span> <span class=\"algo-str\">\"QUEUE EMPTY\"</span> <span class=\"algo-kw\">and Return</span>\n\n<span class=\"algo-step-head\">2. [Iterate from Front to Rear]</span>\n   <span class=\"algo-kw\">Repeat for</span> I <span class=\"algo-arrow\">&larr;</span> F <span class=\"algo-kw\">to</span> R\n       <span class=\"algo-kw\">Write</span> Q[I]\n\n<span class=\"algo-step-head\">3. [Finished]</span>\n   <span class=\"algo-kw\">Return</span>",
+            "blackboardText": "Algorithm: DISPLAY_SQ(Q, F, R)\n\n1. [Check if Queue is Empty]\n   If F = -1\n       Then write \"QUEUE EMPTY\" and Return\n\n2. [Iterate from Front to Rear]\n   Repeat for I <- F to R\n       Write Q[I]\n\n3. [Finished]\n   Return",
+            "c": "#include <stdio.h>\n\nvoid displaySQ(int Q[], int F, int R) {\n    if (F == -1) {\n        printf(\"QUEUE EMPTY\\n\");\n        return;\n    }\n    printf(\"Queue elements: \");\n    for (int i = F; i <= R; i++) {\n        printf(\"[%d] \", Q[i]);\n    }\n    printf(\"\\n\");\n}\n\nint main() {\n    int Q[6] = {5, 15, 25, 35};\n    int F = 0, R = 3;\n    displaySQ(Q, F, R);\n    return 0;\n}",
+            "java": "public class SimpleQueueDisplay {\n    public static void displaySQ(int[] Q, int F, int R) {\n        if (F == -1) {\n            System.out.println(\"QUEUE EMPTY\");\n            return;\n        }\n        System.out.print(\"Queue elements: \");\n        for (int i = F; i <= R; i++) {\n            System.out.print(\"[\" + Q[i] + \"] \");\n        }\n        System.out.println();\n    }\n\n    public static void main(String[] args) {\n        int[] Q = {5, 15, 25, 35};\n        displaySQ(Q, 0, 3);\n    }\n}",
+            "python": "def display_sq(q, f, r):\n    if f == -1:\n        print(\"QUEUE EMPTY\")\n        return\n    print(\"Queue elements:\", \" \".join(f\"[{q[i]}]\" for i in range(f, r + 1)))\n\ndisplay_sq([5, 15, 25, 35], 0, 3)"
         }
-        if (front == -1) {
-            front = 0; rear = 0;
-        } else {
-            front = front - 1;
-        }
-        q[front] = val;
-        return true;
-    }
-
-    public boolean insertRear(int val) {
-        if (rear >= size - 1) {
-            System.out.println("REAR OVERFLOW");
-            return false;
-        }
-        if (front == -1) {
-            front = 0; rear = 0;
-        } else {
-            rear = rear + 1;
-        }
-        q[rear] = val;
-        return true;
-    }
-
-    public int deleteFront() {
-        if (front == -1) return -1;
-        int item = q[front];
-        if (front == rear) {
-            front = -1; rear = -1;
-        } else {
-            front = front + 1;
-        }
-        return item;
-    }
-
-    public int deleteRear() {
-        if (rear == -1) return -1;
-        int item = q[rear];
-        if (front == rear) {
-            front = -1; rear = -1;
-        } else {
-            rear = rear - 1;
-        }
-        return item;
-    }
-}`,
-            python: `class SimpleDeque:
-    def __init__(self, size: int):
-        self.size = size
-        self.q = [None] * size
-        self.front = -1
-        self.rear = -1
-
-    def insert_front(self, val) -> bool:
-        if self.front == 0:
-            print("FRONT OVERFLOW")
-            return False
-        if self.front == -1:
-            self.front = 0
-            self.rear = 0
-        else:
-            self.front -= 1
-        self.q[self.front] = val
-        return True
-
-    def insert_rear(self, val) -> bool:
-        if self.rear >= self.size - 1:
-            print("REAR OVERFLOW")
-            return False
-        if self.front == -1:
-            self.front = 0
-            self.rear = 0
-        else:
-            self.rear += 1
-        self.q[self.rear] = val
-        return True
-
-    def delete_front(self):
-        if self.front == -1: return None
-        item = self.q[self.front]
-        self.q[self.front] = None
-        if self.front == self.rear:
-            self.front = -1
-            self.rear = -1
-        else:
-            self.front += 1
-        return item
-
-    def delete_rear(self):
-        if self.rear == -1: return None
-        item = self.q[self.rear]
-        self.q[self.rear] = None
-        if self.front == self.rear:
-            self.front = -1
-            self.rear = -1
-        else:
-            self.rear -= 1
-        return item
-
-# --- Driver Program ---
-max_size = int(input("Enter the size of Deque::"))
-dq_obj = SimpleDeque(max_size)
-
-while True:
-    print("1. Insert Front")
-    print("2. Insert Rear")
-    print("3. Delete Front")
-    print("4. Delete Rear")
-    print("5. Display")
-    print("6. Exit")
-    user_choice = int(input("Enter your Choice::"))
-    if user_choice == 1:
-        x = input("Enter value to insert front::")
-        dq_obj.insert_front(x)
-        print("Deque array:", dq_obj.q)
-    elif user_choice == 2:
-        x = input("Enter value to insert rear::")
-        dq_obj.insert_rear(x)
-        print("Deque array:", dq_obj.q)
-    elif user_choice == 3:
-        deleted_val = dq_obj.delete_front()
-        print("Deleted Front:", deleted_val)
-        print("Deque array:", dq_obj.q)
-    elif user_choice == 4:
-        deleted_val = dq_obj.delete_rear()
-        print("Deleted Rear:", deleted_val)
-        print("Deque array:", dq_obj.q)
-    elif user_choice == 5:
-        print("Deque array:", dq_obj.q)
-    elif user_choice == 6:
-        print("Exiting the code")
-        break
-    else:
-        print("invalid Choice")`
+    },
+    "circular": {
+        "insert_cq": {
+            "title": "Algorithm: INSERT_CQ(Q, N, F, R, X)",
+            "badge": "Circular Enqueue",
+            "complexity": "Time: O(1) | Space: O(1)",
+            "desc": "Inserts element X into circular array. Wraps rear pointer from N-1 back to 0, preventing linear memory drift.",
+            "simOp": "insert_rear",
+            "blackboardHtml": "<span class=\"algo-step-head\">1. [Check for Circular Queue Overflow]</span>\n   <span class=\"algo-kw\">If</span> (F = 0 <span class=\"algo-kw\">and</span> R = N - 1) <span class=\"algo-kw\">or</span> (R = F - 1)\n       <span class=\"algo-kw\">Then write</span> <span class=\"algo-str\">\"CIRCULAR QUEUE OVERFLOW\"</span> <span class=\"algo-kw\">and Return</span>\n\n<span class=\"algo-step-head\">2. [Calculate New Rear Pointer]</span>\n   <span class=\"algo-kw\">If</span> R = N - 1\n       R <span class=\"algo-arrow\">&larr;</span> 0\n   <span class=\"algo-kw\">Else If</span> F = -1\n       F <span class=\"algo-arrow\">&larr;</span> 0\n       R <span class=\"algo-arrow\">&larr;</span> 0\n   <span class=\"algo-kw\">Else</span>\n       R <span class=\"algo-arrow\">&larr;</span> R + 1\n\n<span class=\"algo-step-head\">3. [Insert Element]</span>\n   Q[R] <span class=\"algo-arrow\">&larr;</span> X\n\n<span class=\"algo-step-head\">4. [Finished]</span>\n   <span class=\"algo-kw\">Return</span>",
+            "blackboardText": "Algorithm: INSERT_CQ(Q, N, F, R, X)\n\n1. [Check for Circular Queue Overflow]\n   If (F = 0 and R = N - 1) or (R = F - 1)\n       Then write \"CIRCULAR QUEUE OVERFLOW\" and Return\n\n2. [Calculate New Rear Pointer]\n   If R = N - 1\n       R <- 0\n   Else If F = -1\n       F <- 0\n       R <- 0\n   Else\n       R <- R + 1\n\n3. [Insert Element]\n   Q[R] <- X\n\n4. [Finished]\n   Return",
+            "c": "#include <stdio.h>\n#define N 6\n\nint Q[N];\nint F = -1, R = -1;\n\n// Algorithm: INSERT_CQ(Q, N, F, R, X)\nint insertCQ(int x) {\n    if ((F == 0 && R == N - 1) || (R == F - 1)) {\n        printf(\"CIRCULAR QUEUE OVERFLOW! Cannot insert %d\\n\", x);\n        return 0;\n    }\n    if (R == N - 1) {\n        R = 0;\n    } else if (F == -1) {\n        F = 0;\n        R = 0;\n    } else {\n        R = R + 1;\n    }\n    Q[R] = x;\n    printf(\"Inserted %d at index %d (F=%d, R=%d)\\n\", x, R, F, R);\n    return 1;\n}\n\nint main() {\n    printf(\"--- Circular Queue: INSERT_CQ ---\\n\");\n    insertCQ(10);\n    insertCQ(20);\n    insertCQ(30);\n    insertCQ(40);\n    return 0;\n}",
+            "java": "public class CircularQueueInsert {\n    private static final int N = 6;\n    private static int[] Q = new int[N];\n    private static int F = -1, R = -1;\n\n    public static boolean insertCQ(int x) {\n        if ((F == 0 && R == N - 1) || (R == F - 1)) {\n            System.out.println(\"CIRCULAR QUEUE OVERFLOW! Cannot insert \" + x);\n            return false;\n        }\n        if (R == N - 1) {\n            R = 0;\n        } else if (F == -1) {\n            F = 0;\n            R = 0;\n        } else {\n            R = R + 1;\n        }\n        Q[R] = x;\n        System.out.println(\"Inserted \" + x + \" at index \" + R + \" (F=\" + F + \", R=\" + R + \")\");\n        return true;\n    }\n\n    public static void main(String[] args) {\n        System.out.println(\"--- Circular Queue: INSERT_CQ ---\");\n        insertCQ(10);\n        insertCQ(20);\n        insertCQ(30);\n    }\n}",
+            "python": "class CircularQueue:\n    def __init__(self, n=6):\n        self.n = n\n        self.q = [None] * n\n        self.f = -1\n        self.r = -1\n\n    def insert_cq(self, x):\n        if (self.f == 0 and self.r == self.n - 1) or (self.r == self.f - 1):\n            print(f\"CIRCULAR QUEUE OVERFLOW! Cannot insert {x}\")\n            return False\n        if self.r == self.n - 1:\n            self.r = 0\n        elif self.f == -1:\n            self.f = 0\n            self.r = 0\n        else:\n            self.r += 1\n        self.q[self.r] = x\n        print(f\"Inserted {x} at index {self.r} (F={self.f}, R={self.r})\")\n        return True\n\ncq = CircularQueue(6)\ncq.insert_cq(10)\ncq.insert_cq(20)\ncq.insert_cq(30)"
         },
-        'c-deque': {
-            blackboard: `// --- CIRCULAR DEQUE INSERT FRONT ---
-Algorithm: INSERT_FRONT_CD(Q, N, F, R, X)
-1. If (F - 1 + N) % N == R -> OVERFLOW
-2. If F == -1 -> F <- 0, R <- 0
-3. Else -> F <- (F - 1 + N) % N
-4. Q[F] <- X
-
-// --- CIRCULAR DEQUE DELETE REAR ---
-Algorithm: DELETE_REAR_CD(Q, N, F, R)
-1. If F == -1 -> UNDERFLOW
-2. ITEM <- Q[R]
-3. If F == R -> F <- -1, R <- -1
-4. Else -> R <- (R - 1 + N) % N
-5. Return ITEM`,
-            java: `public class CircularDeque {
-    private int[] q;
-    private int front, rear, size;
-
-    public CircularDeque(int limit) {
-        size = limit;
-        q = new int[size];
-        front = -1; rear = -1;
-    }
-
-    public boolean insertFront(int val) {
-        if ((front - 1 + size) % size == rear) return false;
-        if (front == -1) {
-            front = 0; rear = 0;
-        } else {
-            front = (front - 1 + size) % size;
-        }
-        q[front] = val;
-        return true;
-    }
-
-    public boolean insertRear(int val) {
-        if ((rear + 1) % size == front) return false;
-        if (front == -1) {
-            front = 0; rear = 0;
-        } else {
-            rear = (rear + 1) % size;
-        }
-        q[rear] = val;
-        return true;
-    }
-
-    public int deleteFront() {
-        if (front == -1) return -1;
-        int item = q[front];
-        if (front == rear) {
-            front = -1; rear = -1;
-        } else {
-            front = (front + 1) % size;
-        }
-        return item;
-    }
-
-    public int deleteRear() {
-        if (front == -1) return -1;
-        int item = q[rear];
-        if (front == rear) {
-            front = -1; rear = -1;
-        } else {
-            rear = (rear - 1 + size) % size;
-        }
-        return item;
-    }
-}`,
-            python: `class CircularDeque:
-    def __init__(self, size: int):
-        self.size = size
-        self.q = [None] * size
-        self.front = -1
-        self.rear = -1
-
-    def insert_front(self, val) -> bool:
-        if (self.front - 1 + self.size) % self.size == self.rear:
-            return False
-        if self.front == -1:
-            self.front = 0
-            self.rear = 0
-        else:
-            self.front = (self.front - 1 + self.size) % self.size
-        self.q[self.front] = val
-        return True
-
-    def insert_rear(self, val) -> bool:
-        if (self.rear + 1) % self.size == self.front:
-            return False
-        if self.front == -1:
-            self.front = 0
-            self.rear = 0
-        else:
-            self.rear = (self.rear + 1) % self.size
-        self.q[self.rear] = val
-        return True
-
-    def delete_front(self):
-        if self.front == -1: return None
-        item = self.q[self.front]
-        self.q[self.front] = None
-        if self.front == self.rear:
-            self.front = -1
-            self.rear = -1
-        else:
-            self.front = (self.front + 1) % self.size
-        return item
-
-    def delete_rear(self):
-        if self.front == -1: return None
-        item = self.q[self.rear]
-        self.q[self.rear] = None
-        if self.front == self.rear:
-            self.front = -1
-            self.rear = -1
-        else:
-            self.rear = (self.rear - 1 + self.size) % self.size
-        return item
-
-# --- Driver Program ---
-max_size = int(input("Enter the size of Circular Deque::"))
-cdq_obj = CircularDeque(max_size)
-
-while True:
-    print("1. Insert Front")
-    print("2. Insert Rear")
-    print("3. Delete Front")
-    print("4. Delete Rear")
-    print("5. Display")
-    print("6. Exit")
-    user_choice = int(input("Enter your Choice::"))
-    if user_choice == 1:
-        x = input("Enter value to insert front::")
-        cdq_obj.insert_front(x)
-        print("Deque array:", cdq_obj.q)
-    elif user_choice == 2:
-        x = input("Enter value to insert rear::")
-        cdq_obj.insert_rear(x)
-        print("Deque array:", cdq_obj.q)
-    elif user_choice == 3:
-        deleted_val = cdq_obj.delete_front()
-        print("Deleted Front:", deleted_val)
-        print("Deque array:", cdq_obj.q)
-    elif user_choice == 4:
-        deleted_val = cdq_obj.delete_rear()
-        print("Deleted Rear:", deleted_val)
-        print("Deque array:", cdq_obj.q)
-    elif user_choice == 5:
-        print("Deque array:", cdq_obj.q)
-    elif user_choice == 6:
-        print("Exiting the code")
-        break
-    else:
-        print("invalid Choice")`
+        "delete_cq": {
+            "title": "Algorithm: DELETE_CQ(Q, N, F, R)",
+            "badge": "Circular Dequeue",
+            "complexity": "Time: O(1) | Space: O(1)",
+            "desc": "Deletes item from front of circular queue and advances front pointer circularly, wrapping to 0 when it hits N-1.",
+            "simOp": "delete_front",
+            "blackboardHtml": "<span class=\"algo-step-head\">1. [Check for Circular Queue Underflow]</span>\n   <span class=\"algo-kw\">If</span> F = -1\n       <span class=\"algo-kw\">Then write</span> <span class=\"algo-str\">\"CIRCULAR QUEUE UNDERFLOW\"</span> <span class=\"algo-kw\">and Return</span>(0)\n\n<span class=\"algo-step-head\">2. [Retrieve Item from Front]</span>\n   ITEM <span class=\"algo-arrow\">&larr;</span> Q[F]\n\n<span class=\"algo-step-head\">3. [Calculate New Front Pointer]</span>\n   <span class=\"algo-kw\">If</span> F = R\n       F <span class=\"algo-arrow\">&larr;</span> -1\n       R <span class=\"algo-arrow\">&larr;</span> -1\n   <span class=\"algo-kw\">Else If</span> F = N - 1\n       F <span class=\"algo-arrow\">&larr;</span> 0\n   <span class=\"algo-kw\">Else</span>\n       F <span class=\"algo-arrow\">&larr;</span> F + 1\n\n<span class=\"algo-step-head\">4. [Return Deleted Item]</span>\n   <span class=\"algo-kw\">Return</span>(ITEM)",
+            "blackboardText": "Algorithm: DELETE_CQ(Q, N, F, R)\n\n1. [Check for Circular Queue Underflow]\n   If F = -1\n       Then write \"CIRCULAR QUEUE UNDERFLOW\" and Return(0)\n\n2. [Retrieve Item from Front]\n   ITEM <- Q[F]\n\n3. [Calculate New Front Pointer]\n   If F = R\n       F <- -1\n       R <- -1\n   Else If F = N - 1\n       F <- 0\n   Else\n       F <- F + 1\n\n4. [Return Deleted Item]\n   Return(ITEM)",
+            "c": "#include <stdio.h>\n#define N 6\n\nint Q[N] = {10, 20, 30};\nint F = 0, R = 2;\n\n// Algorithm: DELETE_CQ(Q, N, F, R)\nint deleteCQ() {\n    if (F == -1) {\n        printf(\"CIRCULAR QUEUE UNDERFLOW!\\n\");\n        return -1;\n    }\n    int item = Q[F];\n    if (F == R) {\n        F = -1;\n        R = -1;\n    } else if (F == N - 1) {\n        F = 0;\n    } else {\n        F = F + 1;\n    }\n    printf(\"Deleted item %d (New F=%d, R=%d)\\n\", item, F, R);\n    return item;\n}\n\nint main() {\n    printf(\"--- Circular Queue: DELETE_CQ ---\\n\");\n    deleteCQ(); // 10\n    deleteCQ(); // 20\n    deleteCQ(); // 30\n    deleteCQ(); // Underflow\n    return 0;\n}",
+            "java": "public class CircularQueueDelete {\n    private static final int N = 6;\n    private static int[] Q = {10, 20, 30};\n    private static int F = 0, R = 2;\n\n    public static int deleteCQ() {\n        if (F == -1) {\n            System.out.println(\"CIRCULAR QUEUE UNDERFLOW!\");\n            return -1;\n        }\n        int item = Q[F];\n        if (F == R) {\n            F = -1;\n            R = -1;\n        } else if (F == N - 1) {\n            F = 0;\n        } else {\n            F = F + 1;\n        }\n        System.out.println(\"Deleted item: \" + item + \" (New F=\" + F + \", R=\" + R + \")\");\n        return item;\n    }\n\n    public static void main(String[] args) {\n        System.out.println(\"--- Circular Queue: DELETE_CQ ---\");\n        deleteCQ();\n        deleteCQ();\n    }\n}",
+            "python": "class CircularQueue:\n    def __init__(self, n=6, items=[10, 20, 30]):\n        self.n = n\n        self.q = items + [None] * (n - len(items))\n        self.f = 0\n        self.r = len(items) - 1\n\n    def delete_cq(self):\n        if self.f == -1:\n            print(\"CIRCULAR QUEUE UNDERFLOW!\")\n            return None\n        item = self.q[self.f]\n        if self.f == self.r:\n            self.f = -1\n            self.r = -1\n        elif self.f == self.n - 1:\n            self.f = 0\n        else:\n            self.f += 1\n        print(f\"Deleted item: {item} (New F={self.f}, R={self.r})\")\n        return item\n\ncq = CircularQueue()\ncq.delete_cq()\ncq.delete_cq()"
         },
-        'priority-max': {
-            blackboard: `// --- PRIORITY QUEUE INSERT (MAX-HEAP) ---
-Algorithm: INSERT_PQ_MAX(Q, N, X)
-1. If COUNT == N -> Write "OVERFLOW" and Return
-2. COUNT <- COUNT + 1
-3. I <- COUNT - 1; Q[I] <- X
-4. Call HEAPIFY_UP_MAX(Q, I)
-
-Algorithm: HEAPIFY_UP_MAX(Q, I)
-1. While I > 0 AND Q[(I-1)/2] < Q[I]
-       Swap Q[I] with Q[(I-1)/2]
-       I <- (I-1)/2
-
-// --- PRIORITY QUEUE DELETE (MAX-HEAP) ---
-Algorithm: DELETE_PQ_MAX(Q, COUNT)
-1. If COUNT == 0 -> Write "UNDERFLOW" and Return
-2. ITEM <- Q[0]
-3. Q[0] <- Q[COUNT - 1]
-4. COUNT <- COUNT - 1
-5. Call HEAPIFY_DOWN_MAX(Q, COUNT, 0)
-6. Return ITEM
-
-Algorithm: HEAPIFY_DOWN_MAX(Q, N, I)
-1. Left <- 2 * I + 1
-2. Right <- 2 * I + 2
-3. Largest <- I
-4. If Left < N AND Q[Left] > Q[Largest] -> Largest <- Left
-5. If Right < N AND Q[Right] > Q[Largest] -> Largest <- Right
-6. If Largest != I
-       Swap Q[I] with Q[Largest]
-       Call HEAPIFY_DOWN_MAX(Q, N, Largest)`,
-            java: `public class MaxHeapPriorityQueue {
-    private int[] q;
-    private int count, size;
-
-    public MaxHeapPriorityQueue(int limit) {
-        size = limit;
-        q = new int[size];
-        count = 0;
-    }
-
-    public boolean insert(int val) {
-        if (count == size) return false;
-        count++;
-        int i = count - 1;
-        q[i] = val;
-        heapifyUp(i);
-        return true;
-    }
-
-    public int delete() {
-        if (count == 0) return -1;
-        int item = q[0];
-        q[0] = q[count - 1];
-        count--;
-        heapifyDown(count, 0);
-        return item;
-    }
-
-    private void heapifyUp(int i) {
-        while (i > 0 && q[(i - 1) / 2] < q[i]) {
-            int temp = q[i];
-            q[i] = q[(i - 1) / 2];
-            q[(i - 1) / 2] = temp;
-            i = (i - 1) / 2;
+        "display_cq": {
+            "title": "Algorithm: DISPLAY_CQ(Q, N, F, R)",
+            "badge": "Circular Traversal",
+            "complexity": "Time: O(n) | Space: O(1)",
+            "desc": "Traverses circular queue elements wrapping around the array boundary using modulo arithmetic.",
+            "simOp": "insert_rear",
+            "blackboardHtml": "<span class=\"algo-step-head\">1. [Check if Circular Queue is Empty]</span>\n   <span class=\"algo-kw\">If</span> F = -1\n       <span class=\"algo-kw\">Then write</span> <span class=\"algo-str\">\"CIRCULAR QUEUE EMPTY\"</span> <span class=\"algo-kw\">and Return</span>\n\n<span class=\"algo-step-head\">2. [Initialize Traversal Index]</span>\n   I <span class=\"algo-arrow\">&larr;</span> F\n\n<span class=\"algo-step-head\">3. [Traverse and Output Elements with Wrap-Around]</span>\n   <span class=\"algo-kw\">Repeat while</span> I &ne; R\n       <span class=\"algo-kw\">Write</span> Q[I]\n       I <span class=\"algo-arrow\">&larr;</span> (I + 1) <span class=\"algo-kw\">mod</span> N\n\n<span class=\"algo-step-head\">4. [Output Final Element at Rear]</span>\n   <span class=\"algo-kw\">Write</span> Q[R]\n\n<span class=\"algo-step-head\">5. [Finished]</span>\n   <span class=\"algo-kw\">Return</span>",
+            "blackboardText": "Algorithm: DISPLAY_CQ(Q, N, F, R)\n\n1. [Check if Circular Queue is Empty]\n   If F = -1\n       Then write \"CIRCULAR QUEUE EMPTY\" and Return\n\n2. [Initialize Traversal Index]\n   I <- F\n\n3. [Traverse and Output Elements with Wrap-Around]\n   Repeat while I \u2260 R\n       Write Q[I]\n       I <- (I + 1) mod N\n\n4. [Output Final Element at Rear]\n   Write Q[R]\n\n5. [Finished]\n   Return",
+            "c": "#include <stdio.h>\n#define N 6\n\nvoid displayCQ(int Q[], int F, int R) {\n    if (F == -1) {\n        printf(\"CIRCULAR QUEUE EMPTY\\n\");\n        return;\n    }\n    printf(\"Circular Queue: \");\n    int i = F;\n    while (i != R) {\n        printf(\"[%d] \", Q[i]);\n        i = (i + 1) % N;\n    }\n    printf(\"[%d]\\n\", Q[R]);\n}\n\nint main() {\n    int Q[N] = {50, 60, 10, 20, 30, 40};\n    int F = 2, R = 1; // Wrapped queue\n    displayCQ(Q, F, R);\n    return 0;\n}",
+            "java": "public class CircularQueueDisplay {\n    public static void displayCQ(int[] Q, int N, int F, int R) {\n        if (F == -1) {\n            System.out.println(\"CIRCULAR QUEUE EMPTY\");\n            return;\n        }\n        System.out.print(\"Circular Queue: \");\n        int i = F;\n        while (i != R) {\n            System.out.print(\"[\" + Q[i] + \"] \");\n            i = (i + 1) % N;\n        }\n        System.out.println(\"[\" + Q[R] + \"]\");\n    }\n\n    public static void main(String[] args) {\n        int[] Q = {50, 60, 10, 20, 30, 40};\n        displayCQ(Q, 6, 2, 1);\n    }\n}",
+            "python": "def display_cq(q, n, f, r):\n    if f == -1:\n        print(\"CIRCULAR QUEUE EMPTY\")\n        return\n    items = []\n    i = f\n    while i != r:\n        items.append(f\"[{q[i]}]\")\n        i = (i + 1) % n\n    items.append(f\"[{q[r]}]\")\n    print(\"Circular Queue:\", \" \".join(items))\n\ndisplay_cq([50, 60, 10, 20, 30, 40], 6, 2, 1)"
         }
-    }
-
-    private void heapifyDown(int n, int i) {
-        while (2 * i + 1 < n) {
-            int left = 2 * i + 1;
-            int right = 2 * i + 2;
-            int largest = i;
-            if (left < n && q[left] > q[largest]) largest = left;
-            if (right < n && q[right] > q[largest]) largest = right;
-            if (largest == i) break;
-            int temp = q[i];
-            q[i] = q[largest];
-            q[largest] = temp;
-            i = largest;
-        }
-    }
-}`,
-            python: `class MaxHeapPriorityQueue:
-    def __init__(self, size: int):
-        self.size = size
-        self.q = []
-
-    def insert(self, val) -> bool:
-        if len(self.q) >= self.size:
-            return False
-        self.q.append(val)
-        self.heapify_up(len(self.q) - 1)
-        return True
-
-    def delete(self):
-        if not self.q:
-            return None
-        item = self.q[0]
-        if len(self.q) == 1:
-            self.q.pop()
-        else:
-            self.q[0] = self.q.pop()
-            self.heapify_down(len(self.q), 0)
-        return item
-
-    def heapify_up(self, i):
-        while i > 0 and self.q[(i - 1) // 2] < self.q[i]:
-            parent = (i - 1) // 2
-            self.q[i], self.q[parent] = self.q[parent], self.q[i]
-            i = parent
-
-    def heapify_down(self, n, i):
-        while 2 * i + 1 < n:
-            left = 2 * i + 1; right = 2 * i + 2
-            largest = i
-            if left < n and self.q[left] > self.q[largest]: largest = left
-            if right < n and self.q[right] > self.q[largest]: largest = right
-            if largest == i: break
-            self.q[i], self.q[largest] = self.q[largest], self.q[i]
-            i = largest
-
-# --- Driver Program ---
-max_size = int(input("Enter the size of Priority Queue (Max-Heap)::"))
-pq_obj = MaxHeapPriorityQueue(max_size)
-
-while True:
-    print("1. Insert Element")
-    print("2. Extract Max Element")
-    print("3. Display Heap Array")
-    print("4. Exit")
-    user_choice = int(input("Enter your Choice::"))
-    if user_choice == 1:
-        x = int(input("Enter integer value to insert::"))
-        pq_obj.insert(x)
-        print("Heap array:", pq_obj.q)
-    elif user_choice == 2:
-        deleted_val = pq_obj.delete()
-        print("Extracted Max:", deleted_val)
-        print("Heap array:", pq_obj.q)
-    elif user_choice == 3:
-        print("Heap array:", pq_obj.q)
-    elif user_choice == 4:
-        print("Exiting the code")
-        break
-    else:
-        print("invalid Choice")`
+    },
+    "deque": {
+        "insert_rear_dq": {
+            "title": "Algorithm: INSERT_REAR_DQ(Q, N, F, R, X)",
+            "badge": "Push Rear",
+            "complexity": "Time: O(1) | Space: O(1)",
+            "desc": "Inserts element X at the rear end of a simple linear double-ended queue.",
+            "simOp": "insert_rear",
+            "blackboardHtml": "<span class=\"algo-step-head\">1. [Check Rear Overflow]</span>\n   <span class=\"algo-kw\">If</span> R &ge; N - 1\n       <span class=\"algo-kw\">Then write</span> <span class=\"algo-str\">\"REAR OVERFLOW\"</span> <span class=\"algo-kw\">and Return</span>\n\n<span class=\"algo-step-head\">2. [Adjust Pointers]</span>\n   <span class=\"algo-kw\">If</span> F = -1\n       F <span class=\"algo-arrow\">&larr;</span> 0\n       R <span class=\"algo-arrow\">&larr;</span> 0\n   <span class=\"algo-kw\">Else</span>\n       R <span class=\"algo-arrow\">&larr;</span> R + 1\n\n<span class=\"algo-step-head\">3. [Insert Element]</span>\n   Q[R] <span class=\"algo-arrow\">&larr;</span> X\n\n<span class=\"algo-step-head\">4. [Finished]</span>\n   <span class=\"algo-kw\">Return</span>",
+            "blackboardText": "Algorithm: INSERT_REAR_DQ(Q, N, F, R, X)\n\n1. [Check Rear Overflow]\n   If R >= N - 1\n       Then write \"REAR OVERFLOW\" and Return\n\n2. [Adjust Pointers]\n   If F = -1\n       F <- 0\n       R <- 0\n   Else\n       R <- R + 1\n\n3. [Insert Element]\n   Q[R] <- X\n\n4. [Finished]\n   Return",
+            "c": "#include <stdio.h>\n#define N 6\n\nint Q[N];\nint F = -1, R = -1;\n\nint insertRearDQ(int x) {\n    if (R >= N - 1) {\n        printf(\"REAR OVERFLOW!\\n\");\n        return 0;\n    }\n    if (F == -1) {\n        F = 0; R = 0;\n    } else {\n        R = R + 1;\n    }\n    Q[R] = x;\n    printf(\"Inserted %d at Rear (index %d)\\n\", x, R);\n    return 1;\n}\n\nint main() {\n    insertRearDQ(10);\n    insertRearDQ(20);\n    return 0;\n}",
+            "java": "public class SimpleDeque {\n    private static final int N = 6;\n    private static int[] Q = new int[N];\n    private static int F = -1, R = -1;\n\n    public static boolean insertRear(int x) {\n        if (R >= N - 1) {\n            System.out.println(\"REAR OVERFLOW!\");\n            return false;\n        }\n        if (F == -1) { F = 0; R = 0; }\n        else { R = R + 1; }\n        Q[R] = x;\n        return true;\n    }\n}",
+            "python": "class SimpleDeque:\n    def __init__(self, n=6):\n        self.n = n\n        self.q = [None] * n\n        self.f = -1\n        self.r = -1\n\n    def insert_rear(self, x):\n        if self.r >= self.n - 1:\n            print(\"REAR OVERFLOW\")\n            return False\n        if self.f == -1:\n            self.f = 0; self.r = 0\n        else:\n            self.r += 1\n        self.q[self.r] = x\n        return True"
         },
-        'priority-min': {
-            blackboard: `// --- PRIORITY QUEUE INSERT (MIN-HEAP) ---
-Algorithm: INSERT_PQ_MIN(Q, N, X)
-1. If COUNT == N -> Write "OVERFLOW" and Return
-2. COUNT <- COUNT + 1
-3. I <- COUNT - 1; Q[I] <- X
-4. Call HEAPIFY_UP_MIN(Q, I)
-
-Algorithm: HEAPIFY_UP_MIN(Q, I)
-1. While I > 0 AND Q[(I-1)/2] > Q[I]
-       Swap Q[I] with Q[(I-1)/2]
-       I <- (I-1)/2
-
-// --- PRIORITY QUEUE DELETE (MIN-HEAP) ---
-Algorithm: DELETE_PQ_MIN(Q, COUNT)
-1. If COUNT == 0 -> Write "UNDERFLOW" and Return
-2. ITEM <- Q[0]
-3. Q[0] <- Q[COUNT - 1]
-4. COUNT <- COUNT - 1
-5. Call HEAPIFY_DOWN_MIN(Q, COUNT, 0)
-6. Return ITEM
-
-Algorithm: HEAPIFY_DOWN_MIN(Q, N, I)
-1. Left <- 2 * I + 1
-2. Right <- 2 * I + 2
-3. Smallest <- I
-4. If Left < N AND Q[Left] < Q[Smallest] -> Smallest <- Left
-5. If Right < N AND Q[Right] < Q[Smallest] -> Smallest <- Right
-6. If Smallest != I
-       Swap Q[I] with Q[Smallest]
-       Call HEAPIFY_DOWN_MIN(Q, N, Smallest)`,
-            java: `public class MinHeapPriorityQueue {
-    private int[] q;
-    private int count, size;
-
-    public MinHeapPriorityQueue(int limit) {
-        size = limit;
-        q = new int[size];
-        count = 0;
-    }
-
-    public boolean insert(int val) {
-        if (count == size) return false;
-        count++;
-        int i = count - 1;
-        q[i] = val;
-        heapifyUp(i);
-        return true;
-    }
-
-    public int delete() {
-        if (count == 0) return -1;
-        int item = q[0];
-        q[0] = q[count - 1];
-        count--;
-        heapifyDown(count, 0);
-        return item;
-    }
-
-    private void heapifyUp(int i) {
-        while (i > 0 && q[(i - 1) / 2] > q[i]) {
-            int temp = q[i];
-            q[i] = q[(i - 1) / 2];
-            q[(i - 1) / 2] = temp;
-            i = (i - 1) / 2;
+        "insert_front_dq": {
+            "title": "Algorithm: INSERT_FRONT_DQ(Q, N, F, R, X)",
+            "badge": "Push Front",
+            "complexity": "Time: O(1) | Space: O(1)",
+            "desc": "Inserts element X at the front of simple deque. Blocked if F = 0 because linear array cannot expand leftwards.",
+            "simOp": "insert_front",
+            "blackboardHtml": "<span class=\"algo-step-head\">1. [Check Front Overflow]</span>\n   <span class=\"algo-kw\">If</span> F = 0\n       <span class=\"algo-kw\">Then write</span> <span class=\"algo-str\">\"FRONT OVERFLOW (Blocked at Index 0)\"</span> <span class=\"algo-kw\">and Return</span>\n\n<span class=\"algo-step-head\">2. [Adjust Pointers]</span>\n   <span class=\"algo-kw\">If</span> F = -1\n       F <span class=\"algo-arrow\">&larr;</span> 0\n       R <span class=\"algo-arrow\">&larr;</span> 0\n   <span class=\"algo-kw\">Else</span>\n       F <span class=\"algo-arrow\">&larr;</span> F - 1\n\n<span class=\"algo-step-head\">3. [Insert Element]</span>\n   Q[F] <span class=\"algo-arrow\">&larr;</span> X\n\n<span class=\"algo-step-head\">4. [Finished]</span>\n   <span class=\"algo-kw\">Return</span>",
+            "blackboardText": "Algorithm: INSERT_FRONT_DQ(Q, N, F, R, X)\n\n1. [Check Front Overflow]\n   If F = 0\n       Then write \"FRONT OVERFLOW (Blocked at Index 0)\" and Return\n\n2. [Adjust Pointers]\n   If F = -1\n       F <- 0\n       R <- 0\n   Else\n       F <- F - 1\n\n3. [Insert Element]\n   Q[F] <- X\n\n4. [Finished]\n   Return",
+            "c": "#include <stdio.h>\n#define N 6\n\nint Q[N];\nint F = 2, R = 4; // Assume some items already present\n\nint insertFrontDQ(int x) {\n    if (F == 0) {\n        printf(\"FRONT OVERFLOW! Index 0 is already occupied.\\n\");\n        return 0;\n    }\n    if (F == -1) {\n        F = 0; R = 0;\n    } else {\n        F = F - 1;\n    }\n    Q[F] = x;\n    printf(\"Inserted %d at Front (index %d)\\n\", x, F);\n    return 1;\n}\n\nint main() {\n    insertFrontDQ(99);\n    return 0;\n}",
+            "java": "public class SimpleDequeFront {\n    private static int[] Q = new int[6];\n    private static int F = 2, R = 4;\n\n    public static boolean insertFront(int x) {\n        if (F == 0) {\n            System.out.println(\"FRONT OVERFLOW (Blocked)\");\n            return false;\n        }\n        if (F == -1) { F = 0; R = 0; }\n        else { F = F - 1; }\n        Q[F] = x;\n        return true;\n    }\n}",
+            "python": "class SimpleDeque:\n    def __init__(self, n=6):\n        self.n = n\n        self.q = [None] * n\n        self.f = 2\n        self.r = 4\n\n    def insert_front(self, x):\n        if self.f == 0:\n            print(\"FRONT OVERFLOW (Blocked)\")\n            return False\n        if self.f == -1:\n            self.f = 0; self.r = 0\n        else:\n            self.f -= 1\n        self.q[self.f] = x\n        return True"
+        },
+        "delete_front_dq": {
+            "title": "Algorithm: DELETE_FRONT_DQ(Q, F, R)",
+            "badge": "Pop Front",
+            "complexity": "Time: O(1) | Space: O(1)",
+            "desc": "Deletes item from front of simple deque. Identical to standard queue deletion.",
+            "simOp": "delete_front",
+            "blackboardHtml": "<span class=\"algo-step-head\">1. [Check Underflow]</span>\n   <span class=\"algo-kw\">If</span> F = -1\n       <span class=\"algo-kw\">Then write</span> <span class=\"algo-str\">\"QUEUE UNDERFLOW\"</span> <span class=\"algo-kw\">and Return</span>(0)\n\n<span class=\"algo-step-head\">2. [Retrieve Item]</span>\n   ITEM <span class=\"algo-arrow\">&larr;</span> Q[F]\n\n<span class=\"algo-step-head\">3. [Reset or Advance Front Pointer]</span>\n   <span class=\"algo-kw\">If</span> F = R\n       F <span class=\"algo-arrow\">&larr;</span> -1\n       R <span class=\"algo-arrow\">&larr;</span> -1\n   <span class=\"algo-kw\">Else</span>\n       F <span class=\"algo-arrow\">&larr;</span> F + 1\n\n<span class=\"algo-step-head\">4. [Return Deleted Item]</span>\n   <span class=\"algo-kw\">Return</span>(ITEM)",
+            "blackboardText": "Algorithm: DELETE_FRONT_DQ(Q, F, R)\n\n1. [Check Underflow]\n   If F = -1\n       Then write \"QUEUE UNDERFLOW\" and Return(0)\n\n2. [Retrieve Item]\n   ITEM <- Q[F]\n\n3. [Reset or Advance Front Pointer]\n   If F = R\n       F <- -1\n       R <- -1\n   Else\n       F <- F + 1\n\n4. [Return Deleted Item]\n   Return(ITEM)",
+            "c": "#include <stdio.h>\n\nint deleteFrontDQ(int Q[], int *F, int *R) {\n    if (*F == -1) {\n        printf(\"QUEUE UNDERFLOW\\n\");\n        return -1;\n    }\n    int item = Q[*F];\n    if (*F == *R) {\n        *F = -1; *R = -1;\n    } else {\n        *F = *F + 1;\n    }\n    return item;\n}",
+            "java": "public class DequeDeleteFront {\n    public static int deleteFront(int[] Q, int[] ptrs) { // ptrs = [F, R]\n        if (ptrs[0] == -1) return -1;\n        int item = Q[ptrs[0]];\n        if (ptrs[0] == ptrs[1]) { ptrs[0] = -1; ptrs[1] = -1; }\n        else { ptrs[0]++; }\n        return item;\n    }\n}",
+            "python": "def delete_front(q, f, r):\n    if f == -1: return None, -1, -1\n    item = q[f]\n    if f == r: return item, -1, -1\n    return item, f + 1, r"
+        },
+        "delete_rear_dq": {
+            "title": "Algorithm: DELETE_REAR_DQ(Q, F, R)",
+            "badge": "Pop Rear",
+            "complexity": "Time: O(1) | Space: O(1)",
+            "desc": "Deletes item from rear end of simple deque and decrements the rear pointer.",
+            "simOp": "delete_rear",
+            "blackboardHtml": "<span class=\"algo-step-head\">1. [Check Underflow]</span>\n   <span class=\"algo-kw\">If</span> R = -1\n       <span class=\"algo-kw\">Then write</span> <span class=\"algo-str\">\"QUEUE UNDERFLOW\"</span> <span class=\"algo-kw\">and Return</span>(0)\n\n<span class=\"algo-step-head\">2. [Retrieve Item from Rear]</span>\n   ITEM <span class=\"algo-arrow\">&larr;</span> Q[R]\n\n<span class=\"algo-step-head\">3. [Reset or Decrement Rear Pointer]</span>\n   <span class=\"algo-kw\">If</span> F = R\n       F <span class=\"algo-arrow\">&larr;</span> -1\n       R <span class=\"algo-arrow\">&larr;</span> -1\n   <span class=\"algo-kw\">Else</span>\n       R <span class=\"algo-arrow\">&larr;</span> R - 1\n\n<span class=\"algo-step-head\">4. [Return Deleted Item]</span>\n   <span class=\"algo-kw\">Return</span>(ITEM)",
+            "blackboardText": "Algorithm: DELETE_REAR_DQ(Q, F, R)\n\n1. [Check Underflow]\n   If R = -1\n       Then write \"QUEUE UNDERFLOW\" and Return(0)\n\n2. [Retrieve Item from Rear]\n   ITEM <- Q[R]\n\n3. [Reset or Decrement Rear Pointer]\n   If F = R\n       F <- -1\n       R <- -1\n   Else\n       R <- R - 1\n\n4. [Return Deleted Item]\n   Return(ITEM)",
+            "c": "#include <stdio.h>\n\nint deleteRearDQ(int Q[], int *F, int *R) {\n    if (*R == -1) {\n        printf(\"QUEUE UNDERFLOW\\n\");\n        return -1;\n    }\n    int item = Q[*R];\n    if (*F == *R) {\n        *F = -1; *R = -1;\n    } else {\n        *R = *R - 1;\n    }\n    return item;\n}",
+            "java": "public class DequeDeleteRear {\n    public static int deleteRear(int[] Q, int[] ptrs) {\n        if (ptrs[1] == -1) return -1;\n        int item = Q[ptrs[1]];\n        if (ptrs[0] == ptrs[1]) { ptrs[0] = -1; ptrs[1] = -1; }\n        else { ptrs[1]--; }\n        return item;\n    }\n}",
+            "python": "def delete_rear(q, f, r):\n    if r == -1: return None, -1, -1\n    item = q[r]\n    if f == r: return item, -1, -1\n    return item, f, r - 1"
+        }
+    },
+    "c-deque": {
+        "insert_rear_cd": {
+            "title": "Algorithm: INSERT_REAR_CD(Q, N, F, R, X)",
+            "badge": "Circular Push Rear",
+            "complexity": "Time: O(1) | Space: O(1)",
+            "desc": "Inserts element X at rear with circular wrap-around modulo N.",
+            "simOp": "insert_rear",
+            "blackboardHtml": "<span class=\"algo-step-head\">1. [Check Overflow]</span>\n   <span class=\"algo-kw\">If</span> (R + 1) <span class=\"algo-kw\">mod</span> N = F\n       <span class=\"algo-kw\">Then write</span> <span class=\"algo-str\">\"CIRCULAR DEQUE OVERFLOW\"</span> <span class=\"algo-kw\">and Return</span>\n\n<span class=\"algo-step-head\">2. [Adjust Pointers]</span>\n   <span class=\"algo-kw\">If</span> F = -1\n       F <span class=\"algo-arrow\">&larr;</span> 0\n       R <span class=\"algo-arrow\">&larr;</span> 0\n   <span class=\"algo-kw\">Else</span>\n       R <span class=\"algo-arrow\">&larr;</span> (R + 1) <span class=\"algo-kw\">mod</span> N\n\n<span class=\"algo-step-head\">3. [Insert Element]</span>\n   Q[R] <span class=\"algo-arrow\">&larr;</span> X\n\n<span class=\"algo-step-head\">4. [Finished]</span>\n   <span class=\"algo-kw\">Return</span>",
+            "blackboardText": "Algorithm: INSERT_REAR_CD(Q, N, F, R, X)\n\n1. [Check Overflow]\n   If (R + 1) mod N = F\n       Then write \"CIRCULAR DEQUE OVERFLOW\" and Return\n\n2. [Adjust Pointers]\n   If F = -1\n       F <- 0\n       R <- 0\n   Else\n       R <- (R + 1) mod N\n\n3. [Insert Element]\n   Q[R] <- X\n\n4. [Finished]\n   Return",
+            "c": "#include <stdio.h>\n#define N 6\n\nint insertRearCD(int Q[], int *F, int *R, int x) {\n    if ((*R + 1) % N == *F) {\n        printf(\"CIRCULAR DEQUE OVERFLOW\\n\");\n        return 0;\n    }\n    if (*F == -1) { *F = 0; *R = 0; }\n    else { *R = (*R + 1) % N; }\n    Q[*R] = x;\n    return 1;\n}",
+            "java": "public class CircularDequeInsertRear {\n    public static boolean insertRear(int[] Q, int N, int[] ptrs, int x) {\n        if ((ptrs[1] + 1) % N == ptrs[0]) return false;\n        if (ptrs[0] == -1) { ptrs[0] = 0; ptrs[1] = 0; }\n        else { ptrs[1] = (ptrs[1] + 1) % N; }\n        Q[ptrs[1]] = x;\n        return true;\n    }\n}",
+            "python": "def insert_rear_cd(q, n, f, r, x):\n    if (r + 1) % n == f:\n        print(\"OVERFLOW\")\n        return False, f, r\n    if f == -1:\n        f, r = 0, 0\n    else:\n        r = (r + 1) % n\n    q[r] = x\n    return True, f, r"
+        },
+        "insert_front_cd": {
+            "title": "Algorithm: INSERT_FRONT_CD(Q, N, F, R, X)",
+            "badge": "Circular Push Front",
+            "complexity": "Time: O(1) | Space: O(1)",
+            "desc": "Inserts element X at front with counter-clockwise circular wrap: (F - 1 + N) mod N.",
+            "simOp": "insert_front",
+            "blackboardHtml": "<span class=\"algo-step-head\">1. [Check Overflow]</span>\n   <span class=\"algo-kw\">If</span> (F - 1 + N) <span class=\"algo-kw\">mod</span> N = R\n       <span class=\"algo-kw\">Then write</span> <span class=\"algo-str\">\"CIRCULAR DEQUE OVERFLOW\"</span> <span class=\"algo-kw\">and Return</span>\n\n<span class=\"algo-step-head\">2. [Adjust Pointers]</span>\n   <span class=\"algo-kw\">If</span> F = -1\n       F <span class=\"algo-arrow\">&larr;</span> 0\n       R <span class=\"algo-arrow\">&larr;</span> 0\n   <span class=\"algo-kw\">Else</span>\n       F <span class=\"algo-arrow\">&larr;</span> (F - 1 + N) <span class=\"algo-kw\">mod</span> N\n\n<span class=\"algo-step-head\">3. [Insert Element]</span>\n   Q[F] <span class=\"algo-arrow\">&larr;</span> X\n\n<span class=\"algo-step-head\">4. [Finished]</span>\n   <span class=\"algo-kw\">Return</span>",
+            "blackboardText": "Algorithm: INSERT_FRONT_CD(Q, N, F, R, X)\n\n1. [Check Overflow]\n   If (F - 1 + N) mod N = R\n       Then write \"CIRCULAR DEQUE OVERFLOW\" and Return\n\n2. [Adjust Pointers]\n   If F = -1\n       F <- 0\n       R <- 0\n   Else\n       F <- (F - 1 + N) mod N\n\n3. [Insert Element]\n   Q[F] <- X\n\n4. [Finished]\n   Return",
+            "c": "#include <stdio.h>\n#define N 6\n\nint insertFrontCD(int Q[], int *F, int *R, int x) {\n    if ((*F - 1 + N) % N == *R) {\n        printf(\"CIRCULAR DEQUE OVERFLOW\\n\");\n        return 0;\n    }\n    if (*F == -1) { *F = 0; *R = 0; }\n    else { *F = (*F - 1 + N) % N; }\n    Q[*F] = x;\n    return 1;\n}",
+            "java": "public class CircularDequeInsertFront {\n    public static boolean insertFront(int[] Q, int N, int[] ptrs, int x) {\n        if ((ptrs[0] - 1 + N) % N == ptrs[1]) return false;\n        if (ptrs[0] == -1) { ptrs[0] = 0; ptrs[1] = 0; }\n        else { ptrs[0] = (ptrs[0] - 1 + N) % N; }\n        Q[ptrs[0]] = x;\n        return true;\n    }\n}",
+            "python": "def insert_front_cd(q, n, f, r, x):\n    if (f - 1 + n) % n == r:\n        print(\"OVERFLOW\")\n        return False, f, r\n    if f == -1:\n        f, r = 0, 0\n    else:\n        f = (f - 1 + n) % n\n    q[f] = x\n    return True, f, r"
+        },
+        "delete_front_cd": {
+            "title": "Algorithm: DELETE_FRONT_CD(Q, N, F, R)",
+            "badge": "Circular Pop Front",
+            "complexity": "Time: O(1) | Space: O(1)",
+            "desc": "Deletes item from front and advances front pointer circularly.",
+            "simOp": "delete_front",
+            "blackboardHtml": "<span class=\"algo-step-head\">1. [Check Underflow]</span>\n   <span class=\"algo-kw\">If</span> F = -1\n       <span class=\"algo-kw\">Then write</span> <span class=\"algo-str\">\"CIRCULAR DEQUE UNDERFLOW\"</span> <span class=\"algo-kw\">and Return</span>(0)\n\n<span class=\"algo-step-head\">2. [Retrieve Item]</span>\n   ITEM <span class=\"algo-arrow\">&larr;</span> Q[F]\n\n<span class=\"algo-step-head\">3. [Reset or Advance Front Circularly]</span>\n   <span class=\"algo-kw\">If</span> F = R\n       F <span class=\"algo-arrow\">&larr;</span> -1\n       R <span class=\"algo-arrow\">&larr;</span> -1\n   <span class=\"algo-kw\">Else</span>\n       F <span class=\"algo-arrow\">&larr;</span> (F + 1) <span class=\"algo-kw\">mod</span> N\n\n<span class=\"algo-step-head\">4. [Return Item]</span>\n   <span class=\"algo-kw\">Return</span>(ITEM)",
+            "blackboardText": "Algorithm: DELETE_FRONT_CD(Q, N, F, R)\n\n1. [Check Underflow]\n   If F = -1\n       Then write \"CIRCULAR DEQUE UNDERFLOW\" and Return(0)\n\n2. [Retrieve Item]\n   ITEM <- Q[F]\n\n3. [Reset or Advance Front Circularly]\n   If F = R\n       F <- -1\n       R <- -1\n   Else\n       F <- (F + 1) mod N\n\n4. [Return Item]\n   Return(ITEM)",
+            "c": "#include <stdio.h>\n#define N 6\n\nint deleteFrontCD(int Q[], int *F, int *R) {\n    if (*F == -1) return -1;\n    int item = Q[*F];\n    if (*F == *R) { *F = -1; *R = -1; }\n    else { *F = (*F + 1) % N; }\n    return item;\n}",
+            "java": "public class CircularDequeDeleteFront {\n    public static int deleteFront(int[] Q, int N, int[] ptrs) {\n        if (ptrs[0] == -1) return -1;\n        int item = Q[ptrs[0]];\n        if (ptrs[0] == ptrs[1]) { ptrs[0] = -1; ptrs[1] = -1; }\n        else { ptrs[0] = (ptrs[0] + 1) % N; }\n        return item;\n    }\n}",
+            "python": "def delete_front_cd(q, n, f, r):\n    if f == -1: return None, -1, -1\n    item = q[f]\n    if f == r: return item, -1, -1\n    return item, (f + 1) % n, r"
+        },
+        "delete_rear_cd": {
+            "title": "Algorithm: DELETE_REAR_CD(Q, N, F, R)",
+            "badge": "Circular Pop Rear",
+            "complexity": "Time: O(1) | Space: O(1)",
+            "desc": "Deletes item from rear and shifts rear counter-clockwise circularly: (R - 1 + N) mod N.",
+            "simOp": "delete_rear",
+            "blackboardHtml": "<span class=\"algo-step-head\">1. [Check Underflow]</span>\n   <span class=\"algo-kw\">If</span> R = -1\n       <span class=\"algo-kw\">Then write</span> <span class=\"algo-str\">\"CIRCULAR DEQUE UNDERFLOW\"</span> <span class=\"algo-kw\">and Return</span>(0)\n\n<span class=\"algo-step-head\">2. [Retrieve Item]</span>\n   ITEM <span class=\"algo-arrow\">&larr;</span> Q[R]\n\n<span class=\"algo-step-head\">3. [Reset or Decrement Rear Circularly]</span>\n   <span class=\"algo-kw\">If</span> F = R\n       F <span class=\"algo-arrow\">&larr;</span> -1\n       R <span class=\"algo-arrow\">&larr;</span> -1\n   <span class=\"algo-kw\">Else</span>\n       R <span class=\"algo-arrow\">&larr;</span> (R - 1 + N) <span class=\"algo-kw\">mod</span> N\n\n<span class=\"algo-step-head\">4. [Return Item]</span>\n   <span class=\"algo-kw\">Return</span>(ITEM)",
+            "blackboardText": "Algorithm: DELETE_REAR_CD(Q, N, F, R)\n\n1. [Check Underflow]\n   If R = -1\n       Then write \"CIRCULAR DEQUE UNDERFLOW\" and Return(0)\n\n2. [Retrieve Item]\n   ITEM <- Q[R]\n\n3. [Reset or Decrement Rear Circularly]\n   If F = R\n       F <- -1\n       R <- -1\n   Else\n       R <- (R - 1 + N) mod N\n\n4. [Return Item]\n   Return(ITEM)",
+            "c": "#include <stdio.h>\n#define N 6\n\nint deleteRearCD(int Q[], int *F, int *R) {\n    if (*R == -1) return -1;\n    int item = Q[*R];\n    if (*F == *R) { *F = -1; *R = -1; }\n    else { *R = (*R - 1 + N) % N; }\n    return item;\n}",
+            "java": "public class CircularDequeDeleteRear {\n    public static int deleteRear(int[] Q, int N, int[] ptrs) {\n        if (ptrs[1] == -1) return -1;\n        int item = Q[ptrs[1]];\n        if (ptrs[0] == ptrs[1]) { ptrs[0] = -1; ptrs[1] = -1; }\n        else { ptrs[1] = (ptrs[1] - 1 + N) % N; }\n        return item;\n    }\n}",
+            "python": "def delete_rear_cd(q, n, f, r):\n    if r == -1: return None, -1, -1\n    item = q[r]\n    if f == r: return item, -1, -1\n    return item, f, (r - 1 + n) % n"
+        }
+    },
+    "priority": {
+        "insert_pq_max": {
+            "title": "Algorithm: INSERT_PQ_MAX(Q, N, X)",
+            "badge": "Heap Insert (Max)",
+            "complexity": "Time: O(log n) | Space: O(1)",
+            "desc": "Appends item X at bottom of max-heap and percolates it upwards until max-heap property is satisfied.",
+            "simOp": "insert_rear",
+            "blackboardHtml": "<span class=\"algo-step-head\">1. [Check for Heap Overflow]</span>\n   <span class=\"algo-kw\">If</span> COUNT = N\n       <span class=\"algo-kw\">Then write</span> <span class=\"algo-str\">\"PRIORITY QUEUE OVERFLOW\"</span> <span class=\"algo-kw\">and Return</span>\n\n<span class=\"algo-step-head\">2. [Append Node at End]</span>\n   COUNT <span class=\"algo-arrow\">&larr;</span> COUNT + 1\n   I <span class=\"algo-arrow\">&larr;</span> COUNT - 1\n   Q[I] <span class=\"algo-arrow\">&larr;</span> X\n\n<span class=\"algo-step-head\">3. [Percolate Up / Heapify]</span>\n   <span class=\"algo-kw\">Call</span> HEAPIFY_UP_MAX(Q, I)\n\n<span class=\"algo-step-head\">4. [Finished]</span>\n   <span class=\"algo-kw\">Return</span>",
+            "blackboardText": "Algorithm: INSERT_PQ_MAX(Q, N, X)\n\n1. [Check for Heap Overflow]\n   If COUNT = N\n       Then write \"PRIORITY QUEUE OVERFLOW\" and Return\n\n2. [Append Node at End]\n   COUNT <- COUNT + 1\n   I <- COUNT - 1\n   Q[I] <- X\n\n3. [Percolate Up / Heapify]\n   Call HEAPIFY_UP_MAX(Q, I)\n\n4. [Finished]\n   Return",
+            "c": "#include <stdio.h>\n#define N 10\n\nint Q[N];\nint count = 0;\n\nvoid heapifyUpMax(int i) {\n    while (i > 0 && Q[(i - 1) / 2] < Q[i]) {\n        int temp = Q[i];\n        Q[i] = Q[(i - 1) / 2];\n        Q[(i - 1) / 2] = temp;\n        i = (i - 1) / 2;\n    }\n}\n\nint insertPQMax(int x) {\n    if (count == N) {\n        printf(\"HEAP OVERFLOW\\n\");\n        return 0;\n    }\n    count++;\n    int i = count - 1;\n    Q[i] = x;\n    heapifyUpMax(i);\n    printf(\"Inserted %d into Max-Heap (Total: %d)\\n\", x, count);\n    return 1;\n}\n\nint main() {\n    insertPQMax(20);\n    insertPQMax(50);\n    insertPQMax(30);\n    return 0;\n}",
+            "java": "public class MaxHeapInsert {\n    private static int[] Q = new int[10];\n    private static int count = 0;\n\n    public static boolean insert(int x) {\n        if (count == 10) return false;\n        count++;\n        int i = count - 1;\n        Q[i] = x;\n        while (i > 0 && Q[(i - 1) / 2] < Q[i]) {\n            int t = Q[i]; Q[i] = Q[(i - 1) / 2]; Q[(i - 1) / 2] = t;\n            i = (i - 1) / 2;\n        }\n        return true;\n    }\n}",
+            "python": "class MaxHeap:\n    def __init__(self, size=10):\n        self.q = []\n        self.size = size\n\n    def insert(self, x):\n        if len(self.q) >= self.size:\n            return False\n        self.q.append(x)\n        i = len(self.q) - 1\n        while i > 0 and self.q[(i - 1) // 2] < self.q[i]:\n            self.q[i], self.q[(i - 1) // 2] = self.q[(i - 1) // 2], self.q[i]\n            i = (i - 1) // 2\n        return True"
+        },
+        "delete_pq_max": {
+            "title": "Algorithm: DELETE_PQ_MAX(Q, COUNT)",
+            "badge": "Extract Max",
+            "complexity": "Time: O(log n) | Space: O(1)",
+            "desc": "Extracts maximum element at index 0, replaces with last element, and percolates down.",
+            "simOp": "delete_front",
+            "blackboardHtml": "<span class=\"algo-step-head\">1. [Check for Heap Underflow]</span>\n   <span class=\"algo-kw\">If</span> COUNT = 0\n       <span class=\"algo-kw\">Then write</span> <span class=\"algo-str\">\"PRIORITY QUEUE UNDERFLOW\"</span> <span class=\"algo-kw\">and Return</span>(0)\n\n<span class=\"algo-step-head\">2. [Retrieve Maximum Root Element]</span>\n   MAX_VAL <span class=\"algo-arrow\">&larr;</span> Q[0]\n\n<span class=\"algo-step-head\">3. [Move Last Element to Root]</span>\n   Q[0] <span class=\"algo-arrow\">&larr;</span> Q[COUNT - 1]\n   COUNT <span class=\"algo-arrow\">&larr;</span> COUNT - 1\n\n<span class=\"algo-step-head\">4. [Restore Max-Heap Invariant]</span>\n   <span class=\"algo-kw\">Call</span> HEAPIFY_DOWN_MAX(Q, COUNT, 0)\n\n<span class=\"algo-step-head\">5. [Return Maximum Value]</span>\n   <span class=\"algo-kw\">Return</span>(MAX_VAL)",
+            "blackboardText": "Algorithm: DELETE_PQ_MAX(Q, COUNT)\n\n1. [Check for Heap Underflow]\n   If COUNT = 0\n       Then write \"PRIORITY QUEUE UNDERFLOW\" and Return(0)\n\n2. [Retrieve Maximum Root Element]\n   MAX_VAL <- Q[0]\n\n3. [Move Last Element to Root]\n   Q[0] <- Q[COUNT - 1]\n   COUNT <- COUNT - 1\n\n4. [Restore Max-Heap Invariant]\n   Call HEAPIFY_DOWN_MAX(Q, COUNT, 0)\n\n5. [Return Maximum Value]\n   Return(MAX_VAL)",
+            "c": "#include <stdio.h>\n\nvoid heapifyDownMax(int Q[], int n, int i) {\n    while (2 * i + 1 < n) {\n        int left = 2 * i + 1, right = 2 * i + 2, largest = i;\n        if (left < n && Q[left] > Q[largest]) largest = left;\n        if (right < n && Q[right] > Q[largest]) largest = right;\n        if (largest == i) break;\n        int temp = Q[i]; Q[i] = Q[largest]; Q[largest] = temp;\n        i = largest;\n    }\n}\n\nint deletePQMax(int Q[], int *count) {\n    if (*count == 0) return -1;\n    int maxVal = Q[0];\n    Q[0] = Q[*count - 1];\n    (*count)--;\n    heapifyDownMax(Q, *count, 0);\n    return maxVal;\n}",
+            "java": "public class MaxHeapDelete {\n    public static int extractMax(int[] Q, int[] count) {\n        if (count[0] == 0) return -1;\n        int max = Q[0];\n        Q[0] = Q[count[0] - 1];\n        count[0]--;\n        // Heapify down\n        int i = 0;\n        while (2 * i + 1 < count[0]) {\n            int left = 2 * i + 1, right = 2 * i + 2, largest = i;\n            if (left < count[0] && Q[left] > Q[largest]) largest = left;\n            if (right < count[0] && Q[right] > Q[largest]) largest = right;\n            if (largest == i) break;\n            int t = Q[i]; Q[i] = Q[largest]; Q[largest] = t;\n            i = largest;\n        }\n        return max;\n    }\n}",
+            "python": "def extract_max(q):\n    if not q: return None\n    if len(q) == 1: return q.pop()\n    max_val = q[0]\n    q[0] = q.pop()\n    i = 0\n    n = len(q)\n    while 2 * i + 1 < n:\n        left = 2 * i + 1; right = 2 * i + 2; largest = i\n        if left < n and q[left] > q[largest]: largest = left\n        if right < n and q[right] > q[largest]: largest = right\n        if largest == i: break\n        q[i], q[largest] = q[largest], q[i]\n        i = largest\n    return max_val"
+        },
+        "heapify_up_max": {
+            "title": "Algorithm: HEAPIFY_UP_MAX(Q, I)",
+            "badge": "Percolate Up",
+            "complexity": "Time: O(log n) | Space: O(1)",
+            "desc": "Swaps child node at index I with parent (I-1)/2 while parent is strictly smaller than child.",
+            "simOp": "insert_rear",
+            "blackboardHtml": "<span class=\"algo-step-head\">1. [Ascend Tree and Swap if Parent is Smaller]</span>\n   <span class=\"algo-kw\">While</span> I &gt; 0 <span class=\"algo-kw\">and</span> Q[(I - 1) / 2] &lt; Q[I]\n       SWAP(Q[I], Q[(I - 1) / 2])\n       I <span class=\"algo-arrow\">&larr;</span> (I - 1) / 2\n\n<span class=\"algo-step-head\">2. [Finished]</span>\n   <span class=\"algo-kw\">Return</span>",
+            "blackboardText": "Algorithm: HEAPIFY_UP_MAX(Q, I)\n\n1. [Ascend Tree and Swap if Parent is Smaller]\n   While I > 0 and Q[(I - 1) / 2] < Q[I]\n       SWAP(Q[I], Q[(I - 1) / 2])\n       I <- (I - 1) / 2\n\n2. [Finished]\n   Return",
+            "c": "void heapifyUpMax(int Q[], int i) {\n    while (i > 0 && Q[(i - 1) / 2] < Q[i]) {\n        int temp = Q[i];\n        Q[i] = Q[(i - 1) / 2];\n        Q[(i - 1) / 2] = temp;\n        i = (i - 1) / 2;\n    }\n}",
+            "java": "public static void heapifyUp(int[] Q, int i) {\n    while (i > 0 && Q[(i - 1) / 2] < Q[i]) {\n        int temp = Q[i];\n        Q[i] = Q[(i - 1) / 2];\n        Q[(i - 1) / 2] = temp;\n        i = (i - 1) / 2;\n    }\n}",
+            "python": "def heapify_up(q, i):\n    while i > 0 and q[(i - 1) // 2] < q[i]:\n        q[i], q[(i - 1) // 2] = q[(i - 1) // 2], q[i]\n        i = (i - 1) // 2"
+        },
+        "heapify_down_max": {
+            "title": "Algorithm: HEAPIFY_DOWN_MAX(Q, N, I)",
+            "badge": "Percolate Down",
+            "complexity": "Time: O(log n) | Space: O(1)",
+            "desc": "Restores max-heap order by pushing root downwards, swapping with the larger of its two children.",
+            "simOp": "delete_front",
+            "blackboardHtml": "<span class=\"algo-step-head\">1. [Identify Children Indices]</span>\n   LEFT <span class=\"algo-arrow\">&larr;</span> 2 * I + 1\n   RIGHT <span class=\"algo-arrow\">&larr;</span> 2 * I + 2\n   LARGEST <span class=\"algo-arrow\">&larr;</span> I\n\n<span class=\"algo-step-head\">2. [Compare with Left and Right Children]</span>\n   <span class=\"algo-kw\">If</span> LEFT &lt; N <span class=\"algo-kw\">and</span> Q[LEFT] &gt; Q[LARGEST]\n       LARGEST <span class=\"algo-arrow\">&larr;</span> LEFT\n   <span class=\"algo-kw\">If</span> RIGHT &lt; N <span class=\"algo-kw\">and</span> Q[RIGHT] &gt; Q[LARGEST]\n       LARGEST <span class=\"algo-arrow\">&larr;</span> RIGHT\n\n<span class=\"algo-step-head\">3. [Swap and Recurse if Invariant Violated]</span>\n   <span class=\"algo-kw\">If</span> LARGEST &ne; I\n       SWAP(Q[I], Q[LARGEST])\n       <span class=\"algo-kw\">Call</span> HEAPIFY_DOWN_MAX(Q, N, LARGEST)\n\n<span class=\"algo-step-head\">4. [Finished]</span>\n   <span class=\"algo-kw\">Return</span>",
+            "blackboardText": "Algorithm: HEAPIFY_DOWN_MAX(Q, N, I)\n\n1. [Identify Children Indices]\n   LEFT <- 2 * I + 1\n   RIGHT <- 2 * I + 2\n   LARGEST <- I\n\n2. [Compare with Left and Right Children]\n   If LEFT < N and Q[LEFT] > Q[LARGEST]\n       LARGEST <- LEFT\n   If RIGHT < N and Q[RIGHT] > Q[LARGEST]\n       LARGEST <- RIGHT\n\n3. [Swap and Recurse if Invariant Violated]\n   If LARGEST \u2260 I\n       SWAP(Q[I], Q[LARGEST])\n       Call HEAPIFY_DOWN_MAX(Q, N, LARGEST)\n\n4. [Finished]\n   Return",
+            "c": "void heapifyDownMax(int Q[], int n, int i) {\n    int left = 2 * i + 1, right = 2 * i + 2, largest = i;\n    if (left < n && Q[left] > Q[largest]) largest = left;\n    if (right < n && Q[right] > Q[largest]) largest = right;\n    if (largest != i) {\n        int temp = Q[i]; Q[i] = Q[largest]; Q[largest] = temp;\n        heapifyDownMax(Q, n, largest);\n    }\n}",
+            "java": "public static void heapifyDown(int[] Q, int n, int i) {\n    int left = 2 * i + 1, right = 2 * i + 2, largest = i;\n    if (left < n && Q[left] > Q[largest]) largest = left;\n    if (right < n && Q[right] > Q[largest]) largest = right;\n    if (largest != i) {\n        int temp = Q[i]; Q[i] = Q[largest]; Q[largest] = temp;\n        heapifyDown(Q, n, largest);\n    }\n}",
+            "python": "def heapify_down(q, n, i):\n    left = 2 * i + 1\n    right = 2 * i + 2\n    largest = i\n    if left < n and q[left] > q[largest]: largest = left\n    if right < n and q[right] > q[largest]: largest = right\n    if largest != i:\n        q[i], q[largest] = q[largest], q[i]\n        heapify_down(q, n, largest)"
+        }
+    },
+    "priority-min": {
+        "insert_pq_min": {
+            "title": "Algorithm: INSERT_PQ_MIN(Q, N, X)",
+            "badge": "Heap Insert (Min)",
+            "complexity": "Time: O(log n) | Space: O(1)",
+            "desc": "Appends item X at bottom of min-heap and percolates it upwards while parent is greater.",
+            "simOp": "insert_rear",
+            "blackboardHtml": "<span class=\"algo-step-head\">1. [Check for Heap Overflow]</span>\n   <span class=\"algo-kw\">If</span> COUNT = N\n       <span class=\"algo-kw\">Then write</span> <span class=\"algo-str\">\"PRIORITY QUEUE OVERFLOW\"</span> <span class=\"algo-kw\">and Return</span>\n\n<span class=\"algo-step-head\">2. [Append Node at End]</span>\n   COUNT <span class=\"algo-arrow\">&larr;</span> COUNT + 1\n   I <span class=\"algo-arrow\">&larr;</span> COUNT - 1\n   Q[I] <span class=\"algo-arrow\">&larr;</span> X\n\n<span class=\"algo-step-head\">3. [Percolate Up / Heapify]</span>\n   <span class=\"algo-kw\">Call</span> HEAPIFY_UP_MIN(Q, I)\n\n<span class=\"algo-step-head\">4. [Finished]</span>\n   <span class=\"algo-kw\">Return</span>",
+            "blackboardText": "Algorithm: INSERT_PQ_MIN(Q, N, X)\n\n1. [Check for Heap Overflow]\n   If COUNT = N\n       Then write \"PRIORITY QUEUE OVERFLOW\" and Return\n\n2. [Append Node at End]\n   COUNT <- COUNT + 1\n   I <- COUNT - 1\n   Q[I] <- X\n\n3. [Percolate Up / Heapify]\n   Call HEAPIFY_UP_MIN(Q, I)\n\n4. [Finished]\n   Return",
+            "c": "#include <stdio.h>\n#define N 10\n\nint Q[N];\nint count = 0;\n\nvoid heapifyUpMin(int i) {\n    while (i > 0 && Q[(i - 1) / 2] > Q[i]) {\n        int temp = Q[i];\n        Q[i] = Q[(i - 1) / 2];\n        Q[(i - 1) / 2] = temp;\n        i = (i - 1) / 2;\n    }\n}\n\nint insertPQMin(int x) {\n    if (count == N) {\n        printf(\"HEAP OVERFLOW\\n\");\n        return 0;\n    }\n    count++;\n    int i = count - 1;\n    Q[i] = x;\n    heapifyUpMin(i);\n    return 1;\n}",
+            "java": "public class MinHeapInsert {\n    private static int[] Q = new int[10];\n    private static int count = 0;\n\n    public static boolean insert(int x) {\n        if (count == 10) return false;\n        count++;\n        int i = count - 1;\n        Q[i] = x;\n        while (i > 0 && Q[(i - 1) / 2] > Q[i]) {\n            int t = Q[i]; Q[i] = Q[(i - 1) / 2]; Q[(i - 1) / 2] = t;\n            i = (i - 1) / 2;\n        }\n        return true;\n    }\n}",
+            "python": "class MinHeap:\n    def __init__(self, size=10):\n        self.q = []\n        self.size = size\n\n    def insert(self, x):\n        if len(self.q) >= self.size: return False\n        self.q.append(x)\n        i = len(self.q) - 1\n        while i > 0 and self.q[(i - 1) // 2] > self.q[i]:\n            self.q[i], self.q[(i - 1) // 2] = self.q[(i - 1) // 2], self.q[i]\n            i = (i - 1) // 2\n        return True"
+        },
+        "delete_pq_min": {
+            "title": "Algorithm: DELETE_PQ_MIN(Q, COUNT)",
+            "badge": "Extract Min",
+            "complexity": "Time: O(log n) | Space: O(1)",
+            "desc": "Extracts minimum element at index 0, replaces with last element, and percolates down.",
+            "simOp": "delete_front",
+            "blackboardHtml": "<span class=\"algo-step-head\">1. [Check for Heap Underflow]</span>\n   <span class=\"algo-kw\">If</span> COUNT = 0\n       <span class=\"algo-kw\">Then write</span> <span class=\"algo-str\">\"PRIORITY QUEUE UNDERFLOW\"</span> <span class=\"algo-kw\">and Return</span>(0)\n\n<span class=\"algo-step-head\">2. [Retrieve Minimum Root Element]</span>\n   MIN_VAL <span class=\"algo-arrow\">&larr;</span> Q[0]\n\n<span class=\"algo-step-head\">3. [Move Last Element to Root]</span>\n   Q[0] <span class=\"algo-arrow\">&larr;</span> Q[COUNT - 1]\n   COUNT <span class=\"algo-arrow\">&larr;</span> COUNT - 1\n\n<span class=\"algo-step-head\">4. [Restore Min-Heap Invariant]</span>\n   <span class=\"algo-kw\">Call</span> HEAPIFY_DOWN_MIN(Q, COUNT, 0)\n\n<span class=\"algo-step-head\">5. [Return Minimum Value]</span>\n   <span class=\"algo-kw\">Return</span>(MIN_VAL)",
+            "blackboardText": "Algorithm: DELETE_PQ_MIN(Q, COUNT)\n\n1. [Check for Heap Underflow]\n   If COUNT = 0\n       Then write \"PRIORITY QUEUE UNDERFLOW\" and Return(0)\n\n2. [Retrieve Minimum Root Element]\n   MIN_VAL <- Q[0]\n\n3. [Move Last Element to Root]\n   Q[0] <- Q[COUNT - 1]\n   COUNT <- COUNT - 1\n\n4. [Restore Min-Heap Invariant]\n   Call HEAPIFY_DOWN_MIN(Q, COUNT, 0)\n\n5. [Return Minimum Value]\n   Return(MIN_VAL)",
+            "c": "#include <stdio.h>\n\nvoid heapifyDownMin(int Q[], int n, int i) {\n    while (2 * i + 1 < n) {\n        int left = 2 * i + 1, right = 2 * i + 2, smallest = i;\n        if (left < n && Q[left] < Q[smallest]) smallest = left;\n        if (right < n && Q[right] < Q[smallest]) smallest = right;\n        if (smallest == i) break;\n        int temp = Q[i]; Q[i] = Q[smallest]; Q[smallest] = temp;\n        i = smallest;\n    }\n}\n\nint deletePQMin(int Q[], int *count) {\n    if (*count == 0) return -1;\n    int minVal = Q[0];\n    Q[0] = Q[*count - 1];\n    (*count)--;\n    heapifyDownMin(Q, *count, 0);\n    return minVal;\n}",
+            "java": "public class MinHeapDelete {\n    public static int extractMin(int[] Q, int[] count) {\n        if (count[0] == 0) return -1;\n        int min = Q[0];\n        Q[0] = Q[count[0] - 1];\n        count[0]--;\n        // Heapify down\n        int i = 0;\n        while (2 * i + 1 < count[0]) {\n            int left = 2 * i + 1, right = 2 * i + 2, smallest = i;\n            if (left < count[0] && Q[left] < Q[smallest]) smallest = left;\n            if (right < count[0] && Q[right] < Q[smallest]) smallest = right;\n            if (smallest == i) break;\n            int t = Q[i]; Q[i] = Q[smallest]; Q[smallest] = t;\n            i = smallest;\n        }\n        return min;\n    }\n}",
+            "python": "def extract_min(q):\n    if not q: return None\n    if len(q) == 1: return q.pop()\n    min_val = q[0]\n    q[0] = q.pop()\n    i = 0\n    n = len(q)\n    while 2 * i + 1 < n:\n        left = 2 * i + 1; right = 2 * i + 2; smallest = i\n        if left < n and q[left] < q[smallest]: smallest = left\n        if right < n and q[right] < q[smallest]: smallest = right\n        if smallest == i: break\n        q[i], q[smallest] = q[smallest], q[i]\n        i = smallest\n    return min_val"
+        },
+        "heapify_up_min": {
+            "title": "Algorithm: HEAPIFY_UP_MIN(Q, I)",
+            "badge": "Percolate Up",
+            "complexity": "Time: O(log n) | Space: O(1)",
+            "desc": "Swaps child node with parent (I-1)/2 while parent is strictly greater than child.",
+            "simOp": "insert_rear",
+            "blackboardHtml": "<span class=\"algo-step-head\">1. [Ascend Tree and Swap if Parent is Larger]</span>\n   <span class=\"algo-kw\">While</span> I &gt; 0 <span class=\"algo-kw\">and</span> Q[(I - 1) / 2] &gt; Q[I]\n       SWAP(Q[I], Q[(I - 1) / 2])\n       I <span class=\"algo-arrow\">&larr;</span> (I - 1) / 2\n\n<span class=\"algo-step-head\">2. [Finished]</span>\n   <span class=\"algo-kw\">Return</span>",
+            "blackboardText": "Algorithm: HEAPIFY_UP_MIN(Q, I)\n\n1. [Ascend Tree and Swap if Parent is Larger]\n   While I > 0 and Q[(I - 1) / 2] > Q[I]\n       SWAP(Q[I], Q[(I - 1) / 2])\n       I <- (I - 1) / 2\n\n2. [Finished]\n   Return",
+            "c": "void heapifyUpMin(int Q[], int i) {\n    while (i > 0 && Q[(i - 1) / 2] > Q[i]) {\n        int temp = Q[i];\n        Q[i] = Q[(i - 1) / 2];\n        Q[(i - 1) / 2] = temp;\n        i = (i - 1) / 2;\n    }\n}",
+            "java": "public static void heapifyUp(int[] Q, int i) {\n    while (i > 0 && Q[(i - 1) / 2] > Q[i]) {\n        int temp = Q[i];\n        Q[i] = Q[(i - 1) / 2];\n        Q[(i - 1) / 2] = temp;\n        i = (i - 1) / 2;\n    }\n}",
+            "python": "def heapify_up(q, i):\n    while i > 0 and q[(i - 1) // 2] > q[i]:\n        q[i], q[(i - 1) // 2] = q[(i - 1) // 2], q[i]\n        i = (i - 1) // 2"
+        },
+        "heapify_down_min": {
+            "title": "Algorithm: HEAPIFY_DOWN_MIN(Q, N, I)",
+            "badge": "Percolate Down",
+            "complexity": "Time: O(log n) | Space: O(1)",
+            "desc": "Restores min-heap order by pushing root downwards, swapping with the smaller of its two children.",
+            "simOp": "delete_front",
+            "blackboardHtml": "<span class=\"algo-step-head\">1. [Identify Children Indices]</span>\n   LEFT <span class=\"algo-arrow\">&larr;</span> 2 * I + 1\n   RIGHT <span class=\"algo-arrow\">&larr;</span> 2 * I + 2\n   SMALLEST <span class=\"algo-arrow\">&larr;</span> I\n\n<span class=\"algo-step-head\">2. [Compare with Left and Right Children]</span>\n   <span class=\"algo-kw\">If</span> LEFT &lt; N <span class=\"algo-kw\">and</span> Q[LEFT] &lt; Q[SMALLEST]\n       SMALLEST <span class=\"algo-arrow\">&larr;</span> LEFT\n   <span class=\"algo-kw\">If</span> RIGHT &lt; N <span class=\"algo-kw\">and</span> Q[RIGHT] &lt; Q[SMALLEST]\n       SMALLEST <span class=\"algo-arrow\">&larr;</span> RIGHT\n\n<span class=\"algo-step-head\">3. [Swap and Recurse if Invariant Violated]</span>\n   <span class=\"algo-kw\">If</span> SMALLEST &ne; I\n       SWAP(Q[I], Q[SMALLEST])\n       <span class=\"algo-kw\">Call</span> HEAPIFY_DOWN_MIN(Q, N, SMALLEST)\n\n<span class=\"algo-step-head\">4. [Finished]</span>\n   <span class=\"algo-kw\">Return</span>",
+            "blackboardText": "Algorithm: HEAPIFY_DOWN_MIN(Q, N, I)\n\n1. [Identify Children Indices]\n   LEFT <- 2 * I + 1\n   RIGHT <- 2 * I + 2\n   SMALLEST <- I\n\n2. [Compare with Left and Right Children]\n   If LEFT < N and Q[LEFT] < Q[SMALLEST]\n       SMALLEST <- LEFT\n   If RIGHT < N and Q[RIGHT] < Q[SMALLEST]\n       SMALLEST <- RIGHT\n\n3. [Swap and Recurse if Invariant Violated]\n   If SMALLEST \u2260 I\n       SWAP(Q[I], Q[SMALLEST])\n       Call HEAPIFY_DOWN_MIN(Q, N, SMALLEST)\n\n4. [Finished]\n   Return",
+            "c": "void heapifyDownMin(int Q[], int n, int i) {\n    int left = 2 * i + 1, right = 2 * i + 2, smallest = i;\n    if (left < n && Q[left] < Q[smallest]) smallest = left;\n    if (right < n && Q[right] < Q[smallest]) smallest = right;\n    if (smallest != i) {\n        int temp = Q[i]; Q[i] = Q[smallest]; Q[smallest] = temp;\n        heapifyDownMin(Q, n, smallest);\n    }\n}",
+            "java": "public static void heapifyDown(int[] Q, int n, int i) {\n    int left = 2 * i + 1, right = 2 * i + 2, smallest = i;\n    if (left < n && Q[left] < Q[smallest]) smallest = left;\n    if (right < n && Q[right] < Q[smallest]) smallest = right;\n    if (smallest != i) {\n        int temp = Q[i]; Q[i] = Q[smallest]; Q[smallest] = temp;\n        heapifyDown(Q, n, smallest);\n    }\n}",
+            "python": "def heapify_down(q, n, i):\n    left = 2 * i + 1\n    right = 2 * i + 2\n    smallest = i\n    if left < n and q[left] < q[smallest]: smallest = left\n    if right < n and q[right] < q[smallest]: smallest = right\n    if smallest != i:\n        q[i], q[smallest] = q[smallest], q[i]\n        heapify_down(q, n, smallest)"
         }
     }
+};
 
-    private void heapifyDown(int n, int i) {
-        while (2 * i + 1 < n) {
-            int left = 2 * i + 1;
-            int right = 2 * i + 2;
-            int smallest = i;
-            if (left < n && q[left] < q[smallest]) smallest = left;
-            if (right < n && q[right] < q[smallest]) smallest = right;
-            if (smallest == i) break;
-            int temp = q[i];
-            q[i] = q[smallest];
-            q[smallest] = temp;
-            i = smallest;
-        }
-    }
-}`,
-            python: `class MinHeapPriorityQueue:
-    def __init__(self, size: int):
-        self.size = size
-        self.q = []
-
-    def insert(self, val) -> bool:
-        if len(self.q) >= self.size:
-            return False
-        self.q.append(val)
-        self.heapify_up(len(self.q) - 1)
-        return True
-
-    def delete(self):
-        if not self.q:
-            return None
-        item = self.q[0]
-        if len(self.q) == 1:
-            self.q.pop()
-        else:
-            self.q[0] = self.q.pop()
-            self.heapify_down(len(self.q), 0)
-        return item
-
-    def heapify_up(self, i):
-        while i > 0 and self.q[(i - 1) // 2] > self.q[i]:
-            parent = (i - 1) // 2
-            self.q[i], self.q[parent] = self.q[parent], self.q[i]
-            i = parent
-
-    def heapify_down(self, n, i):
-        while 2 * i + 1 < n:
-            left = 2 * i + 1; right = 2 * i + 2
-            smallest = i
-            if left < n and self.q[left] < self.q[smallest]: smallest = left
-            if right < n and self.q[right] < self.q[smallest]: smallest = right
-            if smallest == i: break
-            self.q[i], self.q[smallest] = self.q[smallest], self.q[i]
-            i = smallest
-
-# --- Driver Program ---
-max_size = int(input("Enter the size of Priority Queue (Min-Heap)::"))
-pq_obj = MinHeapPriorityQueue(max_size)
-
-while True:
-    print("1. Insert Element")
-    print("2. Extract Min Element")
-    print("3. Display Heap Array")
-    print("4. Exit")
-    user_choice = int(input("Enter your Choice::"))
-    if user_choice == 1:
-        x = int(input("Enter integer value to insert::"))
-        pq_obj.insert(x)
-        print("Heap array:", pq_obj.q)
-    elif user_choice == 2:
-        deleted_val = pq_obj.delete()
-        print("Extracted Min:", deleted_val)
-        print("Heap array:", pq_obj.q)
-    elif user_choice == 3:
-        print("Heap array:", pq_obj.q)
-    elif user_choice == 4:
-        print("Exiting the code")
-        break
-    else:
-        print("invalid Choice")`
-        }
-    };
-
-    // Theme Management
+// Theme Management
     function toggleTheme() {
         const currentTheme = document.documentElement.getAttribute('data-theme');
         const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
@@ -3404,32 +3021,236 @@ while True:
         renderSimulator();
     }
 
-    // Active Code State
-    let activeCodeLang = 'blackboard';
+        // ========================================================================
+    // ACADEMIC QUEUE ALGORITHM STUDIO CONTROLLER (TREMBLAY & SORENSON)
+    // ========================================================================
+    let currentQueueStudioType = 'simple';
+    let currentQueueStudioTab = 'blackboard';
 
-    function switchLanguageTab(event, lang) {
-        const tabContainer = event.target.parentElement;
-        tabContainer.querySelectorAll('.tab-btn').forEach(btn => {
-            btn.classList.remove('active');
-        });
-        event.target.classList.add('active');
+    const queueTypeColorMap = {
+        simple: 'var(--color-simple)',
+        circular: 'var(--color-circular)',
+        deque: 'var(--color-deque)',
+        'c-deque': 'var(--color-c-deque)',
+        priority: 'var(--color-priority)',
+        'priority-min': 'var(--color-priority-min)'
+    };
 
-        activeCodeLang = lang;
-        updateDisplayedCode();
+    const queueTypeBadgeBgMap = {
+        simple: 'rgba(59, 130, 246, 0.12)',
+        circular: 'rgba(13, 148, 136, 0.12)',
+        deque: 'rgba(139, 92, 246, 0.12)',
+        'c-deque': 'rgba(245, 158, 11, 0.12)',
+        priority: 'rgba(239, 68, 68, 0.12)',
+        'priority-min': 'rgba(16, 185, 129, 0.12)'
+    };
+
+    function initQueueAlgoStudio() {
+        populateQueueStudioAlgoSelect(currentQueueStudioType);
+        renderQueueStudio('insert_sq');
     }
 
-    function updateDisplayedCode() {
-        const queueType = document.getElementById('code-queue-select').value;
-        const codeDisplay = document.getElementById('display-code-block');
-        
-        if (codeRepository[queueType] && codeRepository[queueType][activeCodeLang]) {
-            codeDisplay.textContent = codeRepository[queueType][activeCodeLang];
-        } else {
-            codeDisplay.textContent = "Code snippet not found.";
+    function onQueueTypeChange() {
+        const typeSel = document.getElementById('queue-studio-type-select');
+        if (!typeSel) return;
+        currentQueueStudioType = typeSel.value;
+
+        const activeColor = queueTypeColorMap[currentQueueStudioType] || 'var(--color-simple)';
+        typeSel.style.borderColor = activeColor;
+        typeSel.style.color = activeColor;
+
+        populateQueueStudioAlgoSelect(currentQueueStudioType);
+        const algoSel = document.getElementById('queue-algo-select');
+        const defaultAlgo = algoSel ? algoSel.value : Object.keys(queueStudioAlgoData[currentQueueStudioType])[0];
+        renderQueueStudio(defaultAlgo);
+    }
+
+    function populateQueueStudioAlgoSelect(type) {
+        const sel = document.getElementById('queue-algo-select');
+        if (!sel) return;
+
+        let algos = [];
+        if (type === 'simple') {
+            algos = [
+                { val: "insert_sq", text: "1. INSERT_SQ(Q, N, F, R, Y) — Enqueue" },
+                { val: "delete_sq", text: "2. DELETE_SQ(Q, F, R) — Dequeue" },
+                { val: "display_sq", text: "3. DISPLAY_SQ(Q, F, R) — Traverse & Display" }
+            ];
+        } else if (type === 'circular') {
+            algos = [
+                { val: "insert_cq", text: "1. INSERT_CQ(Q, N, F, R, X) — Circular Enqueue" },
+                { val: "delete_cq", text: "2. DELETE_CQ(Q, N, F, R) — Circular Dequeue" },
+                { val: "display_cq", text: "3. DISPLAY_CQ(Q, N, F, R) — Circular Display" }
+            ];
+        } else if (type === 'deque') {
+            algos = [
+                { val: "insert_rear_dq", text: "1. DQ_INSERT_REAR(Q, N, F, R, Y) — Enqueue Rear" },
+                { val: "insert_front_dq", text: "2. DQ_INSERT_FRONT(Q, N, F, R, Y) — Enqueue Front" },
+                { val: "delete_front_dq", text: "3. DQ_DELETE_FRONT(Q, F, R) — Dequeue Front" },
+                { val: "delete_rear_dq", text: "4. DQ_DELETE_REAR(Q, F, R) — Dequeue Rear" }
+            ];
+        } else if (type === 'c-deque') {
+            algos = [
+                { val: "insert_rear_cd", text: "1. CDQ_INSERT_REAR(Q, N, F, R, Y) — Circular Enqueue Rear" },
+                { val: "insert_front_cd", text: "2. CDQ_INSERT_FRONT(Q, N, F, R, Y) — Circular Enqueue Front" },
+                { val: "delete_front_cd", text: "3. CDQ_DELETE_FRONT(Q, N, F, R) — Circular Dequeue Front" },
+                { val: "delete_rear_cd", text: "4. CDQ_DELETE_REAR(Q, N, F, R) — Circular Dequeue Rear" }
+            ];
+        } else if (type === 'priority') {
+            algos = [
+                { val: "insert_pq_max", text: "1. PQ_MAX_INSERT(A, N, X) — Insert & Heapify-Up" },
+                { val: "delete_pq_max", text: "2. PQ_MAX_DELETE(A, N) — Extract Max & Heapify-Down" },
+                { val: "heapify_up_max", text: "3. HEAPIFY_UP_MAX(A, I) — Restore Max-Heap Ascending" },
+                { val: "heapify_down_max", text: "4. HEAPIFY_DOWN_MAX(A, N, I) — Restore Max-Heap Descending" }
+            ];
+        } else if (type === 'priority-min') {
+            algos = [
+                { val: "insert_pq_min", text: "1. PQ_MIN_INSERT(A, N, X) — Insert & Heapify-Up" },
+                { val: "delete_pq_min", text: "2. PQ_MIN_DELETE(A, N) — Extract Min & Heapify-Down" },
+                { val: "heapify_up_min", text: "3. HEAPIFY_UP_MIN(A, I) — Restore Min-Heap Ascending" },
+                { val: "heapify_down_min", text: "4. HEAPIFY_DOWN_MIN(A, N, I) — Restore Min-Heap Descending" }
+            ];
+        }
+
+        let optHtml = '';
+        for (const a of algos) {
+            optHtml += `<option value="${a.val}">${a.text}</option>`;
+        }
+        sel.innerHTML = optHtml;
+        if (algos.length > 0) {
+            sel.value = algos[0].val;
         }
     }
 
-    // CONCEPTUAL QUIZ LOGIC
+    function onQueueAlgoChange() {
+        const sel = document.getElementById('queue-algo-select');
+        if (!sel) return;
+        renderQueueStudio(sel.value);
+    }
+
+    function switchQueueStudioTab(tab) {
+        currentQueueStudioTab = tab;
+        const sel = document.getElementById('queue-algo-select');
+        const key = sel ? sel.value : Object.keys(queueStudioAlgoData[currentQueueStudioType])[0];
+        renderQueueStudio(key);
+    }
+
+    function renderQueueStudio(key) {
+        const typeData = queueStudioAlgoData[currentQueueStudioType] || queueStudioAlgoData.simple;
+        const algoKeys = Object.keys(typeData);
+        const algo = typeData[key] || typeData[algoKeys[0]];
+        if (!algo) return;
+
+        const activeColor = queueTypeColorMap[currentQueueStudioType] || 'var(--color-simple)';
+        const badgeBg = queueTypeBadgeBgMap[currentQueueStudioType] || 'rgba(59, 130, 246, 0.12)';
+
+        const studio = document.getElementById('queue-algo-studio');
+        if (studio) studio.style.display = 'block';
+
+        const titleElem = document.getElementById('studio-algo-title');
+        const badgeElem = document.getElementById('studio-algo-badge');
+        const compElem = document.getElementById('studio-algo-complexity');
+        const descElem = document.getElementById('studio-algo-desc');
+        const codeBox = document.getElementById('queue-studio-code');
+        const runBtn = document.getElementById('btn-run-sim-from-algo');
+
+        if (titleElem) {
+            titleElem.innerText = algo.title;
+            titleElem.style.color = activeColor;
+        }
+        if (badgeElem) {
+            badgeElem.innerText = algo.badge;
+            badgeElem.style.color = activeColor;
+            badgeElem.style.background = badgeBg;
+        }
+        if (compElem) compElem.innerText = algo.complexity;
+        if (descElem) descElem.innerText = algo.desc;
+        if (runBtn) runBtn.className = `btn-action btn-${currentQueueStudioType}`;
+
+        // Update active tab buttons
+        document.querySelectorAll('.queue-tab-btn').forEach(btn => {
+            if (btn.getAttribute('data-tab') === currentQueueStudioTab) {
+                btn.classList.add('active');
+                btn.style.background = activeColor;
+                btn.style.borderColor = activeColor;
+                btn.style.color = '#ffffff';
+            } else {
+                btn.classList.remove('active');
+                btn.style.background = '';
+                btn.style.borderColor = '';
+                btn.style.color = '';
+            }
+        });
+
+        if (codeBox) {
+            if (currentQueueStudioTab === 'blackboard') {
+                codeBox.innerHTML = algo.blackboardHtml;
+            } else {
+                codeBox.textContent = algo[currentQueueStudioTab] || "// Code implementation...";
+            }
+        }
+    }
+
+    function runQueueAlgoInSim() {
+        selectSimulator(currentQueueStudioType);
+        const simSection = document.getElementById('section-simulators');
+        if (simSection) {
+            simSection.scrollIntoView({ behavior: 'smooth' });
+        }
+        logConsole(`Switched to ${currentQueueStudioType.toUpperCase()} Queue Simulator. Ready to step and run!`, 'info');
+    }
+
+    function copyQueueStudioCode() {
+        const sel = document.getElementById('queue-algo-select');
+        const typeData = queueStudioAlgoData[currentQueueStudioType] || queueStudioAlgoData.simple;
+        const key = sel ? sel.value : Object.keys(typeData)[0];
+        const algo = typeData[key];
+        if (!algo) return;
+
+        let textToCopy = '';
+        if (currentQueueStudioTab === 'blackboard') {
+            textToCopy = algo.blackboardText;
+        } else {
+            textToCopy = algo[currentQueueStudioTab] || '';
+        }
+
+        if (navigator && navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                showQueueCopyFeedback();
+            }).catch(() => {
+                fallbackQueueCopy(textToCopy);
+            });
+        } else {
+            fallbackQueueCopy(textToCopy);
+        }
+    }
+
+    function fallbackQueueCopy(text) {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        showQueueCopyFeedback();
+    }
+
+    function showQueueCopyFeedback() {
+        const icon = document.getElementById('copy-btn-icon');
+        const text = document.getElementById('copy-btn-text');
+        if (icon && text) {
+            const oldIcon = icon.innerText;
+            const oldText = text.innerText;
+            icon.innerText = '✅';
+            text.innerText = 'Copied!';
+            setTimeout(() => {
+                icon.innerText = oldIcon;
+                text.innerText = oldText;
+            }, 2000);
+        }
+    }
+
+// CONCEPTUAL QUIZ LOGIC
     const quizData = [
         {
             q: "If Front (F) = 2 and Rear (R) = 1 in a Circular Queue of size N = 5, what is the state of the queue?",
@@ -3543,7 +3364,7 @@ while True:
         // Start Quiz
         loadQuizQuestion();
         // Load default code tab
-        updateDisplayedCode();
+        initQueueAlgoStudio();
     };
 </script>
 </body>
