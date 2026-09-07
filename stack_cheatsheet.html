@@ -32,7 +32,9 @@
             --color-standard: #2563eb; /* Blue */
             --color-twostacks: #8b5cf6; /* Purple */
             --color-revpol: #0d9488; /* Teal */
+            --color-prefix: #6366f1; /* Indigo */
             --color-postfix: #f59e0b; /* Amber */
+            --color-prefixeval: #a855f7; /* Violet */
             --color-linked: #10b981; /* Emerald */
             --color-minstack: #ef4444; /* Crimson */
             
@@ -358,7 +360,9 @@
         .sidebar-tab-btn[data-type="standard"].active { background-color: var(--color-standard); border-color: var(--color-standard); }
         .sidebar-tab-btn[data-type="twostacks"].active { background-color: var(--color-twostacks); border-color: var(--color-twostacks); }
         .sidebar-tab-btn[data-type="revpol"].active { background-color: var(--color-revpol); border-color: var(--color-revpol); }
+        .sidebar-tab-btn[data-type="prefix"].active { background-color: var(--color-prefix); border-color: var(--color-prefix); }
         .sidebar-tab-btn[data-type="postfix"].active { background-color: var(--color-postfix); border-color: var(--color-postfix); }
+        .sidebar-tab-btn[data-type="prefixeval"].active { background-color: var(--color-prefixeval); border-color: var(--color-prefixeval); }
         .sidebar-tab-btn[data-type="linked"].active { background-color: var(--color-linked); border-color: var(--color-linked); }
         .sidebar-tab-btn[data-type="minstack"].active { background-color: var(--color-minstack); border-color: var(--color-minstack); }
 
@@ -423,10 +427,56 @@
         .btn-standard { background-color: var(--color-standard); }
         .btn-twostacks { background-color: var(--color-twostacks); }
         .btn-revpol { background-color: var(--color-revpol); }
+        .btn-prefix { background-color: var(--color-prefix); }
         .btn-postfix { background-color: var(--color-postfix); }
+        .btn-prefixeval { background-color: var(--color-prefixeval); }
         .btn-linked { background-color: var(--color-linked); }
         .btn-minstack { background-color: var(--color-minstack); }
         .btn-reset { background-color: var(--text-secondary); }
+
+        /* Variable Inputs Card */
+        .var-inputs-card {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: center;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin-top: 10px;
+            width: 100%;
+        }
+
+        .var-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 6px 12px;
+            border-radius: 6px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .var-chip label {
+            font-family: var(--font-code);
+            font-weight: 700;
+            font-size: 14px;
+            color: var(--text-primary);
+        }
+
+        .var-input-field {
+            width: 58px;
+            padding: 4px 8px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-family: var(--font-code);
+            font-weight: 700;
+            text-align: center;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+        }
 
         /* Visualization Container */
         .visualization-container {
@@ -953,18 +1003,18 @@
                     <div class="nav-dropdown">
                         <a href="stack_cheatsheet.html" class="dropdown-link" style="color:var(--accent-blue); font-weight:700;">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19h16M4 15h16M4 11h16M4 7h16"/></svg>
-                            Stack Suite (LIFO)
-                            <span class="dropdown-badge live">Current Page ⚡</span>
+                            Stack (LIFO)
+                           
                         </a>
                         <a href="queue_cheatsheet.html" class="dropdown-link">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 10 12 10 12 14"/></svg>
-                            Queue Suite (FIFO)
-                            <span class="dropdown-badge live">Live Simulator</span>
+                            Queue (FIFO)
+                           
                         </a>
                         <a href="index.html#linkedlist" class="dropdown-link">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6" cy="12" r="3"/><circle cx="18" cy="12" r="3"/><line x1="9" y1="12" x2="15" y2="12"/></svg>
                             Linked List
-                            <span class="dropdown-badge">Train</span>
+                           
                         </a>
                     </div>
                 </li>
@@ -979,12 +1029,12 @@
                         <a href="index.html#tree" class="dropdown-link">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v6m-6 6l6-6 6 6m-9 6l3-6 3 6"/><circle cx="12" cy="2" r="1"/></svg>
                             Tree & BST
-                            <span class="dropdown-badge">Family Tree</span>
+                           
                         </a>
                         <a href="index.html#graph" class="dropdown-link">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6" cy="6" r="3"/><circle cx="18" cy="6" r="3"/><circle cx="12" cy="18" r="3"/><line x1="8.5" y1="7.5" x2="15.5" y2="7.5"/><line x1="7.5" y1="8.5" x2="10.5" y2="15.5"/><line x1="16.5" y1="8.5" x2="13.5" y2="15.5"/></svg>
                             Graph Networks
-                            <span class="dropdown-badge">Road Map</span>
+                          
                         </a>
                     </div>
                 </li>
@@ -999,12 +1049,12 @@
                         <a href="index.html#searching" class="dropdown-link">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
                             Searching (Find Items)
-                            <span class="dropdown-badge">Search</span>
+                           
                         </a>
                         <a href="index.html#sorting" class="dropdown-link">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M6 12h12M10 18h4"/></svg>
                             Sorting (Order Items)
-                            <span class="dropdown-badge">Sort</span>
+                            
                         </a>
                     </div>
                 </li>
@@ -1302,8 +1352,10 @@
             <div class="sidebar-tabs">
                 <button class="sidebar-tab-btn active" data-type="standard" onclick="selectSimulator('standard')">Standard Stack (Array LIFO) <span>➔</span></button>
                 <button class="sidebar-tab-btn" data-type="twostacks" onclick="selectSimulator('twostacks')">Two Stacks in One Array <span>➔</span></button>
-                <button class="sidebar-tab-btn" data-type="revpol" onclick="selectSimulator('revpol')">Solve Expression (REVPOL Simulation) <span>➔</span></button>
-                <button class="sidebar-tab-btn" data-type="postfix" onclick="selectSimulator('postfix')">Postfix Evaluator <span>➔</span></button>
+                <button class="sidebar-tab-btn" data-type="revpol" onclick="selectSimulator('revpol')">Infix to Postfix (REVPOL) <span>➔</span></button>
+                <button class="sidebar-tab-btn" data-type="prefix" onclick="selectSimulator('prefix')">Infix to Prefix (POLISH) <span>➔</span></button>
+                <button class="sidebar-tab-btn" data-type="postfix" onclick="selectSimulator('postfix')">Postfix Evaluator (with Variables) <span>➔</span></button>
+                <button class="sidebar-tab-btn" data-type="prefixeval" onclick="selectSimulator('prefixeval')">Prefix Evaluator (with Variables) <span>➔</span></button>
                 <button class="sidebar-tab-btn" data-type="linked" onclick="selectSimulator('linked')">Linked List Stack <span>➔</span></button>
                 <button class="sidebar-tab-btn" data-type="minstack" onclick="selectSimulator('minstack')">Min Stack (O(1) GetMin) <span>➔</span></button>
             </div>
@@ -1335,11 +1387,25 @@
                             <button class="btn-action btn-revpol" onclick="loadCustomRevpol()">Load Expression</button>
                         </div>
 
-                        <!-- Postfix Custom Expression Input -->
+                        <!-- Infix to Prefix Custom Expression Input -->
+                        <div id="ctrl-prefix-inputs" style="display: none; align-items: center; gap: 8px; flex-wrap: wrap;">
+                            <label for="prefix-custom-input" style="font-size: 13px; font-weight: 600;">Infix Expression:</label>
+                            <input type="text" id="prefix-custom-input" class="input-elem" value="(A+B)*C" style="width: 180px; font-weight: 700;">
+                            <button class="btn-action btn-prefix" onclick="loadCustomPrefix()">Load Expression</button>
+                        </div>
+
+                        <!-- Postfix with Variables Expression Input -->
                         <div id="ctrl-postfix-inputs" style="display: none; align-items: center; gap: 8px; flex-wrap: wrap;">
-                            <label for="postfix-custom-input" style="font-size: 13px; font-weight: 600;">Postfix Tokens:</label>
-                            <input type="text" id="postfix-custom-input" class="input-elem" value="5 3 + 2 *" style="width: 180px; font-weight: 700;">
-                            <button class="btn-action btn-postfix" onclick="loadCustomPostfix()">Load Tokens</button>
+                            <label for="postfix-infix-input" style="font-size: 13px; font-weight: 600;">Infix Expression:</label>
+                            <input type="text" id="postfix-infix-input" class="input-elem" value="(A+B)*C" style="width: 180px; font-weight: 700;">
+                            <button class="btn-action btn-postfix" onclick="loadCustomPostfixWithVars()">Convert & Substitute</button>
+                        </div>
+
+                        <!-- Prefix with Variables Expression Input -->
+                        <div id="ctrl-prefixeval-inputs" style="display: none; align-items: center; gap: 8px; flex-wrap: wrap;">
+                            <label for="prefixeval-infix-input" style="font-size: 13px; font-weight: 600;">Infix Expression:</label>
+                            <input type="text" id="prefixeval-infix-input" class="input-elem" value="(A+B)*C" style="width: 180px; font-weight: 700;">
+                            <button class="btn-action btn-prefixeval" onclick="loadCustomPrefixevalWithVars()">Convert & Substitute</button>
                         </div>
 
                         <!-- Step Delay Slider - ALWAYS VISIBLE -->
@@ -1355,7 +1421,7 @@
                         <!-- Standard Stack Actions -->
                         <button class="btn-action btn-standard" id="btn-push" onclick="triggerPush()">PUSH(X)</button>
                         <button class="btn-action btn-standard" id="btn-pop" onclick="triggerPop()" style="background:#ef4444;">POP()</button>
-                        <button class="btn-action btn-standard" id="btn-peek" onclick="triggerPeek()" style="background:#06b6d4;">PEEK()</button>
+                        <button class="btn-action btn-peek" id="btn-peek" onclick="triggerPeek()" style="background:#06b6d4;">PEEK()</button>
                         
                         <!-- PEEP controls -->
                         <div id="peep-group" style="display:inline-flex; align-items:center; gap:6px;">
@@ -1382,10 +1448,20 @@
                         <button class="btn-action btn-revpol" id="btn-revpol-auto" onclick="triggerRevpolAuto()" style="display:none; background:#059669;">Auto Run ⚡</button>
                         <button class="btn-action btn-revpol" id="btn-revpol-all" onclick="triggerRevpolSolveAll()" style="display:none; background:#0f766e;">Solve Expression 🚀</button>
                         
-                        <!-- Postfix Actions -->
+                        <!-- Infix to Prefix Actions -->
+                        <button class="btn-action btn-prefix" id="btn-prefix-step" onclick="triggerPrefixStep()" style="display:none;">Step Next Symbol ➔</button>
+                        <button class="btn-action btn-prefix" id="btn-prefix-auto" onclick="triggerPrefixAuto()" style="display:none; background:#4338ca;">Auto Run ⚡</button>
+                        <button class="btn-action btn-prefix" id="btn-prefix-all" onclick="triggerPrefixSolveAll()" style="display:none; background:#3730a3;">Solve Expression 🚀</button>
+
+                        <!-- Postfix with Variables Actions -->
                         <button class="btn-action btn-postfix" id="btn-postfix-step" onclick="triggerPostfixStep()" style="display:none;">Step Evaluate ➔</button>
                         <button class="btn-action btn-postfix" id="btn-postfix-auto" onclick="triggerPostfixAuto()" style="display:none; background:#d97706;">Auto Run ⚡</button>
                         <button class="btn-action btn-postfix" id="btn-postfix-all" onclick="triggerPostfixSolveAll()" style="display:none; background:#b45309;">Evaluate All 🚀</button>
+
+                        <!-- Prefix with Variables Actions -->
+                        <button class="btn-action btn-prefixeval" id="btn-prefixeval-step" onclick="triggerPrefixevalStep()" style="display:none;">Step Evaluate (R➔L) ➔</button>
+                        <button class="btn-action btn-prefixeval" id="btn-prefixeval-auto" onclick="triggerPrefixevalAuto()" style="display:none; background:#7e22ce;">Auto Run ⚡</button>
+                        <button class="btn-action btn-prefixeval" id="btn-prefixeval-all" onclick="triggerPrefixevalSolveAll()" style="display:none; background:#6b21a8;">Evaluate All 🚀</button>
 
                         <!-- Min Stack Actions -->
                         <button class="btn-action btn-minstack" id="btn-min-get" onclick="triggerGetMin()" style="display:none; background:#ea580c;">GetMin() O(1)</button>
@@ -1393,11 +1469,14 @@
                         <button class="btn-action btn-reset" onclick="resetCurrentSimulator()">Clear All</button>
                     </div>
 
-                    <!-- Preset Pills for REVPOL and Postfix -->
+                    <!-- Preset Pills for REVPOL, Prefix, Postfix, PrefixEval -->
                     <div id="presets-panel" style="display:none; width:100%; padding:10px 14px; background:var(--card-bg); border-radius:6px; border:1px solid var(--border-color);">
                         <span style="font-size:12px; font-weight:700; color:var(--text-secondary); margin-right:8px;">Quick Presets:</span>
                         <div id="preset-buttons-container" style="display:inline-flex; gap:6px; flex-wrap:wrap;"></div>
                     </div>
+
+                    <!-- Dynamic Variable Inputs Panel for Simulators -->
+                    <div id="sim-var-inputs-panel" style="display:none; width:100%;"></div>
                 </div>
 
                 <!-- Simulation visual container -->
@@ -1696,22 +1775,96 @@ If TOP1 + 1 == TOP2
                 </div>
             </div>
         </div>
-
-        <!-- ================================================================
-             5.2 POSTFIX EXPRESSION EVALUATOR & ARITHMETIC SOLVER
+               <!-- ================================================================
+             5.2 POLISH: INFIX TO PREFIX EXPRESSION SOLVER & TRACE TABLE
              ================================================================ -->
-        <div style="margin-top: 36px; padding-top: 24px; border-top: 1px solid var(--border-color);" id="postfix-expression-solver">
+        <div style="margin-top: 36px; padding-top: 24px; border-top: 1px solid var(--border-color);" id="prefix-expression-solver">
             <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 12px;">
                 <div>
-                    <span style="font-size:12px; font-weight:700; color:var(--color-postfix); text-transform:uppercase; letter-spacing:0.5px;">Arithmetic Evaluation Simulator</span>
+                    <span style="font-size:12px; font-weight:700; color:var(--color-prefix); text-transform:uppercase; letter-spacing:0.5px;">Interactive Algorithm Simulator</span>
                     <h3 style="font-family: var(--font-head); font-size: 20px; font-weight: 800; color: var(--text-primary);">
-                        Postfix Expression Evaluator & Step-by-Step Solver
+                        POLISH: Infix to Prefix Expression Solver & Trace Table
                     </h3>
                 </div>
             </div>
 
             <p style="color: var(--text-secondary); font-size: 13px; line-height: 1.6; margin-bottom: 16px;">
-                Evaluate arithmetic Postfix expressions using an operand Stack. Tokens are read from left-to-right: numbers are pushed onto the Stack; when an operator is encountered, two operands are popped, calculated, and the result is pushed back!
+                Convert any Infix arithmetic expression into <strong>Prefix (Polish)</strong> notation using the textbook reversal algorithm:
+                (1) Reverse Infix string, (2) Swap <code>(</code> and <code>)</code>, (3) Convert to Postfix with modified precedence (left-associative operators do not pop equal precedence), and (4) Reverse the output to produce the final Prefix expression!
+            </p>
+
+            <!-- Solver Control Box -->
+            <div style="background: var(--bg-primary); border: 1px solid var(--border-color); border-radius: 8px; padding: 18px; margin-bottom: 20px;">
+                <!-- Presets -->
+                <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 14px;">
+                    <span style="font-size: 12px; font-weight: 700; color: var(--text-secondary);">Try Presets:</span>
+                    <button class="preset-pill-btn" onclick="setPrefixSolverPreset('(A+B)*C')">(A+B)*C</button>
+                    <button class="preset-pill-btn" onclick="setPrefixSolverPreset('A+B*C')">A+B*C</button>
+                    <button class="preset-pill-btn" onclick="setPrefixSolverPreset('((A+B)*C)-D')">((A+B)*C)-D</button>
+                    <button class="preset-pill-btn" onclick="setPrefixSolverPreset('A/B+C/D')">A/B+C/D</button>
+                    <button class="preset-pill-btn" onclick="setPrefixSolverPreset('(A+B)*(C+D)')">(A+B)*(C+D)</button>
+                    <button class="preset-pill-btn" onclick="setPrefixSolverPreset('A+B*C-D/E')">A+B*C-D/E</button>
+                    <button class="preset-pill-btn" onclick="setPrefixSolverPreset('A*(B+C)/D^E')">A*(B+C)/D^E</button>
+                </div>
+
+                <!-- Input & Action Buttons -->
+                <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+                    <label for="prefixSolverInput" style="font-size: 13px; font-weight: 700;">Infix Expression:</label>
+                    <input type="text" id="prefixSolverInput" class="input-elem" value="(A+B)*C" style="width: 280px; font-weight: 700; font-family: var(--font-code);" placeholder="Enter Infix (e.g. (A+B)*C)">
+                    <button class="btn-action btn-prefix" onclick="runPrefixSolver()">Translate to Prefix 🚀</button>
+                    <button class="btn-action btn-reset" onclick="resetPrefixSolver()">Reset ↺</button>
+                </div>
+            </div>
+
+            <!-- Prefix Output Section -->
+            <div id="prefixOutputSection" style="display: none;">
+                <div style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 14px; background: var(--card-bg); padding: 14px; border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+                        <div style="font-family: var(--font-head); font-weight: 700; font-size: 16px;">
+                            Final Result Prefix (POLISH): <span id="prefixFinalResult" style="color:var(--color-prefix); font-family:var(--font-code); font-size:20px; font-weight:800; margin-left:6px;"></span>
+                        </div>
+                        <div id="prefixValidationBadge" class="formula-box" style="background:#dcfce7; color:#15803d; font-weight:700;">✅ COMPLETE</div>
+                    </div>
+                    <div style="font-size: 13px; color: var(--text-secondary); display: flex; gap: 16px; flex-wrap: wrap;">
+                        <span>Reversed Infix (Swapped Parens): <code id="prefixReversedInfix" style="font-weight:700; color:var(--text-primary);"></code></span>
+                        <span>Temporary Postfix Buffer: <code id="prefixTempOutput" style="font-weight:700; color:var(--text-primary);"></code></span>
+                    </div>
+                </div>
+
+                <div class="matrix-container">
+                    <table class="matrix-table" id="prefixTraceTable">
+                        <thead>
+                            <tr>
+                                <th style="width: 6%;">Step</th>
+                                <th style="width: 12%;">Scanned Char</th>
+                                <th style="width: 16%;">Operator Stack S</th>
+                                <th style="width: 22%;">Intermediate Buffer</th>
+                                <th>Action Taken & Academic Associativity Rule</th>
+                            </tr>
+                        </thead>
+                        <tbody id="prefixTraceBody">
+                            <!-- Injected by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================================================================
+             5.3 END-TO-END POSTFIX EVALUATION WITH DYNAMIC VARIABLES
+             ================================================================ -->
+        <div style="margin-top: 36px; padding-top: 24px; border-top: 1px solid var(--border-color);" id="postfix-expression-solver">
+            <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 12px;">
+                <div>
+                    <span style="font-size:12px; font-weight:700; color:var(--color-postfix); text-transform:uppercase; letter-spacing:0.5px;">Arithmetic Evaluation Lab</span>
+                    <h3 style="font-family: var(--font-head); font-size: 20px; font-weight: 800; color: var(--text-primary);">
+                        Postfix Evaluator with Variable Inputs & Stack Trace
+                    </h3>
+                </div>
+            </div>
+
+            <p style="color: var(--text-secondary); font-size: 13px; line-height: 1.6; margin-bottom: 16px;">
+                Enter any custom arithmetic expression with variables (e.g. <code>(A+B)*C</code>). The system automatically converts it to <strong>Postfix notation</strong>, detects all distinct variables, generates interactive input boxes for you to enter numerical values, substitutes them into the postfix expression, and evaluates the answer step-by-step using an operand stack!
             </p>
 
             <!-- Evaluator Control Box -->
@@ -1719,27 +1872,46 @@ If TOP1 + 1 == TOP2
                 <!-- Presets -->
                 <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 14px;">
                     <span style="font-size: 12px; font-weight: 700; color: var(--text-secondary);">Try Presets:</span>
-                    <button class="preset-pill-btn" onclick="setPostfixSolverPreset('5 3 + 2 *')">5 3 + 2 *</button>
-                    <button class="preset-pill-btn" onclick="setPostfixSolverPreset('10 2 / 5 +')">10 2 / 5 +</button>
-                    <button class="preset-pill-btn" onclick="setPostfixSolverPreset('2 3 1 * + 9 -')">2 3 1 * + 9 -</button>
-                    <button class="preset-pill-btn" onclick="setPostfixSolverPreset('4 2 ^ 3 *')">4 2 ^ 3 *</button>
-                    <button class="preset-pill-btn" onclick="setPostfixSolverPreset('12 4 / 3 + 2 *')">12 4 / 3 + 2 *</button>
+                    <button class="preset-pill-btn" onclick="setPostfixInfixPreset('(A+B)*C')">(A+B)*C</button>
+                    <button class="preset-pill-btn" onclick="setPostfixInfixPreset('A+B*C')">A+B*C</button>
+                    <button class="preset-pill-btn" onclick="setPostfixInfixPreset('A*B+C*D')">A*B+C*D</button>
+                    <button class="preset-pill-btn" onclick="setPostfixInfixPreset('(A+B)*(C-D)')">(A+B)*(C-D)</button>
+                    <button class="preset-pill-btn" onclick="setPostfixInfixPreset('A+B*C-D/E')">A+B*C-D/E</button>
+                    <button class="preset-pill-btn" onclick="setPostfixInfixPreset('5 3 + 2 *')">Direct Tokens: 5 3 + 2 *</button>
                 </div>
 
                 <!-- Input & Action Buttons -->
-                <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
-                    <label for="postfixSolverInput" style="font-size: 13px; font-weight: 700;">Postfix Tokens:</label>
-                    <input type="text" id="postfixSolverInput" class="input-elem" value="5 3 + 2 *" style="width: 280px; font-weight: 700; font-family: var(--font-code);" placeholder="Space-separated tokens (e.g. 5 3 + 2 *)">
-                    <button class="btn-action btn-postfix" onclick="runPostfixEvaluator()">Evaluate Postfix ⚡</button>
-                    <button class="btn-action btn-reset" onclick="resetPostfixEvaluator()">Reset ↺</button>
+                <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-bottom: 14px;">
+                    <label for="postfixInfixInput" style="font-size: 13px; font-weight: 700;">Infix or Postfix:</label>
+                    <input type="text" id="postfixInfixInput" class="input-elem" value="(A+B)*C" style="width: 280px; font-weight: 700; font-family: var(--font-code);" placeholder="e.g. (A+B)*C or 5 3 + 2 *">
+                    <button class="btn-action btn-postfix" onclick="loadPostfixVariablesAndEvaluate()">Convert & Load Variables ⚙️</button>
+                    <button class="btn-action btn-postfix" onclick="evaluatePostfixWithCurrentVars()" style="background:#d97706;">Evaluate Postfix ⚡</button>
+                    <button class="btn-action btn-reset" onclick="resetPostfixWithVars()">Reset ↺</button>
+                </div>
+
+                <!-- Dynamic Variable Inputs Section -->
+                <div id="postfixVarContainer" class="var-inputs-card" style="display: none;">
+                    <div style="font-weight: 700; font-size: 13px; width: 100%; color: var(--text-secondary); margin-bottom: 4px;">
+                        📝 Enter Numerical Values for Detected Variables (Live Updates):
+                    </div>
+                    <div id="postfixVarChips" style="display: flex; flex-wrap: wrap; gap: 10px; width: 100%;"></div>
                 </div>
             </div>
 
             <!-- Postfix Output Section -->
             <div id="postfixEvalSection" style="display: none;">
-                <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 14px; background: var(--card-bg); padding: 14px; border-radius: 8px; border: 1px solid var(--border-color);">
-                    <div style="font-family: var(--font-head); font-weight: 700; font-size: 16px;">
-                        Evaluation Result: <span id="postfixFinalResult" style="color:#10b981; font-family:var(--font-code); font-size:20px; font-weight:800; margin-left:6px;"></span>
+                <div style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 14px; background: var(--card-bg); padding: 14px; border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+                        <div style="font-family: var(--font-head); font-weight: 700; font-size: 16px;">
+                            Final Evaluated Answer: <span id="postfixFinalResult" style="color:#10b981; font-family:var(--font-code); font-size:22px; font-weight:800; margin-left:6px;"></span>
+                        </div>
+                        <div class="formula-box" style="background:rgba(245,158,11,0.1); color:var(--color-postfix); font-weight:700;">
+                            LIFO Operand Stack Evaluation
+                        </div>
+                    </div>
+                    <div style="font-size: 13px; color: var(--text-secondary); display: flex; gap: 18px; flex-wrap: wrap;">
+                        <span>Converted Postfix: <code id="postfixConvertedNotation" style="font-weight:700; color:var(--text-primary);"></code></span>
+                        <span>Substituted Expression: <code id="postfixSubstitutedNotation" style="font-weight:700; color:var(--color-postfix);"></code></span>
                     </div>
                 </div>
 
@@ -1749,7 +1921,7 @@ If TOP1 + 1 == TOP2
                             <tr>
                                 <th style="width: 6%;">Step</th>
                                 <th style="width: 12%;">Scanned Token</th>
-                                <th style="width: 26%;">Operation / Action</th>
+                                <th style="width: 28%;">Operation / Action</th>
                                 <th style="width: 10%;">Operand 2</th>
                                 <th style="width: 10%;">Operand 1</th>
                                 <th style="width: 12%;">Result Pushed</th>
@@ -1757,6 +1929,92 @@ If TOP1 + 1 == TOP2
                             </tr>
                         </thead>
                         <tbody id="postfixTraceBody">
+                            <!-- Injected by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================================================================
+             5.4 END-TO-END PREFIX EVALUATION WITH DYNAMIC VARIABLES
+             ================================================================ -->
+        <div style="margin-top: 36px; padding-top: 24px; border-top: 1px solid var(--border-color);" id="prefixeval-expression-solver">
+            <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 12px;">
+                <div>
+                    <span style="font-size:12px; font-weight:700; color:var(--color-prefixeval); text-transform:uppercase; letter-spacing:0.5px;">Arithmetic Evaluation Lab</span>
+                    <h3 style="font-family: var(--font-head); font-size: 20px; font-weight: 800; color: var(--text-primary);">
+                        Prefix Evaluator with Variable Inputs & Stack Trace
+                    </h3>
+                </div>
+            </div>
+
+            <p style="color: var(--text-secondary); font-size: 13px; line-height: 1.6; margin-bottom: 16px;">
+                Enter any arithmetic expression with variables (e.g. <code>(A+B)*C</code>). The system converts it into <strong>Prefix (Polish) notation</strong>, prompts for variable values, substitutes numbers, and evaluates the expression using an operand stack scanned <strong>Right-to-Left</strong>!
+            </p>
+
+            <!-- Evaluator Control Box -->
+            <div style="background: var(--bg-primary); border: 1px solid var(--border-color); border-radius: 8px; padding: 18px; margin-bottom: 20px;">
+                <!-- Presets -->
+                <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 14px;">
+                    <span style="font-size: 12px; font-weight: 700; color: var(--text-secondary);">Try Presets:</span>
+                    <button class="preset-pill-btn" onclick="setPrefixevalInfixPreset('(A+B)*C')">(A+B)*C</button>
+                    <button class="preset-pill-btn" onclick="setPrefixevalInfixPreset('A+B*C')">A+B*C</button>
+                    <button class="preset-pill-btn" onclick="setPrefixevalInfixPreset('A*B+C*D')">A*B+C*D</button>
+                    <button class="preset-pill-btn" onclick="setPrefixevalInfixPreset('(A+B)*(C-D)')">(A+B)*(C-D)</button>
+                    <button class="preset-pill-btn" onclick="setPrefixevalInfixPreset('A+B*C-D/E')">A+B*C-D/E</button>
+                    <button class="preset-pill-btn" onclick="setPrefixevalInfixPreset('* + 5 3 2')">Direct Tokens: * + 5 3 2</button>
+                </div>
+
+                <!-- Input & Action Buttons -->
+                <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-bottom: 14px;">
+                    <label for="prefixevalInfixInput" style="font-size: 13px; font-weight: 700;">Infix or Prefix:</label>
+                    <input type="text" id="prefixevalInfixInput" class="input-elem" value="(A+B)*C" style="width: 280px; font-weight: 700; font-family: var(--font-code);" placeholder="e.g. (A+B)*C or * + 5 3 2">
+                    <button class="btn-action btn-prefixeval" onclick="loadPrefixevalVariablesAndEvaluate()">Convert & Load Variables ⚙️</button>
+                    <button class="btn-action btn-prefixeval" onclick="evaluatePrefixWithCurrentVars()" style="background:#7e22ce;">Evaluate Prefix ⚡</button>
+                    <button class="btn-action btn-reset" onclick="resetPrefixevalWithVars()">Reset ↺</button>
+                </div>
+
+                <!-- Dynamic Variable Inputs Section -->
+                <div id="prefixevalVarContainer" class="var-inputs-card" style="display: none;">
+                    <div style="font-weight: 700; font-size: 13px; width: 100%; color: var(--text-secondary); margin-bottom: 4px;">
+                        📝 Enter Numerical Values for Detected Variables (Live Updates):
+                    </div>
+                    <div id="prefixevalVarChips" style="display: flex; flex-wrap: wrap; gap: 10px; width: 100%;"></div>
+                </div>
+            </div>
+
+            <!-- Prefix Output Section -->
+            <div id="prefixevalEvalSection" style="display: none;">
+                <div style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 14px; background: var(--card-bg); padding: 14px; border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+                        <div style="font-family: var(--font-head); font-weight: 700; font-size: 16px;">
+                            Final Evaluated Answer: <span id="prefixevalFinalResult" style="color:#10b981; font-family:var(--font-code); font-size:22px; font-weight:800; margin-left:6px;"></span>
+                        </div>
+                        <div class="formula-box" style="background:rgba(168,85,247,0.1); color:var(--color-prefixeval); font-weight:700;">
+                            Right-to-Left Operand Stack Scan
+                        </div>
+                    </div>
+                    <div style="font-size: 13px; color: var(--text-secondary); display: flex; gap: 18px; flex-wrap: wrap;">
+                        <span>Converted Prefix: <code id="prefixevalConvertedNotation" style="font-weight:700; color:var(--text-primary);"></code></span>
+                        <span>Substituted Expression: <code id="prefixevalSubstitutedNotation" style="font-weight:700; color:var(--color-prefixeval);"></code></span>
+                    </div>
+                </div>
+
+                <div class="matrix-container">
+                    <table class="matrix-table" id="prefixevalTraceTable">
+                        <thead>
+                            <tr>
+                                <th style="width: 6%;">Step</th>
+                                <th style="width: 12%;">Scanned Token (R➔L)</th>
+                                <th style="width: 28%;">Operation / Action</th>
+                                <th style="width: 10%;">Op1 (Left)</th>
+                                <th style="width: 10%;">Op2 (Right)</th>
+                                <th style="width: 12%;">Result Pushed</th>
+                                <th>Stack Contents</th>
+                            </tr>
+                        </thead>
+                        <tbody id="prefixevalTraceBody">
                             <!-- Injected by JS -->
                         </tbody>
                     </table>
@@ -1778,7 +2036,9 @@ If TOP1 + 1 == TOP2
                 <option value="standard" selected>Standard Array Stack (PUSH, POP, PEEP, CHANGE)</option>
                 <option value="twostacks">Two Stacks in One Array</option>
                 <option value="revpol">REVPOL Infix to Postfix Algorithm</option>
+                <option value="prefix">Infix to Prefix (POLISH) Algorithm</option>
                 <option value="postfix">Postfix Expression Evaluation</option>
+                <option value="prefixeval">Prefix Expression Evaluation</option>
                 <option value="linked">Linked List Stack (Dynamic LIFO)</option>
                 <option value="minstack">Min Stack (O(1) GetMin)</option>
             </select>
@@ -1865,9 +2125,17 @@ If TOP1 + 1 == TOP2
             clearInterval(revpolTimer);
             revpolTimer = setInterval(autoRevpolStep, stepDelay);
         }
+        if (prefixTimer) {
+            clearInterval(prefixTimer);
+            prefixTimer = setInterval(autoPrefixStep, stepDelay);
+        }
         if (postfixTimer) {
             clearInterval(postfixTimer);
             postfixTimer = setInterval(autoPostfixStep, stepDelay);
+        }
+        if (prefixevalTimer) {
+            clearInterval(prefixevalTimer);
+            prefixevalTimer = setInterval(autoPrefixevalStep, stepDelay);
         }
     }
 
@@ -1920,10 +2188,35 @@ If TOP1 + 1 == TOP2
                 action: "Initialize: TOP=0, S[0]='(', POLISH='', RANK=0"
             }]
         },
+        prefix: {
+            rawExpr: "(A+B)*C",
+            reversedInfix: "C*(B+A)",
+            nextIdx: 0,
+            stack: [],
+            buffer: "",
+            finalPrefix: "",
+            complete: false,
+            traceHistory: []
+        },
         postfix: {
-            expr: "5 3 + 2 *",
+            rawInfix: "(A+B)*C",
+            postfixStr: "A B + C *",
+            vars: ['A', 'B', 'C'],
+            varValues: { 'A': 5, 'B': 3, 'C': 2 },
             tokens: ["5", "3", "+", "2", "*"],
             tokenIdx: 0,
+            stack: [],
+            lastCalc: "",
+            complete: false,
+            traceHistory: []
+        },
+        prefixeval: {
+            rawInfix: "(A+B)*C",
+            prefixStr: "* + A B C",
+            vars: ['A', 'B', 'C'],
+            varValues: { 'A': 5, 'B': 3, 'C': 2 },
+            tokens: ["*", "+", "5", "3", "2"],
+            tokenIdx: 4,
             stack: [],
             lastCalc: "",
             complete: false,
@@ -1932,6 +2225,11 @@ If TOP1 + 1 == TOP2
         linked: { head: null, count: 0 },
         minstack: { main: [], min: [] }
     };
+
+    let revpolTimer = null;
+    let prefixTimer = null;
+    let postfixTimer = null;
+    let prefixevalTimer = null;
 
     // Precedence and Rank Map for REVPOL
     const revpolTable = {
@@ -2022,12 +2320,28 @@ If TOP1 + 1 == TOP2
                 "4. Final Check: If TOP == -1 AND RANK == 1 -> VALID"
             ]
         },
+        prefix: {
+            step: [
+                "1. E_rev = REVERSE(INFIX); SWAP_PARENS(E_rev)",
+                "2. While Prec(TOP) > Prec(NEXT) (or >= for ^): POP & append to buffer",
+                "3. If NEXT != ')' -> PUSH(NEXT) Else -> POP until '('",
+                "4. PREFIX = REVERSE(BUFFER)"
+            ]
+        },
         postfix: {
             step: [
                 "1. Read token T from left to right",
                 "2. If T is Operand -> PUSH(T) onto Stack",
                 "3. Else (Operator) -> Pop op2, Pop op1; Result = op1 [op] op2; PUSH(Result)",
                 "4. When input empty -> Result = POP()"
+            ]
+        },
+        prefixeval: {
+            step: [
+                "1. Read token T from Right to Left (<-)",
+                "2. If T is Operand -> PUSH(T) onto Stack",
+                "3. Else (Operator) -> op1 = POP(), op2 = POP(); Result = op1 [op] op2; PUSH(Result)",
+                "4. When all tokens processed -> Answer = POP()"
             ]
         },
         linked: {
@@ -2108,6 +2422,65 @@ If TOP1 + 1 == TOP2
         return current || 'A';
     }
 
+    // Render Dynamic Variable Inputs in Section 3 Simulator
+    function renderSimVarInputs(simType) {
+        const container = document.getElementById('sim-var-inputs-panel');
+        if (!container) return;
+        const st = states[simType];
+        if (!st || !st.vars || st.vars.length === 0) {
+            container.style.display = 'none';
+            container.innerHTML = '';
+            return;
+        }
+        container.style.display = 'block';
+        container.innerHTML = `
+            <div class="var-inputs-card" style="margin-top:10px; padding:10px 14px;">
+                <div style="font-size:12px; font-weight:700; color:var(--text-secondary); width:100%; margin-bottom:6px;">
+                    📝 Enter Variable Values (Live Dynamic Substitution):
+                </div>
+                <div style="display:flex; flex-wrap:wrap; gap:8px; width:100%;">
+                    ${st.vars.map(v => `
+                        <div class="var-chip">
+                            <label>${v} =</label>
+                            <input type="number" class="var-input-field" value="${st.varValues[v] !== undefined ? st.varValues[v] : 5}"
+                                   oninput="updateSimVarValue('${simType}', '${v}', this.value)">
+                        </div>
+                    `).join('')}
+                </div>
+                <div style="font-size:12px; font-weight:600; color:var(--text-secondary); width:100%; margin-top:6px;">
+                    Substituted Tokens: <code style="font-family:var(--font-code); font-weight:700; color:var(--color-${simType});">${st.tokens.join(' ')}</code>
+                </div>
+            </div>
+        `;
+    }
+
+    function updateSimVarValue(simType, v, val) {
+        const st = states[simType];
+        if (!st) return;
+        const numVal = parseFloat(val) || 0;
+        st.varValues[v] = numVal;
+
+        // Re-substitute tokens
+        const rawTokens = (simType === 'postfix') ? st.postfixTokens : st.prefixTokens;
+        st.tokens = rawTokens.map(tok => {
+            if (/^[a-zA-Z]$/.test(tok)) {
+                return (st.varValues[tok.toUpperCase()] !== undefined ? String(st.varValues[tok.toUpperCase()]) : tok);
+            }
+            return tok;
+        });
+
+        // Reset execution state
+        st.tokenIdx = (simType === 'prefixeval') ? st.tokens.length - 1 : 0;
+        st.stack = [];
+        st.lastCalc = `Updated ${v} = ${numVal}. Substituted: ${st.tokens.join(' ')}`;
+        st.complete = false;
+        st.traceHistory = [];
+
+        logConsole(`Variable ${v} updated to ${numVal}. Substituted tokens: "${st.tokens.join(' ')}"`, 'info');
+        renderSimVarInputs(simType);
+        renderSimulator();
+    }
+
     // Tab Selection
     function selectSimulator(type) {
         activeSimType = type;
@@ -2122,11 +2495,14 @@ If TOP1 + 1 == TOP2
         // Input Groups
         const standardInputs = document.getElementById('ctrl-standard-inputs');
         const revpolInputs = document.getElementById('ctrl-revpol-inputs');
+        const prefixInputs = document.getElementById('ctrl-prefix-inputs');
         const postfixInputs = document.getElementById('ctrl-postfix-inputs');
+        const prefixevalInputs = document.getElementById('ctrl-prefixeval-inputs');
         const peepGroup = document.getElementById('peep-group');
         const changeGroup = document.getElementById('change-group');
         const presetsPanel = document.getElementById('presets-panel');
         const presetContainer = document.getElementById('preset-buttons-container');
+        const simVarPanel = document.getElementById('sim-var-inputs-panel');
 
         // Buttons
         const pushBtn = document.getElementById('btn-push');
@@ -2139,9 +2515,15 @@ If TOP1 + 1 == TOP2
         const revpolStepBtn = document.getElementById('btn-revpol-step');
         const revpolAutoBtn = document.getElementById('btn-revpol-auto');
         const revpolAllBtn = document.getElementById('btn-revpol-all');
+        const prefixStepBtn = document.getElementById('btn-prefix-step');
+        const prefixAutoBtn = document.getElementById('btn-prefix-auto');
+        const prefixAllBtn = document.getElementById('btn-prefix-all');
         const postfixStepBtn = document.getElementById('btn-postfix-step');
         const postfixAutoBtn = document.getElementById('btn-postfix-auto');
         const postfixAllBtn = document.getElementById('btn-postfix-all');
+        const prefixevalStepBtn = document.getElementById('btn-prefixeval-step');
+        const prefixevalAutoBtn = document.getElementById('btn-prefixeval-auto');
+        const prefixevalAllBtn = document.getElementById('btn-prefixeval-all');
         const minGetBtn = document.getElementById('btn-min-get');
 
         // Reset visibility
@@ -2157,15 +2539,24 @@ If TOP1 + 1 == TOP2
         revpolStepBtn.style.display = "none";
         revpolAutoBtn.style.display = "none";
         revpolAllBtn.style.display = "none";
+        prefixStepBtn.style.display = "none";
+        prefixAutoBtn.style.display = "none";
+        prefixAllBtn.style.display = "none";
         postfixStepBtn.style.display = "none";
         postfixAutoBtn.style.display = "none";
         postfixAllBtn.style.display = "none";
+        prefixevalStepBtn.style.display = "none";
+        prefixevalAutoBtn.style.display = "none";
+        prefixevalAllBtn.style.display = "none";
         minGetBtn.style.display = "none";
         presetsPanel.style.display = "none";
+        if (simVarPanel) simVarPanel.style.display = "none";
 
         standardInputs.style.display = "none";
         revpolInputs.style.display = "none";
+        if (prefixInputs) prefixInputs.style.display = "none";
         postfixInputs.style.display = "none";
+        if (prefixevalInputs) prefixevalInputs.style.display = "none";
 
         if (type === 'standard') {
             title.innerText = "Standard Stack Simulator (Array LIFO)";
@@ -2206,9 +2597,29 @@ If TOP1 + 1 == TOP2
                 <button class="preset-pill-btn" onclick="setRevpolPreset('A*(B+C)/D^E')">A*(B+C)/D^E</button>
             `;
             updateTraceLines('revpol', 'step');
+        } else if (type === 'prefix') {
+            title.innerText = "Solve Expression using POLISH Simulation (Infix ➔ Prefix)";
+            desc.innerText = "Step-by-step translation using the textbook reversal algorithm: (1) Reverse infix & swap brackets, (2) Convert to postfix with operator stack, (3) Reverse buffer to yield Prefix. Enter an expression or click presets, then Step, Auto Run, or Solve Expression!";
+            if (prefixInputs) prefixInputs.style.display = "flex";
+            prefixStepBtn.style.display = "inline-flex";
+            prefixAutoBtn.style.display = "inline-flex";
+            prefixAllBtn.style.display = "inline-flex";
+            prefixAllBtn.innerText = "Solve Expression 🚀";
+            presetsPanel.style.display = "block";
+            
+            presetContainer.innerHTML = `
+                <button class="preset-pill-btn" onclick="setPrefixPreset('(A+B)*C')">(A+B)*C</button>
+                <button class="preset-pill-btn" onclick="setPrefixPreset('A+B*C')">A+B*C</button>
+                <button class="preset-pill-btn" onclick="setPrefixPreset('((A+B)*C)-D')">((A+B)*C)-D</button>
+                <button class="preset-pill-btn" onclick="setPrefixPreset('A/B+C/D')">A/B+C/D</button>
+                <button class="preset-pill-btn" onclick="setPrefixPreset('(A+B)*(C+D)')">(A+B)*(C+D)</button>
+                <button class="preset-pill-btn" onclick="setPrefixPreset('A+B*C-D/E')">A+B*C-D/E</button>
+                <button class="preset-pill-btn" onclick="setPrefixPreset('A*(B+C)/D^E')">A*(B+C)/D^E</button>
+            `;
+            updateTraceLines('prefix', 'step');
         } else if (type === 'postfix') {
-            title.innerText = "Postfix Expression Evaluator Simulator";
-            desc.innerText = "Reads tokens left-to-right. Pushes numbers to stack. When an operator is encountered, pops 2 operands, computes, and pushes the result.";
+            title.innerText = "Postfix Evaluator Simulator (with Variable Inputs)";
+            desc.innerText = "Reads tokens left-to-right. Pushes numbers onto operand stack. When an operator is encountered, pops 2 operands, calculates result, and pushes it back. Enter an Infix expression, edit variable values below, and watch the stack simulate!";
             postfixInputs.style.display = "flex";
             postfixStepBtn.style.display = "inline-flex";
             postfixAutoBtn.style.display = "inline-flex";
@@ -2216,13 +2627,34 @@ If TOP1 + 1 == TOP2
             presetsPanel.style.display = "block";
             
             presetContainer.innerHTML = `
-                <button class="preset-pill-btn" onclick="setPostfixPreset('5 3 + 2 *')">5 3 + 2 *</button>
-                <button class="preset-pill-btn" onclick="setPostfixPreset('10 2 / 5 +')">10 2 / 5 +</button>
-                <button class="preset-pill-btn" onclick="setPostfixPreset('2 3 1 * + 9 -')">2 3 1 * + 9 -</button>
-                <button class="preset-pill-btn" onclick="setPostfixPreset('4 2 ^ 3 *')">4 2 ^ 3 *</button>
-                <button class="preset-pill-btn" onclick="setPostfixPreset('12 4 / 3 + 2 *')">12 4 / 3 + 2 *</button>
+                <button class="preset-pill-btn" onclick="setPostfixSimPreset('(A+B)*C')">(A+B)*C</button>
+                <button class="preset-pill-btn" onclick="setPostfixSimPreset('A+B*C')">A+B*C</button>
+                <button class="preset-pill-btn" onclick="setPostfixSimPreset('A*B+C*D')">A*B+C*D</button>
+                <button class="preset-pill-btn" onclick="setPostfixSimPreset('(A+B)*(C-D)')">(A+B)*(C-D)</button>
+                <button class="preset-pill-btn" onclick="setPostfixSimPreset('A+B*C-D/E')">A+B*C-D/E</button>
+                <button class="preset-pill-btn" onclick="setPostfixSimTokensPreset('5 3 + 2 *')">Direct Tokens: 5 3 + 2 *</button>
             `;
+            renderSimVarInputs('postfix');
             updateTraceLines('postfix', 'step');
+        } else if (type === 'prefixeval') {
+            title.innerText = "Prefix Evaluator Simulator (with Variable Inputs)";
+            desc.innerText = "Reads tokens Right-to-Left (<-). Pushes numbers onto operand stack. When an operator is encountered, pops left operand op1, pops right operand op2, calculates, and pushes result. Enter an Infix expression, edit variable values below, and step through!";
+            if (prefixevalInputs) prefixevalInputs.style.display = "flex";
+            prefixevalStepBtn.style.display = "inline-flex";
+            prefixevalAutoBtn.style.display = "inline-flex";
+            prefixevalAllBtn.style.display = "inline-flex";
+            presetsPanel.style.display = "block";
+            
+            presetContainer.innerHTML = `
+                <button class="preset-pill-btn" onclick="setPrefixevalSimPreset('(A+B)*C')">(A+B)*C</button>
+                <button class="preset-pill-btn" onclick="setPrefixevalSimPreset('A+B*C')">A+B*C</button>
+                <button class="preset-pill-btn" onclick="setPrefixevalSimPreset('A*B+C*D')">A*B+C*D</button>
+                <button class="preset-pill-btn" onclick="setPrefixevalSimPreset('(A+B)*(C-D)')">(A+B)*(C-D)</button>
+                <button class="preset-pill-btn" onclick="setPrefixevalSimPreset('A+B*C-D/E')">A+B*C-D/E</button>
+                <button class="preset-pill-btn" onclick="setPrefixevalSimTokensPreset('* + 5 3 2')">Direct Tokens: * + 5 3 2</button>
+            `;
+            renderSimVarInputs('prefixeval');
+            updateTraceLines('prefixeval', 'step');
         } else if (type === 'linked') {
             title.innerText = "Linked List Stack Simulator (Dynamic LIFO)";
             desc.innerText = "Stack implemented using dynamically allocated nodes. PUSH inserts at the head (TOP). POP removes from head. Never overflows under normal memory.";
@@ -2522,6 +2954,93 @@ If TOP1 + 1 == TOP2
                 `;
                 view.appendChild(traceTableBox);
             }
+        } else if (activeSimType === 'prefix') {
+            const st = states.prefix;
+            const grid = document.createElement('div');
+            grid.className = 'revpol-display-grid';
+
+            // Card 1: Reversed Infix (Swapped Parens) Tape
+            const inputCard = document.createElement('div');
+            inputCard.className = 'revpol-card';
+            inputCard.innerHTML = `<div style="font-weight:700; font-size:13px; margin-bottom:8px;">1. Scanned Reversed Infix Tape:</div>`;
+            const tape = document.createElement('div');
+            tape.className = 'revpol-tape';
+            for (let i = 0; i < st.reversedInfix.length; i++) {
+                const tok = document.createElement('div');
+                tok.className = `tape-token ${i === st.nextIdx ? 'active' : ''}`;
+                tok.innerText = st.reversedInfix[i];
+                tape.appendChild(tok);
+            }
+            inputCard.appendChild(tape);
+            grid.appendChild(inputCard);
+
+            // Card 2: Operator Stack S
+            const stackCard = document.createElement('div');
+            stackCard.className = 'revpol-card';
+            stackCard.innerHTML = `<div style="font-weight:700; font-size:13px; margin-bottom:8px;">2. Operator Stack S (TOP = ${st.stack.length - 1}):</div>`;
+            const stackTape = document.createElement('div');
+            stackTape.className = 'revpol-tape';
+            st.stack.forEach((sym, idx) => {
+                const tok = document.createElement('div');
+                tok.className = `tape-token ${idx === st.stack.length - 1 ? 'active' : ''}`;
+                tok.innerText = sym;
+                stackTape.appendChild(tok);
+            });
+            stackCard.appendChild(stackTape);
+            grid.appendChild(stackCard);
+
+            // Card 3: Buffer & Final Prefix
+            const outCard = document.createElement('div');
+            outCard.className = 'revpol-card';
+            outCard.innerHTML = `
+                <div style="font-weight:700; font-size:13px; margin-bottom:8px;">3. Buffer & Prefix Output:</div>
+                <div style="font-family:var(--font-code); font-size:14px; color:var(--text-secondary); margin-bottom:4px;">
+                    Buffer: "${st.buffer || '(empty)'}"
+                </div>
+                <div style="font-family:var(--font-code); font-size:16px; font-weight:700; color:var(--color-prefix); margin-bottom:6px;">
+                    PREFIX: "${st.finalPrefix || (st.complete ? [...st.buffer].reverse().join('') : '(computing...)')}"
+                </div>
+                <div style="font-size:13px; font-weight:600;">
+                    Status: ${st.complete ? '✅ COMPLETE (Reversed Buffer)' : '⏳ In Progress'}
+                </div>
+            `;
+            grid.appendChild(outCard);
+            view.appendChild(grid);
+
+            // Live Accumulating Mini Trace Table
+            if (st.traceHistory && st.traceHistory.length > 0) {
+                const traceTableBox = document.createElement('div');
+                traceTableBox.style.width = '100%';
+                traceTableBox.style.marginTop = '16px';
+                traceTableBox.className = 'matrix-container';
+
+                let rowsHtml = '';
+                st.traceHistory.forEach(r => {
+                    rowsHtml += `<tr>
+                        <td><strong>${r.step}</strong></td>
+                        <td><span class="formula-box">${r.char}</span></td>
+                        <td><code>${r.stack || '(empty)'}</code></td>
+                        <td><strong style="color:var(--color-prefix);">${r.buffer}</strong></td>
+                        <td style="font-size:12px;">${r.action}</td>
+                    </tr>`;
+                });
+
+                traceTableBox.innerHTML = `
+                    <table class="matrix-table" style="font-size:12px;">
+                        <thead>
+                            <tr>
+                                <th>Step</th>
+                                <th>Next Char</th>
+                                <th>Stack S</th>
+                                <th>Intermediate Buffer</th>
+                                <th>Action Taken & Precedence Rule</th>
+                            </tr>
+                        </thead>
+                        <tbody>${rowsHtml}</tbody>
+                    </table>
+                `;
+                view.appendChild(traceTableBox);
+            }
         } else if (activeSimType === 'postfix') {
             const st = states.postfix;
             const grid = document.createElement('div');
@@ -2530,7 +3049,7 @@ If TOP1 + 1 == TOP2
             // Tape: Token Stream
             const tokenCard = document.createElement('div');
             tokenCard.className = 'revpol-card';
-            tokenCard.innerHTML = `<div style="font-weight:700; font-size:13px; margin-bottom:8px;">Scanned Token Stream:</div>`;
+            tokenCard.innerHTML = `<div style="font-weight:700; font-size:13px; margin-bottom:8px;">Scanned Token Stream (Left ➔ Right):</div>`;
             const tape = document.createElement('div');
             tape.className = 'revpol-tape';
             st.tokens.forEach((tok, i) => {
@@ -2607,6 +3126,100 @@ If TOP1 + 1 == TOP2
                                 <th>Action</th>
                                 <th>Op2</th>
                                 <th>Op1</th>
+                                <th>Result</th>
+                                <th>Stack Contents</th>
+                            </tr>
+                        </thead>
+                        <tbody>${rowsHtml}</tbody>
+                    </table>
+                `;
+                view.appendChild(traceTableBox);
+            }
+        } else if (activeSimType === 'prefixeval') {
+            const st = states.prefixeval;
+            const grid = document.createElement('div');
+            grid.className = 'revpol-display-grid';
+
+            // Tape: Scanned Right-to-Left Tokens
+            const tokenCard = document.createElement('div');
+            tokenCard.className = 'revpol-card';
+            tokenCard.innerHTML = `<div style="font-weight:700; font-size:13px; margin-bottom:8px;">Scanned Token Stream (Right ➔ Left):</div>`;
+            const tape = document.createElement('div');
+            tape.className = 'revpol-tape';
+            st.tokens.forEach((tok, i) => {
+                const elem = document.createElement('div');
+                elem.className = `tape-token ${i === st.tokenIdx ? 'active' : ''}`;
+                elem.innerText = tok;
+                tape.appendChild(elem);
+            });
+            tokenCard.appendChild(tape);
+            grid.appendChild(tokenCard);
+
+            // Stack: Operand Stack
+            const stackCard = document.createElement('div');
+            stackCard.className = 'revpol-card';
+            stackCard.innerHTML = `<div style="font-weight:700; font-size:13px; margin-bottom:8px;">Operand Stack:</div>`;
+            const sTape = document.createElement('div');
+            sTape.className = 'revpol-tape';
+            if (st.stack.length === 0) {
+                sTape.innerHTML = `<span style="font-size:13px; color:var(--text-secondary);">(empty)</span>`;
+            } else {
+                st.stack.forEach((val, i) => {
+                    const elem = document.createElement('div');
+                    elem.className = `tape-token ${i === st.stack.length - 1 ? 'active' : ''}`;
+                    elem.style.background = 'rgba(168, 85, 247, 0.15)';
+                    elem.style.borderColor = 'var(--color-prefixeval)';
+                    elem.innerText = val;
+                    sTape.appendChild(elem);
+                });
+            }
+            stackCard.appendChild(sTape);
+            grid.appendChild(stackCard);
+
+            // Calculation card
+            const calcCard = document.createElement('div');
+            calcCard.className = 'revpol-card';
+            calcCard.innerHTML = `
+                <div style="font-weight:700; font-size:13px; margin-bottom:8px;">Evaluation State:</div>
+                <div style="font-family:var(--font-code); font-size:14px; color:var(--text-primary); margin-bottom:6px;">
+                    ${st.lastCalc || 'Ready to evaluate tokens from Right to Left.'}
+                </div>
+                <div style="font-size:13px; font-weight:700; color:var(--color-success);">
+                    ${st.complete ? `Final Evaluated Result = ${st.stack[0]}` : 'Evaluating Right-to-Left step-by-step...'}
+                </div>
+            `;
+            grid.appendChild(calcCard);
+            view.appendChild(grid);
+
+            // Live Accumulating Mini Trace Table
+            if (st.traceHistory && st.traceHistory.length > 0) {
+                const traceTableBox = document.createElement('div');
+                traceTableBox.style.width = '100%';
+                traceTableBox.style.marginTop = '16px';
+                traceTableBox.className = 'matrix-container';
+
+                let rowsHtml = '';
+                st.traceHistory.forEach(r => {
+                    rowsHtml += `<tr>
+                        <td><strong>${r.step}</strong></td>
+                        <td><span class="formula-box">${r.token}</span></td>
+                        <td style="font-size:12px;">${r.action}</td>
+                        <td>${r.op1}</td>
+                        <td>${r.op2}</td>
+                        <td><strong style="color:var(--color-prefixeval);">${r.result}</strong></td>
+                        <td><code>${r.stack}</code></td>
+                    </tr>`;
+                });
+
+                traceTableBox.innerHTML = `
+                    <table class="matrix-table" style="font-size:12px;">
+                        <thead>
+                            <tr>
+                                <th>Step</th>
+                                <th>Token (R➔L)</th>
+                                <th>Action</th>
+                                <th>Op1 (Left)</th>
+                                <th>Op2 (Right)</th>
                                 <th>Result</th>
                                 <th>Stack Contents</th>
                             </tr>
@@ -3244,7 +3857,6 @@ If TOP1 + 1 == TOP2
         renderSimulator();
     }
 
-    let revpolTimer = null;
     function autoRevpolStep() {
         if (states.revpol.complete) {
             clearInterval(revpolTimer);
@@ -3279,26 +3891,343 @@ If TOP1 + 1 == TOP2
     }
 
     // =========================================================================
-    // POSTFIX EVALUATION (SECTION 3 SIMULATOR)
+    // CONVERSION & VARIABLE HELPER UTILITIES
     // =========================================================================
-    function setPostfixPreset(expr) {
-        document.getElementById('postfix-custom-input').value = expr;
-        loadCustomPostfix();
+    function getPrefixOperatorPrec(op) {
+        if (op === '^') return 3;
+        if (op === '*' || op === '/') return 2;
+        if (op === '+' || op === '-') return 1;
+        return 0;
     }
 
-    function loadCustomPostfix() {
-        const raw = document.getElementById('postfix-custom-input').value.trim();
+    function extractVariables(expr) {
+        const matches = expr.match(/[a-zA-Z]/g);
+        if (!matches) return [];
+        return [...new Set(matches.map(ch => ch.toUpperCase()))];
+    }
+
+    function getDefaultVarValues(vars) {
+        const defaults = { 'A': 5, 'B': 3, 'C': 2, 'D': 4, 'E': 2, 'F': 1, 'X': 6, 'Y': 2, 'Z': 3 };
+        const res = {};
+        vars.forEach((v, idx) => {
+            res[v] = (defaults[v] !== undefined) ? defaults[v] : (idx + 2);
+        });
+        return res;
+    }
+
+    // Convert Infix to Prefix via Academic Reversal Algorithm
+    function convertInfixToPrefixDetails(rawInfix) {
+        const clean = rawInfix.replace(/\s+/g, '');
+        let reversed = '';
+        for (let i = clean.length - 1; i >= 0; i--) {
+            const ch = clean[i];
+            if (ch === '(') reversed += ')';
+            else if (ch === ')') reversed += '(';
+            else reversed += ch;
+        }
+
+        const stack = [];
+        let buffer = '';
+        const rows = [];
+        let step = 1;
+
+        for (let i = 0; i < reversed.length; i++) {
+            const ch = reversed[i];
+            if (/^[a-zA-Z0-9]$/.test(ch)) {
+                buffer += ch;
+                rows.push({
+                    step: step++,
+                    char: ch,
+                    stack: stack.join(''),
+                    buffer: buffer,
+                    action: `Operand '${ch}': Append directly to intermediate buffer`
+                });
+            } else if (ch === '(') {
+                stack.push(ch);
+                rows.push({
+                    step: step++,
+                    char: ch,
+                    stack: stack.join(''),
+                    buffer: buffer,
+                    action: `Open parenthesis '(': PUSH onto Operator Stack`
+                });
+            } else if (ch === ')') {
+                let popped = '';
+                while (stack.length > 0 && stack[stack.length - 1] !== '(') {
+                    const topOp = stack.pop();
+                    buffer += topOp;
+                    popped += topOp;
+                }
+                if (stack.length > 0 && stack[stack.length - 1] === '(') {
+                    stack.pop(); // Discard '('
+                }
+                rows.push({
+                    step: step++,
+                    char: ch,
+                    stack: stack.join(''),
+                    buffer: buffer,
+                    action: `Closing parenthesis ')': Pop operators [${popped || 'none'}] until '(', discard '('`
+                });
+            } else if (['+', '-', '*', '/', '^'].includes(ch)) {
+                const precCh = getPrefixOperatorPrec(ch);
+                let popped = '';
+                // In reversed infix: left-associative operators (+, -, *, /) do NOT pop equal precedence; pop only if strictly greater!
+                // Right-associative (^) pops if >=
+                while (
+                    stack.length > 0 &&
+                    stack[stack.length - 1] !== '(' &&
+                    (
+                        (ch === '^' && getPrefixOperatorPrec(stack[stack.length - 1]) >= precCh) ||
+                        (ch !== '^' && getPrefixOperatorPrec(stack[stack.length - 1]) > precCh)
+                    )
+                ) {
+                    const topOp = stack.pop();
+                    buffer += topOp;
+                    popped += topOp;
+                }
+                stack.push(ch);
+                rows.push({
+                    step: step++,
+                    char: ch,
+                    stack: stack.join(''),
+                    buffer: buffer,
+                    action: popped ? `G(Top) > F('${ch}'): Pop [${popped}] (higher precedence), then PUSH '${ch}'` : `PUSH '${ch}' onto Operator Stack`
+                });
+            }
+        }
+
+        let poppedRemaining = '';
+        while (stack.length > 0) {
+            const topOp = stack.pop();
+            buffer += topOp;
+            poppedRemaining += topOp;
+        }
+        if (poppedRemaining) {
+            rows.push({
+                step: step++,
+                char: 'END',
+                stack: '(empty)',
+                buffer: buffer,
+                action: `End of expression: Pop remaining operators [${poppedRemaining}] to intermediate buffer`
+            });
+        }
+
+        const finalPrefix = [...buffer].reverse().join('');
+        return {
+            cleanInfix: clean,
+            reversedInfix: reversed,
+            buffer: buffer,
+            finalPrefix: finalPrefix,
+            rows: rows
+        };
+    }
+
+    // Convert Infix to Postfix Tokens
+    function convertInfixToPostfixTokens(rawInfix) {
+        if (rawInfix.trim().includes(' ')) {
+            return rawInfix.trim().split(/\s+/);
+        }
+        const clean = rawInfix.replace(/\s+/g, '');
+        const stack = [];
+        const output = [];
+        let i = 0;
+
+        while (i < clean.length) {
+            const ch = clean[i];
+            if (/^[a-zA-Z0-9]$/.test(ch)) {
+                let operand = ch;
+                while (i + 1 < clean.length && /^[a-zA-Z0-9]$/.test(clean[i + 1])) {
+                    i++;
+                    operand += clean[i];
+                }
+                output.push(operand);
+            } else if (ch === '(') {
+                stack.push(ch);
+            } else if (ch === ')') {
+                while (stack.length > 0 && stack[stack.length - 1] !== '(') {
+                    output.push(stack.pop());
+                }
+                if (stack.length > 0 && stack[stack.length - 1] === '(') {
+                    stack.pop();
+                }
+            } else if (['+', '-', '*', '/', '^'].includes(ch)) {
+                const precCh = getPrefixOperatorPrec(ch);
+                // Standard infix to postfix: left-associative pops if >=
+                while (
+                    stack.length > 0 &&
+                    stack[stack.length - 1] !== '(' &&
+                    (
+                        (ch === '^' && getPrefixOperatorPrec(stack[stack.length - 1]) > precCh) ||
+                        (ch !== '^' && getPrefixOperatorPrec(stack[stack.length - 1]) >= precCh)
+                    )
+                ) {
+                    output.push(stack.pop());
+                }
+                stack.push(ch);
+            }
+            i++;
+        }
+
+        while (stack.length > 0) {
+            output.push(stack.pop());
+        }
+
+        return output;
+    }
+
+    // Convert Infix to Prefix Tokens
+    function convertInfixToPrefixTokens(rawInfix) {
+        if (rawInfix.trim().includes(' ')) {
+            return rawInfix.trim().split(/\s+/);
+        }
+        const res = convertInfixToPrefixDetails(rawInfix);
+        return [...res.finalPrefix];
+    }
+
+    // =========================================================================
+    // INFIX TO PREFIX (SECTION 3 SIMULATOR)
+    // =========================================================================
+    function setPrefixPreset(expr) {
+        document.getElementById('prefix-custom-input').value = expr;
+        loadCustomPrefix();
+    }
+
+    function loadCustomPrefix() {
+        const raw = document.getElementById('prefix-custom-input').value.trim();
         if (!raw) return;
+        const res = convertInfixToPrefixDetails(raw);
+        states.prefix = {
+            rawExpr: raw,
+            reversedInfix: res.reversedInfix,
+            nextIdx: 0,
+            stack: [],
+            buffer: "",
+            finalPrefix: "",
+            complete: false,
+            allRows: res.rows,
+            traceHistory: []
+        };
+        logConsole(`Loaded Expression: "${raw}". Reversed with swapped parens: "${res.reversedInfix}". Click Step or Auto Run!`, 'info');
+        renderSimulator();
+    }
+
+    function triggerPrefixStep() {
+        const st = states.prefix;
+        if (st.complete) {
+            logConsole("Prefix translation already completed. Click Clear or pick a preset to restart.", 'info');
+            return;
+        }
+
+        if (!st.allRows || st.traceHistory.length >= st.allRows.length) {
+            st.complete = true;
+            st.finalPrefix = [...st.buffer].reverse().join('');
+            updateTraceLines('prefix', 'step', 3);
+            logConsole(`PREFIX COMPLETE: Final Prefix (POLISH) is "${st.finalPrefix}".`, 'success');
+            renderSimulator();
+            return;
+        }
+
+        const row = st.allRows[st.traceHistory.length];
+        updateTraceLines('prefix', 'step', 1);
+        st.traceHistory.push(row);
+        st.nextIdx = Math.min(st.reversedInfix.length, st.traceHistory.length);
+        st.stack = (row.stack === '(empty)' || !row.stack) ? [] : row.stack.split('');
+        st.buffer = row.buffer;
+
+        logConsole(`Step ${row.step}: Scanned '${row.char}' -> ${row.action}`, 'info');
+
+        if (st.traceHistory.length >= st.allRows.length) {
+            st.complete = true;
+            st.finalPrefix = [...st.buffer].reverse().join('');
+            updateTraceLines('prefix', 'step', 3);
+            logConsole(`PREFIX TRANSLATION COMPLETE! Final Prefix (POLISH): "${st.finalPrefix}".`, 'success');
+        }
+
+        renderSimulator();
+    }
+
+    function autoPrefixStep() {
+        if (states.prefix.complete) {
+            clearInterval(prefixTimer);
+            prefixTimer = null;
+            const btn = document.getElementById('btn-prefix-auto');
+            if (btn) btn.innerText = "Auto Run ⚡";
+            return;
+        }
+        triggerPrefixStep();
+    }
+
+    function triggerPrefixAuto() {
+        if (prefixTimer) {
+            clearInterval(prefixTimer);
+            prefixTimer = null;
+            const btn = document.getElementById('btn-prefix-auto');
+            if (btn) btn.innerText = "Auto Run ⚡";
+            return;
+        }
+        if (states.prefix.complete) {
+            loadCustomPrefix();
+        }
+        const btn = document.getElementById('btn-prefix-auto');
+        if (btn) btn.innerText = "Pause ⏸";
+        prefixTimer = setInterval(autoPrefixStep, stepDelay);
+    }
+
+    function triggerPrefixSolveAll() {
+        if (states.prefix.complete) {
+            loadCustomPrefix();
+        }
+        while (!states.prefix.complete) {
+            triggerPrefixStep();
+        }
+    }
+
+    // =========================================================================
+    // POSTFIX EVALUATION WITH DYNAMIC VARIABLES (SECTION 3 SIMULATOR)
+    // =========================================================================
+    function setPostfixSimPreset(expr) {
+        document.getElementById('postfix-infix-input').value = expr;
+        loadCustomPostfixWithVars();
+    }
+
+    function setPostfixSimTokensPreset(tokStr) {
+        document.getElementById('postfix-infix-input').value = tokStr;
+        loadCustomPostfixWithVars();
+    }
+
+    function loadCustomPostfixWithVars() {
+        const raw = document.getElementById('postfix-infix-input').value.trim();
+        if (!raw) return;
+        const postfixTokens = convertInfixToPostfixTokens(raw);
+        const vars = extractVariables(raw);
+        const varValues = states.postfix.varValues || getDefaultVarValues(vars);
+        vars.forEach(v => {
+            if (varValues[v] === undefined) varValues[v] = 5;
+        });
+
+        const numericTokens = postfixTokens.map(t => {
+            if (/^[a-zA-Z]$/.test(t)) {
+                const v = t.toUpperCase();
+                return varValues[v] !== undefined ? String(varValues[v]) : t;
+            }
+            return t;
+        });
+
         states.postfix = {
-            expr: raw,
-            tokens: raw.split(/\s+/),
+            rawInfix: raw,
+            postfixTokens: postfixTokens,
+            vars: vars,
+            varValues: varValues,
+            tokens: numericTokens,
             tokenIdx: 0,
             stack: [],
-            lastCalc: "",
+            lastCalc: `Loaded ${postfixTokens.join(' ')}. Substituted: ${numericTokens.join(' ')}`,
             complete: false,
             traceHistory: []
         };
-        logConsole(`Loaded Postfix Tokens: "${raw}". Click Step or Auto Run!`, 'info');
+
+        logConsole(`Loaded Postfix with Variables: "${raw}" -> [${numericTokens.join(' ')}]. Ready to evaluate!`, 'info');
+        renderSimVarInputs('postfix');
         renderSimulator();
     }
 
@@ -3346,7 +4275,7 @@ If TOP1 + 1 == TOP2
                 st.traceHistory.push({
                     step: stepNum,
                     token: tok,
-                    action: `ERROR: Stack has < 2 operands!`,
+                    action: `ERROR: Stack has < 2 operands! Underflow.`,
                     op2: '—',
                     op1: '—',
                     result: 'ERROR',
@@ -3377,34 +4306,222 @@ If TOP1 + 1 == TOP2
             });
             logConsole(st.lastCalc, 'success');
         }
+
+        if (st.tokenIdx >= st.tokens.length) {
+            st.complete = true;
+            updateTraceLines('postfix', 'step', 3);
+            logConsole(`POSTFIX EVALUATION COMPLETE: Result = ${st.stack[0]}.`, 'success');
+        }
+
         renderSimulator();
     }
 
-    let postfixTimer = null;
     function autoPostfixStep() {
         if (states.postfix.complete) {
             clearInterval(postfixTimer);
             postfixTimer = null;
-            document.getElementById('btn-postfix-auto').innerText = "Auto Run ⚡";
-        } else {
-            triggerPostfixStep();
+            const btn = document.getElementById('btn-postfix-auto');
+            if (btn) btn.innerText = "Auto Run ⚡";
+            return;
         }
+        triggerPostfixStep();
     }
 
     function triggerPostfixAuto() {
         if (postfixTimer) {
             clearInterval(postfixTimer);
             postfixTimer = null;
-            document.getElementById('btn-postfix-auto').innerText = "Auto Run ⚡";
+            const btn = document.getElementById('btn-postfix-auto');
+            if (btn) btn.innerText = "Auto Run ⚡";
             return;
         }
-        document.getElementById('btn-postfix-auto').innerText = "Pause ⏸";
+        if (states.postfix.complete) {
+            loadCustomPostfixWithVars();
+        }
+        const btn = document.getElementById('btn-postfix-auto');
+        if (btn) btn.innerText = "Pause ⏸";
         postfixTimer = setInterval(autoPostfixStep, stepDelay);
     }
 
     function triggerPostfixSolveAll() {
+        if (states.postfix.complete) {
+            loadCustomPostfixWithVars();
+        }
         while (!states.postfix.complete) {
             triggerPostfixStep();
+        }
+    }
+
+    // =========================================================================
+    // PREFIX EVALUATION WITH DYNAMIC VARIABLES (SECTION 3 SIMULATOR)
+    // =========================================================================
+    function setPrefixevalSimPreset(expr) {
+        document.getElementById('prefixeval-infix-input').value = expr;
+        loadCustomPrefixevalWithVars();
+    }
+
+    function setPrefixevalSimTokensPreset(tokStr) {
+        document.getElementById('prefixeval-infix-input').value = tokStr;
+        loadCustomPrefixevalWithVars();
+    }
+
+    function loadCustomPrefixevalWithVars() {
+        const raw = document.getElementById('prefixeval-infix-input').value.trim();
+        if (!raw) return;
+        const prefixTokens = convertInfixToPrefixTokens(raw);
+        const vars = extractVariables(raw);
+        const varValues = states.prefixeval.varValues || getDefaultVarValues(vars);
+        vars.forEach(v => {
+            if (varValues[v] === undefined) varValues[v] = 5;
+        });
+
+        const numericTokens = prefixTokens.map(t => {
+            if (/^[a-zA-Z]$/.test(t)) {
+                const v = t.toUpperCase();
+                return varValues[v] !== undefined ? String(varValues[v]) : t;
+            }
+            return t;
+        });
+
+        states.prefixeval = {
+            rawInfix: raw,
+            prefixTokens: prefixTokens,
+            vars: vars,
+            varValues: varValues,
+            tokens: numericTokens,
+            tokenIdx: numericTokens.length - 1, // Scanned Right to Left!
+            stack: [],
+            lastCalc: `Loaded ${prefixTokens.join(' ')}. Substituted: ${numericTokens.join(' ')}`,
+            complete: false,
+            traceHistory: []
+        };
+
+        logConsole(`Loaded Prefix with Variables: "${raw}" -> [${numericTokens.join(' ')}]. Scanning Right-to-Left!`, 'info');
+        renderSimVarInputs('prefixeval');
+        renderSimulator();
+    }
+
+    function triggerPrefixevalStep() {
+        const st = states.prefixeval;
+        if (st.complete) {
+            logConsole("Prefix evaluation already finished. Click Clear or pick a preset to restart.", 'info');
+            return;
+        }
+
+        const stepNum = st.traceHistory.length + 1;
+
+        if (st.tokenIdx < 0) {
+            st.complete = true;
+            updateTraceLines('prefixeval', 'step', 3);
+            logConsole(`PREFIX EVALUATION COMPLETE: Final result is ${st.stack[0]}.`, 'success');
+            renderSimulator();
+            return;
+        }
+
+        const tok = st.tokens[st.tokenIdx];
+        st.tokenIdx--;
+        updateTraceLines('prefixeval', 'step', 0);
+
+        if (!isNaN(parseFloat(tok))) {
+            updateTraceLines('prefixeval', 'step', 1);
+            const num = parseFloat(tok);
+            st.stack.push(num);
+            st.lastCalc = `Pushed operand ${tok} onto stack.`;
+            st.traceHistory.push({
+                step: stepNum,
+                token: tok,
+                action: `Operand (R➔L): Push ${tok} onto Stack`,
+                op1: '—',
+                op2: '—',
+                result: num,
+                stack: `[ ${st.stack.join(', ')} ]`
+            });
+            logConsole(st.lastCalc, 'info');
+        } else {
+            updateTraceLines('prefixeval', 'step', 2);
+            if (st.stack.length < 2) {
+                logConsole(`PREFIX ERROR: Insufficient operands on Stack for operator '${tok}'.`, 'error');
+                st.complete = true;
+                st.traceHistory.push({
+                    step: stepNum,
+                    token: tok,
+                    action: `ERROR: Stack has < 2 operands! Underflow.`,
+                    op1: '—',
+                    op2: '—',
+                    result: 'ERROR',
+                    stack: `[ ${st.stack.join(', ')} ]`
+                });
+                renderSimulator();
+                return;
+            }
+            // In prefix evaluation scanned Right-to-Left:
+            // First popped is op1 (Left operand)
+            // Second popped is op2 (Right operand)
+            const op1 = st.stack.pop();
+            const op2 = st.stack.pop();
+            let res = 0;
+            if (tok === '+') res = op1 + op2;
+            else if (tok === '-') res = op1 - op2;
+            else if (tok === '*') res = op1 * op2;
+            else if (tok === '/') res = op2 !== 0 ? op1 / op2 : NaN;
+            else if (tok === '^') res = Math.pow(op1, op2);
+
+            st.stack.push(res);
+            st.lastCalc = `Computed: ${op1} ${tok} ${op2} = ${res}. Pushed ${res} back.`;
+            st.traceHistory.push({
+                step: stepNum,
+                token: tok,
+                action: `Compute: ${op1} ${tok} ${op2} = ${res}`,
+                op1: op1,
+                op2: op2,
+                result: res,
+                stack: `[ ${st.stack.join(', ')} ]`
+            });
+            logConsole(st.lastCalc, 'success');
+        }
+
+        if (st.tokenIdx < 0) {
+            st.complete = true;
+            updateTraceLines('prefixeval', 'step', 3);
+            logConsole(`PREFIX EVALUATION COMPLETE: Final result is ${st.stack[0]}.`, 'success');
+        }
+
+        renderSimulator();
+    }
+
+    function autoPrefixevalStep() {
+        if (states.prefixeval.complete) {
+            clearInterval(prefixevalTimer);
+            prefixevalTimer = null;
+            const btn = document.getElementById('btn-prefixeval-auto');
+            if (btn) btn.innerText = "Auto Run ⚡";
+            return;
+        }
+        triggerPrefixevalStep();
+    }
+
+    function triggerPrefixevalAuto() {
+        if (prefixevalTimer) {
+            clearInterval(prefixevalTimer);
+            prefixevalTimer = null;
+            const btn = document.getElementById('btn-prefixeval-auto');
+            if (btn) btn.innerText = "Auto Run ⚡";
+            return;
+        }
+        if (states.prefixeval.complete) {
+            loadCustomPrefixevalWithVars();
+        }
+        const btn = document.getElementById('btn-prefixeval-auto');
+        if (btn) btn.innerText = "Pause ⏸";
+        prefixevalTimer = setInterval(autoPrefixevalStep, stepDelay);
+    }
+
+    function triggerPrefixevalSolveAll() {
+        if (states.prefixeval.complete) {
+            loadCustomPrefixevalWithVars();
+        }
+        while (!states.prefixeval.complete) {
+            triggerPrefixevalStep();
         }
     }
 
@@ -3422,7 +4539,18 @@ If TOP1 + 1 == TOP2
     // Reset current active simulator
     function resetCurrentSimulator() {
         if (revpolTimer) { clearInterval(revpolTimer); revpolTimer = null; }
+        if (prefixTimer) { clearInterval(prefixTimer); prefixTimer = null; }
         if (postfixTimer) { clearInterval(postfixTimer); postfixTimer = null; }
+        if (prefixevalTimer) { clearInterval(prefixevalTimer); prefixevalTimer = null; }
+
+        const revAuto = document.getElementById('btn-revpol-auto');
+        if (revAuto) revAuto.innerText = "Auto Run ⚡";
+        const preAuto = document.getElementById('btn-prefix-auto');
+        if (preAuto) preAuto.innerText = "Auto Run ⚡";
+        const postAuto = document.getElementById('btn-postfix-auto');
+        if (postAuto) postAuto.innerText = "Auto Run ⚡";
+        const preEvalAuto = document.getElementById('btn-prefixeval-auto');
+        if (preEvalAuto) preEvalAuto.innerText = "Auto Run ⚡";
 
         if (activeSimType === 'standard') {
             states.standard = { s: Array(N).fill(null), top: -1 };
@@ -3430,8 +4558,12 @@ If TOP1 + 1 == TOP2
             states.twostacks = { s: Array(N).fill(null), top1: -1, top2: N };
         } else if (activeSimType === 'revpol') {
             loadCustomRevpol();
+        } else if (activeSimType === 'prefix') {
+            loadCustomPrefix();
         } else if (activeSimType === 'postfix') {
-            loadCustomPostfix();
+            loadCustomPostfixWithVars();
+        } else if (activeSimType === 'prefixeval') {
+            loadCustomPrefixevalWithVars();
         } else if (activeSimType === 'linked') {
             states.linked = { head: null, count: 0 };
         } else if (activeSimType === 'minstack') {
@@ -3606,28 +4738,120 @@ If TOP1 + 1 == TOP2
     }
 
     // =========================================================================
-    // SECTION 5: POSTFIX EVALUATION SOLVER LOGIC
+    // SECTION 5.2: POLISH INFIX TO PREFIX SOLVER LOGIC
     // =========================================================================
-    function setPostfixSolverPreset(expr) {
-        document.getElementById('postfixSolverInput').value = expr;
-        runPostfixEvaluator();
+    function setPrefixSolverPreset(expr) {
+        document.getElementById('prefixSolverInput').value = expr;
+        runPrefixSolver();
     }
 
-    function runPostfixEvaluator() {
-        const raw = document.getElementById('postfixSolverInput').value.trim();
-        if (!raw) {
-            alert("Please enter space-separated postfix tokens!");
+    function runPrefixSolver() {
+        const rawExpr = document.getElementById('prefixSolverInput').value.trim();
+        if (!rawExpr) {
+            alert("Please enter an infix expression!");
             return;
         }
 
-        const tokens = raw.split(/\s+/);
+        const res = convertInfixToPrefixDetails(rawExpr);
+        const tbody = document.getElementById('prefixTraceBody');
+        tbody.innerHTML = '';
+        res.rows.forEach(r => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td><strong>${r.step}</strong></td>
+                <td><span class="formula-box">${r.char}</span></td>
+                <td><code>${r.stack || '(empty)'}</code></td>
+                <td><strong style="color:var(--color-prefix);">${r.buffer}</strong></td>
+                <td style="font-size:12px;">${r.action}</td>
+            `;
+            tbody.appendChild(tr);
+        });
+
+        document.getElementById('prefixOutputSection').style.display = 'block';
+        document.getElementById('prefixFinalResult').innerText = res.finalPrefix;
+        document.getElementById('prefixReversedInfix').innerText = res.reversedInfix;
+        document.getElementById('prefixTempOutput').innerText = res.buffer;
+    }
+
+    function resetPrefixSolver() {
+        document.getElementById('prefixSolverInput').value = '(A+B)*C';
+        document.getElementById('prefixOutputSection').style.display = 'none';
+        document.getElementById('prefixTraceBody').innerHTML = '';
+    }
+
+    // =========================================================================
+    // SECTION 5.3: POSTFIX EVALUATOR WITH DYNAMIC VARIABLE INPUTS
+    // =========================================================================
+    let postfixSolverVars = { tokens: [], vars: [], values: {} };
+
+    function setPostfixInfixPreset(expr) {
+        document.getElementById('postfixInfixInput').value = expr;
+        loadPostfixVariablesAndEvaluate();
+    }
+
+    function loadPostfixVariablesAndEvaluate() {
+        const raw = document.getElementById('postfixInfixInput').value.trim();
+        if (!raw) {
+            alert("Please enter an arithmetic expression or postfix tokens!");
+            return;
+        }
+
+        const tokens = convertInfixToPostfixTokens(raw);
+        const vars = extractVariables(raw);
+        const defaults = getDefaultVarValues(vars);
+        const values = {};
+        vars.forEach(v => {
+            values[v] = (postfixSolverVars.values && postfixSolverVars.values[v] !== undefined) ? postfixSolverVars.values[v] : defaults[v];
+        });
+
+        postfixSolverVars = { tokens, vars, values };
+        renderPostfixVarInputs();
+        evaluatePostfixWithCurrentVars();
+    }
+
+    function renderPostfixVarInputs() {
+        const container = document.getElementById('postfixVarContainer');
+        const chips = document.getElementById('postfixVarChips');
+        if (!container || !chips) return;
+
+        if (postfixSolverVars.vars.length === 0) {
+            container.style.display = 'none';
+            chips.innerHTML = '';
+            return;
+        }
+
+        container.style.display = 'flex';
+        chips.innerHTML = postfixSolverVars.vars.map(v => `
+            <div class="var-chip">
+                <label>${v} =</label>
+                <input type="number" class="var-input-field" value="${postfixSolverVars.values[v]}"
+                       oninput="updatePostfixSolverVar('${v}', this.value)">
+            </div>
+        `).join('');
+    }
+
+    function updatePostfixSolverVar(v, val) {
+        postfixSolverVars.values[v] = parseFloat(val) || 0;
+        evaluatePostfixWithCurrentVars();
+    }
+
+    function evaluatePostfixWithCurrentVars() {
+        const rawTokens = postfixSolverVars.tokens;
+        const numericTokens = rawTokens.map(t => {
+            if (/^[a-zA-Z]$/.test(t)) {
+                const v = t.toUpperCase();
+                return postfixSolverVars.values[v] !== undefined ? String(postfixSolverVars.values[v]) : t;
+            }
+            return t;
+        });
+
         const evalStack = [];
         const rows = [];
         let step = 1;
         let hasError = false;
 
-        for (let t of tokens) {
-            if (/^-?\d+(\.\d+)?$/.test(t)) {
+        for (let t of numericTokens) {
+            if (!isNaN(parseFloat(t))) {
                 const num = parseFloat(t);
                 evalStack.push(num);
                 rows.push({
@@ -3693,6 +4917,9 @@ If TOP1 + 1 == TOP2
         });
 
         document.getElementById('postfixEvalSection').style.display = 'block';
+        document.getElementById('postfixConvertedNotation').innerText = rawTokens.join(' ');
+        document.getElementById('postfixSubstitutedNotation').innerText = numericTokens.join(' ');
+
         const finalSpan = document.getElementById('postfixFinalResult');
         if (!hasError && evalStack.length === 1) {
             finalSpan.innerText = evalStack[0];
@@ -3703,10 +4930,170 @@ If TOP1 + 1 == TOP2
         }
     }
 
-    function resetPostfixEvaluator() {
-        document.getElementById('postfixSolverInput').value = '5 3 + 2 *';
-        document.getElementById('postfixEvalSection').style.display = 'none';
-        document.getElementById('postfixTraceBody').innerHTML = '';
+    function resetPostfixWithVars() {
+        document.getElementById('postfixInfixInput').value = '(A+B)*C';
+        loadPostfixVariablesAndEvaluate();
+    }
+
+    // =========================================================================
+    // SECTION 5.4: PREFIX EVALUATOR WITH DYNAMIC VARIABLE INPUTS
+    // =========================================================================
+    let prefixevalSolverVars = { tokens: [], vars: [], values: {} };
+
+    function setPrefixevalInfixPreset(expr) {
+        document.getElementById('prefixevalInfixInput').value = expr;
+        loadPrefixevalVariablesAndEvaluate();
+    }
+
+    function loadPrefixevalVariablesAndEvaluate() {
+        const raw = document.getElementById('prefixevalInfixInput').value.trim();
+        if (!raw) {
+            alert("Please enter an arithmetic expression or prefix tokens!");
+            return;
+        }
+
+        const tokens = convertInfixToPrefixTokens(raw);
+        const vars = extractVariables(raw);
+        const defaults = getDefaultVarValues(vars);
+        const values = {};
+        vars.forEach(v => {
+            values[v] = (prefixevalSolverVars.values && prefixevalSolverVars.values[v] !== undefined) ? prefixevalSolverVars.values[v] : defaults[v];
+        });
+
+        prefixevalSolverVars = { tokens, vars, values };
+        renderPrefixevalVarInputs();
+        evaluatePrefixWithCurrentVars();
+    }
+
+    function renderPrefixevalVarInputs() {
+        const container = document.getElementById('prefixevalVarContainer');
+        const chips = document.getElementById('prefixevalVarChips');
+        if (!container || !chips) return;
+
+        if (prefixevalSolverVars.vars.length === 0) {
+            container.style.display = 'none';
+            chips.innerHTML = '';
+            return;
+        }
+
+        container.style.display = 'flex';
+        chips.innerHTML = prefixevalSolverVars.vars.map(v => `
+            <div class="var-chip">
+                <label>${v} =</label>
+                <input type="number" class="var-input-field" value="${prefixevalSolverVars.values[v]}"
+                       oninput="updatePrefixevalSolverVar('${v}', this.value)">
+            </div>
+        `).join('');
+    }
+
+    function updatePrefixevalSolverVar(v, val) {
+        prefixevalSolverVars.values[v] = parseFloat(val) || 0;
+        evaluatePrefixWithCurrentVars();
+    }
+
+    function evaluatePrefixWithCurrentVars() {
+        const rawTokens = prefixevalSolverVars.tokens;
+        const numericTokens = rawTokens.map(t => {
+            if (/^[a-zA-Z]$/.test(t)) {
+                const v = t.toUpperCase();
+                return prefixevalSolverVars.values[v] !== undefined ? String(prefixevalSolverVars.values[v]) : t;
+            }
+            return t;
+        });
+
+        const evalStack = [];
+        const rows = [];
+        let step = 1;
+        let hasError = false;
+
+        // Scanned Right to Left (<-)
+        for (let i = numericTokens.length - 1; i >= 0; i--) {
+            const t = numericTokens[i];
+            if (!isNaN(parseFloat(t))) {
+                const num = parseFloat(t);
+                evalStack.push(num);
+                rows.push({
+                    step: step++,
+                    token: t,
+                    action: `Read Operand '${t}' (R➔L): PUSH to Stack`,
+                    op1: '—',
+                    op2: '—',
+                    result: num,
+                    stack: `[ ${evalStack.join(', ')} ]`
+                });
+            } else if (['+', '-', '*', '/', '^'].includes(t)) {
+                if (evalStack.length < 2) {
+                    hasError = true;
+                    rows.push({
+                        step: step++,
+                        token: t,
+                        action: `ERROR: Stack has fewer than 2 operands for operator '${t}'! Underflow.`,
+                        op1: '—',
+                        op2: '—',
+                        result: 'ERROR',
+                        stack: `[ ${evalStack.join(', ')} ]`
+                    });
+                    break;
+                }
+
+                // In Right-to-Left prefix scan:
+                // First pop is op1 (Left operand)
+                // Second pop is op2 (Right operand)
+                const op1 = evalStack.pop();
+                const op2 = evalStack.pop();
+                let res = 0;
+                if (t === '+') res = op1 + op2;
+                else if (t === '-') res = op1 - op2;
+                else if (t === '*') res = op1 * op2;
+                else if (t === '/') res = op2 !== 0 ? op1 / op2 : NaN;
+                else if (t === '^') res = Math.pow(op1, op2);
+
+                evalStack.push(res);
+                rows.push({
+                    step: step++,
+                    token: t,
+                    action: `Operator '${t}': Pop op1=${op1} (left), op2=${op2} (right). Compute: ${op1} ${t} ${op2} = ${res}. PUSH ${res}.`,
+                    op1: op1,
+                    op2: op2,
+                    result: res,
+                    stack: `[ ${evalStack.join(', ')} ]`
+                });
+            }
+        }
+
+        const tbody = document.getElementById('prefixevalTraceBody');
+        tbody.innerHTML = '';
+        rows.forEach(r => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td><strong>${r.step}</strong></td>
+                <td><span class="formula-box">${r.token}</span></td>
+                <td style="font-size:12px;">${r.action}</td>
+                <td>${r.op1}</td>
+                <td>${r.op2}</td>
+                <td><strong style="color:var(--color-prefixeval);">${r.result}</strong></td>
+                <td><code>${r.stack}</code></td>
+            `;
+            tbody.appendChild(tr);
+        });
+
+        document.getElementById('prefixevalEvalSection').style.display = 'block';
+        document.getElementById('prefixevalConvertedNotation').innerText = rawTokens.join(' ');
+        document.getElementById('prefixevalSubstitutedNotation').innerText = numericTokens.join(' ');
+
+        const finalSpan = document.getElementById('prefixevalFinalResult');
+        if (!hasError && evalStack.length === 1) {
+            finalSpan.innerText = evalStack[0];
+            finalSpan.style.color = '#10b981';
+        } else {
+            finalSpan.innerText = hasError ? 'ERROR (Syntax/Underflow)' : `Incomplete Stack: [${evalStack.join(', ')}]`;
+            finalSpan.style.color = '#ef4444';
+        }
+    }
+
+    function resetPrefixevalWithVars() {
+        document.getElementById('prefixevalInfixInput').value = '(A+B)*C';
+        loadPrefixevalVariablesAndEvaluate();
     }
 
     // =========================================================================
@@ -3938,6 +5325,74 @@ Algorithm: REVPOL(INFIX)
     # Uses F, G, and Rank tables for conversion
     pass`
         },
+        prefix: {
+            blackboard: `// --- INFIX TO PREFIX CONVERSION (REVERSAL ALGORITHM) ---
+Algorithm: INFIX_TO_PREFIX(INFIX)
+1. [Reverse and swap parentheses]
+   E_REV <- REVERSE(INFIX)
+   Replace '(' with ')' and ')' with '(' in E_REV
+2. [Translate to Postfix with modified precedence]
+   S <- Empty Stack; BUFFER <- ""
+   For each token T in E_REV:
+       If T is operand -> BUFFER <- BUFFER + T
+       Else if T is '(' -> PUSH(S, T)
+       Else if T is ')' -> POP until '(' into BUFFER, discard '('
+       Else (Operator):
+           While S not empty AND S[TOP] != '(' AND 
+                 ((T == '^' AND Prec(S[TOP]) >= Prec(T)) OR 
+                  (T != '^' AND Prec(S[TOP]) > Prec(T))):
+               BUFFER <- BUFFER + POP(S)
+           PUSH(S, T)
+   While S not empty -> BUFFER <- BUFFER + POP(S)
+3. [Final Reversal]
+   PREFIX <- REVERSE(BUFFER)
+4. Return PREFIX`,
+            c: `// Infix to Prefix conversion using Stack in C
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+
+int prec(char c) {
+    if (c == '^') return 3;
+    if (c == '*' || c == '/') return 2;
+    if (c == '+' || c == '-') return 1;
+    return 0;
+}
+
+void infixToPrefix(char infix[], char prefix[]) {
+    // 1. Reverse & swap brackets
+    // 2. Modified postfix translation
+    // 3. Reverse output buffer
+}`,
+            java: `public class InfixToPrefix {
+    // Academic Infix to Prefix using textbook reversal method
+}`,
+            python: `def infix_to_prefix(infix: str) -> str:
+    # 1. Reverse and swap parens
+    rev = []
+    for ch in reversed(infix.replace(" ", "")):
+        if ch == '(': rev.append(')')
+        elif ch == ')': rev.append('(')
+        else: rev.append(ch)
+    
+    prec = {'^': 3, '*': 2, '/': 2, '+': 1, '-': 1}
+    stack, buffer = [], []
+    for ch in rev:
+        if ch.isalnum(): buffer.append(ch)
+        elif ch == '(': stack.append(ch)
+        elif ch == ')':
+            while stack and stack[-1] != '(': buffer.append(stack.pop())
+            if stack: stack.pop()
+        elif ch in prec:
+            while stack and stack[-1] != '(' and (
+                (ch == '^' and prec.get(stack[-1], 0) >= prec[ch]) or
+                (ch != '^' and prec.get(stack[-1], 0) > prec[ch])
+            ):
+                buffer.append(stack.pop())
+            stack.append(ch)
+    while stack: buffer.append(stack.pop())
+    return "".join(reversed(buffer))`
+        },
         postfix: {
             blackboard: `// --- POSTFIX EVALUATION ALGORITHM ---
 Algorithm: EVAL_POSTFIX(E)
@@ -3964,6 +5419,35 @@ Algorithm: EVAL_POSTFIX(E)
             elif t == '*': stack.append(a * b)
             elif t == '/': stack.append(a // b)
             elif t == '^': stack.append(a ** b)
+    return stack.pop()`
+        },
+        prefixeval: {
+            blackboard: `// --- PREFIX EVALUATION ALGORITHM (RIGHT-TO-LEFT SCAN) ---
+Algorithm: EVAL_PREFIX(E)
+1. Read tokens from RIGHT to LEFT:
+2. If token T is an operand:
+       PUSH(S, T)
+3. Else if token T is an operator:
+       OP1 <- POP(S)  // Left operand!
+       OP2 <- POP(S)  // Right operand!
+       RES <- OP1 (operator) OP2
+       PUSH(S, RES)
+4. When input expression is exhausted:
+       Return POP(S)`,
+            c: `// Prefix Evaluation using Stack in C (Right to Left Scan)`,
+            java: `// Prefix Evaluation using Stack in Java (Right to Left Scan)`,
+            python: `def eval_prefix(tokens):
+    # Scan Right to Left
+    stack = []
+    for t in reversed(tokens):
+        if t.isdigit(): stack.append(int(t))
+        else:
+            op1, op2 = stack.pop(), stack.pop() # op1 is left, op2 is right
+            if t == '+': stack.append(op1 + op2)
+            elif t == '-': stack.append(op1 - op2)
+            elif t == '*': stack.append(op1 * op2)
+            elif t == '/': stack.append(op1 // op2)
+            elif t == '^': stack.append(op1 ** op2)
     return stack.pop()`
         },
         linked: {
@@ -4170,7 +5654,9 @@ Algorithm: GET_MIN()
         updateDisplayedCode();
         // Run default examples in Section 5 solvers
         runRevpolSolver();
-        runPostfixEvaluator();
+        runPrefixSolver();
+        loadPostfixVariablesAndEvaluate();
+        loadPrefixevalVariablesAndEvaluate();
     };
 </script>
 </body>
